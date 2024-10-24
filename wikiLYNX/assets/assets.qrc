@@ -15,6 +15,7 @@
         <file>images/refresh.png</file>
         <file>images/wikiLYNX_logo.png</file>
         <file>info/COPYING.txt</file>
+        <file>info/COPYING.QtWebEngine.txt</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>

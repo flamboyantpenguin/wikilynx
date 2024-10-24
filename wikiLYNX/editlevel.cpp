@@ -9,15 +9,18 @@ editLevel::editLevel(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->editButton->setEnabled(false);
-    ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
     ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    ui->table->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
     connect(ui->addButton, &QPushButton::clicked, this, &editLevel::addLevel);
     connect(ui->removeButton, &QPushButton::clicked, this, &editLevel::removeLevel);
     connect(ui->editButton, &QPushButton::clicked, this, &editLevel::editChkPoint);
     connect(ui->table, &QTableWidget::clicked, this, &editLevel::setEditStatus);
     connect(ui->loadButton, &QPushButton::clicked, this, &editLevel::importLevels);
     connect(ui->exportButton, &QPushButton::clicked, this, &editLevel::exportLevels);
+    connect(ui->downloadButton, &QPushButton::clicked, this, &editLevel::downloadLevel);
+    connect(&getLevelDialog, &getLevel::exitWindow, this, &editLevel::initialise);
     connect(ui->closeButton, &QPushButton::clicked, this, &editLevel::close);
 
 
@@ -39,8 +42,9 @@ void editLevel::initialise() {
     lFile.close();
 
     this->cfg = temp["info"].toObject();
-    this->updateTable(temp["data"].toObject());
     this->iData = temp["data"].toObject();
+    this->updateTable(this->iData);
+
 
     QStringList keys = this->iData.keys();
     for (const QString& key : keys) this->uData.insert(key, this->iData[key].toObject()["data"].toObject());
@@ -182,4 +186,11 @@ void editLevel::exportLevels() {
     }
     //if (filename.isEmpty()) return
     this->saveData(filename, 1);
+}
+
+
+void editLevel::downloadLevel() {
+
+    getLevelDialog.initialise();
+    getLevelDialog.show();
 }

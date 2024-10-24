@@ -20,13 +20,13 @@ viewcheckpoint::~viewcheckpoint()
 
 void viewcheckpoint::initialise(QJsonObject *data, int *c, int *cStatus) {
 
-    ui->table->clear();
+    //ui->table->clear();
     ui->table->setRowCount(*c);
     ui->table->setColumnCount(3);
     ui->table->setColumnWidth(1, 100);
 
     ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+    ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
 
     for (int i = 0; i < *c; ++i) {

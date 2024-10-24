@@ -43,16 +43,22 @@
     <enum>Qt::PenStyle::DotLine</enum>
    </property>
    <property name="rowCount">
-    <number>5</number>
+    <number>1</number>
    </property>
    <property name="columnCount">
     <number>3</number>
    </property>
    <attribute name="horizontalHeaderVisible">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderHighlightSections">
     <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderStretchLastSection">
     <bool>false</bool>
@@ -60,17 +66,28 @@
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
    </attribute>
+   <attribute name="verticalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
    <attribute name="verticalHeaderStretchLastSection">
     <bool>false</bool>
    </attribute>
    <row/>
-   <row/>
-   <row/>
-   <row/>
-   <row/>
-   <column/>
-   <column/>
-   <column/>
+   <column>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Website</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Status</string>
+    </property>
+   </column>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">

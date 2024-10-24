@@ -38,6 +38,7 @@ void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString 
     ui->startTime->setText(startTime);
     ui->endTime->setText(endTime);
     ui->chkCleared->setText(QString::number(chk));
+    ui->lnameLabel->setText(this->level);
 
     if (this->gameStatus == "Failed") {
         ui->mainLabel->setText(QString("Mission Failed"));
