@@ -96,7 +96,7 @@
   <widget class="QComboBox" name="levelSelect">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>350</x>
      <y>100</y>
      <width>211</width>
      <height>21</height>

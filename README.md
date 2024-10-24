@@ -48,18 +48,18 @@ wikiLYNX is available for Debian, RPM and Arch Linux users. You can download the
 
 | Distribution                                                                                                          | Availability | Recommended Version     | System Architecture |
 | --------------------------------------------------------------------------------------------------------------------- |------------- | ------------------------| --------------------|
-| [Ubuntu (Debian)](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx_1.2.6-0_amd64.deb)  |      ☑️      | 22.04 LTS or above      |  amd64              |
-| [Fedora (RPM)](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx-1.2.6-0.fc40.x86_64.rpm)     |      ☑️      | 40           |  amd64              |
+| [Ubuntu (Debian)](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx_1.2.7-0_amd64.deb)  |      ☑️      | 22.04 LTS or above      |  amd64              |
+| [Fedora (RPM)](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx-1.2.7-0.fc40.x86_64.rpm)     |      ☑️      | 40           |  amd64              |
 | [Arch Linux (AUR)](https://aur.archlinux.org/packages/wikilynx)                                                       |      ☑️      | Built from source       |  any                |
 
 #### Ubuntu (Debian)
 
-Download deb from [here](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx_1.2.6-0_amd64.deb).
+Download deb from [here](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx_1.2.7-0_amd64.deb).
 
 To install, open it with Software in GNOME or Discover in KDE or any other graphical package manager. To install using `apt` in cli, run the command
 
 ```bash
-sudo apt install ./wikilynx_1.2.6-0_amd64.deb
+sudo apt install ./wikilynx_1.2.7-0_amd64.deb
 ```
 
 You can also install by adding DAWN APT Repository
@@ -72,12 +72,12 @@ sudo apt update && sudo apt install wikilynx
 
 #### Fedora (RPM)
 
-Download rpm from [here](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx-1.2.6-0.fc40.x86_64.rpm).
+Download rpm from [here](https://github.com/flamboyantpenguin/wikiLYNX/releases/latest/download/wikilynx-1.2.7-0.fc40.x86_64.rpm).
 
 To install it, open it with a supported package manager or run the command
 
 ```bash
-sudo dnf install ./wikilynx-1.2.6-0.fc40.x86_64.rpm
+sudo dnf install ./wikilynx-1.2.7-0.fc40.x86_64.rpm
 ```
 
 You can also install by adding DAWN RPM repository
@@ -174,7 +174,7 @@ You can install Qt6, gcc and cmake from your package manager.
 For Ubuntu
 
 ```bash
-sudo apt install qt6-webengine-dev cmake git build-essential
+sudo apt install qt6-webengine-dev cmake git
 ```
 
 For Fedora
@@ -187,12 +187,6 @@ For Arch Linux
 
 ```bash
 sudo pacman -S qt6-webengine cmake base-devel git
-```
-
-For Ubuntu
-
-```bash
-sudo apt install qt6-webengine-dev cmake
 ```
 
 ### Clone the Repository
@@ -227,16 +221,15 @@ The source files are in wikiLYNX directory.
 
 ## Feedback
 
-You can submit your feedback about the project in the discussions page or in this [Google Form]().
+You can submit your feedback about the project in the discussions page or in this [Google Form](https://forms.gle/SScZKbFLFBffdVay8).
 
 ## About
 
 ```Txt
-wikiLYNX 1.2.6
+wikiLYNX 1.2.7
 
-Last Updated: 20-10-2024
+Last Updated: 24-10-2024
 Made by DAWN/ペンギン
 ```
 
 ![DAWN](https://github.com/user-attachments/assets/e634151e-0178-4168-aca4-9664237d7ace)
-
