@@ -34,7 +34,12 @@ Wikipedia: https://www.wikipedia.org/
 
 This software uses the Qt6 framework, © The Qt Company Ltd. Licensed under the LGPL v3. See the COPYING file for the full license text.
 
-## Third-Part Components: CMake
+## Third-Party Components: CMake
 
 This project uses CMake, which is distributed under the BSD 3-Clause License.
 See https://cmake.org/licensing/ for details.
+
+## Third-Party Components: QtWebEngine
+
+This software uses QtWebEngine, which incorporates code from Chromium.
+The license for this component can be found in the `COPYING.QtWebEngine` file.

@@ -33,6 +33,12 @@ void terms::initialise() {
     c.close();
     ui->copyingView->setText(copying);
 
+    QFile w(":/base/info/COPYING.QtWebEngine.txt");
+    w.open(QIODevice::ReadOnly);
+    auto copyingWeb = QString(w.readAll());
+    w.close();
+    ui->webEngineLicenseView->setText(copyingWeb);
+
     QFile n(":/base/fonts/NotoSans_OFL.txt");
     n.open(QIODevice::ReadOnly);
     auto notoOFL = QString(n.readAll());

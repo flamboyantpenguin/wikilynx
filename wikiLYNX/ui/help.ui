@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>852</width>
-    <height>432</height>
+    <width>1048</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="font">
@@ -24,8 +24,8 @@
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>390</y>
+     <x>950</x>
+     <y>470</y>
      <width>80</width>
      <height>24</height>
     </rect>
@@ -94,8 +94,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>10</x>
      <y>140</y>
-     <width>831</width>
-     <height>241</height>
+     <width>1021</width>
+     <height>321</height>
     </rect>
    </property>
    <property name="html">
@@ -114,7 +114,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;How to Play?&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Each level in our game systems consists of a some checkpoints. A checkpoint is basically an article on Wikipedia. Your initial article will be the first checkpoint. You are tasked with navigating to the next checkpoint (next article) through the hyperlinks on the page, The game ends once you reach the final checkpoint. Checkpoints are calculated incrementally, meaning you have to visit them the right order to win (0 -&amp;gt; 1 -&amp;gt; 2) that is, one can't skip checkpoints. The next checkpoint URL will be displayed on the status bar. You can level stats on the View Checkpoints dialog. Each level has a predefined timer. The game ends abrubtly when the timer ends. For competing with your friends, you can use the `Time Taken` field to declare the winner. Time Taken denotes the time taken by the player to finish the level from start till the end. If a player is unable to reach the last checkpoint, the `Time Taken` field denotes the time taken to reach the last checkpoint.&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;We have included some interesting levels by default. You can add your own levels in the `Edit Level` option in settings. You can also export your levels as a JSON file to share it with your friends. Download more levels from &lt;a href=&quot;https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels.&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels.&lt;/span&gt;&lt;/a&gt; To get to know the game, get started with the level `flyingduck`.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;We have included some interesting levels by default. You can add your own levels in the `Edit Level` option in settings. You can also export your levels as a JSON file to share it with your friends. You can download more levels using the `Download` option in `Edit Level`. You can also download them directly and load it from &lt;a href=&quot;https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels&lt;/span&gt;&lt;/a&gt;. To get to know the game, get started with the level `flyingduck`.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The name you enter in the text field in the welcome dialog is used to register in the leaderboard. The leaderboard can have only 12 names for each level. If you do not enter any name, your name will be registered as `Blondie`. You will know what this means if you have watched a certain Western Cowboy film released in 1966. &lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline; color:#007af4;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
