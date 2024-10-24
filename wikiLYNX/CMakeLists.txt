@@ -35,6 +35,7 @@ set(PROJECT_SOURCES
         ui/editlevel.ui editlevel.cpp include/editlevel.h
         ui/editchk.ui editchk.cpp include/editchk.h
         ui/viewstats.ui viewstats.cpp include/viewstats.h
+        include/getlevel.h getlevel.cpp ui/getlevel.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -216,6 +216,7 @@ void welcomeUI::clearLogs() {
 
 void welcomeUI::showStats() {
 
+    statsDialog.initialise();
     statsDialog.show();
 }
 

@@ -25,8 +25,8 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.2.6-0");
-std::string version("1.2.6-0");
+std::string lVersion("1.2.7-0");
+std::string version("1.2.7-0");
 
 
 int main(int argc, char *argv[])
@@ -79,28 +79,34 @@ void checkUpdate() {
     QUrl url("https://repo.pcland.co.in/QtOnline/wikiLYNX/.info/version.txt");
 
     QNetworkReply *reply = manager.get(QNetworkRequest(url));
-    app->connect(reply, &QNetworkReply::finished, [&reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QByteArray data = reply->readAll();
-            lVersion = QString::fromLocal8Bit(data).toStdString();
 
-        } else {
-            qDebug() << "Error fetching latest version information:" << reply->errorString();
-        }
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
 
-        reply->deleteLater();
-    });
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray data = reply->read(7);
+        lVersion = QString::fromLocal8Bit(data).toStdString();
+    } else {
+        qDebug() << "Error fetching latest version information:" << reply->errorString();
+    }
+
+    reply->deleteLater();
 
     if (strcmp(lVersion.c_str(), version.c_str()) > 0) {
         downloadUpdate();
     }
+    if (strcmp(lVersion.c_str(), version.c_str()) < 0) {
+        qDebug() << "Meow";
+    }
+
 }
 
 
 void downloadUpdate() {
 
     if (QSysInfo::productType() != "windows") {
-        QString msg("Check your package manager for the latest version");
+        QString msg("New Update available! Check your package manager for the latest version");
         QMessageBox::information(nullptr, "wikiLYNX", msg, QMessageBox::Ok);
         return;
     }

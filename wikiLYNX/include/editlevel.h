@@ -10,6 +10,7 @@
 #include <QFileDialog>
 
 #include "editchk.h"
+#include "getlevel.h"
 
 namespace Ui {
 class editLevel;
@@ -34,12 +35,12 @@ protected:
     void closeEvent(QCloseEvent *event) override {
         this->saveData();
         QDialog::closeEvent(event);
-
     }
 
 private:
     Ui::editLevel *ui;
     editChk editChkDialog;
+    getLevel getLevelDialog;
 
 
 private slots:
@@ -48,6 +49,7 @@ private slots:
     void importLevels();
     void exportLevels();
     void editChkPoint();
+    void downloadLevel();
     void setEditStatus();
 
 };

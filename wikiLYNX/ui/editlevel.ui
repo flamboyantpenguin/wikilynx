@@ -110,12 +110,12 @@
    </column>
    <column>
     <property name="text">
-     <string>Time</string>
+     <string>Time (In Seconds)</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Checkpoints</string>
+     <string>Number of Checkpoints</string>
     </property>
    </column>
    <column>
@@ -195,6 +195,19 @@
    </property>
    <property name="text">
     <string>Export</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="downloadButton">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>220</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Download</string>
    </property>
   </widget>
  </widget>
