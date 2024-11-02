@@ -35,6 +35,7 @@ private:
     int updateTable();
     QJsonObject cfg, iData, levelData;
     Ui::getLevel *ui;
+    QString dirName = ".wLnKMeow";
 
 private slots:
     void setEditStatus();

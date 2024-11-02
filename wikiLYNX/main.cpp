@@ -1,5 +1,7 @@
 #include "include/welcome.h"
+#include "include/loadingscreen.h"
 #include "ui/ui_welcome.h"
+#include "ui/ui_loadingscreen.h"
 
 #include <fstream>
 #include <QDialog>
@@ -25,8 +27,8 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.2.7-0");
-std::string version("1.2.7-0");
+std::string lVersion("1.2.8-0");
+std::string version("1.2.8-0");
 
 
 int main(int argc, char *argv[])
@@ -44,7 +46,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    checkUpdate();
+    //checkUpdate();
+    loadingScreen banner;
+    banner.setWindowFlags(Qt::FramelessWindowHint);
+    banner.show();
+    app->exec();
+    QThread::msleep(500);
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
     dialog.show();

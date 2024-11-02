@@ -34,7 +34,7 @@ editLevel::~editLevel()
 
 void editLevel::initialise() {
 
-    QFile lFile("./gData/gData.json");
+    QFile lFile("./"+dirName+"/gData.json");
     if (lFile.isOpen())
         lFile.close();
     lFile.open(QIODevice::ReadOnly);
@@ -191,6 +191,23 @@ void editLevel::exportLevels() {
 
 void editLevel::downloadLevel() {
 
+    if (this->checkInternet()){
+        QString msg("Unable to reach DAWN Archives! Try again later or report this via GitHub or Feedback form");
+        QMessageBox::critical(nullptr, "wikiLYNX", msg, QMessageBox::Ok);
+        return;
+    }
     getLevelDialog.initialise();
     getLevelDialog.show();
+}
+
+
+int editLevel::checkInternet() {
+#ifdef Q_OS_WIN
+
+    return QProcess::execute("ping", QStringList() << "archive.pcland.co.in");  // Replace with wikipedia.org if preferred
+
+#else
+    return QProcess::execute("ping", QStringList() << "-c" << "1" << "archive.pcland.co.in"); // Replace with wikipedia.org if preferred
+
+#endif
 }

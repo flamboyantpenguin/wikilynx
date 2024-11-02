@@ -55,9 +55,9 @@ void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString 
 void congrats::viewhistory() {
 
     int t;
-    QFile lFile("./gData/logs/"+this->instanceName+"/log.txt");
+    QFile lFile("./"+dirName+"/logs/"+this->instanceName+"/log.txt");
     lFile.open(QIODevice::ReadOnly);
-    auto logs = QString(lFile.readAll());
+    QString logs = QString(lFile.readAll());
     lFile.close();
     hView.dontKillMe = (&t);
     hView.initialise(&logs);
@@ -73,7 +73,7 @@ void congrats::launchFeedBack() {
 
 void congrats::genReport() {
 
-    std::ofstream out("./gData/logs/"+this->instanceName.toStdString()+"/report.txt", std::ios_base::app);
+    std::ofstream out("./"+dirName.toStdString()+"/logs/"+this->instanceName.toStdString()+"/report.txt", std::ios_base::app);
     out << "Status: "+this->gameStatus.toStdString()+"\n";
     out << "Player Name: "+this->playerName.toStdString()+"\n";
     out << "Time Taken: "+this->timeTaken.toStdString()+"\n";
@@ -85,15 +85,9 @@ void congrats::genReport() {
 
 void congrats::updateStats() {
 
-    if (this->gameStatus != "Passed")
-        return;
+    if (this->gameStatus != "Passed") return;
 
-    //QFile statFile("./gData/.stat");
-    //statFile.open(QIODevice::ReadOnly);
-    //auto initialData = QJsonDocument::fromJson(statFile.readAll()).object();
-    //statFile.close();
-
-    QFile statFile("./gData/.stat");
+    QFile statFile("./"+dirName+"/.stat");
     statFile.open(QIODevice::ReadOnly);
     auto iData = QJsonDocument::fromJson(statFile.readAll()).object();
     this->data = iData[this->level].toObject();
@@ -114,8 +108,8 @@ void congrats::updateStats() {
     iData[this->level] = this->data;
     document.setObject(iData);
 
-    QFile::remove("./gData/.stat");
-    QFile file("./gData/.stat");
+    QFile::remove("./"+dirName+"/.stat");
+    QFile file("./"+dirName+"/.stat");
     file.open(QIODevice::ReadWrite);
     file.write(document.toJson());
     file.flush();

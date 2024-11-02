@@ -13,6 +13,18 @@
     <height>382</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>855</width>
+    <height>382</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>855</width>
+    <height>382</height>
+   </size>
+  </property>
   <property name="font">
    <font>
     <family>Noto Sans</family>
