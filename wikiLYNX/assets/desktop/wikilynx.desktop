@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=wikiLYNX
+GenericName=Wikipedia Speedrun Game Browser
+Comment=A simple Qt C++ app to play Wikipedia speedruns the right way
+Keywords=game;
+Exec=wikiLYNX
+Icon=/usr/share/pixmaps/wikiLYNX_logo.png
+Terminal=false
+Type=Application
+Categories=Game;Application

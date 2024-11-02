@@ -27,8 +27,8 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.2.8-0");
-std::string version("1.2.8-0");
+std::string lVersion("1.2.8-1");
+std::string version("1.2.8-1");
 
 
 int main(int argc, char *argv[])
@@ -46,9 +46,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    checkUpdate();
+    //checkUpdate();
     loadingScreen banner;
     banner.setWindowFlags(Qt::FramelessWindowHint);
+    //banner.windowHandle()->setScaleFactor(1.0);
     banner.show();
     app->exec();
     QThread::msleep(500);
@@ -66,7 +67,7 @@ int checkInternet() {
     return QProcess::execute("ping", QStringList() << "wikipedia.org");  // Replace with wikipedia.org if preferred
 
 #else
-    return QProcess::execute("ping", QStringList() << "-c" << "1" << "wikipedia.org"); // Replace with wikipedia.org if preferred
+    return QProcess::execute("ping", QStringList() << "-c" << "3" << "wikipedia.org"); // Replace with wikipedia.org if preferred
 
 #endif
 }
