@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    //checkUpdate();
+    checkUpdate();
     loadingScreen banner;
     banner.setWindowFlags(Qt::FramelessWindowHint);
     banner.show();
