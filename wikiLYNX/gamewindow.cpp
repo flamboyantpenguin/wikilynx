@@ -14,6 +14,7 @@ GameWindow::GameWindow(QWidget *parent)
 
     ui->clock->setAlignment(Qt::AlignCenter);
     ui->counter->setAlignment(Qt::AlignCenter);
+    ui->progressBar->setStyleSheet("QProgressBar::chunk {background-color: #39ff14;}");
 
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
     connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
@@ -32,7 +33,7 @@ GameWindow::~GameWindow()
 int GameWindow::initialise(QJsonObject *cfgData, int *dontKillMeParse, QString allowedDomain, int aRD, QString playerName, QString levelName) {
 
     instance = "instance"+QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
-    fs::create_directories("./gData/logs/"+instance.toStdString());
+    fs::create_directories(dirName.toStdString()+"/logs/"+instance.toStdString());
     aTime = QTime::currentTime().toString("hh:mm:ss.zzz");
 
     if (playerName.isEmpty()) this->gamer = "Blondie";
@@ -75,7 +76,7 @@ void GameWindow::updateCountdown()
 void GameWindow::initAction() {
 
     auto url = ui->field->page()->url();
-    std::ofstream out("./gData/logs/"+instance.toStdString()+"/log.txt", std::ios_base::app);
+    std::ofstream out(dirName.toStdString()+"/logs/"+instance.toStdString()+"/log.txt", std::ios_base::app);
     out << QDateTime::currentDateTime().toString("yyyy/MM/dd|hh:mm:ss.zzz").toStdString()+">>\t";
     out << url.toString().toStdString()+"\n";
     out.close();
@@ -116,10 +117,11 @@ int GameWindow::missionAccomplished() {
         ui->statusbar->showMessage("You won!!!");
         *dontKillMe = 1;
         QString timeTaken = QString::number(endTime-cCount);
-        ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
+        //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
         congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk);
         //congratsView.initialise(c, QString::fromStdString(this->aTime), QString::fromStdString(cTime), instance, &(this->chk), 1);
         QMessageBox::information(this, "wikiLYNX", "You Won!!!", QMessageBox::Ok);
+        congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
         congratsView.show();
         close();
     }
@@ -136,9 +138,10 @@ int GameWindow::missionFailed(){
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
     *dontKillMe = 1;
     QString timeTaken = QString::number(endTime-cCount);
-    ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
+    //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
     QMessageBox::critical(this, "wikiLYNX", "Timeout!", QMessageBox::Ok);
     congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Failed", this->gamer, this->level, this->chk);
+    congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     close();
     return 0;
@@ -147,12 +150,13 @@ int GameWindow::missionFailed(){
 
 void GameWindow::launchLogs() {
 
-    QFile f("./gData/logs/"+instance+"/log.txt");
+    QFile f("./"+dirName+"/logs/"+instance+"/log.txt");
     f.open(QIODevice::ReadOnly);
     auto logs = QString(f.readAll());
     f.close();
     historyView.dontKillMe = (this->dontKillMe);
     historyView.initialise(&logs);
+    historyView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     historyView.show();
 }
 
@@ -161,6 +165,7 @@ void GameWindow::viewCheckPoints() {
 
     checkpointView.dontKillMe = (this->dontKillMe);
     checkpointView.initialise(&cfg, &this->tChk, &this->chk);
+    checkpointView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     checkpointView.show();
 }
 
@@ -171,8 +176,9 @@ void GameWindow::endGame() {
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
     *dontKillMe = 1;
     QString timeTaken = QString::number(endTime-cCount);
-    ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
+    //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
     congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Aborted", this->gamer, this->level, this->chk);
+    congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     close();
 

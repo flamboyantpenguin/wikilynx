@@ -13,6 +13,18 @@
     <height>444</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>816</width>
+    <height>444</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>816</width>
+    <height>444</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Leaderboard</string>
   </property>

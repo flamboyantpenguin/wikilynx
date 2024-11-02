@@ -44,6 +44,7 @@ private:
     void genReport();
     void updateStats();
     QString instanceName, startTime, endTime, gameStatus, playerName, timeTaken, level;
+    QString dirName = ".wLnKMeow";
 
 protected:
 

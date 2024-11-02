@@ -23,7 +23,7 @@ getLevel::~getLevel()
 
 int getLevel::initialise() {
 
-    QFile lFile("./gData/gData.json");
+    QFile lFile("./"+dirName+"/gData.json");
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
     auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
@@ -123,7 +123,7 @@ void getLevel::downloadLevel() {
     loop.exec();
 
     if (reply->error() != QNetworkReply::NoError) {
-        ui->status->setText("Unable to reach Archives!");
+        ui->status->setText("Can't reach Archives!");
         qDebug() << "Can't download level" << reply->errorString();
         return;
     }
@@ -142,10 +142,10 @@ void getLevel::downloadLevel() {
     temp.insert("data", this->iData);
     document.setObject(temp);
 
-    QFile::remove("./gData/gData.json");
+    QFile::remove("./"+dirName+"/gData.json");
 
     QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file("./gData/gData.json");
+    QFile file("./"+dirName+"/gData.json");
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadWrite);
     QTextStream iStream(&file);
@@ -161,4 +161,5 @@ void getLevel::downloadLevel() {
 void getLevel::setEditStatus() {
     if (ui->table->item(ui->table->currentIndex().row(), 1) && !ui->table->item(ui->table->currentIndex().row(), 1)->text().isEmpty())
         ui->downloadButton->setEnabled(true);
+    ui->status->setText("");
 }

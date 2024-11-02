@@ -1,14 +1,16 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
-#include <QMainWindow>
-#include <filesystem>
-#include <fstream>
-#include <QJsonObject>
-#include <QMessageBox>
+
 #include <QFile>
 #include <QTimer>
 #include <QString>
+#include <fstream>
+#include <filesystem>
+#include <QMessageBox>
+#include <QJsonObject>
+#include <QMainWindow>
+
 
 #include "congrats.h"
 #include "viewhistory.h"
@@ -46,6 +48,7 @@ public:
     int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
 private:
+    QString dirName = ".wLnKMeow";
     QString gamer, level;
     Ui::GameWindow *ui;
     viewHistory historyView;

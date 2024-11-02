@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <QJsonDocument>
 #include <QFile>
+#include <QThread>
 #include <QJsonObject>
 #include <QResource>
 #include <QMessageBox>
@@ -65,5 +66,6 @@ private:
     editLevel editDialog;
     viewStats statsDialog;
     Ui::welcomeDialog *ui;
+    QString dirName = ".wLnKMeow";
 
 };

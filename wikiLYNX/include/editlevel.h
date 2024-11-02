@@ -8,6 +8,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QFileDialog>
+#include <QProcess>
 
 #include "editchk.h"
 #include "getlevel.h"
@@ -25,7 +26,7 @@ public:
     ~editLevel();
     //std::map<QString, QJsonObject> uData;
     QJsonObject cfg, iData, uData;
-    void saveData(QString fname = "./gData/gData.json", int mode = 0);
+    void saveData(QString fname = "./.wLnKMeow/gData.json", int mode = 0);
     //void collectData();
     void initialise();
     void updateTable(QJsonObject);
@@ -38,9 +39,11 @@ protected:
     }
 
 private:
+    int checkInternet();
     Ui::editLevel *ui;
     editChk editChkDialog;
     getLevel getLevelDialog;
+    QString dirName = ".wLnKMeow";
 
 
 private slots:

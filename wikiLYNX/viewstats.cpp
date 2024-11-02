@@ -20,7 +20,7 @@ viewStats::~viewStats()
 int viewStats::initialise() {
 
     ui->levelSelect->clear();
-    QFile statFile("./gData/.stat");
+    QFile statFile("./"+dirName+"/.stat");
     statFile.open(QIODevice::ReadOnly);
     this->data = QJsonDocument::fromJson(statFile.readAll()).object();
     ui->levelSelect->addItems(data.keys());

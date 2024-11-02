@@ -16,6 +16,8 @@
         <file>images/wikiLYNX_logo.png</file>
         <file>info/COPYING.txt</file>
         <file>info/COPYING.QtWebEngine.txt</file>
+        <file>images/WelcomeBanner.png</file>
+        <file>pallete/bannerPrg.plt</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>

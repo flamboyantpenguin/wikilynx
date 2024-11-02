@@ -22,6 +22,7 @@ public:
 private:
     QJsonObject data;
     Ui::viewStats *ui;
+    QString dirName = ".wLnKMeow";
 
 private slots:
     void loadData();
