@@ -45,6 +45,9 @@
    <property name="text">
     <string>Close</string>
    </property>
+   <property name="icon">
+    <iconset theme="close"/>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -115,6 +118,9 @@
    <property name="text">
     <string>Add</string>
    </property>
+   <property name="icon">
+    <iconset theme="add"/>
+   </property>
   </widget>
   <widget class="QPushButton" name="removeButton">
    <property name="geometry">
@@ -127,6 +133,9 @@
    </property>
    <property name="text">
     <string>Remove</string>
+   </property>
+   <property name="icon">
+    <iconset theme="remove"/>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

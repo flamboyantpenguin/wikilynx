@@ -84,7 +84,7 @@ int getLevel::updateTable() {
         QTableWidgetItem* chk = new QTableWidgetItem();
         QTableWidgetItem* difficulty = new QTableWidgetItem();
         QTableWidgetItem* status = new QTableWidgetItem();
-        status->setText("X");
+        status->setIcon(QIcon::fromTheme("cancel"));
         code->setText(l[i]);
         time->setText(QString::number(this->levelData[l[i]].toObject()["time"].toInt()));
         chk->setText(QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()));
@@ -95,7 +95,7 @@ int getLevel::updateTable() {
         ui->table->setItem(i, 3, difficulty);
 
         if (this->iData.contains(l[i])) {
-            status->setText("Y");
+            status->setIcon(QIcon::fromTheme("check_circle"));
         }
         ui->table->setItem(i, 4, status);
 

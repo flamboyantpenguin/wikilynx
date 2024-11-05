@@ -17,7 +17,9 @@
 #include <QSysInfo>
 
 
+bool isDarkTheme();
 void loadFonts();
+void loadIconTheme();
 void checkUpdate();
 int checkInternet();
 void downloadUpdate();
@@ -37,6 +39,9 @@ int main(int argc, char *argv[])
     app = &a;
 
     loadFonts();
+    loadIconTheme();
+    qDebug() << QIcon::themeName();
+
     welcomeUI dialog;
     QObject::connect(app, &QApplication::focusChanged, onFocusChanged);
 
@@ -49,7 +54,6 @@ int main(int argc, char *argv[])
     checkUpdate();
     loadingScreen banner;
     banner.setWindowFlags(Qt::FramelessWindowHint);
-    //banner.windowHandle()->setScaleFactor(1.0);
     banner.show();
     app->exec();
     QThread::msleep(500);
@@ -79,6 +83,26 @@ void loadFonts() {
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Regular.ttf");
 }
+
+
+void loadIconTheme() {
+
+    if (isDarkTheme()) {
+        QIcon::setThemeName("materialDark");
+        return;
+    }
+    QIcon::setThemeName("materialLight");
+}
+
+
+bool isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
+}
+
 
 
 void checkUpdate() {

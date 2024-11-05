@@ -196,6 +196,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <property name="text">
          <string>Checkpoints</string>
         </property>
+        <property name="icon">
+         <iconset theme="check_circle"/>
+        </property>
        </widget>
       </item>
       <item>
@@ -212,6 +215,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <property name="text">
          <string>History</string>
         </property>
+        <property name="icon">
+         <iconset theme="history"/>
+        </property>
        </widget>
       </item>
       <item>
@@ -227,6 +233,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
         <property name="text">
          <string>Exit</string>
+        </property>
+        <property name="icon">
+         <iconset theme="close"/>
         </property>
        </widget>
       </item>

@@ -133,6 +133,9 @@
    <property name="text">
     <string>Refresh</string>
    </property>
+   <property name="icon">
+    <iconset theme="refresh"/>
+   </property>
   </widget>
   <widget class="QPushButton" name="downloadButton">
    <property name="geometry">
@@ -146,6 +149,9 @@
    <property name="text">
     <string>Download</string>
    </property>
+   <property name="icon">
+    <iconset theme="download"/>
+   </property>
   </widget>
   <widget class="QPushButton" name="exitButton">
    <property name="geometry">
@@ -157,7 +163,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>Close</string>
+   </property>
+   <property name="icon">
+    <iconset theme="close"/>
    </property>
   </widget>
   <widget class="QLabel" name="tipLabel">

@@ -33,10 +33,10 @@
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>740</x>
      <y>340</y>
-     <width>80</width>
-     <height>24</height>
+     <width>100</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="font">
@@ -51,6 +51,9 @@
    </property>
    <property name="text">
     <string>Close</string>
+   </property>
+   <property name="icon">
+    <iconset theme="close"/>
    </property>
   </widget>
   <widget class="QLabel" name="mainLabel">
@@ -211,17 +214,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <widget class="QPushButton" name="viewHistory">
    <property name="geometry">
     <rect>
-     <x>659</x>
+     <x>630</x>
      <y>340</y>
-     <width>91</width>
-     <height>24</height>
+     <width>100</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="toolTip">
     <string>View Logs</string>
    </property>
    <property name="text">
-    <string>View History</string>
+    <string>History</string>
+   </property>
+   <property name="icon">
+    <iconset theme="history"/>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -256,10 +262,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <widget class="QPushButton" name="feedBackButton">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>520</x>
      <y>340</y>
-     <width>91</width>
-     <height>24</height>
+     <width>100</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -268,14 +274,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Feedback</string>
    </property>
+   <property name="icon">
+    <iconset theme="feedback"/>
+   </property>
   </widget>
   <widget class="QPushButton" name="viewStatsButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>410</x>
      <y>340</y>
-     <width>91</width>
-     <height>24</height>
+     <width>100</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -283,6 +292,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="text">
     <string>Leaderboard</string>
+   </property>
+   <property name="icon">
+    <iconset theme="trophy"/>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -303,12 +315,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>380</x>
      <y>290</y>
-     <width>81</width>
+     <width>451</width>
      <height>18</height>
     </rect>
    </property>
    <property name="text">
     <string>level</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>517</x>
+     <y>310</y>
+     <width>321</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Right click on a value to learn more about it</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
  </widget>

@@ -52,6 +52,9 @@
    <property name="text">
     <string>Close</string>
    </property>
+   <property name="icon">
+    <iconset theme="close"/>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -84,7 +87,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="add"/>
    </property>
   </widget>
   <widget class="QPushButton" name="removeButton">
@@ -97,7 +103,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Remove</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="remove"/>
    </property>
   </widget>
   <widget class="QTableWidget" name="table">
@@ -146,7 +155,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Edit</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="edit"/>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -219,7 +231,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>Download</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="download"/>
    </property>
   </widget>
  </widget>

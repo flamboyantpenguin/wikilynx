@@ -43,6 +43,9 @@
    <property name="text">
     <string>Close</string>
    </property>
+   <property name="icon">
+    <iconset theme="close"/>
+   </property>
   </widget>
   <widget class="QLabel" name="mainLabel">
    <property name="geometry">

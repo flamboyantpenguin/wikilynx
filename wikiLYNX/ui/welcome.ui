@@ -132,7 +132,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>390</x>
      <y>360</y>
-     <width>61</width>
+     <width>65</width>
      <height>31</height>
     </rect>
    </property>
@@ -145,13 +145,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Help</string>
    </property>
+   <property name="icon">
+    <iconset theme="help"/>
+   </property>
   </widget>
   <widget class="QPushButton" name="aboutButton">
    <property name="geometry">
     <rect>
      <x>460</x>
      <y>360</y>
-     <width>61</width>
+     <width>65</width>
      <height>31</height>
     </rect>
    </property>
@@ -163,6 +166,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="text">
     <string>About</string>
+   </property>
+   <property name="icon">
+    <iconset theme="info"/>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -203,6 +209,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <number>0</number>
    </property>
    <widget class="QWidget" name="tabPlay">
+    <attribute name="icon">
+     <iconset theme="home"/>
+    </attribute>
     <attribute name="title">
      <string>Play</string>
     </attribute>
@@ -345,8 +354,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../assets/assets.qrc">
-       <normaloff>:/base/images/refresh.png</normaloff>:/base/images/refresh.png</iconset>
+      <iconset theme="refresh"/>
      </property>
     </widget>
     <widget class="QLabel" name="label_3">
@@ -386,6 +394,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </widget>
    </widget>
    <widget class="QWidget" name="tabSettings">
+    <attribute name="icon">
+     <iconset theme="settings"/>
+    </attribute>
     <attribute name="title">
      <string>Settings</string>
     </attribute>
@@ -431,9 +442,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <widget class="QPushButton" name="cLogsButton">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>133</y>
-       <width>80</width>
+       <x>410</x>
+       <y>130</y>
+       <width>90</width>
        <height>31</height>
       </rect>
      </property>
@@ -443,13 +454,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="text">
       <string>Clear Logs</string>
      </property>
+     <property name="icon">
+      <iconset theme="delete"/>
+     </property>
     </widget>
     <widget class="QPushButton" name="sLogsButton">
      <property name="geometry">
       <rect>
-       <x>330</x>
-       <y>133</y>
-       <width>80</width>
+       <x>310</x>
+       <y>130</y>
+       <width>90</width>
        <height>31</height>
       </rect>
      </property>
@@ -459,13 +473,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="text">
       <string>Show Logs</string>
      </property>
+     <property name="icon">
+      <iconset theme="history"/>
+     </property>
     </widget>
     <widget class="QPushButton" name="editLevelButton">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>133</y>
-       <width>80</width>
+       <x>210</x>
+       <y>130</y>
+       <width>90</width>
        <height>31</height>
       </rect>
      </property>
@@ -475,6 +492,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="text">
       <string>Edit Levels</string>
      </property>
+     <property name="icon">
+      <iconset theme="edit"/>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -483,7 +503,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>320</x>
      <y>360</y>
-     <width>61</width>
+     <width>65</width>
      <height>31</height>
     </rect>
    </property>
@@ -493,10 +513,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Stats</string>
    </property>
+   <property name="icon">
+    <iconset theme="trophy"/>
+   </property>
   </widget>
  </widget>
- <resources>
-  <include location="../assets/assets.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

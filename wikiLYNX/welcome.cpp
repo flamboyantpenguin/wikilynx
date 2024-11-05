@@ -10,6 +10,8 @@ welcomeUI::welcomeUI(QDialog *parent)
 {
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
+
+    ui->initButton->setIcon(QIcon::fromTheme("play"));
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
