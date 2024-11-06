@@ -3,6 +3,10 @@
 %:
 	dh $@ --buildsystem=cmake
 
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE=MinSizeRel
+
 #override_dh_auto_build:
 #	uscan --download-current-version || echo "Uscan failed to fetch source"
 #	tar xavf extras.tar.gz
