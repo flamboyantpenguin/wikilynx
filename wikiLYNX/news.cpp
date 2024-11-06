@@ -58,11 +58,11 @@ void news::finished(QNetworkReply *reply)
 
 void news::get(const QUrl &url)
 {
-    if (currentReply) {
-        currentReply->disconnect(this);
-        currentReply->deleteLater();
-    }
-    currentReply = url.isValid() ? manager.get(QNetworkRequest(url)) : nullptr;
+    //if (currentReply) {
+     //   currentReply->disconnect(this);
+     //   currentReply->deleteLater();
+    //}
+    currentReply = manager.get(QNetworkRequest(this->url));
     if (currentReply) {
         connect(currentReply, &QNetworkReply::readyRead, this, &news::consumeData);
         connect(currentReply, &QNetworkReply::errorOccurred, this, &news::error);
