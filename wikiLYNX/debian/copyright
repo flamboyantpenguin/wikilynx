@@ -6,7 +6,7 @@ Files: *
 Copyright: 2024, Penguin
            2016-2023, The Qt Company Ltd (Qt6)
            2012-2023, Quote-Unquote Apps (Courier Prime)
-           2014-2023, Google LLC (Noto Sans)
+           2014-2023, Google LLC (Noto Sans, Material Icons)
 License: MIT and LGPL-3.0 and OFL-1.1
 
 License: MIT
@@ -29,13 +29,10 @@ License: MIT
  THE SOFTWARE.
 
 License: LGPL-3.0
- This library is free software; you can redistribute it and/or modify
- it under the terms of the GNU Lesser General Public License as
- published by the Free Software Foundation; either version 3 of the
- License, or (at your option) any later version.
-
- On Debian systems, the complete text of the GNU Lesser General Public
- License can be found in `/usr/share/common-licenses/LGPL-3`.
+ This software uses the Qt6 framework, The Qt Company Ltd. Licensed under
+ the LGPL v3.
+ .
+ Please read /usr/share/licenses/wikilynx/COPYING for the license text.
 
 License: OFL-1.1
  This Font Software is licensed under the SIL Open Font License, Version 1.1.
@@ -45,16 +42,14 @@ License: OFL-1.1
  redistribute the font software, provided that the fonts, including any
  derivative works, are distributed under the same license. Fonts can be
  embedded within documents under the same terms.
+ .
+ Please read /usr/share/licenses/wikilynx/NotoSans_OFL.txt for the license text.
 
- On Debian systems, the complete text of the SIL Open Font License (OFL-1.1)
- can be found at `/usr/share/common-licenses/OFL-1.1`.
-
-License: BSD-3 Clause License
+License: BSD-3
  This software uses QtWebEngine, which includes code from the Chromium project 
  and is licensed under BSD-3 Clause License. Please read 
  /usr/share/licenses/wikilynx/COPYING.QtWebEngine for the license text.
 
- License: Apache 2.0 License
+License: Apache-2.0
  This project makes use of Google's Material Icons, which are licensed under the Apache License, Version 2.0.
  Please read /usr/share/licenses/wikilynx/LICENSE-MaterialIcons for the license text.
-
