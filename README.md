@@ -28,7 +28,7 @@ We have included some interesting levels by default. You can add your own levels
 
 ## Installation Instructions
 
-The app is available for Windows and Linux. 
+The app is available for Windows and Linux.
 
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
@@ -141,9 +141,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.2.8
+wikiLYNX 1.3.0
 
-Last Updated: 02-11-2024
+Last Updated: 06-11-2024
 Made by DAWN/ペンギン
 ```
 

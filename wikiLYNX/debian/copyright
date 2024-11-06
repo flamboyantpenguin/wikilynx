@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: wikilynx
-Source: https://example.com
+Source: https://github.com/flamboyantpenguin/wikilynx
 
 Files: *
-Copyright: 2024, Your Name or Company
+Copyright: 2024, Penguin
            2016-2023, The Qt Company Ltd (Qt6)
            2012-2023, Quote-Unquote Apps (Courier Prime)
            2014-2023, Google LLC (Noto Sans)
@@ -52,4 +52,9 @@ License: OFL-1.1
 License: BSD-3 Clause License
  This software uses QtWebEngine, which includes code from the Chromium project 
  and is licensed under BSD-3 Clause License. Please read 
- /usr/share/licenses/wikilynx/COPYING.QtWebEngine for more the license text.
+ /usr/share/licenses/wikilynx/COPYING.QtWebEngine for the license text.
+
+ License: Apache 2.0 License
+ This project makes use of Google's Material Icons, which are licensed under the Apache License, Version 2.0.
+ Please read /usr/share/licenses/wikilynx/LICENSE-MaterialIcons for the license text.
+

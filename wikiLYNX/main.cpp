@@ -29,8 +29,8 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.2.8-1");
-std::string version("1.2.8-1");
+std::string lVersion("1.3.0-1");
+std::string version("1.3.0-1");
 
 
 int main(int argc, char *argv[])
@@ -67,12 +67,9 @@ int main(int argc, char *argv[])
 
 int checkInternet() {
 #ifdef Q_OS_WIN
-
-    return QProcess::execute("ping", QStringList() << "wikipedia.org");  // Replace with wikipedia.org if preferred
-
+    return QProcess::execute("ping", QStringList() << "wikipedia.org");
 #else
-    return QProcess::execute("ping", QStringList() << "-c" << "3" << "wikipedia.org"); // Replace with wikipedia.org if preferred
-
+    return QProcess::execute("ping", QStringList() << "-c" << "3" << "wikipedia.org");
 #endif
 }
 
@@ -156,7 +153,6 @@ void onFocusChanged(QWidget *oldFocus, QWidget* newFocus) {
         //std::ofstream out("./gData/"+instance+"/report.txt", std::ios_base::app);
         qDebug() << "Game Ended Abruptly due to Game Policy Violation";
         //out.close();
-        //app->quit();
         QApplication::quit();
         QMessageBox::critical(nullptr, "wikiLYNX", "Game Rule Violation! You're not allowed to switch windows during game session", QMessageBox::Ok);
         return;

@@ -10,14 +10,14 @@
         <file>fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf</file>
         <file>fonts/NotoSans-Regular.ttf</file>
         <file>fonts/NotoSans-VariableFont_wdth,wght.ttf</file>
-        <file>images/DAWN.png</file>
         <file>info/LICENSE.txt</file>
-        <file>images/refresh.png</file>
-        <file>images/wikiLYNX_logo.png</file>
         <file>info/COPYING.txt</file>
         <file>info/COPYING.QtWebEngine.txt</file>
-        <file>images/WelcomeBanner.png</file>
         <file>pallete/bannerPrg.plt</file>
+        <file>images/WelcomeBanner.svg</file>
+        <file>images/wikiLYNX_logo.svg</file>
+        <file>images/DAWN.svg</file>
+        <file>info/LICENSE-MaterialIcons.txt</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>

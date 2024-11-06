@@ -43,3 +43,8 @@ See https://cmake.org/licensing/ for details.
 
 This software uses QtWebEngine, which incorporates code from Chromium.
 The license for this component can be found in the `COPYING.QtWebEngine` file.
+
+## Third-Party Components: Google Material Icons
+
+This project makes use of Google's Material Icons, which are licensed under the Apache License, Version 2.0.
+See docs/license/LICENSE-MaterialIcons for details.
