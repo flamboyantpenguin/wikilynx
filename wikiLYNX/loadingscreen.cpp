@@ -17,7 +17,6 @@ loadingScreen::loadingScreen(QWidget *parent)
     Worker* worker = new Worker();
     worker->moveToThread(thread);
 
-    //connect( worker, &Worker::error, this, &MyClass::errorString);
     connect( thread, &QThread::started, worker, &Worker::process);
     connect( worker, &Worker::finished, thread, &QThread::quit);
     connect( worker, &Worker::finished, worker, &Worker::deleteLater);
@@ -28,9 +27,6 @@ loadingScreen::loadingScreen(QWidget *parent)
 
 
     ui->progressBar->setStyleSheet(styleSheet);
-    //connect()
-
-    //this->initialise();
 
 
 }
@@ -49,7 +45,7 @@ void loadingScreen::setPrg(int i) {
 void Worker::process() { // Process. Start processing data.
     for (int i = 0; i < 100; i++) {
         emit progress(i);
-        QThread::msleep(50);
+        QThread::msleep(30);
     }
     emit finished();
 }

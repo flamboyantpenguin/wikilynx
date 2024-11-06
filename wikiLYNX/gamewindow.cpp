@@ -12,9 +12,14 @@ GameWindow::GameWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    QFile plt(":/base/pallete/bannerPrg.plt");
+    plt.open(QIODevice::ReadOnly);
+    auto styleSheet = plt.readAll();
+    plt.close();
+
     ui->clock->setAlignment(Qt::AlignCenter);
     ui->counter->setAlignment(Qt::AlignCenter);
-    ui->progressBar->setStyleSheet("QProgressBar::chunk {background-color: #39ff14;}");
+    ui->progressBar->setStyleSheet(styleSheet);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
     connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);

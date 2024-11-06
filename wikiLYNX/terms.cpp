@@ -51,4 +51,10 @@ void terms::initialise() {
     cP.close();
     ui->courierPrimeOFL->setText(courierPrimeOFL);
 
+    QFile mP(":/base/info/LICENSE-MaterialIcons.txt");
+    mP.open(QIODevice::ReadOnly);
+    auto materialLicense = QString(mP.readAll());
+    mP.close();
+    ui->materialLicenseView->setText(materialLicense);
+
 }

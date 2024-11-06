@@ -9,11 +9,7 @@ Homepage: https://github.com/flamboyantpenguin/wikilynx
 Package: wikilynx
 Architecture: any
 Depends: libqt6webenginewidgets6, libqt6widgets6
-Description: A simple Qt C++ app to play Wikipedia speedruns the right way
-  A simple app based on Qt Webengine with some rules and features to play Wikipedia speedruns
-
-
-
-
-
+Description: Qt C++ app to play Wikipedia speedruns the right way
+        A simple app based on Qt Webengine with some rules and features
+        to play Wikipedia speedruns
 

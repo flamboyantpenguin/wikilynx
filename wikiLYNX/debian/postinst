@@ -10,3 +10,5 @@ echo "Updating APT cache..."
 apt update || true
 
 exit 0
+
+#DEBHELPER#

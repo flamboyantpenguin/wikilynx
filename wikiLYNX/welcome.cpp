@@ -10,6 +10,8 @@ welcomeUI::welcomeUI(QDialog *parent)
 {
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
+
+    ui->initButton->setIcon(QIcon::fromTheme("play"));
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
@@ -20,6 +22,7 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::loadSettings);
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
     connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
+    connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
 
     ui->initButton->setFocus();
 
@@ -219,6 +222,11 @@ void welcomeUI::showStats() {
 
     statsDialog.initialise();
     statsDialog.show();
+}
+
+
+void welcomeUI::showNews() {
+    newsDialog.show();
 }
 
 void welcomeUI::showAbout() {

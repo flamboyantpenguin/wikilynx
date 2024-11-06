@@ -12,6 +12,7 @@
 #include <QDesktopServices>
 #include <QDir>
 
+#include "news.h"
 #include "help.h"
 #include "about.h"
 #include "congrats.h"
@@ -47,6 +48,7 @@ private slots:
     void showStats();
     void showAbout();
     void showLogs();
+    void showNews();
     void clearLogs();
     int startGame();
     void updateUI();
@@ -60,6 +62,7 @@ private slots:
 
 
 private:
+    news newsDialog;
     help helpDialog;
     GameWindow *game;
     about aboutDialog;

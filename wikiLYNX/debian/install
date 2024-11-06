@@ -1,7 +1,8 @@
 ./assets/desktop/wikilynx.desktop   usr/share/applications
-./assets/images/wikiLYNX_logo.png   usr/share/pixmaps
+./assets/images/wikiLYNX_logo.svg   usr/share/pixmaps
 ../LICENSE usr/share/license/wikilynx
 ../COPYING usr/share/license/wikilynx
 ../COPYING.QtWebEngine usr/share/license/wikilynx
 ../docs/license/NotoSans_OFL.txt    usr/share/license/wikilynx
 ../docs/license/CourierPrime_OFL.txt    usr/share/license/wikilynx
+../docs/license/LICENSE-MaterialIcons.txt    usr/share/license/wikilynx

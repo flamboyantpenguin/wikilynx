@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(wikilynx VERSION 1.2.8 LANGUAGES CXX)
+project(wikilynx VERSION 1.3.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -37,6 +37,7 @@ set(PROJECT_SOURCES
         ui/viewstats.ui viewstats.cpp include/viewstats.h
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
+        include/news.h news.cpp ui/news.ui
 
 )
 

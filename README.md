@@ -28,7 +28,7 @@ We have included some interesting levels by default. You can add your own levels
 
 ## Installation Instructions
 
-The app is available for Windows and Linux. 
+The app is available for Windows and Linux.
 
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
@@ -43,82 +43,23 @@ To update wikiLYNX, you can use the Maintenance Tool in Windows or update packag
 
 ## Development
 
-wikiLYNX is made using Qt6 WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. You can also open issues here. If you want to contribute to the project but is unsure where to get started, read this section or contact me at [penguin@pcland.co.in](mailto:penguin@pcland.co.in).
+wikiLYNX is made using Qt6 WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@pcland.co.in](mailto:penguin@pcland.co.in).
 
 ### Getting Started
 
-To compile this project, you need to install Qt6 from their online installer or from your respective package managers. This project uses cmake for compilation.
+To compile this project, you need to have the following components installed in your system. 
 
-### Building from Source | Windows
+- Qt6
+  - Qt WebEngine
+  - Qt Positioning
+  - Qt WebChannel
+  - Qt Desktop (MSVC)
+  - cmake
+- git
+- gcc/msvc (project not tested in clang; should work)
 
-#### Install Git
-
-Git for Windows can be installed from [git-scm](https://git-scm.com/downloads/win).
-
-#### Install Qt6
-
-Install Qt6 using their [online installer](https://doc.qt.io/qt-6/qt-online-installation.html). Install the following components.
-
-- Qt WebEngine
-- Qt Positioning
-- Qt WebChannel
-- Qt Desktop (MSVC)
-- CMake (You can install cmake manually as well)
-
-I personally prefer Qt Creator for Qt projects since it's easier to edit the ui in Qt Creator.
-
-#### Install MSVC
-
-The app can be compiled using GCC or MSVC. However for Windows, Qt WebEngine won't be supported if you use GCC. If you use MSVC to compile the project along with Windows SDK, the Windows themeing will be applied to the project and it actually looks good :).
-
-To install MSVC, download Visual Studio 2022. You need not install the entire workload for Desktop C++ development. The following components are necessary.
-
-- MSVC
-- Windows SDK
-
-#### Install CMake
-
-CMake can be installed via Qt Installer or from [their website](https://cmake.org/download/).
-
-### Building from Source | Linux
-
-#### Installation
-
-You can install Qt6, gcc and cmake from your package manager.
-
-For Ubuntu
-
-```bash
-sudo apt install qt6-webengine-dev cmake git
-```
-
-For Fedora
-
-```bash
-sudo dnf install qt6-qtwebengine-devel cmake git
-```
-
-For Arch Linux
-
-```bash
-sudo pacman -S qt6-webengine cmake base-devel git
-```
-
-### Clone the Repository
-
-To clone the repository, copy the project GitHub URL.
-
-```bash
-git clone https://github.com/flamboyantpenguin/wikilynx
-```
-
-### Build the project
-
-```bash
-cd wikilynx/wikiLYNX
-cmake .
-cmake --build
-```
+After this clone this repository and start contributing. You can contact me via email or raise an issue on GitHub if you 
+encounter errors during build. For more info please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Development).
 
 ### Contribute
 
@@ -127,12 +68,15 @@ Use any IDE like Qt Creator to modify the files. Do note the following before yo
 - Respect everyone
 - Follow exisiting project structure
 - Follow contribution guidelines
+- Check changes before you commit them
+- Avoid adding secrets, build files or user configurations to commits
 
 The source files are in wikiLYNX directory.
 
 - wikiLYNX/header contains the necessary C++ header files
 - wikiLYNX/ui contains the Qt UI files
-- wikiLYNX/assets contains the assets files for the game
+- wikiLYNX/assets contains the assets for the game
+- wikiLYNX/debian contains debian packaging info
 
 ## Feedback
 
@@ -141,9 +85,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.2.8
+wikiLYNX 1.3.0
 
-Last Updated: 02-11-2024
+Last Updated: 06-11-2024
 Made by DAWN/ペンギン
 ```
 

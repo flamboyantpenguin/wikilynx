@@ -17,7 +17,9 @@
 #include <QSysInfo>
 
 
+bool isDarkTheme();
 void loadFonts();
+void loadIconTheme();
 void checkUpdate();
 int checkInternet();
 void downloadUpdate();
@@ -27,8 +29,8 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.2.8-1");
-std::string version("1.2.8-1");
+std::string lVersion("1.3.0-1");
+std::string version("1.3.0-1");
 
 
 int main(int argc, char *argv[])
@@ -37,6 +39,9 @@ int main(int argc, char *argv[])
     app = &a;
 
     loadFonts();
+    loadIconTheme();
+    qDebug() << QIcon::themeName();
+
     welcomeUI dialog;
     QObject::connect(app, &QApplication::focusChanged, onFocusChanged);
 
@@ -49,7 +54,6 @@ int main(int argc, char *argv[])
     checkUpdate();
     loadingScreen banner;
     banner.setWindowFlags(Qt::FramelessWindowHint);
-    //banner.windowHandle()->setScaleFactor(1.0);
     banner.show();
     app->exec();
     QThread::msleep(500);
@@ -63,12 +67,9 @@ int main(int argc, char *argv[])
 
 int checkInternet() {
 #ifdef Q_OS_WIN
-
-    return QProcess::execute("ping", QStringList() << "wikipedia.org");  // Replace with wikipedia.org if preferred
-
+    return QProcess::execute("ping", QStringList() << "wikipedia.org");
 #else
-    return QProcess::execute("ping", QStringList() << "-c" << "3" << "wikipedia.org"); // Replace with wikipedia.org if preferred
-
+    return QProcess::execute("ping", QStringList() << "-c" << "3" << "wikipedia.org");
 #endif
 }
 
@@ -79,6 +80,26 @@ void loadFonts() {
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Regular.ttf");
 }
+
+
+void loadIconTheme() {
+
+    if (isDarkTheme()) {
+        QIcon::setThemeName("materialDark");
+        return;
+    }
+    QIcon::setThemeName("materialLight");
+}
+
+
+bool isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
+}
+
 
 
 void checkUpdate() {
@@ -132,7 +153,6 @@ void onFocusChanged(QWidget *oldFocus, QWidget* newFocus) {
         //std::ofstream out("./gData/"+instance+"/report.txt", std::ios_base::app);
         qDebug() << "Game Ended Abruptly due to Game Policy Violation";
         //out.close();
-        //app->quit();
         QApplication::quit();
         QMessageBox::critical(nullptr, "wikiLYNX", "Game Rule Violation! You're not allowed to switch windows during game session", QMessageBox::Ok);
         return;
