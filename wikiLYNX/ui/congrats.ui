@@ -281,9 +281,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <widget class="QPushButton" name="viewStatsButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>399</x>
      <y>340</y>
-     <width>100</width>
+     <width>111</width>
      <height>25</height>
     </rect>
    </property>
