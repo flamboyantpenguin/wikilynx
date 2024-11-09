@@ -5,7 +5,7 @@ set -e
 
 echo "Installing APT repo..."
 sh -c "curl https://repo.pcland.co.in/.keys/dawn-pgp.public >> /usr/share/keyrings/dawn-pgp.public"
-sh -c "echo deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/dawn-pgp.public] https://repo.pcland.co.in/apt stable main > /etc/apt/sources.list.d/dawn.list"
+sh -c "echo deb [signed-by=/usr/share/keyrings/dawn-pgp.public] https://repo.pcland.co.in/apt stable main > /etc/apt/sources.list.d/dawn.list"
 echo "Updating APT cache..."
 apt update || true
 
