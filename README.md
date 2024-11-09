@@ -33,7 +33,7 @@ The app is available for Windows and Linux.
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
 | [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
-| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, armhf, arm64 | Debian, RPM, Arch    |
+| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch    |
 
 You can find the installation files in [DAWN Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX) or in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
 
