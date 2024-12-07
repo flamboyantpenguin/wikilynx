@@ -80,5 +80,15 @@
         <file>icons/materialLight/main/trophy.svg</file>
         <file>icons/materialDark/main/cancel.svg</file>
         <file>icons/materialLight/main/cancel.svg</file>
+        <file>icons/materialLight/main/online.svg</file>
+        <file>icons/materialLight/main/offline.svg</file>
+        <file>icons/materialLight/main/pending.svg</file>
+        <file>icons/materialDark/main/offline.svg</file>
+        <file>icons/materialDark/main/online.svg</file>
+        <file>icons/materialDark/main/pending.svg</file>
+        <file>icons/materialDark/main/meow.svg</file>
+        <file>icons/materialDark/main/upgrade.svg</file>
+        <file>icons/materialLight/main/meow.svg</file>
+        <file>icons/materialLight/main/upgrade.svg</file>
     </qresource>
 </RCC>

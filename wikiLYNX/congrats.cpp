@@ -54,12 +54,11 @@ void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString 
 
 void congrats::viewhistory() {
 
-    int t;
     QFile lFile("./"+dirName+"/logs/"+this->instanceName+"/log.txt");
     lFile.open(QIODevice::ReadOnly);
     QString logs = QString(lFile.readAll());
     lFile.close();
-    hView.dontKillMe = (&t);
+    hView.dontKillMe = nullptr;
     hView.initialise(&logs);
     hView.show();
 }
@@ -118,7 +117,6 @@ void congrats::updateStats() {
 }
 
 void congrats::showStats() {
-
     statsDialog.initialise();
     statsDialog.show();
 }

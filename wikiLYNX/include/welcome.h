@@ -60,6 +60,9 @@ private slots:
     void showLevelInfo();
     void showRules();
 
+public slots:
+    void setStatus(int);
+
 
 private:
     news newsDialog;
@@ -71,4 +74,20 @@ private:
     Ui::welcomeDialog *ui;
     QString dirName = ".wLnKMeow";
 
+};
+
+
+class checkUpdateWorker : public QObject  {
+    Q_OBJECT
+
+public:
+    std::string lVersion = "1.0.0-1";
+    std::string version = "1.0.0-1";
+
+public slots:
+    void process();
+
+signals:
+    void finished();
+    void status(int);
 };

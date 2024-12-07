@@ -151,9 +151,7 @@ void editLevel::importLevels() {
     dialog.setFileMode(QFileDialog::ExistingFile);
     dialog.setAcceptMode(QFileDialog::AcceptOpen);
     dialog.setNameFilter(tr("JSON Files (*.json)"));
-    if (dialog.exec()) {
-        filename = dialog.selectedFiles()[0];
-    }
+    if (dialog.exec()) filename = dialog.selectedFiles()[0];
 
     QFile lFile(filename);
     if (lFile.isOpen()) lFile.close();
@@ -174,40 +172,27 @@ void editLevel::importLevels() {
 
 void editLevel::exportLevels() {
 
-
     QFileDialog dialog(this);
     QString filename;
     dialog.setFileMode(QFileDialog::AnyFile);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     dialog.selectFile("export.json");
     dialog.setNameFilter(tr("JSON Files (*.json)"));
-    if (dialog.exec()) {
-        filename = dialog.selectedFiles()[0];
-    }
-    //if (filename.isEmpty()) return
+    if (dialog.exec()) filename = dialog.selectedFiles()[0];
     this->saveData(filename, 1);
 }
 
 
 void editLevel::downloadLevel() {
-
-    if (this->checkInternet()){
-        QString msg("Unable to reach DAWN Archives! Try again later or report this via GitHub or Feedback form");
-        QMessageBox::critical(nullptr, "wikiLYNX", msg, QMessageBox::Ok);
-        return;
-    }
     getLevelDialog.initialise();
     getLevelDialog.show();
 }
 
 
 int editLevel::checkInternet() {
-#ifdef Q_OS_WIN
-
-    return QProcess::execute("ping", QStringList() << "archive.pcland.co.in");  // Replace with wikipedia.org if preferred
-
-#else
-    return QProcess::execute("ping", QStringList() << "-c" << "1" << "archive.pcland.co.in"); // Replace with wikipedia.org if preferred
-
-#endif
+    #ifdef Q_OS_WIN
+        return QProcess::execute("ping", QStringList() << "archive.pcland.co.in");  // Replace with wikipedia.org if preferred
+    #else
+        return QProcess::execute("ping", QStringList() << "-c" << "1" << "archive.pcland.co.in"); // Replace with wikipedia.org if preferred
+    #endif
 }

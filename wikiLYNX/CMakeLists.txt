@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(wikilynx VERSION 1.3.0 LANGUAGES CXX)
+project(wikilynx VERSION 1.5.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -66,7 +66,7 @@ else()
 endif()
 
 
-target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt::WebEngineWidgets)
+target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

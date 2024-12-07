@@ -25,7 +25,6 @@ loadingScreen::loadingScreen(QWidget *parent)
     connect( thread, &QThread::finished, this, &loadingScreen::close);
     thread->start();
 
-
     ui->progressBar->setStyleSheet(styleSheet);
 
 

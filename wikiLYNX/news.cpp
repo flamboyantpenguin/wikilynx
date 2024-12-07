@@ -7,12 +7,8 @@ news::news(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(&manager, &QNetworkAccessManager::finished, this, &news::finished);
-
-    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, [](QTreeWidgetItem *item) { QDesktopServices::openUrl(QUrl(item->text(1))); });
     ui->treeWidget->setHeaderLabels(QStringList { tr("Title"), tr("Link"), tr("Date"), tr("Description") });
     ui->treeWidget->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    this->initialise();
 }
 
 
@@ -23,6 +19,8 @@ news::~news()
 
 
 void news::initialise() {
+    connect(&manager, &QNetworkAccessManager::finished, this, &news::finished);
+    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, [](QTreeWidgetItem *item) { QDesktopServices::openUrl(QUrl(item->text(1))); });
     this->fetch();
 }
 

@@ -33,7 +33,7 @@ The app is available for Windows and Linux.
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
 | [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
-| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, armhf, arm64 | Debian, RPM, Arch    |
+| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage    |
 
 You can find the installation files in [DAWN Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX) or in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
 
@@ -47,7 +47,7 @@ wikiLYNX is made using Qt6 WebEngine. As of now the source is compatible for Win
 
 ### Getting Started
 
-To compile this project, you need to have the following components installed in your system. 
+To compile this project, you need to have the following components installed in your system.
 
 - Qt6
   - Qt WebEngine
@@ -58,7 +58,7 @@ To compile this project, you need to have the following components installed in 
 - git
 - gcc/msvc (project not tested in clang; should work)
 
-After this clone this repository and start contributing. You can contact me via email or raise an issue on GitHub if you 
+After this clone this repository and start contributing. You can contact me via email or raise an issue on GitHub if you
 encounter errors during build. For more info please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Development).
 
 ### Contribute
@@ -85,9 +85,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.3.0
+wikiLYNX 1.5.0
 
-Last Updated: 06-11-2024
+Last Updated: 07-11-2024
 Made by DAWN/ペンギン
 ```
 

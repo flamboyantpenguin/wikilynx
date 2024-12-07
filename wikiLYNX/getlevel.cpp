@@ -45,8 +45,8 @@ int getLevel::initialise() {
     loop.exec();
 
     if (reply->error() != QNetworkReply::NoError) {
-        ui->status->setText("Unable to reach Archives!");
-        qDebug() << "Can't connect to Archive:" << reply->errorString();
+        ui->status->setText("Unable to reach Archives :(");
+        qDebug() << "Can't connect to Archives:" << reply->errorString();
         return 1;
     }
 

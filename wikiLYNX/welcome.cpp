@@ -11,9 +11,21 @@ welcomeUI::welcomeUI(QDialog *parent)
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
-    ui->initButton->setIcon(QIcon::fromTheme("play"));
+    QThread* thread = new QThread();
+    checkUpdateWorker* worker = new checkUpdateWorker();
+    worker->moveToThread(thread);
+
+    connect( thread, &QThread::started, worker, &checkUpdateWorker::process);
+    connect( worker, &checkUpdateWorker::finished, thread, &QThread::quit);
+    connect( worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
+    connect(worker, SIGNAL(status(int)), this, SLOT(setStatus(int)));
+    connect( thread, &QThread::finished, thread, &QThread::deleteLater);
+    //connect( thread, &QThread::finished, this, &loadingScreen::close);
+    thread->start();
+
+
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
-    connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
+    connect(ui->passcodeInput, SIGNAL(currentIndexChanged(int)), this, SLOT(showLevelInfo()));
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
     connect(ui->cLogsButton, &QPushButton::clicked, this, &welcomeUI::clearLogs);
@@ -208,7 +220,9 @@ void welcomeUI::showRules() {
 
 void welcomeUI::showLogs() {
     fs::create_directories("./"+dirName.toStdString()+"/logs");
-    QDesktopServices::openUrl(QUrl::fromLocalFile("./"+dirName+"/logs"));
+    //QDesktopServices::openUrl(QUrl::fromLocalFile("./"+dirName+"/logs"));
+    // Finally Fixed this :)
+    QDesktopServices::openUrl(QUrl::fromUserInput(QDir("./"+dirName+"/logs").absolutePath()));
 }
 
 
@@ -218,17 +232,70 @@ void welcomeUI::clearLogs() {
 }
 
 
-void welcomeUI::showStats() {
+void welcomeUI::setStatus(int c) {
 
+    std::map<int, QString> code = {
+        { 0, "Offline" },
+        { 1, "Online" },
+        { 2, "Update Available" },
+        { 3, "Meow" }
+    };
+    ui->status->setText(code[c]);
+    ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].toLower()));
+    if (c == 2) ui->statusIndicator->setIcon(QIcon::fromTheme("upgrade"));
+    return;
+}
+
+
+void welcomeUI::showStats() {
     statsDialog.initialise();
     statsDialog.show();
 }
 
 
 void welcomeUI::showNews() {
+    newsDialog.initialise();
     newsDialog.show();
 }
 
 void welcomeUI::showAbout() {
     aboutDialog.show();
+}
+
+
+void checkUpdateWorker::process() { // Process. Start processing data.
+
+    QNetworkAccessManager manager;
+    QUrl url("https://wikipedia.org");
+    QNetworkReply *reply = manager.get(QNetworkRequest(url));
+
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError) emit status(0);
+    reply->deleteLater();
+
+    url = QUrl("https://repo.pcland.co.in/QtOnline/wikiLYNX/.info/version.txt");
+    reply = manager.get(QNetworkRequest(url));
+
+    QEventLoop loop2;
+    QObject::connect(reply, &QNetworkReply::finished, &loop2, &QEventLoop::quit);
+    loop2.exec();
+
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray data = reply->read(7);
+        lVersion = QString::fromLocal8Bit(data).toStdString();
+    } else qDebug() << "Error fetching latest version information:" << reply->errorString();
+    reply->deleteLater();
+
+
+    if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
+    else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(3);
+    else emit(1);
+
+    QApplication::processEvents();
+
+    emit finished();
+
 }
