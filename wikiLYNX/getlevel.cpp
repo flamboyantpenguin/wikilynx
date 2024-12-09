@@ -7,9 +7,8 @@ getLevel::getLevel(QWidget *parent)
     , ui(new Ui::getLevel)
 {
     ui->setupUi(this);
-    ui->downloadButton->setEnabled(false);
-    connect(ui->table, &QTableWidget::clicked, this, &getLevel::setEditStatus);
-    connect(ui->downloadButton, &QPushButton::clicked, this, &getLevel::downloadLevel);
+    connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
+    connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
     connect(ui->exitButton, &QPushButton::clicked, this, &getLevel::close);
 
 }
@@ -69,35 +68,46 @@ int getLevel::initialise() {
 int getLevel::updateTable() {
 
     auto l = this->levelData.keys();
-    ui->table->setRowCount(l.count());
+    ui->list->clear();
 
-    ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+    QListWidgetItem *item = new QListWidgetItem();
+    auto widget = new levels(this);
+
+    item->setSizeHint(widget->sizeHint());
+    ui->list->addItem(item);
+    ui->list->setItemWidget(item, widget);
+
+    widget->setItem("Code Name", \
+        "Time", \
+        "Checkpoints", \
+        "Difficulty", \
+        "neutralOnline", "", "");
 
     for (int i = 0; i < this->levelData.count(); i++) {
 
-        QTableWidgetItem* code = new QTableWidgetItem();
-        QTableWidgetItem* time = new QTableWidgetItem();
-        QTableWidgetItem* chk = new QTableWidgetItem();
-        QTableWidgetItem* difficulty = new QTableWidgetItem();
-        QTableWidgetItem* status = new QTableWidgetItem();
-        status->setIcon(QIcon::fromTheme("cancel"));
-        code->setText(l[i]);
-        time->setText(QString::number(this->levelData[l[i]].toObject()["time"].toInt()));
-        chk->setText(QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()));
-        difficulty->setText(this->levelData[l[i]].toObject()["difficulty"].toString());
-        ui->table->setItem(i, 0, code);
-        ui->table->setItem(i, 1, time);
-        ui->table->setItem(i, 2, chk);
-        ui->table->setItem(i, 3, difficulty);
+        QListWidgetItem *item = new QListWidgetItem();
+        auto widget = new levels(this);
 
         if (this->iData.contains(l[i])) {
-            status->setIcon(QIcon::fromTheme("check_circle"));
+            widget->setItem(l[i], \
+                QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
+                QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
+                this->levelData[l[i]].toObject()["difficulty"].toString(), \
+                "delete", "", "");
         }
-        ui->table->setItem(i, 4, status);
+        else {
+            widget->setItem(l[i], \
+                QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
+                QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
+                this->levelData[l[i]].toObject()["difficulty"].toString(), \
+                "download", "", "");
+        }
+
+        connect(widget, &levels::action0, this, &getLevel::downloadLevel);
+
+        item->setSizeHint(widget->sizeHint());
+        ui->list->addItem(item);
+        ui->list->setItemWidget(item, widget);
 
     }
 
@@ -105,15 +115,16 @@ int getLevel::updateTable() {
 }
 
 
-void getLevel::downloadLevel() {
+void getLevel::downloadLevel(QString code) {
 
-    auto t = ui->table->currentIndex();
-    auto cde = ui->table->item(t.row(), 0)->text();
+    if (this->iData.contains(code)) {
+        this->deleteLevel(code);
+        return;
+    }
 
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
-
-    QUrl url("https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels/"+this->levelData[cde].toObject()["fname"].toString()); // Replace with the actual URL
+    QUrl url("https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels/"+this->levelData[code].toObject()["fname"].toString()); // Replace with the actual URL
     QNetworkRequest request(url);
 
     QNetworkReply *reply = manager->get(request);
@@ -136,7 +147,7 @@ void getLevel::downloadLevel() {
     QJsonDocument document;
     QJsonObject temp;
 
-    iData.insert(cde, jsonObject[cde].toObject());
+    iData.insert(code, jsonObject[code].toObject());
 
     temp.insert("info", this->cfg);
     temp.insert("data", this->iData);
@@ -158,8 +169,33 @@ void getLevel::downloadLevel() {
 }
 
 
+void getLevel::deleteLevel(QString code) {
+
+    QJsonDocument document;
+    QJsonObject temp;
+
+    iData.remove(code);
+
+    temp.insert("info", this->cfg);
+    temp.insert("data", this->iData);
+    document.setObject(temp);
+
+    QFile::remove("./"+dirName+"/gData.json");
+
+    QByteArray bytes = document.toJson( QJsonDocument::Indented );
+    QFile file("./"+dirName+"/gData.json");
+    if (file.isOpen()) file.close();
+    file.open(QIODevice::ReadWrite);
+    QTextStream iStream(&file);
+    iStream << bytes;
+    file.flush();
+    file.close();
+    this->updateTable();
+    ui->status->setText("Deleted!");
+
+}
+
+
 void getLevel::setEditStatus() {
-    if (ui->table->item(ui->table->currentIndex().row(), 1) && !ui->table->item(ui->table->currentIndex().row(), 1)->text().isEmpty())
-        ui->downloadButton->setEnabled(true);
     ui->status->setText("");
 }

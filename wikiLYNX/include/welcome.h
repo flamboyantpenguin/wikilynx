@@ -104,8 +104,8 @@ class checkUpdateWorker : public QObject  {
     Q_OBJECT
 
 public:
-    std::string lVersion = "1.3.0-1";
-    std::string version = "1.3.0-1";
+    std::string lVersion = "1.5.0-1";
+    std::string version = "1.5.0-1";
 
 public slots:
     void process();

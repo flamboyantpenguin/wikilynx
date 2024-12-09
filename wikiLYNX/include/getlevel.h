@@ -12,6 +12,8 @@
 #include <QNetworkAccessManager>
 
 
+#include "levels.h"
+
 namespace Ui {
 class getLevel;
 }
@@ -39,7 +41,8 @@ private:
 
 private slots:
     void setEditStatus();
-    void downloadLevel();
+    void deleteLevel(QString);
+    void downloadLevel(QString);
 
 signals:
     void exitWindow();

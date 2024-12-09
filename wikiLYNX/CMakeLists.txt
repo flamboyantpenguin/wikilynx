@@ -41,6 +41,7 @@ set(PROJECT_SOURCES
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
         include/news.h news.cpp ui/news.ui
         include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
+        include//levels.h levels.cpp ui/levels.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -48,6 +49,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${app_icon_resource_windows}
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET wikilynx APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

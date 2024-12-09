@@ -10,8 +10,10 @@
 #include <QFileDialog>
 #include <QProcess>
 
+#include "levels.h"
 #include "editchk.h"
 #include "getlevel.h"
+
 
 namespace Ui {
 class editLevel;
@@ -24,17 +26,13 @@ class editLevel : public QDialog
 public:
     explicit editLevel(QWidget *parent = nullptr);
     ~editLevel();
-    //std::map<QString, QJsonObject> uData;
     QJsonObject cfg, iData, uData;
-    void saveData(QString fname = "./.wikilynx/gData.json", int mode = 0);
-    //void collectData();
     void initialise();
     void updateTable(QJsonObject);
 
 
 protected:
     void closeEvent(QCloseEvent *event) override {
-        this->saveData();
         QDialog::closeEvent(event);
     }
 
@@ -48,12 +46,11 @@ private:
 
 private slots:
     void addLevel();
-    void removeLevel();
+    void levelEditor(QString code);
+    void removeLevel(QString code);
     void importLevels();
     void exportLevels();
-    void editChkPoint();
     void downloadLevel();
-    void setEditStatus();
 
 };
 
