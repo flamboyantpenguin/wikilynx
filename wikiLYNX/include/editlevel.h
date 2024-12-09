@@ -11,7 +11,7 @@
 #include <QProcess>
 
 #include "levels.h"
-#include "editchk.h"
+#include "leveleditor.h"
 #include "getlevel.h"
 
 
@@ -28,7 +28,7 @@ public:
     ~editLevel();
     QJsonObject cfg, iData, uData;
     void initialise();
-    void updateTable(QJsonObject);
+    void updateTable();
 
 
 protected:
@@ -37,20 +37,19 @@ protected:
     }
 
 private:
-    int checkInternet();
     Ui::editLevel *ui;
-    editChk editChkDialog;
+    levelEditor levelEditorDialog;
     getLevel getLevelDialog;
     QString dirName = ".wikilynx";
 
 
 private slots:
     void addLevel();
-    void levelEditor(QString code);
     void removeLevel(QString code);
     void importLevels();
     void exportLevels();
     void downloadLevel();
+    void launchLevelEditor(QString code);
 
 };
 

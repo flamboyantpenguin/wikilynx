@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>editChk</class>
- <widget class="QDialog" name="editChk">
+ <class>levelEditor</class>
+ <widget class="QDialog" name="levelEditor">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>

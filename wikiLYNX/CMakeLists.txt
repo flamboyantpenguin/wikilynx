@@ -35,7 +35,7 @@ set(PROJECT_SOURCES
         ui/help.ui help.cpp include/help.h
         ui/terms.ui terms.cpp include/terms.h
         ui/editlevel.ui editlevel.cpp include/editlevel.h
-        ui/editchk.ui editchk.cpp include/editchk.h
+        ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
         ui/viewstats.ui viewstats.cpp include/viewstats.h
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui

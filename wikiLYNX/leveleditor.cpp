@@ -1,27 +1,27 @@
-#include "include/editchk.h"
-#include "ui/ui_editchk.h"
+#include "include/leveleditor.h"
+#include "ui/ui_leveleditor.h"
 
-editChk::editChk(QWidget *parent) :
+levelEditor::levelEditor(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::editChk)
+    ui(new Ui::levelEditor)
 {
     ui->setupUi(this);
     ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
     ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
     ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
-    connect(ui->addButton, &QPushButton::clicked, this, &editChk::addChk);
-    connect(ui->removeButton, &QPushButton::clicked, this, &editChk::removeChk);
-    connect(ui->closeButton, &QPushButton::clicked, this, &editChk::close);
+    connect(ui->addButton, &QPushButton::clicked, this, &levelEditor::addChk);
+    connect(ui->removeButton, &QPushButton::clicked, this, &levelEditor::removeChk);
+    connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
 
 }
 
-editChk::~editChk()
+levelEditor::~levelEditor()
 {
     delete ui;
 }
 
 
-void editChk::initialise(QJsonObject *chk, QString cde) {
+void levelEditor::initialise(QJsonObject *chk, QString cde) {
 
     this->chkData = chk;
     this->code = cde;
@@ -47,7 +47,7 @@ void editChk::initialise(QJsonObject *chk, QString cde) {
 }
 
 
-void editChk::saveData() {
+void levelEditor::saveData() {
 
     QJsonObject nData;
 
@@ -70,7 +70,7 @@ void editChk::saveData() {
 }
 
 
-void editChk::addChk() {
+void levelEditor::addChk() {
     ui->table->setRowCount(ui->table->rowCount()+1);
     QTableWidgetItem* i = new QTableWidgetItem();
     i->setText(QString::number(ui->table->rowCount() - 1));
@@ -78,6 +78,6 @@ void editChk::addChk() {
 }
 
 
-void editChk::removeChk() {
+void levelEditor::removeChk() {
     ui->table->removeRow(ui->table->rowAt(ui->table->rowCount() - 1));
 }

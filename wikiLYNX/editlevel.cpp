@@ -37,20 +37,15 @@ void editLevel::initialise() {
 
     this->cfg = temp["info"].toObject();
     this->iData = temp["data"].toObject();
-    this->updateTable(this->iData);
-
-
-    QStringList keys = this->iData.keys();
-    for (const QString& key : keys) this->uData.insert(key, this->iData[key].toObject()["data"].toObject());
+    this->updateTable();
 
 }
 
 
-void editLevel::updateTable(QJsonObject data) {
-
+void editLevel::updateTable() {
 
     ui->list->clear();
-    auto l = data.keys();
+    auto l = this->iData.keys();
 
     QListWidgetItem *item = new QListWidgetItem();
     auto widget = new levels(this);
@@ -71,12 +66,12 @@ void editLevel::updateTable(QJsonObject data) {
         auto widget = new levels(this);
 
         widget->setItem(l[i], \
-            QString::number(data[l[i]].toObject()["time"].toInt()), \
-            QString::number(data[l[i]].toObject()["checkpoints"].toInt()), \
-            data[l[i]].toObject()["difficulty"].toString(), \
+            QString::number(iData[l[i]].toObject()["time"].toInt()), \
+            QString::number(iData[l[i]].toObject()["checkpoints"].toInt()), \
+            iData[l[i]].toObject()["difficulty"].toString(), \
             "edit", "delete", "");
 
-        connect(widget, &levels::action0, this, &editLevel::levelEditor);
+        connect(widget, &levels::action0, this, &editLevel::launchLevelEditor);
         connect(widget, &levels::action1, this, &editLevel::removeLevel);
 
         item->setSizeHint(widget->sizeHint());
@@ -94,7 +89,7 @@ void editLevel::addLevel() {
 }
 
 
-void editLevel::levelEditor(QString code) {
+void editLevel::launchLevelEditor(QString code) {
     /*
     auto t = ui->table->currentIndex();
     auto cde = ui->table->item(t.row(), 0)->text();
@@ -142,16 +137,27 @@ void editLevel::importLevels() {
     QFile lFile(filename);
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
-    auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
+    auto importData = QJsonDocument::fromJson(lFile.readAll()).object();
     lFile.close();
 
     QVariantMap map = this->iData.toVariantMap();
-    map.insert(temp["data"].toObject().toVariantMap());
+    map.insert(importData["data"].toObject().toVariantMap());
     this->iData = QJsonObject::fromVariantMap(map);
-    this->updateTable(this->iData);
 
-    QStringList keys = this->iData.keys();
-    for (const QString& key : keys) this->uData.insert(key, this->iData[key].toObject()["data"].toObject());
+    QJsonObject nSaveData;
+    QJsonDocument document;
+    nSaveData.insert("info", this->cfg);
+    nSaveData.insert("data", this->iData);
+    document.setObject(nSaveData);
+    QFile::remove("./"+dirName+"/gData.json");
+    QFile file("./"+dirName+"/gData.json");
+    if (file.isOpen()) file.close();
+    file.open(QIODevice::ReadWrite);
+    QTextStream iStream(&file);
+    iStream << document.toJson( QJsonDocument::Indented );;
+    file.flush();
+    file.close();
+    this->updateTable();
 
 }
 
@@ -165,7 +171,22 @@ void editLevel::exportLevels() {
     dialog.selectFile("export.json");
     dialog.setNameFilter(tr("JSON Files (*.json)"));
     if (dialog.exec()) filename = dialog.selectedFiles()[0];
-    this->saveData(filename, 1);
+
+    QJsonDocument document;
+    QJsonObject temp;
+
+    temp.insert("info", this->cfg);
+    temp.insert("data", iData);
+    document.setObject(temp);
+    QFile::remove(filename);
+    QByteArray bytes = document.toJson( QJsonDocument::Indented );
+    QFile file(filename);
+    if (file.isOpen()) file.close();
+    file.open(QIODevice::ReadWrite);
+    QTextStream iStream(&file);
+    iStream << bytes;
+    file.flush();
+    file.close();
 
 }
 

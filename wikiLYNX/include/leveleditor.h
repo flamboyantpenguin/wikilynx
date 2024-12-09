@@ -1,5 +1,5 @@
-#ifndef EDITCHK_H
-#define EDITCHK_H
+#ifndef LEVELEDITOR_H
+#define LEVELEDITOR_H
 
 #include <QDialog>
 #include <QString>
@@ -7,20 +7,20 @@
 #include <QJsonObject>
 
 namespace Ui {
-class editChk;
+class levelEditor;
 }
 
-class editChk : public QDialog
+class levelEditor : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit editChk(QWidget *parent = nullptr);
+    explicit levelEditor(QWidget *parent = nullptr);
     QString code;
     QJsonObject *chkData;
     void saveData();
     void initialise(QJsonObject *, QString);
-    ~editChk();
+    ~levelEditor();
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -31,7 +31,7 @@ protected:
 
 
 private:
-    Ui::editChk *ui;
+    Ui::levelEditor *ui;
 
 private slots:
     void addChk();
@@ -39,4 +39,4 @@ private slots:
 
 };
 
-#endif // EDITCHK_H
+#endif // LEVELEDITOR_H
