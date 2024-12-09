@@ -27,6 +27,10 @@
   <property name="windowTitle">
    <string>wikiLYNX</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
   <property name="tabShape">
    <enum>QTabWidget::TabShape::Rounded</enum>
   </property>
@@ -301,6 +305,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <header location="global">QtWebEngineWidgets/QWebEngineView</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

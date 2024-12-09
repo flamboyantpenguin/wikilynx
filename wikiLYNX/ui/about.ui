@@ -34,9 +34,8 @@
    <string>About</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normalon>:/images/Images/Logo.png</normalon>
-   </iconset>
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <widget class="QTextBrowser" name="aboutPage">
    <property name="geometry">
@@ -233,6 +232,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

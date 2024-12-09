@@ -28,6 +28,10 @@
   <property name="windowTitle">
    <string>Leaderboard</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="layout0">
@@ -251,6 +255,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

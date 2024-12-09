@@ -25,6 +25,8 @@ set(PROJECT_SOURCES
         include/gamewindow.h
         ui/gamewindow.ui
         assets/assets.qrc
+
+
         ui/welcome.ui include/welcome.h welcome.cpp
         viewhistory.cpp include/viewhistory.h ui/viewhistory.ui
         viewcheckpoint.cpp include/viewcheckpoint.h ui/viewcheckpoint.ui
@@ -38,7 +40,7 @@ set(PROJECT_SOURCES
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
         include/news.h news.cpp ui/news.ui
-
+        include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

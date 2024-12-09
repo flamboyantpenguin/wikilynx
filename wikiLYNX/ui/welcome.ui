@@ -40,6 +40,10 @@
   <property name="windowTitle">
    <string>Welcome to wikiLYNX</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -259,7 +263,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <string>Number of checkpoints</string>
              </property>
              <property name="text">
-              <string>chk</string>
+              <string>number of checkpoints</string>
              </property>
             </widget>
            </item>
@@ -393,7 +397,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <string>Current Level difficulty</string>
              </property>
              <property name="text">
-              <string>difficulty</string>
+              <string>level difficulty</string>
              </property>
             </widget>
            </item>
@@ -516,22 +520,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Icon Theme: </string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Font: </string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBox">
+         <item row="1" column="1">
+          <widget class="QComboBox" name="iconThemeSelect">
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -543,8 +533,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QFontComboBox" name="fontComboBox"/>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Icon Theme: </string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -823,7 +817,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </font>
        </property>
        <property name="text">
-        <string>status</string>
+        <string>Loading</string>
        </property>
       </widget>
      </item>
@@ -841,7 +835,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="version">
        <property name="text">
         <string>Version: 1.5.0 (Stable)</string>
        </property>
@@ -851,6 +845,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

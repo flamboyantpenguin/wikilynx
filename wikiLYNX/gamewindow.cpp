@@ -124,7 +124,6 @@ int GameWindow::missionAccomplished() {
         QString timeTaken = QString::number(endTime-cCount);
         //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
         congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk);
-        //congratsView.initialise(c, QString::fromStdString(this->aTime), QString::fromStdString(cTime), instance, &(this->chk), 1);
         QMessageBox::information(this, "wikiLYNX", "You Won!!!", QMessageBox::Ok);
         congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
         congratsView.show();

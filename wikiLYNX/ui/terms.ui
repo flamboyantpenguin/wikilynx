@@ -33,6 +33,10 @@
   <property name="windowTitle">
    <string>Terms</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -276,6 +280,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

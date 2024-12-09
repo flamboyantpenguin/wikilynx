@@ -65,7 +65,6 @@ void congrats::viewhistory() {
 
 
 void congrats::launchFeedBack() {
-
     QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
 }
 

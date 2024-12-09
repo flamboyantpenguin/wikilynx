@@ -33,6 +33,10 @@
   <property name="windowTitle">
    <string>Edit Custom Checkpoints</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
@@ -152,6 +156,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

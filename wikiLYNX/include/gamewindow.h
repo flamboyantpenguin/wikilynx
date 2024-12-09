@@ -48,7 +48,7 @@ public:
     int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
 private:
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
     QString gamer, level;
     Ui::GameWindow *ui;
     viewHistory historyView;

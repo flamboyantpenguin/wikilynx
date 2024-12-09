@@ -11,19 +11,7 @@ welcomeUI::welcomeUI(QDialog *parent)
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
-    QThread* thread = new QThread();
-    checkUpdateWorker* worker = new checkUpdateWorker();
-    worker->moveToThread(thread);
-
-    connect( thread, &QThread::started, worker, &checkUpdateWorker::process);
-    connect( worker, &checkUpdateWorker::finished, thread, &QThread::quit);
-    connect( worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
-    connect(worker, SIGNAL(status(int)), this, SLOT(setStatus(int)));
-    connect( thread, &QThread::finished, thread, &QThread::deleteLater);
-    //connect( thread, &QThread::finished, this, &loadingScreen::close);
-    thread->start();
-
-
+    this->checkStatus();
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->passcodeInput, SIGNAL(currentIndexChanged(int)), this, SLOT(showLevelInfo()));
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
@@ -35,6 +23,8 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
     connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
+    connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
+    connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
 
     ui->initButton->setFocus();
 
@@ -49,10 +39,42 @@ int welcomeUI::initialise(int *totem) {
     loadSettings();
     updateUI();
 
+    // Set icon theme
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    theme = this->cfg["iconTheme"].toString() + theme;
+    QIcon::setThemeName(theme);
+    qDebug() << "Current Icon Theme:" << QIcon::themeName();
+
     connect(ui->killToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
     connect(ui->allowSitesToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
+    connect(ui->iconThemeSelect, SIGNAL(currentTextChanged(QString)), this, SLOT(updateSettings()));
 
     return 0;
+}
+
+
+void welcomeUI::checkStatus() {
+
+    thread = new QThread();
+    checkUpdateWorker* worker = new checkUpdateWorker();
+    worker->moveToThread(thread);
+
+    connect( thread, &QThread::started, worker, &checkUpdateWorker::process);
+    connect( worker, &checkUpdateWorker::finished, thread, &QThread::quit);
+    connect( worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
+    connect(worker, SIGNAL(status(int)), this, SLOT(setStatus(int)));
+    connect( thread, &QThread::finished, thread, &QThread::deleteLater);
+    thread->start();
+
+}
+
+
+bool welcomeUI::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
 
@@ -79,7 +101,7 @@ int welcomeUI::startGame() {
     this->grabKeyboard();
     this->hide();
     auto temp = data[passcode].toObject();
-    game->initialise(&temp, dontKillParse0, "https://en.wikipedia.org", this->aRD, ui->playerName->text(), passcode);
+    game->initialise(&temp, dontKillParse0, "https://en.wikipedia.org", this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
@@ -90,10 +112,10 @@ int welcomeUI::startGame() {
 
 
 void welcomeUI::reset() {
-
     this->show();
     this->releaseKeyboard();
     *dontKillParse0 = 1;
+    this->checkStatus();
 }
 
 
@@ -123,8 +145,10 @@ void welcomeUI::loadSettings() {
 
 void welcomeUI::updateUI() {
 
-    this->aRD = cfg["allowReference"].toInt();
-    ui->allowSitesToggle->setChecked(aRD);
+    ui->iconThemeSelect->addItems(this->cfg["availableIconThemes"].toString().split("|"));
+    ui->iconThemeSelect->setCurrentText(this->cfg["iconTheme"].toString());
+
+    ui->allowSitesToggle->setChecked(this->cfg["allowReference"].toInt());
 
     *totemofUndying = cfg["totemOfUndying"].toInt();
     ui->killToggle->setChecked(cfg["totemOfUndying"].toInt());
@@ -137,7 +161,13 @@ void welcomeUI::updateUI() {
 
 void welcomeUI::updateSettings() {
     *totemofUndying = ui->killToggle->isChecked();
-    this->aRD = ui->allowSitesToggle->isChecked();
+    this->cfg["allowReference"] = ui->allowSitesToggle->isChecked();
+    this->cfg["iconTheme"] = ui->iconThemeSelect->currentText();
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    theme = this->cfg["iconTheme"].toString() + theme;
+    QIcon::setThemeName(theme);
+    QWidget::update();
+    //QApplication::processEvents();
     saveSettings();
 }
 
@@ -155,7 +185,6 @@ void welcomeUI::saveSettings() {
     QJsonObject d = temp["data"].toObject();
 
     //this->cfg = this->cfg;
-    this->cfg["allowReference"] = this->aRD;
     this->cfg["totemOfUndying"] = *totemofUndying;
 
     QJsonDocument document;
@@ -177,7 +206,7 @@ void welcomeUI::saveSettings() {
 
 void welcomeUI::checkCustom() {
 
-    const char* file = ("./.wLnKMeow/gData.json");
+    const char* file = ("./.wikilynx/gData.json");
     struct stat sb;
 
     if (stat(file, &sb) != 0 && !(sb.st_mode & S_IFDIR)) {
@@ -234,22 +263,36 @@ void welcomeUI::clearLogs() {
 
 void welcomeUI::setStatus(int c) {
 
-    std::map<int, QString> code = {
-        { 0, "Offline" },
-        { 1, "Online" },
-        { 2, "Update Available" },
-        { 3, "Meow" }
-    };
-    ui->status->setText(code[c]);
-    ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].toLower()));
-    if (c == 2) ui->statusIndicator->setIcon(QIcon::fromTheme("upgrade"));
+    ui->status->setText(code[c].split("|")[0]);
+    ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].split("|")[1]));
+    if (c != 0)  checkWorldEvent();
+    overview.initialise(c);
     return;
+}
+
+
+void welcomeUI::checkWorldEvent() {
+
+    QString day = QDate::currentDate().toString("ddMM");
+
+    for (auto const& [key, val] : this->worldEvents) {
+        if (day == key) {
+            ui->status->setText(val.split('|')[1]);
+            ui->statusIndicator->setIcon(QIcon::fromTheme(val.split('|')[0]));
+        }
+    }
 }
 
 
 void welcomeUI::showStats() {
     statsDialog.initialise();
     statsDialog.show();
+}
+
+
+void welcomeUI::launchStatusOverview() {
+    //overview.initialise();
+    overview.show();
 }
 
 
@@ -265,6 +308,7 @@ void welcomeUI::showAbout() {
 
 void checkUpdateWorker::process() { // Process. Start processing data.
 
+    int flg;
     QNetworkAccessManager manager;
     QUrl url("https://wikipedia.org");
     QNetworkReply *reply = manager.get(QNetworkRequest(url));
@@ -273,7 +317,10 @@ void checkUpdateWorker::process() { // Process. Start processing data.
     QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
 
-    if (reply->error() != QNetworkReply::NoError) emit status(0);
+    if (reply->error() != QNetworkReply::NoError) {
+        emit status(0);
+        flg = 1;
+    }
     reply->deleteLater();
 
     url = QUrl("https://repo.pcland.co.in/QtOnline/wikiLYNX/.info/version.txt");
@@ -286,15 +333,19 @@ void checkUpdateWorker::process() { // Process. Start processing data.
     if (reply->error() == QNetworkReply::NoError) {
         QByteArray data = reply->read(7);
         lVersion = QString::fromLocal8Bit(data).toStdString();
-    } else qDebug() << "Error fetching latest version information:" << reply->errorString();
+    } else {
+        qDebug() << "Error fetching latest version information:" << reply->errorString();
+        if (!flg) emit status(3);
+        flg = 1;
+    }
     reply->deleteLater();
 
 
-    if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
-    else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(3);
-    else emit(1);
-
-    QApplication::processEvents();
+    if (!flg) {
+        if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
+        else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(4);
+        else emit status(1);
+    }
 
     emit finished();
 

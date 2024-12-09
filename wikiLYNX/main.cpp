@@ -17,11 +17,7 @@
 #include <QSysInfo>
 
 
-bool isDarkTheme();
 void loadFonts();
-void loadIconTheme();
-void checkUpdate();
-int checkInternet();
 void downloadUpdate();
 void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 
@@ -38,8 +34,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     loadFonts();
-    loadIconTheme();
-    qDebug() << "Current Icon Theme:" << QIcon::themeName();
+    //loadIconTheme();
 
     welcomeUI dialog;
     QObject::connect(&a, &QApplication::focusChanged, onFocusChanged);
@@ -60,67 +55,11 @@ int main(int argc, char *argv[])
 }
 
 
-
 void loadFonts() {
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Bold.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Regular.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Regular.ttf");
-}
-
-
-void loadIconTheme() {
-    if (isDarkTheme()) {
-        QIcon::setThemeName("materialDark");
-        return;
-    }
-    QIcon::setThemeName("materialLight");
-}
-
-
-bool isDarkTheme() {
-    QColor backgroundColor = qApp->palette().color(QPalette::Window);
-    int luminance = (0.299 * backgroundColor.red() +
-                     0.587 * backgroundColor.green() +
-                     0.114 * backgroundColor.blue());
-    return luminance < 128;  // If luminance is low, it's likely a dark theme.
-}
-
-
-
-void checkUpdate() {
-
-    QNetworkAccessManager manager;
-    QUrl url("https://repo.pcland.co.in/QtOnline/wikiLYNX/.info/version.txt");
-    QNetworkReply *reply = manager.get(QNetworkRequest(url));
-
-    QEventLoop loop;
-    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    if (reply->error() == QNetworkReply::NoError) {
-        QByteArray data = reply->read(7);
-        lVersion = QString::fromLocal8Bit(data).toStdString();
-    } else qDebug() << "Error fetching latest version information:" << reply->errorString();
-
-    reply->deleteLater();
-
-    if (strcmp(lVersion.c_str(), version.c_str()) > 0) downloadUpdate();
-    if (strcmp(lVersion.c_str(), version.c_str()) < 0) qDebug() << "Meow";
-
-}
-
-
-void downloadUpdate() {
-
-    if (QSysInfo::productType() != "windows") {
-        QString msg("New Update available! Check your package manager for the latest version");
-        QMessageBox::information(nullptr, "wikiLYNX", msg, QMessageBox::Ok);
-        return;
-    }
-    QMessageBox::StandardButton reply = QMessageBox::question(nullptr, "wikiLYNX", "New Update Available. Do you want to update?", QMessageBox::Yes | QMessageBox::No);
-
-    if (reply == QMessageBox::Yes) QDesktopServices::openUrl(QUrl::fromLocalFile("./maintenancetool.exe"));
 }
 
 

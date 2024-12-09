@@ -11,6 +11,7 @@
 #include <QTextStream>
 #include <QDesktopServices>
 #include <QDir>
+#include <QToolTip>
 
 #include "news.h"
 #include "help.h"
@@ -19,6 +20,7 @@
 #include "editlevel.h"
 #include "viewstats.h"
 #include "gamewindow.h"
+#include "statusoverview.h"
 
 
 namespace Ui {
@@ -32,18 +34,24 @@ class welcomeUI : public QDialog
 
 
 public:
+
+    QThread *thread;
     explicit welcomeUI(QDialog *parent = nullptr);
 
-    int initialise(int*);
-
     int *dontKillParse0;
-    int aRD = 0;
     int *totemofUndying;
+    QString theme;
     QJsonObject data, cfg;
-    //Json::Value cfg;
+
+    std::map<QString, QString> worldEvents = {
+        { "2512", "christmas|Merry Christmas!" },
+        { "0101", "newyear|Happy New Year!" }
+    };
 
 
 private slots:
+    void checkStatus();
+    bool isDarkTheme();
     void reset();
     void showStats();
     void showAbout();
@@ -59,20 +67,35 @@ private slots:
     void addCustom();
     void showLevelInfo();
     void showRules();
+    void checkWorldEvent();
+    void launchStatusOverview();
+
 
 public slots:
+    int initialise(int*);
     void setStatus(int);
 
 
 private:
+
+    std::map<int, QString> code = {
+        { 0, "Offline|offline" },
+        { 1, "Online|online" },
+        { 2, "Update Available|update" },
+        { 3, "Update Check Failed|neutralOnline" },
+        { 4, "Meow|meow" },
+    };
+
     news newsDialog;
     help helpDialog;
     GameWindow *game;
     about aboutDialog;
     editLevel editDialog;
     viewStats statsDialog;
+    statusOverview overview;
+
     Ui::welcomeDialog *ui;
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
 
 };
 
@@ -81,8 +104,8 @@ class checkUpdateWorker : public QObject  {
     Q_OBJECT
 
 public:
-    std::string lVersion = "1.0.0-1";
-    std::string version = "1.0.0-1";
+    std::string lVersion = "1.3.0-1";
+    std::string version = "1.3.0-1";
 
 public slots:
     void process();

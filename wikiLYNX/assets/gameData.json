@@ -1,7 +1,9 @@
 {
     "info": {
         "allowReference": 0,
-        "totemOfUndying": 0
+        "totemOfUndying": 0,
+        "availableIconThemes": "green|monochrome|orange|red|blue|yellow|nord",
+        "iconTheme": "green"
     },
     "data": {
         "flyingduck": {

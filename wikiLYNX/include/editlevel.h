@@ -26,7 +26,7 @@ public:
     ~editLevel();
     //std::map<QString, QJsonObject> uData;
     QJsonObject cfg, iData, uData;
-    void saveData(QString fname = "./.wLnKMeow/gData.json", int mode = 0);
+    void saveData(QString fname = "./.wikilynx/gData.json", int mode = 0);
     //void collectData();
     void initialise();
     void updateTable(QJsonObject);
@@ -43,7 +43,7 @@ private:
     Ui::editLevel *ui;
     editChk editChkDialog;
     getLevel getLevelDialog;
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
 
 
 private slots:

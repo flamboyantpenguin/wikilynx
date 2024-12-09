@@ -35,7 +35,7 @@ private:
     int updateTable();
     QJsonObject cfg, iData, levelData;
     Ui::getLevel *ui;
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
 
 private slots:
     void setEditStatus();

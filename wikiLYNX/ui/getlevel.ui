@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>440</height>
+    <height>441</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,18 +21,22 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>900</width>
-    <height>440</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>900</width>
-    <height>440</height>
+    <width>10000000</width>
+    <height>10000000</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Download Levels</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../assets/assets.qrc">
+    <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <property name="statusTip">
    <string>Meow</string>
@@ -199,6 +203,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>
