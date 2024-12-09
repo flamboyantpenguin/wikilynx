@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>739</width>
-    <height>43</height>
+    <height>58</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,14 +66,14 @@
     <widget class="QPushButton" name="action0">
      <property name="minimumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="text">
@@ -91,14 +91,14 @@
     <widget class="QPushButton" name="action1">
      <property name="minimumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="text">
@@ -116,14 +116,14 @@
     <widget class="QPushButton" name="action2">
      <property name="minimumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
      <property name="text">

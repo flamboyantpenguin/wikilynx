@@ -7,10 +7,10 @@ getLevel::getLevel(QWidget *parent)
     , ui(new Ui::getLevel)
 {
     ui->setupUi(this);
+    ui->progressBar->hide();
     connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
     connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
     connect(ui->exitButton, &QPushButton::clicked, this, &getLevel::close);
-
 }
 
 
@@ -56,6 +56,19 @@ int getLevel::initialise() {
 
     this->levelData = jsonObject;
 
+    QListWidgetItem *item = new QListWidgetItem();
+    auto widget = new levels(this);
+
+    item->setSizeHint(widget->sizeHint());
+    ui->header->addItem(item);
+    ui->header->setItemWidget(item, widget);
+
+    widget->setItem("Code Name", \
+                    "Time", \
+                    "Checkpoints", \
+                    "Difficulty", \
+                    "neutralOnline", "", "");
+
     this->updateTable();
 
     reply->deleteLater();
@@ -69,19 +82,6 @@ int getLevel::updateTable() {
 
     auto l = this->levelData.keys();
     ui->list->clear();
-
-    QListWidgetItem *item = new QListWidgetItem();
-    auto widget = new levels(this);
-
-    item->setSizeHint(widget->sizeHint());
-    ui->list->addItem(item);
-    ui->list->setItemWidget(item, widget);
-
-    widget->setItem("Code Name", \
-        "Time", \
-        "Checkpoints", \
-        "Difficulty", \
-        "neutralOnline", "", "");
 
     for (int i = 0; i < this->levelData.count(); i++) {
 
@@ -121,6 +121,10 @@ void getLevel::downloadLevel(QString code) {
         this->deleteLevel(code);
         return;
     }
+
+    ui->progressBar->show();
+
+    ui->status->setText("Downloading...");
 
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
@@ -165,6 +169,8 @@ void getLevel::downloadLevel(QString code) {
     file.close();
     this->updateTable();
     ui->status->setText("Done!");
+
+    ui->progressBar->hide();
 
 }
 

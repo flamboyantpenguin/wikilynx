@@ -37,6 +37,19 @@ void editLevel::initialise() {
 
     this->cfg = temp["info"].toObject();
     this->iData = temp["data"].toObject();
+
+    QListWidgetItem *item = new QListWidgetItem();
+    auto widget = new levels(this);
+
+    widget->setItem("Code", \
+                    "Time Taken (Seconds)", \
+                    "Checkpoints", \
+                    "Difficulty", \
+                    "neutralOnline", "neutralOnline", "");
+
+    item->setSizeHint(widget->sizeHint());
+    ui->header->addItem(item);
+    ui->header->setItemWidget(item, widget);
     this->updateTable();
 
 }
@@ -46,19 +59,6 @@ void editLevel::updateTable() {
 
     ui->list->clear();
     auto l = this->iData.keys();
-
-    QListWidgetItem *item = new QListWidgetItem();
-    auto widget = new levels(this);
-
-    widget->setItem("Code", \
-        "Time Taken (Seconds)", \
-        "Checkpoints", \
-        "Difficulty", \
-        "neutralOnline", "neutralOnline", "");
-
-    item->setSizeHint(widget->sizeHint());
-    ui->list->addItem(item);
-    ui->list->setItemWidget(item, widget);
 
     for (int i = 0; i < l.count(); i++) {
 
