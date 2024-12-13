@@ -6,12 +6,10 @@ levelEditor::levelEditor(QWidget *parent) :
     ui(new Ui::levelEditor)
 {
     ui->setupUi(this);
-    ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
-    ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
     connect(ui->addButton, &QPushButton::clicked, this, &levelEditor::addChk);
-    connect(ui->removeButton, &QPushButton::clicked, this, &levelEditor::removeChk);
     connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
+    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
+    connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
 
 }
 
@@ -21,33 +19,85 @@ levelEditor::~levelEditor()
 }
 
 
-void levelEditor::initialise(QJsonObject *chk, QString cde) {
+void levelEditor::initialise(QJsonObject *lData, QString cde) {
 
-    this->chkData = chk;
     this->code = cde;
-    auto d = chk->value(cde).toObject();
+    this->gameData = lData;
+    this->levelInfo = (*this->gameData)[code].toObject();
+    this->chkData = this->levelInfo["data"].toObject();
 
+    this->updateHeader();
+    this->updateChkList();
+    this->updateBrowser();
 
-    auto l = d.keys();
-    ui->table->setRowCount(l.count());
+    ui->code->setText(code);
+    ui->difficulty->setText(this->levelInfo["difficulty"].toString());
+    ui->timeTaken->setText(QString::number(this->levelInfo["time"].toInt()));
+    ui->clicks->setText(QString::number(this->levelInfo["clicks"].toInt()));
 
-    for (int i = 0; i < l.count(); i++) {
-
-        QTableWidgetItem* nChk = new QTableWidgetItem();
-        QTableWidgetItem* chkName = new QTableWidgetItem();
-        QTableWidgetItem* chkURL = new QTableWidgetItem();
-        nChk->setText(QString::number(i));
-        chkName->setText(d[QString::number(i)].toObject().value("name").toString());
-        chkURL->setText(d[QString::number(i)].toObject().value("url").toString());
-        ui->table->setItem(i, 0, nChk);
-        ui->table->setItem(i, 1, chkName);
-        ui->table->setItem(i, 2, chkURL);
-
-    }
 }
 
 
+void levelEditor::updateHeader() {
+
+    ui->header->clear();
+    QListWidgetItem *item = new QListWidgetItem();
+    auto widget = new levels(this);
+
+    QString s("Url ($count)");
+    s.replace("$count", QString::number(this->chkData.keys().count()));
+    widget->setItem(s, \
+                    "", \
+                    "", \
+                    "", \
+                    "neutralOnline", "", "");
+
+    //connect(widget, &levels::action0, this, &levelEditor::removeChks);
+
+    item->setSizeHint(widget->sizeHint());
+    ui->header->addItem(item);
+    ui->header->setItemWidget(item, widget);
+
+
+}
+
+
+void levelEditor::updateChkList() {
+
+    ui->list->clear();
+    auto chk = this->chkData;
+    auto l = chk.keys();
+
+    for (int i = 0; i < l.count(); i++) {
+
+        QListWidgetItem *item = new QListWidgetItem();
+        auto widget = new levels(this);
+
+        widget->setItem(chk[l[i]].toObject()["url"].toString(), \
+                        "", \
+                        "", \
+                        "", \
+                        "delete", "", "");
+
+        //connect(widget, &levels::action0, this, &levelEditor::removeChks);
+
+        item->setSizeHint(widget->sizeHint());
+        ui->list->addItem(item);
+        ui->list->setItemWidget(item, widget);
+
+    }
+
+}
+
+
+void levelEditor::updateBrowser() {
+    ui->url->setText(ui->webEngineView->url().toString());
+}
+
+/*
 void levelEditor::saveData() {
+
+
 
     QJsonObject nData;
 
@@ -69,15 +119,27 @@ void levelEditor::saveData() {
 
 }
 
+*/
+
 
 void levelEditor::addChk() {
-    ui->table->setRowCount(ui->table->rowCount()+1);
-    QTableWidgetItem* i = new QTableWidgetItem();
-    i->setText(QString::number(ui->table->rowCount() - 1));
-    ui->table->setItem(ui->table->rowCount() - 1, 0, i);
+
+    QString c = QString::number(this->levelInfo["data"].toObject().keys().count());
+
+
+    QString url = ui->url->text();
+
+    QJsonObject chk, temp;
+    chk["url"] = url;
+    chk["name"] = url.mid(30);
+    ///this->chkData[c] = chk;
+    this->updateHeader();
+    this->updateChkList();
+
+
 }
 
 
-void levelEditor::removeChk() {
-    ui->table->removeRow(ui->table->rowAt(ui->table->rowCount() - 1));
+void levelEditor::removeChk(QString chk) {
+
 }

@@ -9,25 +9,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>855</width>
-    <height>382</height>
+    <width>970</width>
+    <height>527</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>855</width>
-    <height>382</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>855</width>
-    <height>382</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
    <font>
-    <family>Noto Sans</family>
+    <family>Comfortaa</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -37,86 +37,54 @@
    <iconset resource="../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
-  <widget class="QPushButton" name="closeButton">
+  <widget class="QWebEngineView" name="webEngineView">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>340</y>
-     <width>80</width>
-     <height>24</height>
+     <x>430</x>
+     <y>50</y>
+     <width>531</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="url">
+    <url>
+     <string>https://en.wikipedia.org/wiki/Cat</string>
+    </url>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="url">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>10</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="refreshButton">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>10</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
-    <string>Close</string>
+    <string/>
    </property>
    <property name="icon">
-    <iconset theme="close"/>
+    <iconset theme="refresh"/>
    </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>831</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier Prime</family>
-     <pointsize>32</pointsize>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Edit Checkpoints</string>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="table">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>741</width>
-     <height>261</height>
-    </rect>
-   </property>
-   <property name="showDropIndicator" stdset="0">
-    <bool>true</bool>
-   </property>
-   <property name="sortingEnabled">
-    <bool>true</bool>
-   </property>
-   <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
-   </attribute>
-   <attribute name="verticalHeaderVisible">
-    <bool>false</bool>
-   </attribute>
-   <column>
-    <property name="text">
-     <string>Checkpoint</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Name</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>URL</string>
-    </property>
-   </column>
   </widget>
   <widget class="QPushButton" name="addButton">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>100</y>
-     <width>80</width>
-     <height>24</height>
+     <x>860</x>
+     <y>10</y>
+     <width>101</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -126,36 +94,176 @@
     <iconset theme="add"/>
    </property>
   </widget>
-  <widget class="QPushButton" name="removeButton">
+  <widget class="QLineEdit" name="code">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>140</y>
-     <width>80</width>
-     <height>24</height>
+     <x>10</x>
+     <y>30</y>
+     <width>391</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>71</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="text">
-    <string>Remove</string>
-   </property>
-   <property name="icon">
-    <iconset theme="remove"/>
+    <string>Difficulty: </string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
-     <width>741</width>
-     <height>31</height>
+     <y>110</y>
+     <width>58</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="text">
-    <string>Edit checkpoints of level code: </string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clicks (Optional): </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Time (Optional): </string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="list">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>411</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="dragEnabled">
+    <bool>true</bool>
+   </property>
+   <property name="dragDropOverwriteMode">
+    <bool>false</bool>
+   </property>
+   <property name="dragDropMode">
+    <enum>QAbstractItemView::DragDropMode::InternalMove</enum>
+   </property>
+   <property name="defaultDropAction">
+    <enum>Qt::DropAction::MoveAction</enum>
+   </property>
+   <property name="movement">
+    <enum>QListView::Movement::Snap</enum>
+   </property>
+   <property name="resizeMode">
+    <enum>QListView::ResizeMode::Fixed</enum>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="header">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="helpButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>490</y>
+     <width>111</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>What's This? </string>
+   </property>
+   <property name="icon">
+    <iconset theme="help"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>490</y>
+     <width>80</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="icon">
+    <iconset theme="close"/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="difficulty">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>70</y>
+     <width>271</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="clicks">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>100</y>
+     <width>271</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="timeTaken">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>130</y>
+     <width>271</width>
+     <height>26</height>
+    </rect>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../assets/assets.qrc"/>
  </resources>

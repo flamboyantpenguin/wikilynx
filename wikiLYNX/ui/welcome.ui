@@ -33,7 +33,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Noto Sans</family>
+    <family>Comfortaa</family>
     <stylestrategy>PreferDefault</stylestrategy>
    </font>
   </property>
@@ -83,7 +83,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#000000&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#000000&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/wikiLYNX_logo.svg&quot; width=&quot;90&quot; height=&quot;70&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
@@ -121,12 +121,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
    <item>
     <widget class="QLabel" name="label0">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <stylestrategy>PreferDefault</stylestrategy>
-      </font>
-     </property>
      <property name="text">
       <string>Welcome to wikiLYNX!</string>
      </property>
@@ -323,8 +317,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
              <property name="maximumSize">
               <size>
-               <width>81</width>
-               <height>21</height>
+               <width>1000</width>
+               <height>1000</height>
               </size>
              </property>
              <property name="text">
@@ -345,13 +339,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <width>40</width>
                <height>21</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Noto Sans</family>
-               <pointsize>10</pointsize>
-               <stylestrategy>PreferDefault</stylestrategy>
-              </font>
              </property>
              <property name="layoutDirection">
               <enum>Qt::LayoutDirection::LeftToRight</enum>
@@ -655,7 +642,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#161616&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#161616&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/DAWN.svg&quot; width=&quot;100&quot; height=&quot;50&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">

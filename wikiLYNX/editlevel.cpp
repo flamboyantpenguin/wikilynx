@@ -90,12 +90,8 @@ void editLevel::addLevel() {
 
 
 void editLevel::launchLevelEditor(QString code) {
-    /*
-    auto t = ui->table->currentIndex();
-    auto cde = ui->table->item(t.row(), 0)->text();
-    editChkDialog.initialise(&uData, cde);
-    editChkDialog.show();
-    */
+    levelEditorDialog.initialise(&(this->iData), code);
+    levelEditorDialog.show();
 }
 
 

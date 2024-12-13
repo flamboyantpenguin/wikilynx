@@ -49,14 +49,14 @@
       </font>
      </property>
      <property name="text">
-      <string>Edit Levels</string>
+      <string>Custom Levels</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Edit custom levels here</string>
+      <string>View and manage custom levels here</string>
      </property>
     </widget>
    </item>
