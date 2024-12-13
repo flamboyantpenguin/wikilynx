@@ -100,8 +100,8 @@ int welcomeUI::startGame() {
     connect(&(this->game->congratsView), &congrats::closed, this, &welcomeUI::reset);
     this->grabKeyboard();
     this->hide();
-    auto temp = data[passcode].toObject();
-    game->initialise(&temp, dontKillParse0, "https://en.wikipedia.org", this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
+    auto gData = data[passcode].toObject();
+    game->initialise(&gData, dontKillParse0, "https://en.wikipedia.org", this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();

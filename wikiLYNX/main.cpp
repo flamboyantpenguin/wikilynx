@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
+    dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
     dialog.show();
 
     return app->exec();

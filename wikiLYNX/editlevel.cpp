@@ -29,8 +29,7 @@ editLevel::~editLevel()
 void editLevel::initialise() {
 
     QFile lFile("./"+dirName+"/gData.json");
-    if (lFile.isOpen())
-        lFile.close();
+    if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
     auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
     lFile.close();
@@ -42,7 +41,7 @@ void editLevel::initialise() {
     auto widget = new levels(this);
 
     widget->setItem("Code", \
-                    "Time Taken (Seconds)", \
+                    "Time (Seconds)", \
                     "Checkpoints", \
                     "Difficulty", \
                     "neutralOnline", "neutralOnline", "");
@@ -91,7 +90,8 @@ void editLevel::addLevel() {
 
 void editLevel::launchLevelEditor(QString code) {
     levelEditorDialog.initialise(&(this->iData), code);
-    levelEditorDialog.show();
+    //levelEditorDialog.setWindowFlags(Qt::SubWindow | Qt::WindowCloseButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowStaysOnTopHint | Qt::WindowTitleHint);
+    levelEditorDialog.showMaximized();
 }
 
 
@@ -130,6 +130,8 @@ void editLevel::importLevels() {
     dialog.setNameFilter(tr("JSON Files (*.json)"));
     if (dialog.exec()) filename = dialog.selectedFiles()[0];
 
+    if (filename == "") return;
+
     QFile lFile(filename);
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
@@ -167,6 +169,8 @@ void editLevel::exportLevels() {
     dialog.selectFile("export.json");
     dialog.setNameFilter(tr("JSON Files (*.json)"));
     if (dialog.exec()) filename = dialog.selectedFiles()[0];
+
+    if (filename == "") return;
 
     QJsonDocument document;
     QJsonObject temp;

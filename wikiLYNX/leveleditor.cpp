@@ -10,8 +10,11 @@ levelEditor::levelEditor(QWidget *parent) :
     connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
     connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
     connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
+    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
+    connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
 
 }
+
 
 levelEditor::~levelEditor()
 {
@@ -20,11 +23,12 @@ levelEditor::~levelEditor()
 
 
 void levelEditor::initialise(QJsonObject *lData, QString cde) {
+void levelEditor::initialise(QJsonObject *lData, QString cde) {
 
     this->code = cde;
     this->gameData = lData;
     this->levelInfo = (*this->gameData)[code].toObject();
-    this->chkData = this->levelInfo["data"].toObject();
+    this->chkData = this->levelInfo["levels"].toString().split(" ");
 
     this->updateHeader();
     this->updateChkList();
@@ -44,8 +48,8 @@ void levelEditor::updateHeader() {
     QListWidgetItem *item = new QListWidgetItem();
     auto widget = new levels(this);
 
-    QString s("Url ($count)");
-    s.replace("$count", QString::number(this->chkData.keys().count()));
+    QString s("URL ($count)");
+    s.replace("$count", QString::number(this->chkData.count()));
     widget->setItem(s, \
                     "", \
                     "", \
@@ -66,20 +70,19 @@ void levelEditor::updateChkList() {
 
     ui->list->clear();
     auto chk = this->chkData;
-    auto l = chk.keys();
 
-    for (int i = 0; i < l.count(); i++) {
+    for (int i = 0; i < this->chkData.count(); i++) {
 
         QListWidgetItem *item = new QListWidgetItem();
         auto widget = new levels(this);
 
-        widget->setItem(chk[l[i]].toObject()["url"].toString(), \
-                        "", \
+        widget->setItem(QString::number(i), \
+                        this->chkData[i], \
                         "", \
                         "", \
                         "delete", "", "");
 
-        //connect(widget, &levels::action0, this, &levelEditor::removeChks);
+        connect(widget, &levels::action0, this, &levelEditor::removeChk);
 
         item->setSizeHint(widget->sizeHint());
         ui->list->addItem(item);
@@ -94,28 +97,12 @@ void levelEditor::updateBrowser() {
     ui->url->setText(ui->webEngineView->url().toString());
 }
 
-/*
+
+
 void levelEditor::saveData() {
 
-
-
-    QJsonObject nData;
-
-    for (int i = 0; i < ui->table->rowCount(); ++i) {
-        QJsonObject t;
-        if (ui->table->item(i, 1) && !ui->table->item(i, 1)->text().isEmpty()) {
-            t.insert("name", ui->table->item(i, 1)->text());
-
-        }
-        if (ui->table->item(i, 2) && !ui->table->item(i, 2)->text().isEmpty()) {
-            t.insert("url", ui->table->item(i, 2)->text());
-            nData.insert(QString::number(i), t);
-
-        }
-    }
-
-
-    this->chkData->insert(this->code, nData);
+    this->levelInfo["levels"] = this->chkData.join(" ");
+    (*(this->gameData))[this->code] = this->levelInfo;
 
 }
 
@@ -124,22 +111,24 @@ void levelEditor::saveData() {
 
 void levelEditor::addChk() {
 
-    QString c = QString::number(this->levelInfo["data"].toObject().keys().count());
+    int c = this->chkData.count();
 
 
     QString url = ui->url->text();
 
-    QJsonObject chk, temp;
-    chk["url"] = url;
-    chk["name"] = url.mid(30);
-    ///this->chkData[c] = chk;
+    this->chkData.append(url);
     this->updateHeader();
     this->updateChkList();
-
+    this->saveData();
 
 }
 
 
 void levelEditor::removeChk(QString chk) {
+
+    this->chkData.removeAt(chk.toInt());
+    this->updateChkList();
+    this->updateHeader();
+    this->saveData();
 
 }

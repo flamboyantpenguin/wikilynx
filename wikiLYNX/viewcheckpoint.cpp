@@ -18,10 +18,10 @@ viewcheckpoint::~viewcheckpoint()
 }
 
 
-void viewcheckpoint::initialise(QJsonObject *data, int *c, int *cStatus) {
+void viewcheckpoint::initialise(QStringList *data, int *cStatus) {
 
     //ui->table->clear();
-    ui->table->setRowCount(*c);
+    ui->table->setRowCount(data->count());
     ui->table->setColumnCount(3);
     ui->table->setColumnWidth(1, 100);
 
@@ -29,20 +29,18 @@ void viewcheckpoint::initialise(QJsonObject *data, int *c, int *cStatus) {
     ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     ui->table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
 
-    for (int i = 0; i < *c; ++i) {
-        QString url = (*data)[QString::number(i)].toObject()["name"].toString();
+    for (int i = 0; i < data->count(); ++i) {
         QTableWidgetItem* n = new QTableWidgetItem();
         QTableWidgetItem* item = new QTableWidgetItem();
+        QTableWidgetItem* checkBox = new QTableWidgetItem();
+
+        if (i <= *cStatus) checkBox->setCheckState(Qt::CheckState::Checked);
         n->setText(QString::number(i));
-        item->setText(url);
+        item->setText(data->at(i));
         ui->table->setItem(i, 0, n);
         ui->table->setItem(i, 1, item);
-
-    }
-
-    for (int i = 0; i < (*cStatus)+1; ++i) {
-        QTableWidgetItem* checkBox = new QTableWidgetItem();
-        checkBox->setCheckState(Qt::CheckState::Checked);
         ui->table->setItem(i, 2, checkBox);
+
     }
+
 }

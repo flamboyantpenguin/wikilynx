@@ -27,32 +27,34 @@ class GameWindow : public QMainWindow
 {
     Q_OBJECT
 
-
-    int chk = 0;
-    int alD = 1;
-    int tChk = 0;
-    float endTime = 0;
-    float cCount = 0;
-    float countdown = 0;
-    QString aTime, instance, domain;
+    QString aTime, instance;
     QTimer *timer = new QTimer(this);
 
 public:
+
     GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
 
     congrats congratsView;
-
-    QJsonObject cfg;
     int *dontKillMe;
     int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
 private:
+    int chk = 0;
+    int alD = 1;
+    float endTime = 0;
+    float countup = 0;
+    bool domain;
+
+    QJsonObject gameData;
+
+    QStringList levels;
     QString dirName = ".wikilynx";
     QString gamer, level;
     Ui::GameWindow *ui;
     viewHistory historyView;
     viewcheckpoint checkpointView;
+
 
 private slots:
     void launchLogs();

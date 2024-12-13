@@ -8,6 +8,8 @@
 
 #include "levels.h"
 
+#include "levels.h"
+
 namespace Ui {
 class levelEditor;
 }
@@ -20,17 +22,16 @@ public:
     explicit levelEditor(QWidget *parent = nullptr);
     QString code;
     QJsonObject levelInfo;
-    QJsonObject chkData;
+    QStringList chkData;
     QJsonObject *gameData;
-    void saveData();
     void initialise(QJsonObject *, QString);
     ~levelEditor();
 
 protected:
     void closeEvent(QCloseEvent *event) override {
         //this->saveData();
+        //this->saveData();
         QDialog::closeEvent(event);
-
     }
 
 
@@ -41,6 +42,7 @@ private slots:
     void addChk();
     void updateBrowser();
     void updateChkList();
+    void saveData();
     //void launchHelp();
     void updateHeader();
     void removeChk(QString chk);

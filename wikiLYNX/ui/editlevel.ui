@@ -3,7 +3,7 @@
  <class>editLevel</class>
  <widget class="QDialog" name="editLevel">
   <property name="windowModality">
-   <enum>Qt::WindowModality::WindowModal</enum>
+   <enum>Qt::WindowModality::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -27,7 +27,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Noto Sans</family>
+    <family>Comfortaa</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -36,6 +36,9 @@
   <property name="windowIcon">
    <iconset resource="../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -75,21 +78,30 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
+           <height>58</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>200</width>
            <height>45</height>
           </size>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QListWidget" name="list">
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
          </property>
         </widget>
        </item>
