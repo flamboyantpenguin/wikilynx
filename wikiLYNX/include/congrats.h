@@ -33,17 +33,17 @@ public:
     //int chk;
     //int tChk;
     int chk;
-    void initialise(QString, QString, QString, QString, QString, QString, QString, int);
+    void initialise(QString, QString, QString, QString, QString, QString, QString, int, int);
 
 private:
+    QJsonObject data;
     viewHistory hView;
     viewcheckpoint cView;
     viewStats statsDialog;
     Ui::congrats *ui;
-    QJsonObject data;
+    QJsonObject statData;
     void genReport();
     void updateStats();
-    QString instanceName, startTime, endTime, gameStatus, playerName, timeTaken, level;
     QString dirName = ".wikilynx";
 
 protected:

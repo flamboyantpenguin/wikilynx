@@ -8,6 +8,7 @@ welcomeUI::welcomeUI(QDialog *parent)
     : QDialog(parent)
     , ui(new Ui::welcomeDialog)
 {
+
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
@@ -59,11 +60,11 @@ void welcomeUI::checkStatus() {
     checkUpdateWorker* worker = new checkUpdateWorker();
     worker->moveToThread(thread);
 
-    connect( thread, &QThread::started, worker, &checkUpdateWorker::process);
-    connect( worker, &checkUpdateWorker::finished, thread, &QThread::quit);
-    connect( worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
+    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
+    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
+    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
     connect(worker, SIGNAL(status(int)), this, SLOT(setStatus(int)));
-    connect( thread, &QThread::finished, thread, &QThread::deleteLater);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     thread->start();
 
 }
@@ -82,13 +83,16 @@ void welcomeUI::showLevelInfo() {
 
     QString lName = ui->passcodeInput->currentText();
     auto level = data[lName].toObject();
-    ui->chk->setText(QString::number(level["checkpoints"].toInt()));
+    ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
     ui->difficulty->setText(level["difficulty"].toString());
 
 }
 
 
 int welcomeUI::startGame() {
+
+    QString hex = "#" +this->base["availableIconThemes"].toString().split(",")[ui->iconThemeSelect->currentIndex()].split("#")[!(this->isDarkTheme()) + 1];
+    QString bHex = (isDarkTheme()) ? "#000000" : "#ffffff";
 
     QString passcode = ui->passcodeInput->currentText();
     if (!data.contains(passcode)) {
@@ -98,10 +102,10 @@ int welcomeUI::startGame() {
 
     this->game = new GameWindow;
     connect(&(this->game->congratsView), &congrats::closed, this, &welcomeUI::reset);
-    this->grabKeyboard();
+    if (!(ui->keyboardToggle->isChecked())) this->grabKeyboard();
     this->hide();
     auto gData = data[passcode].toObject();
-    game->initialise(&gData, dontKillParse0, "https://en.wikipedia.org", this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
+    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
@@ -127,6 +131,7 @@ void welcomeUI::loadSettings() {
     ui->editLevelButton->setEnabled(true);
     cFile.open(QIODevice::ReadOnly);
     auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
+    this->base = iData["base"].toObject();
     iData = iData["data"].toObject();
     QFile sFile("./"+dirName+"/gData.json");
     sFile.open(QIODevice::ReadOnly);
@@ -145,7 +150,11 @@ void welcomeUI::loadSettings() {
 
 void welcomeUI::updateUI() {
 
-    ui->iconThemeSelect->addItems(this->cfg["availableIconThemes"].toString().split("|"));
+    //ui->iconThemeSelect->clear();
+
+    for (int i = 0; i < this->base["availableIconThemes"].toString().split(",").count(); ++i) {
+        ui->iconThemeSelect->addItem(this->base["availableIconThemes"].toString().split(",")[i].split("#")[0]);
+    }
     ui->iconThemeSelect->setCurrentText(this->cfg["iconTheme"].toString());
 
     ui->allowSitesToggle->setChecked(this->cfg["allowReference"].toInt());
@@ -243,6 +252,7 @@ void welcomeUI::addCustom() {
 
 
 void welcomeUI::showRules() {
+    helpDialog.initialise();
     helpDialog.show();
 }
 
@@ -286,7 +296,7 @@ void welcomeUI::checkWorldEvent() {
 
 void welcomeUI::showStats() {
     statsDialog.initialise();
-    statsDialog.show();
+    statsDialog.showMaximized();
 }
 
 

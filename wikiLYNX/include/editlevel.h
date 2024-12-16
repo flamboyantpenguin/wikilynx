@@ -24,11 +24,11 @@ class editLevel : public QDialog
     Q_OBJECT
 
 public:
+    QString dirName = ".wikilynx";
     explicit editLevel(QWidget *parent = nullptr);
     ~editLevel();
     QJsonObject cfg, iData, uData;
     void initialise();
-    void updateTable();
 
 
 protected:
@@ -40,16 +40,19 @@ private:
     Ui::editLevel *ui;
     levelEditor levelEditorDialog;
     getLevel getLevelDialog;
-    QString dirName = ".wikilynx";
 
 
 private slots:
     void addLevel();
-    void removeLevel(QString code);
+    void updateTable();
     void importLevels();
     void exportLevels();
     void downloadLevel();
+    void genRandomLevel();
+    void removeLevel(QString code);
     void launchLevelEditor(QString code);
+    void saveData(QString fname = "./.wikilynx/gData.json");
+
 
 };
 

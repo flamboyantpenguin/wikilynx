@@ -23,6 +23,7 @@ void statusOverview::initialise(int status) {
     ui->archiveStatus->setText(this->code[status].split("|")[1]);
     ui->wiki->setIcon(QIcon::fromTheme(this->code[status].split("|")[0].toLower()));
     ui->archive->setIcon(QIcon::fromTheme(this->code[status].split("|")[1].toLower()));
+    connect(ui->version, &QPushButton::clicked, this, &statusOverview::developerHehe);
     connect(ui->infoButton, &QPushButton::clicked, this, &statusOverview::launchVersionInfo);
 
     if (status == 2) {
@@ -49,4 +50,12 @@ void statusOverview::launchLatestVersionInfo() {
 
 void statusOverview::launchVersionInfo() {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/releases/v"+cVersion));
+}
+
+
+void statusOverview::developerHehe() {
+    this->hehe++;
+
+    if (!(this->hehe % 3))
+        QMessageBox::information(this, "wikiLYNX", "Congratulations! You're now a developer! Get started by checking the project on GitHub :)", QMessageBox::Ok);
 }

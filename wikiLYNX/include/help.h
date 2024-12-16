@@ -15,8 +15,12 @@ public:
     explicit help(QWidget *parent = nullptr);
     ~help();
 
+    void initialise(QString url  = "https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay");
+
+
 private:
     Ui::help *ui;
+
 };
 
 #endif // HELP_H

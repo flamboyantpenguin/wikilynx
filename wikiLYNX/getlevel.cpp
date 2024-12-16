@@ -65,6 +65,7 @@ int getLevel::initialise() {
 
     widget->setItem("Code Name", \
                     "Time", \
+                    "Clicks", \
                     "Checkpoints", \
                     "Difficulty", \
                     "neutralOnline", "", "");
@@ -91,6 +92,7 @@ int getLevel::updateTable() {
         if (this->iData.contains(l[i])) {
             widget->setItem(l[i], \
                 QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
+                QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
                 QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
                 this->levelData[l[i]].toObject()["difficulty"].toString(), \
                 "delete", "", "");
@@ -98,6 +100,7 @@ int getLevel::updateTable() {
         else {
             widget->setItem(l[i], \
                 QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
+                QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
                 QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
                 this->levelData[l[i]].toObject()["difficulty"].toString(), \
                 "download", "", "");

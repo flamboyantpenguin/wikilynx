@@ -41,7 +41,7 @@ public:
     int *dontKillParse0;
     int *totemofUndying;
     QString theme;
-    QJsonObject data, cfg;
+    QJsonObject data, cfg, base;
 
     std::map<QString, QString> worldEvents = {
         { "2512", "christmas|Merry Christmas!" },

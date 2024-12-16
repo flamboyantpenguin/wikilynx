@@ -4,6 +4,7 @@
 #include <QUrl>
 #include <QThread>
 #include <QDialog>
+#include <QMessageBox>
 #include <QDesktopServices>
 
 
@@ -21,6 +22,7 @@ public:
 
 private:
 
+    int hehe = 0;
     QString cVersion = "1.5.0";
     std::map<int, QString> code = {
        { 0, "Offline|Offline" },
@@ -36,6 +38,7 @@ public slots:
     void initialise(int);
 
 private slots:
+    void developerHehe();
     void launchVersionInfo();
     void launchMaintenanceTool();
     void launchLatestVersionInfo();

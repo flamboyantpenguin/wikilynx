@@ -34,7 +34,6 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
-    <family>Comfortaa</family>
     <stylestrategy>PreferDefault</stylestrategy>
    </font>
   </property>
@@ -177,14 +176,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0" columnstretch="0,0,0">
+          <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0" columnstretch="0,1,0" columnminimumwidth="0,1,0">
            <property name="spacing">
             <number>6</number>
            </property>
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -197,8 +196,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
              <property name="maximumSize">
               <size>
-               <width>81</width>
-               <height>21</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="text">
@@ -216,14 +215,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
              <property name="minimumSize">
               <size>
-               <width>21</width>
-               <height>21</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>21</width>
-               <height>21</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="baseSize">
@@ -242,10 +241,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
            </item>
            <item row="2" column="1">
             <widget class="QLabel" name="chk">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="maximumSize">
               <size>
-               <width>221</width>
-               <height>21</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="font">
@@ -265,21 +270,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <item row="0" column="1">
             <widget class="QComboBox" name="passcodeInput">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="minimumSize">
               <size>
-               <width>221</width>
-               <height>21</height>
+               <width>0</width>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>221</width>
-               <height>21</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="font">
@@ -311,17 +316,15 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <item row="2" column="0">
             <widget class="QLabel" name="label_4">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="maximumSize">
               <size>
-               <width>1000</width>
-               <height>1000</height>
-               <width>1000</width>
-               <height>1000</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="text">
@@ -332,15 +335,15 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <item row="0" column="0">
             <widget class="QLabel" name="label1">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>21</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="layoutDirection">
@@ -360,7 +363,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <item row="1" column="1">
             <widget class="QLabel" name="difficulty">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -373,8 +376,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
              <property name="maximumSize">
               <size>
-               <width>221</width>
-               <height>21</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="font">
@@ -505,6 +508,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <widget class="QCheckBox" name="killToggle">
          <property name="text">
           <string>Allow changing game window during game session</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="keyboardToggle">
+         <property name="text">
+          <string>Enable Keyboard</string>
          </property>
         </widget>
        </item>

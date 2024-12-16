@@ -1,8 +1,11 @@
 {
+    "base": {
+        "availableIconThemes": "green#75fb4c#2854c5,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
+    },
     "info": {
         "allowReference": 0,
         "totemOfUndying": 0,
-        "availableIconThemes": "green,monochrome,orange,red,blue,yellow,nord",
+        "version": "v1.5.0",
         "iconTheme": "green"
     },
     "data": {
@@ -11,68 +14,68 @@
             "difficulty": "easy",
             "time": 600,
             "clicks" : 7,
-            "levels": "https://en.wikipedia.org/wiki/7_Up https://en.wikipedia.org/wiki/United_States https://en.wikipedia.org/wiki/Federal_government_of_the_United_States https://en.wikipedia.org/wiki/President_of_the_United_States https://en.wikipedia.org/wiki/Joe_Biden"
+            "levels": "7_Up United_States Federal_government_of_the_United_States President_of_the_United_States Joe_Biden"
         },
         "pingus": {
             "wiki?": 1,
             "difficulty": "easy",
             "time": 600,
             "clicks" : 0,
-            "levels": "https://en.wikipedia.org/wiki/Shah_Rukh_Khan https://en.wikipedia.org/wiki/Taj_Mahal https://en.wikipedia.org/wiki/Roman_Empire https://en.wikipedia.org/wiki/Solar_System"
+            "levels": "Shah_Rukh_Khan Taj_Mahal Roman_Empire Solar_System"
         },
         "cattomosfet!": {
             "wiki?": 1,
             "difficulty": "medium",
             "time": 900,
             "clicks" : 0,
-            "levels": "https://en.wikipedia.org/wiki/Paper https://en.wikipedia.org/wiki/Pollution https://en.wikipedia.org/wiki/Snow_White_and_the_Seven_Dwarfs_(1937_film) https://en.wikipedia.org/wiki/Isaac_Newton https://en.wikipedia.org/wiki/Diode"
+            "levels": "Paper Pollution Snow_White_and_the_Seven_Dwarfs_(1937_film) Isaac_Newton Diode"
         },
         "blisteringbarnacles!": {
             "wiki?": 1,
             "difficulty": "hard",
             "time": 850,
-            "levels": "https://en.wikipedia.org/wiki/Nintendo https://en.wikipedia.org/wiki/ARCH_Motorcycle https://en.wikipedia.org/wiki/V8_engine https://en.wikipedia.org/wiki/Captain_Haddock"
+            "levels": "Nintendo ARCH_Motorcycle V8_engine Captain_Haddock"
         },
         "debug": {
             "wiki?": 1,
             "difficulty": "debug",
             "time": 10,
-            "levels": "https://en.wikipedia.org/wiki/Pencil https://en.wikipedia.org/wiki/Paper https://en.wikipedia.org/wiki/Cat"
+            "levels": "Pencil Paper Cat"
         },
         "youseewhatyouthinkyousee": {
             "wiki?": 1,
             "difficulty": "bonus",
             "time": 1200,
             "clicks" : 0,
-            "levels": "https://en.wikipedia.org/wiki/Cat https://en.wikipedia.org/wiki/MOSFET"
+            "levels": "Cat MOSFET"
         },
-        "maytheforcebewithyou": {
+        "tranquility": {
             "wiki?": 1,
             "difficulty": "medium",
             "time": 800,
             "clicks" : 0,
-            "levels": "https://en.wikipedia.org/wiki/MrBeast https://en.wikipedia.org/wiki/Studio_Ghibli https://en.wikipedia.org/wiki/Light"
+            "levels": "Silence Studio_Ghibli Light"
         },
         "toinfinityandbeyond": {
             "wiki?": 1,
             "difficulty": "easy",
             "time": 1000,
             "clicks" : 100,
-            "levels": "https://en.wikipedia.org/wiki/Buzz_Lightyear https://en.wikipedia.org/wiki/Apollo_11 https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas https://en.wikipedia.org/wiki/The_Good,_the_Bad_and_the_Ugly https://en.wikipedia.org/wiki/Mandalorians"
+            "levels": "Buzz_Lightyear Apollo_11 Grand_Theft_Auto:_San_Andreas The_Good,_the_Bad_and_the_Ugly Mandalorians"
         },
         "wikiLYNX?": {
             "wiki?": 1,
             "difficulty": "hard",
             "time": 1200,
             "clicks" : 100,
-            "levels": "https://en.wikipedia.org/wiki/Wikipedia https://en.wikipedia.org/wiki/Qt_(software) https://en.wikipedia.org/wiki/Chromium_(web_browser) https://en.wikipedia.org/wiki/University https://en.wikipedia.org/wiki/Speedrunning https://en.wikipedia.org/wiki/Arch_Linux https://en.wikipedia.org/wiki/Nokia https://en.wikipedia.org/wiki/Rajagiri_School_of_Engineering_%26_Technology_(Autonomous) https://en.wikipedia.org/wiki/Love https://en.wikipedia.org/wiki/C%2B%2B https://en.wikipedia.org/wiki/Team https://en.wikipedia.org/wiki/Optimus_Prime"
+            "levels": "Wikipedia Qt_(software) Chromium_(web_browser) University Speedrunning Arch_Linux Nokia Rajagiri_School_of_Engineering_%26_Technology_(Autonomous) Love C%2B%2B Team Optimus_Prime"
         },
         "star": {
             "wiki?": 1,
             "difficulty": "special",
             "time": 1200,
             "clicks" : 100,
-            "levels": "https://en.wikipedia.org/wiki/Star https://en.wikipedia.org/wiki/Classroom https://en.wikipedia.org/wiki/Notebook https://en.wikipedia.org/wiki/Smile https://en.wikipedia.org/wiki/Letter_(message https://en.wikipedia.org/wiki/Love"
+            "levels": "Star Classroom Eye_contact Smile Letter_(message) Love"
         }
     }
 }

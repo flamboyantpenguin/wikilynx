@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
+    <width>944</width>
     <height>529</height>
    </rect>
   </property>
@@ -72,7 +72,7 @@
       <number>0</number>
      </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
        <item>
         <widget class="QListWidget" name="header">
          <property name="maximumSize">
@@ -116,12 +116,12 @@
         <widget class="QPushButton" name="addButton">
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>25</height>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="text">
-          <string/>
+          <string>Add</string>
          </property>
          <property name="icon">
           <iconset theme="add"/>
@@ -132,15 +132,15 @@
         <widget class="QPushButton" name="downloadButton">
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>25</height>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="toolTip">
           <string>Download Custom Levels from DAWN Archives</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Download</string>
          </property>
          <property name="icon">
           <iconset theme="download"/>
@@ -148,11 +148,18 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="randomButton">
+         <property name="text">
+          <string>Random</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="loadButton">
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>25</height>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="statusTip">
@@ -179,8 +186,8 @@
         <widget class="QPushButton" name="exportButton">
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>25</height>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="statusTip">
@@ -198,14 +205,14 @@
         <widget class="QPushButton" name="closeButton">
          <property name="maximumSize">
           <size>
-           <width>80</width>
-           <height>25</height>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <family>Noto Sans</family>
-           <pointsize>10</pointsize>
+           <family>Comfortaa</family>
+           <pointsize>11</pointsize>
            <bold>false</bold>
           </font>
          </property>

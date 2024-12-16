@@ -29,7 +29,7 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event) override {
-        emit this->exitWindow();
+        emit this->closed();
         QDialog::closeEvent(event);
     }
 
@@ -45,7 +45,7 @@ private slots:
     void downloadLevel(QString);
 
 signals:
-    void exitWindow();
+    void closed();
 };
 
 #endif // GETLEVEL_H

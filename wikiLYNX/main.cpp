@@ -34,23 +34,21 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     loadFonts();
-    //loadIconTheme();
-
-    welcomeUI dialog;
-    QObject::connect(&a, &QApplication::focusChanged, onFocusChanged);
-
-    //checkUpdate();
 
     loadingScreen banner;
     banner.setWindowFlags(Qt::FramelessWindowHint);
     banner.show();
     app->exec();
-    QThread::msleep(500);
+    //QThread::msleep(500);
+
+    welcomeUI dialog;
 
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
     dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
     dialog.show();
+
+    QObject::connect(&a, &QApplication::focusChanged, onFocusChanged);
 
     return app->exec();
 }

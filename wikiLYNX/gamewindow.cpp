@@ -12,18 +12,12 @@ GameWindow::GameWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-    QFile plt(":/base/pallete/bannerPrg.plt");
-    plt.open(QIODevice::ReadOnly);
-    auto styleSheet = plt.readAll();
-    plt.close();
-
     ui->clock->setAlignment(Qt::AlignCenter);
     ui->counter->setAlignment(Qt::AlignCenter);
-    ui->progressBar->setStyleSheet(styleSheet);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
-    connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
     connect(ui->exitButton, SIGNAL(clicked(bool)), this, SLOT(endGame()));
+    connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
     connect(ui->showHistory, SIGNAL(clicked(bool)), this, SLOT(launchLogs()));
     connect(ui->viewChkButton, SIGNAL(clicked(bool)), this, SLOT(viewCheckPoints()));
 
@@ -35,8 +29,17 @@ GameWindow::~GameWindow()
 }
 
 
-int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString allowedDomain, int aRD, QString playerName, QString levelName) {
+int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prgHex, int aRD, QString playerName, QString levelName) {
 
+    QFile plt(":/base/pallete/bannerPrg.plt");
+    plt.open(QIODevice::ReadOnly);
+    QString styleSheet = plt.readAll();
+    plt.close();
+
+    styleSheet.replace("#39ff14", prgHex.split("|")[0]);
+    styleSheet.replace("#181818", prgHex.split("|")[1]);
+
+    ui->progressBar->setStyleSheet(styleSheet);
 
     if (playerName.isEmpty()) this->gamer = "Blondie";
     else this->gamer = playerName;
@@ -44,13 +47,12 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString all
     this->alD = aRD;
     this->level = levelName;
     this->gameData = *gData;
-    this->endTime = (*gData)["time"].toDouble();
-    this->domain = (*gData)["wiki?"].toBool();
     this->dontKillMe = dontKillMeParse;
     this->levels = (*gData)["levels"].toString().split(" ");
 
     ui->progressBar->setValue(0);
-    ui->field->load(QUrl::fromUserInput(this->levels[0]));
+    if (this->gameData["wiki?"].toInt()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
+    else ui->field->load(QUrl::fromUserInput(this->levels[0]));
 
     timer->start(100);
 
@@ -78,7 +80,11 @@ void GameWindow::updateCountdown() {
     ui->counter->setText(counterText);
 
     if (gameData["time"].toDouble() > 0 && countup >= gameData["time"].toDouble()) {
-        this->missionFailed();
+        this->missionFailed("Timeout!");
+    }
+
+    if (gameData["clicks"].toInt() > 0 && clicks > gameData["clicks"].toDouble()) {
+        this->missionFailed("Max Clicks Reached!");
     }
 
 }
@@ -86,26 +92,28 @@ void GameWindow::updateCountdown() {
 
 void GameWindow::initAction() {
 
+    this->clicks++;
+    ui->clicks->setText(QString::number(clicks));
+
     auto url = ui->field->page()->url();
     std::ofstream out(dirName.toStdString()+"/logs/"+instance.toStdString()+"/log.txt", std::ios_base::app);
     out << QDateTime::currentDateTime().toString("yyyy/MM/dd|hh:mm:ss.zzz").toStdString()+">>\t";
     out << url.toString().toStdString()+"\n";
     out.close();
 
-
-    if (!alD) {
-        if (url.toString().slice(11, 13) != "wikipedia.org") {
+    if (!alD && url.toString().split("://")[1].split("/")[0].last(13 % (url.toString().split("://")[1].split("/")[0].length())) != "wikipedia.org") {
             *dontKillMe = 1;
-            QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites other domain in this game", QMessageBox::Ok);
+            QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings", QMessageBox::Ok);
             *dontKillMe = 0;
-            ui->field->load(QUrl::fromUserInput(levels[chk]));
-        }
+            ui->field->load(QUrl::fromUserInput(wikiURL+levels[chk]));
+            return;
     }
 
-
+    QString uUrl = url.toString();
+    if (this->gameData["wiki?"].toInt()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
 
     ui->statusbar->showMessage("Next Checkpoint: "+levels[chk+1]);
-    if (url.toString() == levels[chk+1]) {
+    if (uUrl == levels[chk+1]) {
         this->missionAccomplished();
     }
 
@@ -125,7 +133,7 @@ int GameWindow::missionAccomplished() {
         *dontKillMe = 1;
         QString timeTaken = QString::number(countup);
         //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-        congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk);
+        congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk, this->clicks);
         QMessageBox::information(this, "wikiLYNX", "You Won!!!", QMessageBox::Ok);
         congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
         congratsView.show();
@@ -138,15 +146,15 @@ int GameWindow::missionAccomplished() {
 }
 
 
-int GameWindow::missionFailed(){
+int GameWindow::missionFailed(QString message){
 
     timer->stop();
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
     *dontKillMe = 1;
     QString timeTaken = QString::number(countup);
     //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-    QMessageBox::critical(this, "wikiLYNX", "Timeout!", QMessageBox::Ok);
-    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Failed", this->gamer, this->level, this->chk);
+    QMessageBox::critical(this, "wikiLYNX", message, QMessageBox::Ok);
+    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Failed", this->gamer, this->level, this->chk, this->clicks);
     congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     ui->field->deleteLater();
@@ -185,7 +193,7 @@ void GameWindow::endGame() {
     *dontKillMe = 1;
     QString timeTaken = QString::number(countup);
     //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Aborted", this->gamer, this->level, this->chk);
+    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Aborted", this->gamer, this->level, this->chk, this->clicks);
     congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     ui->field->deleteLater();

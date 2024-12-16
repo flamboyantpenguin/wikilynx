@@ -1,7 +1,11 @@
 #ifndef LEVELS_H
 #define LEVELS_H
 
+#include <QList>
+#include <QLabel>
 #include <QWidget>
+#include <QPushButton>
+
 
 namespace Ui {
 class levels;
@@ -16,10 +20,13 @@ public:
     ~levels();
 
     int initialise();
-    void setItem(QString, QString, QString, QString, QString, QString, QString);
+    QString getItem(int n = 0);
+    void setItem(QString, QString, QString, QString, QString, QString, QString, QString);
 
 private:
     Ui::levels *ui;
+    QList <QLabel*> labels;
+    QList <QPushButton*> actions;
 
 private slots:
     void initAction0();

@@ -15,7 +15,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QLabel" name="code">
+    <widget class="QLabel" name="label0">
      <property name="font">
       <font>
        <family>Courier Prime</family>
@@ -27,7 +27,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="time">
+    <widget class="QLabel" name="label1">
      <property name="font">
       <font>
        <family>Courier Prime</family>
@@ -39,7 +39,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="chk">
+    <widget class="QLabel" name="label2">
      <property name="font">
       <font>
        <family>Courier Prime</family>
@@ -51,7 +51,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="difficulty">
+    <widget class="QLabel" name="label3">
+     <property name="text">
+      <string>Clicks</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label4">
      <property name="font">
       <font>
        <family>Courier Prime</family>

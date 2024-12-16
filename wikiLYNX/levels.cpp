@@ -10,6 +10,11 @@ levels::levels(QWidget *parent)
     connect(ui->action1, &QPushButton::clicked, this, &levels::initAction1);
     connect(ui->action2, &QPushButton::clicked, this, &levels::initAction2);
 
+    labels.append(ui->label0);
+    labels.append(ui->label1);
+    labels.append(ui->label2);
+    labels.append(ui->label3);
+
 }
 
 levels::~levels()
@@ -18,12 +23,13 @@ levels::~levels()
 }
 
 
-void levels::setItem(QString code, QString time, QString chk, QString difficulty, QString icon0, QString icon1, QString icon2) {
+void levels::setItem(QString label0, QString label1, QString label2, QString label3, QString label4, QString icon0, QString icon1, QString icon2) {
 
-    ui->code->setText(code);
-    ui->time->setText(time);
-    ui->chk->setText(chk);
-    ui->difficulty->setText(difficulty);
+    ui->label0->setText(label0);
+    ui->label1->setText(label1);
+    ui->label2->setText(label2);
+    ui->label3->setText(label3);
+    ui->label4->setText(label4);
     if (!(icon0.isEmpty())) ui->action0->setIcon(QIcon::fromTheme(icon0));
     else ui->action0->hide();
     if (!(icon1.isEmpty())) ui->action1->setIcon(QIcon::fromTheme(icon1));
@@ -34,19 +40,21 @@ void levels::setItem(QString code, QString time, QString chk, QString difficulty
 }
 
 
+QString levels::getItem(int n) {
+    return labels[n]->text();
+}
+
+
 void levels::initAction0() {
-    QString code = ui->code->text();
-    emit action0(code);
+    emit action0(ui->label0->text());
 }
 
 
 void levels::initAction1() {
-    QString code = ui->code->text();
-    emit action1(code);
+    emit action1(ui->label0->text());
 }
 
 
 void levels::initAction2() {
-    QString code = ui->code->text();
-    emit action2(code);
+    emit action2(ui->label0->text());
 }

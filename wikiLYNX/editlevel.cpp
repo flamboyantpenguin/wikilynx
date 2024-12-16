@@ -11,10 +11,12 @@ editLevel::editLevel(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->addButton, &QPushButton::clicked, this, &editLevel::addLevel);
+    connect(ui->randomButton, &QPushButton::clicked, this, &editLevel::genRandomLevel);
     connect(ui->loadButton, &QPushButton::clicked, this, &editLevel::importLevels);
     connect(ui->exportButton, &QPushButton::clicked, this, &editLevel::exportLevels);
     connect(ui->downloadButton, &QPushButton::clicked, this, &editLevel::downloadLevel);
-    connect(&getLevelDialog, &getLevel::exitWindow, this, &editLevel::initialise);
+    connect(&getLevelDialog, &getLevel::closed, this, &editLevel::initialise);
+    connect(&levelEditorDialog, SIGNAL(closed()), this, SLOT(saveData()));
     connect(ui->closeButton, &QPushButton::clicked, this, &editLevel::close);
 
 }
@@ -42,6 +44,7 @@ void editLevel::initialise() {
 
     widget->setItem("Code", \
                     "Time (Seconds)", \
+                    "Clicks", \
                     "Checkpoints", \
                     "Difficulty", \
                     "neutralOnline", "neutralOnline", "");
@@ -65,8 +68,9 @@ void editLevel::updateTable() {
         auto widget = new levels(this);
 
         widget->setItem(l[i], \
-            QString::number(iData[l[i]].toObject()["time"].toInt()), \
-            QString::number(iData[l[i]].toObject()["checkpoints"].toInt()), \
+            QString::number(iData[l[i]].toObject()["time"].toDouble()), \
+            QString::number(iData[l[i]].toObject()["clicks"].toInt()), \
+            QString::number(iData[l[i]].toObject()["levels"].toString().split(" ").count()), \
             iData[l[i]].toObject()["difficulty"].toString(), \
             "edit", "delete", "");
 
@@ -82,34 +86,32 @@ void editLevel::updateTable() {
 
 
 void editLevel::addLevel() {
-    /*
-    ui->table->setRowCount(ui->table->rowCount()+1);
-    */
-}
-
-
-void editLevel::launchLevelEditor(QString code) {
-    levelEditorDialog.initialise(&(this->iData), code);
-    //levelEditorDialog.setWindowFlags(Qt::SubWindow | Qt::WindowCloseButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowStaysOnTopHint | Qt::WindowTitleHint);
+    QString lname = "level$date";
+    lname.replace("$date", QDateTime::currentDateTime().toString("yyMMddHHmm"));
+    levelEditorDialog.initialise(&(this->iData), lname);
     levelEditorDialog.showMaximized();
 }
 
 
-void editLevel::removeLevel(QString code) {
+void editLevel::genRandomLevel() {
+    levelEditorDialog.genRandomLevel(&(this->iData));
+    levelEditorDialog.showMaximized();
+}
+
+
+void editLevel::saveData(QString fname) {
 
     QJsonDocument document;
     QJsonObject temp;
-
-    iData.remove(code);
 
     temp.insert("info", this->cfg);
     temp.insert("data", this->iData);
     document.setObject(temp);
 
-    QFile::remove("./"+dirName+"/gData.json");
+    QFile::remove(fname);
 
     QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file("./"+dirName+"/gData.json");
+    QFile file(fname);
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadWrite);
     QTextStream iStream(&file);
@@ -117,6 +119,19 @@ void editLevel::removeLevel(QString code) {
     file.flush();
     file.close();
     this->initialise();
+
+}
+
+
+void editLevel::launchLevelEditor(QString code) {
+    levelEditorDialog.initialise(&(iData), code);
+    levelEditorDialog.showMaximized();
+}
+
+
+void editLevel::removeLevel(QString code) {
+    iData.remove(code);
+    this->saveData();
 
 }
 
@@ -142,19 +157,7 @@ void editLevel::importLevels() {
     map.insert(importData["data"].toObject().toVariantMap());
     this->iData = QJsonObject::fromVariantMap(map);
 
-    QJsonObject nSaveData;
-    QJsonDocument document;
-    nSaveData.insert("info", this->cfg);
-    nSaveData.insert("data", this->iData);
-    document.setObject(nSaveData);
-    QFile::remove("./"+dirName+"/gData.json");
-    QFile file("./"+dirName+"/gData.json");
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadWrite);
-    QTextStream iStream(&file);
-    iStream << document.toJson( QJsonDocument::Indented );;
-    file.flush();
-    file.close();
+    this->saveData();
     this->updateTable();
 
 }
@@ -172,21 +175,7 @@ void editLevel::exportLevels() {
 
     if (filename == "") return;
 
-    QJsonDocument document;
-    QJsonObject temp;
-
-    temp.insert("info", this->cfg);
-    temp.insert("data", iData);
-    document.setObject(temp);
-    QFile::remove(filename);
-    QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file(filename);
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadWrite);
-    QTextStream iStream(&file);
-    iStream << bytes;
-    file.flush();
-    file.close();
+    this->saveData(filename);
 
 }
 
