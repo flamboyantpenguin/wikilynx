@@ -1,5 +1,6 @@
 #include "include/welcome.h"
 #include "include/loadingscreen.h"
+
 #include "ui/ui_welcome.h"
 #include "ui/ui_loadingscreen.h"
 
@@ -9,12 +10,7 @@
 #include <QFontDatabase>
 #include <QMessageBox>
 #include <QString>
-#include <QUrl>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QDesktopServices>
-#include <QProcess>
-#include <QSysInfo>
 
 
 void loadFonts();
@@ -29,8 +25,8 @@ std::string lVersion("1.5.0-1");
 std::string version("1.5.0-1");
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+
     QApplication a(argc, argv);
 
     loadFonts();
@@ -57,8 +53,9 @@ int main(int argc, char *argv[])
 void loadFonts() {
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Bold.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/base/fonts/Comfortaa-VariableFont_wght");
+    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght");
+    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Italic-VariableFont_wdth,wght");
 }
 
 

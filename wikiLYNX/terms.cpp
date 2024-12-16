@@ -21,6 +21,12 @@ terms::~terms()
 
 void terms::initialise() {
 
+    QFile p(":/base/info/PRIVACY.txt");
+    p.open(QIODevice::ReadOnly);
+    auto privacy = QString(p.readAll());
+    p.close();
+    ui->privacy->setText(privacy);
+
     QFile f(":/base/info/LICENSE.txt");
     f.open(QIODevice::ReadOnly);
     auto license = QString(f.readAll());

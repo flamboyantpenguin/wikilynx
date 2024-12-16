@@ -9,6 +9,7 @@
 #include <QJsonDocument>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QDesktopServices>
 #include <QNetworkAccessManager>
 
 
@@ -40,6 +41,7 @@ private:
     QString dirName = ".wikilynx";
 
 private slots:
+    void launchHelp();
     void setEditStatus();
     void deleteLevel(QString);
     void downloadLevel(QString);

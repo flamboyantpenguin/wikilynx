@@ -54,6 +54,12 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prg
     if (this->gameData["wiki?"].toInt()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
     else ui->field->load(QUrl::fromUserInput(this->levels[0]));
 
+    QMediaPlayer *player = new QMediaPlayer;
+    QAudioOutput *audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl("qrc:/base/audio/init.wav"));
+    audioOutput->setVolume(50);
+    player->play();
     timer->start(100);
 
     this->instance = "instance"+QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
@@ -71,10 +77,8 @@ void GameWindow::updateCountdown() {
 
     QString counterText = "$c $t";
     counterText.replace("$c", QString::number(countup, 'f', 2));
-    if ((this->gameData["time"].toDouble() == 0.00))
-        counterText.replace("$t", "/ " + QString::number(this->gameData["time"].toDouble(), 'f', 2));
-    else
-       counterText.replace("$t", "");
+    if ((this->gameData["time"].toDouble() != 0.00)) counterText.replace("$t", "/ " + QString::number(this->gameData["time"].toDouble(), 'f', 2));
+    else counterText.replace("$t", "");
 
     ui->clock->setText(QTime::currentTime().toString("hh:mm:ss"));
     ui->counter->setText(counterText);
@@ -93,7 +97,12 @@ void GameWindow::updateCountdown() {
 void GameWindow::initAction() {
 
     this->clicks++;
-    ui->clicks->setText(QString::number(clicks));
+
+    QString clicksText = "$c $t";
+    clicksText.replace("$c", QString::number(clicks));
+    if (this->gameData["clicks"].toInt()) clicksText.replace("$t", "/ " + QString::number(this->gameData["clicks"].toInt()));
+    else clicksText.replace("$t", "");
+    ui->clicks->setText(clicksText);
 
     auto url = ui->field->page()->url();
     std::ofstream out(dirName.toStdString()+"/logs/"+instance.toStdString()+"/log.txt", std::ios_base::app);
@@ -101,7 +110,13 @@ void GameWindow::initAction() {
     out << url.toString().toStdString()+"\n";
     out.close();
 
-    if (!alD && url.toString().split("://")[1].split("/")[0].last(13 % (url.toString().split("://")[1].split("/")[0].length())) != "wikipedia.org") {
+    if (!alD && !(url.toString().split("://")[1].split("/")[0].endsWith("wikipedia.org"))) {
+            QMediaPlayer *player = new QMediaPlayer;
+            QAudioOutput *audioOutput = new QAudioOutput;
+            player->setAudioOutput(audioOutput);
+            player->setSource(QUrl("qrc:/base/audio/error.wav"));
+            audioOutput->setVolume(50);
+            player->play();
             *dontKillMe = 1;
             QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings", QMessageBox::Ok);
             *dontKillMe = 0;
@@ -127,7 +142,15 @@ int GameWindow::missionAccomplished() {
     ui->progressBar->setValue(prg);
 
     if (prg == 100) {
+
+        QMediaPlayer *player = new QMediaPlayer;
+        QAudioOutput *audioOutput = new QAudioOutput;
+        player->setAudioOutput(audioOutput);
+        player->setSource(QUrl("qrc:/base/audio/yay.wav"));
+        audioOutput->setVolume(50);
+        player->play();
         timer->stop();
+
         auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
         ui->statusbar->showMessage("You won!!!");
         *dontKillMe = 1;
@@ -147,6 +170,13 @@ int GameWindow::missionAccomplished() {
 
 
 int GameWindow::missionFailed(QString message){
+
+    QMediaPlayer *player = new QMediaPlayer;
+    QAudioOutput *audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl("qrc:/base/audio/error.wav"));
+    audioOutput->setVolume(50);
+    player->play();
 
     timer->stop();
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
@@ -187,6 +217,13 @@ void GameWindow::viewCheckPoints() {
 
 
 void GameWindow::endGame() {
+
+    QMediaPlayer *player = new QMediaPlayer;
+    QAudioOutput *audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl("qrc:/base/audio/error.wav"));
+    audioOutput->setVolume(50);
+    player->play();
 
     timer->stop();
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");

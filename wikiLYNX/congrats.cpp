@@ -21,23 +21,27 @@ congrats::~congrats()
 
 void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString instance, QString stat, QString gamerName, QString lName, int checkPoints, int clicks) {
 
-    this->data["chk"] = QString::number(checkPoints);
-    this->data["instanceName"] = instance;
-    this->data["startTime"] = sTime;
+    this->data["level"] = lName;
     this->data["endTime"] = eTime;
-    this->data["timeTaken"] = QString::number(tTaken.toDouble(), 'f', 4);
+    this->data["startTime"] = sTime;
     this->data["gameStatus"] = stat;
     this->data["playerName"] = gamerName;
-    this->data["level"] = lName;
+    this->data["instanceName"] = instance;
     this->data["clicks"] = QString::number(clicks);
+    this->data["chk"] = QString::number(checkPoints);
+    this->data["timeTaken"] = QString::number(tTaken.toDouble(), 'f', 4);
+
     this->genReport();
     this->updateStats();
 
-    ui->timeTaken->setText( QString::number(tTaken.toFloat()/(60.0))+" minutes ("+tTaken+" seconds) ");
-    ui->startTime->setText(sTime);
     ui->endTime->setText(eTime);
-    ui->chkCleared->setText(QString::number(checkPoints));
+    ui->startTime->setText(sTime);
     ui->lnameLabel->setText(lName);
+    ui->clicksLabel->setText(QString::number(clicks));
+    ui->chkCleared->setText(QString::number(checkPoints));
+    ui->timeTaken->setText(QString::number(tTaken.toFloat()/(60.0))+" minutes ("+tTaken+" seconds) ");
+
+
 
     if (stat == "Failed") {
         ui->mainLabel->setText(QString("Mission Failed"));

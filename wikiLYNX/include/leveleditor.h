@@ -45,6 +45,7 @@ private:
 private slots:
     void addChk();
     void genRandomReload();
+    void previewArticle(QListWidgetItem *item);
     void getRandomArticle();
     void updateBrowser();
     void updateChkList();
@@ -54,6 +55,7 @@ private slots:
     void updateExtras();
     void updateIsWiki();
     void loadURL();
+    void resetBrowser();
     void launchHelp();
     void updateHeader();
     void removeChk(QString chk);

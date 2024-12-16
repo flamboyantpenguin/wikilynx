@@ -10,6 +10,8 @@
 #include <QMessageBox>
 #include <QJsonObject>
 #include <QMainWindow>
+#include <QtMultimedia/QAudioOutput>
+#include <QtMultimedia/QMediaPlayer>
 
 
 #include "congrats.h"

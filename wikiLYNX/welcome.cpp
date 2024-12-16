@@ -28,7 +28,6 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
 
     ui->initButton->setFocus();
-
 }
 
 
@@ -125,7 +124,7 @@ void welcomeUI::reset() {
 
 void welcomeUI::loadSettings() {
 
-    checkCustom();
+    this->checkCustom();
 
     QFile cFile(":/cfg/gameData.json");
     ui->editLevelButton->setEnabled(true);
@@ -253,7 +252,7 @@ void welcomeUI::addCustom() {
 
 void welcomeUI::showRules() {
     helpDialog.initialise();
-    helpDialog.show();
+    helpDialog.showMaximized();
 }
 
 
@@ -273,9 +272,15 @@ void welcomeUI::clearLogs() {
 
 void welcomeUI::setStatus(int c) {
 
+    if (this->base["version"].toString() > this->cfg["version"].toString()) {
+        whatsNewDialog.show();
+        this->cfg["version"] = this->base["version"].toString();
+        this->saveSettings();
+    }
+
     ui->status->setText(code[c].split("|")[0]);
     ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].split("|")[1]));
-    if (c != 0)  checkWorldEvent();
+    if (c != 0) checkWorldEvent();
     overview.initialise(c);
     return;
 }

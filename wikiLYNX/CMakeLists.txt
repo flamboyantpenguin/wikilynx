@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS WebEngineWidgets)
 
 if (MSVC)
@@ -34,14 +34,16 @@ set(PROJECT_SOURCES
         ui/about.ui about.cpp include/about.h
         ui/help.ui help.cpp include/help.h
         ui/terms.ui terms.cpp include/terms.h
-        ui/editlevel.ui editlevel.cpp include/editlevel.h
+        ui/levelmanager.ui levelmanager.cpp include/levelmanager.h
         ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
         ui/viewstats.ui viewstats.cpp include/viewstats.h
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
         include/news.h news.cpp ui/news.ui
         include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
-        include//levels.h levels.cpp ui/levels.ui
+        include/levels.h levels.cpp ui/levels.ui
+        include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -49,9 +51,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${app_icon_resource_windows}
-
-
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET wikilynx APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -72,7 +71,7 @@ else()
 endif()
 
 
-target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
+target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

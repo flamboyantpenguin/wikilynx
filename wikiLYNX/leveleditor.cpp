@@ -8,6 +8,11 @@ levelEditor::levelEditor(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->isWiki->setChecked(true);
+    ui->genRandIndicatorPrg->hide();
+    ui->genRandIndicatorText->hide();
+    connect(ui->homeButton, &QPushButton::clicked, this, &levelEditor::resetBrowser);
+    connect(ui->backButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::back);
+    connect(ui->list, &QListWidget::itemDoubleClicked, this, &levelEditor::previewArticle);
     connect(ui->getRandomButton, &QPushButton::clicked, this, &levelEditor::getRandomArticle);
     connect(ui->addButton, &QPushButton::clicked, this, &levelEditor::addChk);
     connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
@@ -36,7 +41,7 @@ levelEditor::~levelEditor()
 void levelEditor::initialise(QJsonObject *lData, QString cde) {
 
     this->code = cde;
-    this->genRandom = 0;
+    this->genRandom = -1;
     this->gameData = lData;
     this->levelInfo = (*this->gameData)[code].toObject();
     this->chkData = this->levelInfo["levels"].toString().split(" ");
@@ -62,6 +67,9 @@ void levelEditor::initialise(QJsonObject *lData, QString cde) {
 
 
 void levelEditor::genRandomLevel(QJsonObject *lData) {
+
+    ui->genRandIndicatorPrg->show();
+    ui->genRandIndicatorText->show();
 
     this->chkData.clear();
     this->levelInfo = QJsonObject();
@@ -93,9 +101,14 @@ void levelEditor::genRandomLevel(QJsonObject *lData) {
 
 
 void levelEditor::genRandomReload() {
-    if (!genRandom) return;
+    if (genRandom == -1) return;
+    if (!genRandom) {
+        ui->genRandIndicatorPrg->hide();
+        ui->genRandIndicatorText->hide();
+        this->update();
+        return;
+    }
     ui->addButton->click();
-    if (!genRandom) return;
     ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org/wiki/Special:Random"));
     genRandom--;
 }
@@ -199,6 +212,22 @@ void levelEditor::loadURL() {
 }
 
 
+void levelEditor::previewArticle(QListWidgetItem *i) {
+    auto itemWidget = (levels *) ui->list->itemWidget(i);
+    if (this->levelInfo["wiki?"].toInt()) {
+        ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org/wiki/"+itemWidget->getItem(0)));
+    }
+    else {
+        ui->webEngineView->load(QUrl::fromUserInput(itemWidget->getItem(0)));
+    }
+}
+
+
+void levelEditor::resetBrowser() {
+    ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org"));
+}
+
+
 void levelEditor::launchHelp()   {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#level-editor"));
 }
@@ -228,6 +257,8 @@ void levelEditor::saveData() {
 void levelEditor::addChk() {
 
     QString url = ui->url->text();
+
+    if (!QUrl::fromUserInput(ui->url->text()).isValid()) return;
 
     if (this->levelInfo["wiki?"].toInt()) {
         if (url.contains("wikipedia.org/wiki")) url = url.split("wikipedia.org/wiki/")[1];

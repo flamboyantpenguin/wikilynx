@@ -49,16 +49,9 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_4">
+  <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
    <item>
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,1,0">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,1,0">
      <item>
       <widget class="QLineEdit" name="code">
        <property name="placeholderText">
@@ -154,6 +147,27 @@
       </widget>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="genRandomIndicator" stretch="0,1">
+       <item>
+        <widget class="QLabel" name="genRandIndicatorText">
+         <property name="text">
+          <string>Generating Random...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="genRandIndicatorPrg">
+         <property name="maximum">
+          <number>0</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <widget class="QListWidget" name="header">
        <property name="maximumSize">
         <size>
@@ -210,8 +224,11 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="helpButton">
+         <property name="toolTip">
+          <string>Help Info</string>
+         </property>
          <property name="text">
-          <string>What's This? </string>
+          <string>Help</string>
          </property>
          <property name="icon">
           <iconset theme="help"/>
@@ -261,9 +278,35 @@
       <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
      </property>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,1,0,0">
+       <item>
+        <widget class="QPushButton" name="homeButton">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="home"/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="backButton">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="back"/>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QPushButton" name="refreshButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -294,7 +337,7 @@
           <string>Get Random</string>
          </property>
          <property name="icon">
-          <iconset theme="random"/>
+          <iconset theme="shuffle"/>
          </property>
         </widget>
        </item>

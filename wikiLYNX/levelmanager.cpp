@@ -1,34 +1,34 @@
-#include "include/editlevel.h"
-#include "ui/ui_editlevel.h"
+#include "include/levelmanager.h"
+#include "ui/ui_levelmanager.h"
 
 
 #include <QMessageBox>
 
 
-editLevel::editLevel(QWidget *parent) :
+levelManager::levelManager(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::editLevel)
+    ui(new Ui::levelManager)
 {
     ui->setupUi(this);
-    connect(ui->addButton, &QPushButton::clicked, this, &editLevel::addLevel);
-    connect(ui->randomButton, &QPushButton::clicked, this, &editLevel::genRandomLevel);
-    connect(ui->loadButton, &QPushButton::clicked, this, &editLevel::importLevels);
-    connect(ui->exportButton, &QPushButton::clicked, this, &editLevel::exportLevels);
-    connect(ui->downloadButton, &QPushButton::clicked, this, &editLevel::downloadLevel);
-    connect(&getLevelDialog, &getLevel::closed, this, &editLevel::initialise);
+    connect(ui->addButton, &QPushButton::clicked, this, &levelManager::addLevel);
+    connect(ui->randomButton, &QPushButton::clicked, this, &levelManager::genRandomLevel);
+    connect(ui->loadButton, &QPushButton::clicked, this, &levelManager::importLevels);
+    connect(ui->exportButton, &QPushButton::clicked, this, &levelManager::exportLevels);
+    connect(ui->downloadButton, &QPushButton::clicked, this, &levelManager::downloadLevel);
+    connect(&getLevelDialog, &getLevel::closed, this, &levelManager::initialise);
     connect(&levelEditorDialog, SIGNAL(closed()), this, SLOT(saveData()));
-    connect(ui->closeButton, &QPushButton::clicked, this, &editLevel::close);
+    connect(ui->closeButton, &QPushButton::clicked, this, &levelManager::close);
 
 }
 
 
-editLevel::~editLevel()
+levelManager::~levelManager()
 {
     delete ui;
 }
 
 
-void editLevel::initialise() {
+void levelManager::initialise() {
 
     QFile lFile("./"+dirName+"/gData.json");
     if (lFile.isOpen()) lFile.close();
@@ -57,7 +57,7 @@ void editLevel::initialise() {
 }
 
 
-void editLevel::updateTable() {
+void levelManager::updateTable() {
 
     ui->list->clear();
     auto l = this->iData.keys();
@@ -74,8 +74,8 @@ void editLevel::updateTable() {
             iData[l[i]].toObject()["difficulty"].toString(), \
             "edit", "delete", "");
 
-        connect(widget, &levels::action0, this, &editLevel::launchLevelEditor);
-        connect(widget, &levels::action1, this, &editLevel::removeLevel);
+        connect(widget, &levels::action0, this, &levelManager::launchLevelEditor);
+        connect(widget, &levels::action1, this, &levelManager::removeLevel);
 
         item->setSizeHint(widget->sizeHint());
         ui->list->addItem(item);
@@ -85,7 +85,7 @@ void editLevel::updateTable() {
 }
 
 
-void editLevel::addLevel() {
+void levelManager::addLevel() {
     QString lname = "level$date";
     lname.replace("$date", QDateTime::currentDateTime().toString("yyMMddHHmm"));
     levelEditorDialog.initialise(&(this->iData), lname);
@@ -93,13 +93,13 @@ void editLevel::addLevel() {
 }
 
 
-void editLevel::genRandomLevel() {
+void levelManager::genRandomLevel() {
     levelEditorDialog.genRandomLevel(&(this->iData));
     levelEditorDialog.showMaximized();
 }
 
 
-void editLevel::saveData(QString fname) {
+void levelManager::saveData(QString fname) {
 
     QJsonDocument document;
     QJsonObject temp;
@@ -123,20 +123,20 @@ void editLevel::saveData(QString fname) {
 }
 
 
-void editLevel::launchLevelEditor(QString code) {
+void levelManager::launchLevelEditor(QString code) {
     levelEditorDialog.initialise(&(iData), code);
     levelEditorDialog.showMaximized();
 }
 
 
-void editLevel::removeLevel(QString code) {
+void levelManager::removeLevel(QString code) {
     iData.remove(code);
     this->saveData();
 
 }
 
 
-void editLevel::importLevels() {
+void levelManager::importLevels() {
 
     QFileDialog dialog(this);
     QString filename;
@@ -163,7 +163,7 @@ void editLevel::importLevels() {
 }
 
 
-void editLevel::exportLevels() {
+void levelManager::exportLevels() {
 
     QFileDialog dialog(this);
     QString filename;
@@ -180,7 +180,7 @@ void editLevel::exportLevels() {
 }
 
 
-void editLevel::downloadLevel() {
+void levelManager::downloadLevel() {
     getLevelDialog.initialise();
     getLevelDialog.show();
 }

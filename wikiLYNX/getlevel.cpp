@@ -8,9 +8,10 @@ getLevel::getLevel(QWidget *parent)
 {
     ui->setupUi(this);
     ui->progressBar->hide();
-    connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
-    connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
     connect(ui->exitButton, &QPushButton::clicked, this, &getLevel::close);
+    connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
+    connect(ui->helpButton, &QPushButton::clicked, this, &getLevel::launchHelp);
+    connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
 }
 
 
@@ -208,3 +209,9 @@ void getLevel::deleteLevel(QString code) {
 void getLevel::setEditStatus() {
     ui->status->setText("");
 }
+
+
+void getLevel::launchHelp()   {
+    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#downloading-levels"));
+}
+

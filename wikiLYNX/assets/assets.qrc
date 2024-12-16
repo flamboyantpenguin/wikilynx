@@ -6,9 +6,7 @@
         <file>fonts/CourierPrime-Italic.ttf</file>
         <file>fonts/CourierPrime-Regular.ttf</file>
         <file>fonts/NotoSans_OFL.txt</file>
-        <file>fonts/NotoSans-Bold.ttf</file>
         <file>fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf</file>
-        <file>fonts/NotoSans-Regular.ttf</file>
         <file>fonts/NotoSans-VariableFont_wdth,wght.ttf</file>
         <file>info/LICENSE.txt</file>
         <file>info/COPYING.txt</file>
@@ -18,6 +16,12 @@
         <file>images/wikiLYNX_logo.svg</file>
         <file>images/DAWN.svg</file>
         <file>info/LICENSE-MaterialIcons.txt</file>
+        <file>audio/error.wav</file>
+        <file>audio/init.wav</file>
+        <file>audio/yay.wav</file>
+        <file>info/PRIVACY.txt</file>
+        <file>fonts/Comfortaa_OFL.txt</file>
+        <file>fonts/Comfortaa-VariableFont_wght.ttf</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>
@@ -415,5 +419,33 @@
         <file>icons/nordLight/main/neutralOnline.svg</file>
         <file>icons/orangeDark/main/neutralOnline.svg</file>
         <file>icons/orangeLight/main/neutralOnline.svg</file>
+        <file>icons/blueDark/main/back.svg</file>
+        <file>icons/blueDark/main/shuffle.svg</file>
+        <file>icons/blueLight/main/back.svg</file>
+        <file>icons/blueLight/main/shuffle.svg</file>
+        <file>icons/greenDark/main/back.svg</file>
+        <file>icons/greenDark/main/shuffle.svg</file>
+        <file>icons/greenLight/main/back.svg</file>
+        <file>icons/greenLight/main/shuffle.svg</file>
+        <file>icons/monochromeDark/main/back.svg</file>
+        <file>icons/monochromeDark/main/shuffle.svg</file>
+        <file>icons/monochromeLight/main/back.svg</file>
+        <file>icons/monochromeLight/main/shuffle.svg</file>
+        <file>icons/redDark/main/back.svg</file>
+        <file>icons/redDark/main/shuffle.svg</file>
+        <file>icons/redLight/main/back.svg</file>
+        <file>icons/redLight/main/shuffle.svg</file>
+        <file>icons/yellowDark/main/back.svg</file>
+        <file>icons/yellowDark/main/shuffle.svg</file>
+        <file>icons/yellowLight/main/back.svg</file>
+        <file>icons/yellowLight/main/shuffle.svg</file>
+        <file>icons/orangeDark/main/back.svg</file>
+        <file>icons/orangeDark/main/shuffle.svg</file>
+        <file>icons/orangeLight/main/back.svg</file>
+        <file>icons/orangeLight/main/shuffle.svg</file>
+        <file>icons/nordDark/main/back.svg</file>
+        <file>icons/nordDark/main/shuffle.svg</file>
+        <file>icons/nordLight/main/back.svg</file>
+        <file>icons/nordLight/main/shuffle.svg</file>
     </qresource>
 </RCC>

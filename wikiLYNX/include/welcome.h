@@ -1,25 +1,27 @@
 #include <sys/stat.h>
 #include <fstream>
 #include <filesystem>
-#include <QJsonDocument>
-#include <QFile>
-#include <QThread>
-#include <QJsonObject>
-#include <QResource>
-#include <QMessageBox>
-#include <QString>
-#include <QTextStream>
-#include <QDesktopServices>
+
 #include <QDir>
-#include <QToolTip>
+#include <QFile>
+#include <QString>
+#include <QThread>
+#include <QResource>
+#include <QJsonObject>
+#include <QMessageBox>
+#include <QTextStream>
+#include <QJsonDocument>
+#include <QSystemTrayIcon>
+#include <QDesktopServices>
 
 #include "news.h"
 #include "help.h"
 #include "about.h"
 #include "congrats.h"
-#include "editlevel.h"
+#include "whatsnew.h"
 #include "viewstats.h"
 #include "gamewindow.h"
+#include "levelmanager.h"
 #include "statusoverview.h"
 
 
@@ -81,7 +83,7 @@ private:
     std::map<int, QString> code = {
         { 0, "Offline|offline" },
         { 1, "Online|online" },
-        { 2, "Update Available|update" },
+        { 2, "Update Available|upgrade" },
         { 3, "Update Check Failed|neutralOnline" },
         { 4, "Meow|meow" },
     };
@@ -90,8 +92,10 @@ private:
     help helpDialog;
     GameWindow *game;
     about aboutDialog;
-    editLevel editDialog;
+    whatsNew whatsNewDialog;
+
     viewStats statsDialog;
+    levelManager editDialog;
     statusOverview overview;
 
     Ui::welcomeDialog *ui;

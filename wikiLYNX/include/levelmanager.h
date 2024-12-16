@@ -1,5 +1,5 @@
-#ifndef EDITLEVEL_H
-#define EDITLEVEL_H
+#ifndef LEVELMANAGER_H
+#define LEVELMANAGER_H
 
 #include <QDialog>
 #include <QJsonDocument>
@@ -16,17 +16,17 @@
 
 
 namespace Ui {
-class editLevel;
+class levelManager;
 }
 
-class editLevel : public QDialog
+class levelManager : public QDialog
 {
     Q_OBJECT
 
 public:
     QString dirName = ".wikilynx";
-    explicit editLevel(QWidget *parent = nullptr);
-    ~editLevel();
+    explicit levelManager(QWidget *parent = nullptr);
+    ~levelManager();
     QJsonObject cfg, iData, uData;
     void initialise();
 
@@ -37,7 +37,7 @@ protected:
     }
 
 private:
-    Ui::editLevel *ui;
+    Ui::levelManager *ui;
     levelEditor levelEditorDialog;
     getLevel getLevelDialog;
 
@@ -56,4 +56,4 @@ private slots:
 
 };
 
-#endif // EDITLEVEL_H
+#endif // LEVELMANAGER_H
