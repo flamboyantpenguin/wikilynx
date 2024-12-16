@@ -57,6 +57,12 @@ void terms::initialise() {
     cP.close();
     ui->courierPrimeOFL->setText(courierPrimeOFL);
 
+    QFile comP(":/base/fonts/Comfortaa_OFL.txt");
+    comP.open(QIODevice::ReadOnly);
+    auto comfortaaOFL = QString(comP.readAll());
+    comP.close();
+    ui->comfortaaOFL->setText(comfortaaOFL);
+
     QFile mP(":/base/info/LICENSE-MaterialIcons.txt");
     mP.open(QIODevice::ReadOnly);
     auto materialLicense = QString(mP.readAll());
