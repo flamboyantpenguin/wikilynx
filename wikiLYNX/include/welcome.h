@@ -21,6 +21,7 @@
 #include "whatsnew.h"
 #include "viewstats.h"
 #include "gamewindow.h"
+#include "leveleditor.h"
 #include "levelmanager.h"
 #include "statusoverview.h"
 
@@ -67,6 +68,7 @@ private slots:
     void saveSettings();
     void checkCustom();
     void addCustom();
+    void genRandomLevel();
     void showLevelInfo();
     void showRules();
     void checkWorldEvent();
@@ -96,6 +98,7 @@ private:
 
     viewStats statsDialog;
     levelManager editDialog;
+    levelEditor levelEditorDlg;
     statusOverview overview;
 
     Ui::welcomeDialog *ui;

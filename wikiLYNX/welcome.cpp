@@ -14,13 +14,14 @@ welcomeUI::welcomeUI(QDialog *parent)
 
     this->checkStatus();
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
-    connect(ui->passcodeInput, SIGNAL(currentIndexChanged(int)), this, SLOT(showLevelInfo()));
+    connect(ui->passcodeInput, SIGNAL(currentIndexChanged()), this, SLOT(showLevelInfo()));
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
     connect(ui->cLogsButton, &QPushButton::clicked, this, &welcomeUI::clearLogs);
     connect(ui->sLogsButton, &QPushButton::clicked, this, &welcomeUI::showLogs);
     connect(ui->editLevelButton, &QPushButton::clicked, this, &welcomeUI::addCustom);
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::loadSettings);
+    connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
     connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
@@ -162,7 +163,7 @@ void welcomeUI::updateUI() {
     ui->killToggle->setChecked(cfg["totemOfUndying"].toInt());
 
     ui->passcodeInput->clear();
-    ui->passcodeInput->addItems(data.keys());
+    ui->passcodeInput->addItems(this->data.keys());
     ui->passcodeInput->removeItem(ui->passcodeInput->findText("debug"));
 }
 
@@ -174,8 +175,7 @@ void welcomeUI::updateSettings() {
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     theme = this->cfg["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
-    QWidget::update();
-    //QApplication::processEvents();
+    this->update();
     saveSettings();
 }
 
@@ -250,6 +250,17 @@ void welcomeUI::addCustom() {
 }
 
 
+void welcomeUI::genRandomLevel() {
+    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
+    levelEditorDlg.genRandomLevel(&(this->data), "random");
+    levelEditorDlg.showMaximized();
+    //levelEditorDlg.hide();
+    ui->passcodeInput->addItem("random");
+    ui->passcodeInput->setCurrentText("random");
+    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
+}
+
+
 void welcomeUI::showRules() {
     helpDialog.initialise();
     helpDialog.showMaximized();
@@ -306,7 +317,7 @@ void welcomeUI::showStats() {
 
 
 void welcomeUI::launchStatusOverview() {
-    //overview.initialise();
+    //overiDataview.initialise();
     overview.show();
 }
 

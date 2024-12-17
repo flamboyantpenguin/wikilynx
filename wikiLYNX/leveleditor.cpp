@@ -66,7 +66,7 @@ void levelEditor::initialise(QJsonObject *lData, QString cde) {
 }
 
 
-void levelEditor::genRandomLevel(QJsonObject *lData) {
+void levelEditor::genRandomLevel(QJsonObject *lData, QString code) {
 
     ui->genRandIndicatorPrg->show();
     ui->genRandIndicatorText->show();
@@ -78,7 +78,7 @@ void levelEditor::genRandomLevel(QJsonObject *lData) {
 
     genRandom = (generator->bounded(2, 11)) + 1;
 
-    this->code = "rand"+QDateTime::currentDateTime().toString("yyMMddHHmmss");
+    this->code = code;
     this->gameData = lData;
 
     ui->code->setText(code);
@@ -106,6 +106,7 @@ void levelEditor::genRandomReload() {
         ui->genRandIndicatorPrg->hide();
         ui->genRandIndicatorText->hide();
         this->update();
+        emit genRandomFinished();
         return;
     }
     ui->addButton->click();

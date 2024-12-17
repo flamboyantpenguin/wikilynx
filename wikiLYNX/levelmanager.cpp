@@ -94,7 +94,7 @@ void levelManager::addLevel() {
 
 
 void levelManager::genRandomLevel() {
-    levelEditorDialog.genRandomLevel(&(this->iData));
+    levelEditorDialog.genRandomLevel(&(this->iData), "rand"+QDateTime::currentDateTime().toString("yyMMddHHmmss"));
     levelEditorDialog.showMaximized();
 }
 

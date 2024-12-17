@@ -25,7 +25,7 @@ public:
     QJsonObject levelInfo;
     QStringList chkData;
     QJsonObject *gameData;
-    void genRandomLevel(QJsonObject*);
+    void genRandomLevel(QJsonObject*, QString);
     void initialise(QJsonObject *, QString);
     ~levelEditor();
 
@@ -61,8 +61,10 @@ private slots:
     void removeChk(QString chk);
 
 signals:
-    void itemMoved();
     void closed();
+    void itemMoved();
+    void genRandomFinished();
+
 
 };
 

@@ -152,6 +152,9 @@
          <property name="text">
           <string>Random</string>
          </property>
+         <property name="icon">
+          <iconset theme="shuffle"/>
+         </property>
         </widget>
        </item>
        <item>
