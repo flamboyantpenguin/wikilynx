@@ -6,8 +6,8 @@ URL:		https://github.com/flamboyantpenguin/wikilynx
 License:	MIT
 Source0:	https://github.com/flamboyantpenguin/wikilynx/archive/refs/tags/v1.5.0.tar.gz
 Source1:	https://repo.pcland.co.in/rpm/dawn.repo
-BuildRequires:	cmake, qt6-qtwebengine-devel
-Requires:	qt6-qtwebengine, qt6-qtsvg
+BuildRequires:	cmake, qt6-qtwebengine-devel, qt6-qtmultimedia-devel
+Requires:	qt6-qtwebengine, qt6-qtsvg, qt6-qtmultimedia
 
 %description
 Navigate your way through articles in Wikipedia through hyperlinks.
@@ -39,6 +39,7 @@ install -D -m 0644 ../LICENSE %{buildroot}/usr/share/licenses/wikilynx/LICENSE
 install -D -m 0644 ../COPYING %{buildroot}/usr/share/licenses/wikilynx/COPYING
 install -D -m 0644 ../COPYING.QtWebEngine %{buildroot}/usr/share/licenses/wikilynx/COPYING.QtWebEngine
 install -D -m 0644 ../docs/license/NotoSans_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/NotoSans_OFL.txt
+install -D -m 0644 ../docs/license/Comfortaa_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/NotoSans_OFL.txt
 install -D -m 0644 ../docs/license/CourierPrime_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/CourierPrime_OFL.txt
 install -D -m 0644 ../docs/license/LICENSE-MaterialIcons.txt %{buildroot}/usr/share/licenses/wikilynx/LICENSE-MaterialIcons.txt
 
@@ -51,13 +52,18 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 /usr/share/licenses/wikilynx/COPYING
 /usr/share/licenses/wikilynx/COPYING.QtWebEngine
 /usr/share/licenses/wikilynx/NotoSans_OFL.txt
+/usr/share/licenses/wikilynx/Comfortaa_OFL.txt
 /usr/share/licenses/wikilynx/CourierPrime_OFL.txt
 /usr/share/licenses/wikilynx/LICENSE-MaterialIcons.txt
 /usr/share/applications/wikilynx.desktop
-/usr/share/pixmaps/wikiLYNX_logo.svg
+/usr/share/icons/hicolor/scalable/apps/wikiLYNX_logo.svg
+/usr/share/metainfo/wikilynx.appdata.xml
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
+* Tue Dec 17 2024 Penguin <penguin@pcland.co.in> - 1.5.0-1
+- Release 1.5.0
+
 * Wed Nov 06 2024 Penguin <penguin@pcland.co.in> - 1.3.0-1
 - Release 1.3.0
 
