@@ -201,10 +201,11 @@ void GameWindow::playSound(QString sound) {
         QAudioOutput *audioOutput = new QAudioOutput;
         player->setAudioOutput(audioOutput);
         player->setSource(QUrl("qrc:/base/audio/"+sound));
+        audioOutput->setVolume(50);
     #else
         player->setMedia(QUrl("qrc:/base/audio/"+sound));
+        player->setVolume(50);
     #endif
-    audioOutput->setVolume(50);
     player->play();
 }
 
