@@ -1,7 +1,6 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
-
 #include <QFile>
 #include <QTimer>
 #include <QString>
@@ -61,6 +60,7 @@ private:
     QString wikiURL = "https://wikipedia.org/wiki/";
 
 private slots:
+    void playSound(QString sound);
     void launchLogs();
     void viewCheckPoints();
     int missionAccomplished();

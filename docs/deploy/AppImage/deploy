@@ -1,0 +1,91 @@
+#!/bin/bash
+
+
+# A simple script to automate AppImage building for wikiLYNX Game Browser
+# https://github.com/flamboyantpenguin/wikiLYNX
+
+
+# Project Vars
+ARCH=$(uname -m)
+ver="1.5.0"
+
+
+# QT Installation Dir. If you're not doing this using containers as specified in the docs, change this value.
+#QT_DIR=/usr/lib/qt6
+
+# Deploy vars
+export QMAKE=/usr/bin/qmake6
+#export QT_ROOT_DIR=$QT_DIR
+#export LD_LIBRARY_PATH=$QT_DIR/lib
+export APPIMAGE_EXTRACT_AND_RUN=1
+#export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqwayland-xcomposite-egl.so;libqwayland-xcomposite-glx.so;libqeglfs.so"
+
+
+# Download Requirements
+downloadAppImagers() {
+    wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-$ARCH.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
+    chmod u+x *.AppImage
+}
+
+
+# Build and Prepare Project
+prepareProject() {
+
+    wget https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v$ver.zip
+
+    mkdir -p AppDir/usr/{share,bin}
+    mkdir -p AppDir/usr/share/{applications,metainfo}
+    mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
+    APPDIR=$(realpath AppDir)
+
+
+    unzip v$ver.zip
+    cd wikilynx-$ver/wikiLYNX
+
+    # stateChanged was changed to checkStateChanged in Qt 6.7; We use Qt 5.15.2 for building AppImage
+    sed -i 's/checkStateChanged/stateChanged/g' welcome.cpp
+    sed -i 's/checkStateChanged/stateChanged/g' leveleditor.cpp 
+
+    cmake -DCMAKE_BUILD_TYPE=MinSizeRel .
+    make
+
+    cp wikilynx $APPDIR/usr/bin
+    cp ./assets/images/wikiLYNX_logo.svg $APPDIR/usr/share/icons/hicolor/scalable/apps
+    cp ../docs/desktop/wikilynx.desktop $APPDIR/usr/share/applications
+    cp ../docs/desktop/wikilynx.appdata.xml $APPDIR/usr/share/metainfo
+
+
+    cd $APPDIR/..
+    rm -rf wikilynx-$ver
+
+}
+
+
+# Deploy AppDir
+downloadAppImagers
+prepareProject
+ls $APPDIR
+
+dd if=/dev/zero bs=1 count=3 seek=8 conv=notrunc of=linuxdeploy-x86_64.AppImage
+./linuxdeploy-x86_64.AppImage --appdir $APPDIR --plugin qt
+
+
+# Fixes
+bash -c "rm -rf AppDir/usr/lib/libnss*"
+bash -c "cp -r /usr/lib/x86_64-linux-gnu/libcrypto* AppDir/usr/lib"
+bash -c "cp -r /usr/lib/x86_64-linux-gnu/libssl* AppDir/usr/lib"
+bash -c "cp -r /usr/lib/qt6/plugins/* AppDir/usr/plugins"
+
+# Make AppImage
+./appimagetool-x86_64.AppImage AppDir
+
+
+# Copy to output volume
+cp wiki*.AppImage /opt/output
+
+
+# Cleanup
+rm -rf AppDir *.zip *.AppImage
+

@@ -54,13 +54,8 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prg
     if (this->gameData["wiki?"].toInt()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
     else ui->field->load(QUrl::fromUserInput(this->levels[0]));
 
-    QMediaPlayer *player = new QMediaPlayer;
-    QAudioOutput *audioOutput = new QAudioOutput;
-    player->setAudioOutput(audioOutput);
-    player->setSource(QUrl("qrc:/base/audio/init.wav"));
-    audioOutput->setVolume(50);
-    player->play();
     timer->start(100);
+    this->playSound("init.wav");
 
     this->instance = "instance"+QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
     this->aTime = QTime::currentTime().toString("hh:mm:ss.zzz");
@@ -111,12 +106,7 @@ void GameWindow::initAction() {
     out.close();
 
     if (!alD && !(url.toString().split("://")[1].split("/")[0].endsWith("wikipedia.org"))) {
-            QMediaPlayer *player = new QMediaPlayer;
-            QAudioOutput *audioOutput = new QAudioOutput;
-            player->setAudioOutput(audioOutput);
-            player->setSource(QUrl("qrc:/base/audio/error.wav"));
-            audioOutput->setVolume(50);
-            player->play();
+            this->playSound("error.wav");
             *dontKillMe = 1;
             QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings", QMessageBox::Ok);
             *dontKillMe = 0;
@@ -143,13 +133,7 @@ int GameWindow::missionAccomplished() {
 
     if (prg == 100) {
 
-        QMediaPlayer *player = new QMediaPlayer;
-        QAudioOutput *audioOutput = new QAudioOutput;
-        player->setAudioOutput(audioOutput);
-        player->setSource(QUrl("qrc:/base/audio/yay.wav"));
-        audioOutput->setVolume(50);
-        player->play();
-        timer->stop();
+        this->playSound("yay.wav");
 
         auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
         ui->statusbar->showMessage("You won!!!");
@@ -171,12 +155,7 @@ int GameWindow::missionAccomplished() {
 
 int GameWindow::missionFailed(QString message){
 
-    QMediaPlayer *player = new QMediaPlayer;
-    QAudioOutput *audioOutput = new QAudioOutput;
-    player->setAudioOutput(audioOutput);
-    player->setSource(QUrl("qrc:/base/audio/error.wav"));
-    audioOutput->setVolume(50);
-    player->play();
+    this->playSound("error.wav");
 
     timer->stop();
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
@@ -216,14 +195,23 @@ void GameWindow::viewCheckPoints() {
 }
 
 
-void GameWindow::endGame() {
-
+void GameWindow::playSound(QString sound) {
     QMediaPlayer *player = new QMediaPlayer;
-    QAudioOutput *audioOutput = new QAudioOutput;
-    player->setAudioOutput(audioOutput);
-    player->setSource(QUrl("qrc:/base/audio/error.wav"));
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QAudioOutput *audioOutput = new QAudioOutput;
+        player->setAudioOutput(audioOutput);
+        player->setSource(QUrl("qrc:/base/audio/"+sound));
+    #else
+        player->setMedia(QUrl("qrc:/base/audio/"+sound));
+    #endif
     audioOutput->setVolume(50);
     player->play();
+}
+
+
+void GameWindow::endGame() {
+
+    this->playSound("error.wav");
 
     timer->stop();
     auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
