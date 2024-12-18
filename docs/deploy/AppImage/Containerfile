@@ -1,7 +1,9 @@
 FROM debian:12
 
 RUN apt update && apt upgrade -y
-RUN apt install libgl1-mesa-dev qt6-webengine-dev cmake wget fuse libfuse2 zip g++ qt6-wayland-dev qt6-multimedia-dev qt6-svg-dev breeze-dev file -y
+RUN apt install libgl1-mesa-dev qt6-webengine-dev cmake wget fuse libfuse2 zip g++ qt6-wayland qt6-wayland-dev qt6-multimedia-dev qt6-svg-dev libegl1-mesa-dev file libqt5multimedia5-plugins -y
+RUN apt install gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav -y
+
 #RUN modprobe fuse
 RUN groupadd fuse
 RUN usermod -a -G fuse root

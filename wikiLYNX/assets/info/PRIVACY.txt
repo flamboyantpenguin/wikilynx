@@ -1,11 +1,9 @@
 # wikiLYNX Game Browser | Privacy Policy
 
-
 ## Introduction
 
 wikiLYNX is a game browser application. Since the game of Wikipedia speed-runs is browsing from one article to the other, this application is basically a browser with features and options attached to enhance gameplay. This means that almost all standard rules and practises of browsing applies to using the browser within this app as well.
 wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped around Chromium Embedded Framework (CEF), which means most of the things applicable for Chromium browsers applies here as well.
-
 
 ## Data Collection
 
@@ -30,7 +28,6 @@ These info is not collected by wikiLYNX and/or its developers.
 
 As the developer of this app, I have tried my best to implement the best practises to implement good privacy practises. These include disabling third party cookies and implementing Non-Persistent Cookies. Cookies are stored on each session in temporary storage and are cleared once you close the app completely.
 
-
 All the inbuilt levels within the game are Wikipedia levels. This means that the levels won't force you to navigate to sites outside wikipedia.org. The help documentation is hosted on the GitHub Repository (Wiki section).
 
 To learn more about the data collection practises of Wikipedia, read their [Privacy Policy](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy) and [Cookie Statement](https://foundation.wikimedia.org/wiki/Policy:Cookie_statement).
@@ -41,4 +38,4 @@ As for external levels, it's your responsibility to understand the data collecti
 
 If you find any discrepancies in this document or if you have any queries/suggestions, contact [penguin@pcland.co.in](mailto:penguin@pcland.co.in).
 
-If you read till here, you're a good person who respects the importance of privacy and security in this age! Thank you!
+If you read till here, you're a good person who respected the importance of privacy and security in this age! Thank you!

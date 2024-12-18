@@ -15,10 +15,13 @@ ver="1.5.0"
 
 # Deploy vars
 export QMAKE=/usr/bin/qmake6
-#export QT_ROOT_DIR=$QT_DIR
-#export LD_LIBRARY_PATH=$QT_DIR/lib
+export GTK_THEME=Adwaita-dark
+export GST_PLUGIN_PATH=$APPDIR/usr/lib/gstreamer-1.0
+export XDG_DATA_DIRS="$APPDIR/usr/share:$XDG_DATA_DIRS"
+export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
+export DEPLOY_PLATFORM_THEMES=true
 export APPIMAGE_EXTRACT_AND_RUN=1
-#export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqwayland-xcomposite-egl.so;libqwayland-xcomposite-glx.so;libqeglfs.so"
+export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqeglfs.so"
 
 
 # Download Requirements
@@ -66,17 +69,17 @@ prepareProject() {
 # Deploy AppDir
 downloadAppImagers
 prepareProject
-ls $APPDIR
 
-dd if=/dev/zero bs=1 count=3 seek=8 conv=notrunc of=linuxdeploy-x86_64.AppImage
 ./linuxdeploy-x86_64.AppImage --appdir $APPDIR --plugin qt
 
 
 # Fixes
+bash -c "ls /usr/lib/qt6/plugins"
 bash -c "rm -rf AppDir/usr/lib/libnss*"
 bash -c "cp -r /usr/lib/x86_64-linux-gnu/libcrypto* AppDir/usr/lib"
 bash -c "cp -r /usr/lib/x86_64-linux-gnu/libssl* AppDir/usr/lib"
-bash -c "cp -r /usr/lib/qt6/plugins/* AppDir/usr/plugins"
+bash -c "cp -r /usr/lib/x86_64-linux-gnu/gstreamer-1.0 AppDir/usr/lib"
+bash -c "cp -r /usr/share/themes AppDir/usr/share"
 
 # Make AppImage
 ./appimagetool-x86_64.AppImage AppDir
@@ -88,4 +91,3 @@ cp wiki*.AppImage /opt/output
 
 # Cleanup
 rm -rf AppDir *.zip *.AppImage
-

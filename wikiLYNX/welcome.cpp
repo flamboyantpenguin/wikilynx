@@ -63,7 +63,7 @@ void welcomeUI::checkStatus() {
     connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
     connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
     connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
-    connect(worker, SIGNAL(status(int)), this, SLOT(setStatus(int)));
+    connect(worker, &checkUpdateWorker::status, this, &welcomeUI::setStatus);
     connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     thread->start();
 

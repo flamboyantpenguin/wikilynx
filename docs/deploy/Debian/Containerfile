@@ -1,7 +1,7 @@
 FROM debian
 
 RUN apt update && apt upgrade -y
-RUN apt install libglx-dev libgl1-mesa-dev qt6-webengine-dev qt6-webengine-dev-tools cmake devscripts debhelper wget -y
+RUN apt install libglx-dev libgl1-mesa-dev qt6-webengine-dev qt6-webengine-dev-tools qt6-multimedia-dev cmake devscripts debhelper wget -y
 
 ADD build /root
 
