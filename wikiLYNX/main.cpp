@@ -53,9 +53,9 @@ int main(int argc, char *argv[]) {
 void loadFonts() {
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Bold.ttf");
     QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/Comfortaa-VariableFont_wght");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Italic-VariableFont_wdth,wght");
+    QFontDatabase::addApplicationFont(":/base/fonts/Comfortaa-VariableFont_wght.ttf");
+    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
+    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf");
 }
 
 

@@ -10,18 +10,15 @@ ARCH=$(uname -m)
 ver="1.5.0"
 
 
-# QT Installation Dir. If you're not doing this using containers as specified in the docs, change this value.
-#QT_DIR=/usr/lib/qt6
-
 # Deploy vars
 export QMAKE=/usr/bin/qmake6
-export GTK_THEME=Adwaita-dark
-export GST_PLUGIN_PATH=$APPDIR/usr/lib/gstreamer-1.0
-export XDG_DATA_DIRS="$APPDIR/usr/share:$XDG_DATA_DIRS"
-export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
-export DEPLOY_PLATFORM_THEMES=true
 export APPIMAGE_EXTRACT_AND_RUN=1
+export DEPLOY_PLATFORM_THEMES=true
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+export XDG_DATA_DIRS="$APPDIR/usr/share:$XDG_DATA_DIRS"
+export GST_PLUGIN_PATH=$APPDIR/usr/lib/gstreamer-1.0
 export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqeglfs.so"
+export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
 
 
 # Download Requirements
@@ -67,27 +64,23 @@ prepareProject() {
 
 
 # Deploy AppDir
+apt install adwaita-qt6 -y
 downloadAppImagers
 prepareProject
 
 ./linuxdeploy-x86_64.AppImage --appdir $APPDIR --plugin qt
 
-
 # Fixes
-bash -c "ls /usr/lib/qt6/plugins"
 bash -c "rm -rf AppDir/usr/lib/libnss*"
 bash -c "cp -r /usr/lib/x86_64-linux-gnu/libcrypto* AppDir/usr/lib"
 bash -c "cp -r /usr/lib/x86_64-linux-gnu/libssl* AppDir/usr/lib"
-bash -c "cp -r /usr/lib/x86_64-linux-gnu/gstreamer-1.0 AppDir/usr/lib"
-bash -c "cp -r /usr/share/themes AppDir/usr/share"
+#bash -c "cp -r /usr/lib/x86_64-linux-gnu/gstreamer-1.0 AppDir/usr/lib"
 
 # Make AppImage
 ./appimagetool-x86_64.AppImage AppDir
 
-
 # Copy to output volume
 cp wiki*.AppImage /opt/output
-
 
 # Cleanup
 rm -rf AppDir *.zip *.AppImage

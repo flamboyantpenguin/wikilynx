@@ -12,17 +12,6 @@ welcomeUI::welcomeUI(QDialog *parent)
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
-    thread = new QThread();
-    checkUpdateWorker* worker = new checkUpdateWorker();
-    worker->moveToThread(thread);
-
-    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
-    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
-    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
-    connect(worker, &checkUpdateWorker::status, this, &welcomeUI::setStatus);
-    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
-
-
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->passcodeInput, SIGNAL(currentIndexChanged()), this, SLOT(showLevelInfo()));
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
@@ -69,6 +58,14 @@ int welcomeUI::initialise(int *totem) {
 
 
 void welcomeUI::checkStatus() {
+    thread = new QThread();
+    checkUpdateWorker* worker = new checkUpdateWorker();
+    worker->moveToThread(thread);
+    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
+    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
+    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
+    connect(worker, &checkUpdateWorker::status, this, &welcomeUI::setStatus);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     thread->start();
 }
 
@@ -112,7 +109,6 @@ int welcomeUI::startGame() {
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
-    QApplication::processEvents();
     return 0;
 
 }
@@ -347,8 +343,9 @@ void checkUpdateWorker::process() { // Process. Start processing data.
     loop.exec();
 
     if (reply->error() != QNetworkReply::NoError) {
+        reply->deleteLater();
         emit status(0);
-        flg = 1;
+        return;
     }
     reply->deleteLater();
 
@@ -359,22 +356,21 @@ void checkUpdateWorker::process() { // Process. Start processing data.
     QObject::connect(reply, &QNetworkReply::finished, &loop2, &QEventLoop::quit);
     loop2.exec();
 
-    if (reply->error() == QNetworkReply::NoError) {
+    if (reply->error() != QNetworkReply::NoError) {
+        reply->deleteLater();
+        qDebug() << "Error fetching latest version information:" << reply->errorString();
+        emit status(3);
+        return;
+    }
+    else {
         QByteArray data = reply->read(7);
         lVersion = QString::fromLocal8Bit(data).toStdString();
-    } else {
-        qDebug() << "Error fetching latest version information:" << reply->errorString();
-        if (!flg) emit status(3);
-        flg = 1;
     }
     reply->deleteLater();
 
-
-    if (!flg) {
-        if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
-        else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(4);
-        else emit status(1);
-    }
+    if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
+    else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(4);
+    else emit status(1);
 
     emit finished();
 

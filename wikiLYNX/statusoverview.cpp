@@ -56,6 +56,6 @@ void statusOverview::launchVersionInfo() {
 void statusOverview::developerHehe() {
     this->hehe++;
 
-    if (!(this->hehe % 3))
-        QMessageBox::information(this, "wikiLYNX", "Congratulations! You're now a developer! Get started by checking the project on GitHub :)", QMessageBox::Ok);
+    if (!(this->hehe % 7))
+        QMessageBox::information(this, "wikiLYNX", "What it takes to become a developer is the will to work on something for a good reason! Get started by checking the project on GitHub :)", QMessageBox::Ok);
 }
