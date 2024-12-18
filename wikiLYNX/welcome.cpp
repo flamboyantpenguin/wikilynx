@@ -12,7 +12,17 @@ welcomeUI::welcomeUI(QDialog *parent)
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
-    this->checkStatus();
+    thread = new QThread();
+    checkUpdateWorker* worker = new checkUpdateWorker();
+    worker->moveToThread(thread);
+
+    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
+    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
+    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
+    connect(worker, &checkUpdateWorker::status, this, &welcomeUI::setStatus);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+
+
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->passcodeInput, SIGNAL(currentIndexChanged()), this, SLOT(showLevelInfo()));
     connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
@@ -28,7 +38,11 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
 
+
     ui->initButton->setFocus();
+
+    this->checkStatus();
+
 }
 
 
@@ -55,18 +69,7 @@ int welcomeUI::initialise(int *totem) {
 
 
 void welcomeUI::checkStatus() {
-
-    thread = new QThread();
-    checkUpdateWorker* worker = new checkUpdateWorker();
-    worker->moveToThread(thread);
-
-    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
-    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
-    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
-    connect(worker, &checkUpdateWorker::status, this, &welcomeUI::setStatus);
-    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     thread->start();
-
 }
 
 
