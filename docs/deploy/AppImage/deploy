@@ -72,16 +72,16 @@ downloadAppImagers
 prepareProject
 
 chmod u+x AppRun
-./linuxdeploy-x86_64.AppImage --appdir $APPDIR --custom-apprun=$APPDIR/../AppRun --plugin qt --plugin gstreamer
+./linuxdeploy-$ARCH.AppImage --appdir $APPDIR --custom-apprun=$APPDIR/../AppRun --plugin qt --plugin gstreamer
 
 # Fixes
 bash -c "rm -rf AppDir/usr/lib/libnss*"
-bash -c "cp -r /usr/lib/x86_64-linux-gnu/libcrypto* AppDir/usr/lib"
-bash -c "cp -r /usr/lib/x86_64-linux-gnu/libssl* AppDir/usr/lib"
+bash -c "cp -r /usr/lib/$ARCH-linux-gnu/libcrypto* AppDir/usr/lib"
+bash -c "cp -r /usr/lib/$ARCH-linux-gnu/libssl* AppDir/usr/lib"
 bash -c "cp AppRun AppDir/AppRun"
 
 # Make AppImage
-./appimagetool-x86_64.AppImage AppDir
+./appimagetool-$ARCH.AppImage AppDir
 
 # Copy to output volume
 cp wiki*.AppImage /opt/output
