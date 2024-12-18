@@ -12,21 +12,20 @@ welcomeUI::welcomeUI(QDialog *parent)
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
 
+    connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
-    connect(ui->passcodeInput, SIGNAL(currentIndexChanged()), this, SLOT(showLevelInfo()));
-    connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
-    connect(ui->cLogsButton, &QPushButton::clicked, this, &welcomeUI::clearLogs);
     connect(ui->sLogsButton, &QPushButton::clicked, this, &welcomeUI::showLogs);
+    connect(ui->aboutButton, &QPushButton::clicked, this, &welcomeUI::showAbout);
+    connect(ui->cLogsButton, &QPushButton::clicked, this, &welcomeUI::clearLogs);
+    connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
+    connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
     connect(ui->editLevelButton, &QPushButton::clicked, this, &welcomeUI::addCustom);
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::loadSettings);
-    connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
-    connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
-    connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
-    connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
+    connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
-
+    connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
 
     ui->initButton->setFocus();
 

@@ -22,9 +22,22 @@ The name you enter in the text field in the welcome dialog is used to register i
 
 By default, you are not allowed to access websites outside Wikipedia from reference links. Doing so will restart the current checkpoint. You're also not allowed to change game window, this will end the game abruptly. These policies can be turned off in settings.
 
-Apart from seeing the Leaderboads, you can see more detailed info about the Game in the directory named `.wLnKMeow`. This is usally seen in the Program Files folder of Windows or in your Home Directory in Linux. We initially developed this software to conduct Wikipedia speed-runs as a competition in our college. So as a measure de security, the game logs all the URLs accessed in a game. Some other details are stored in a file named `report.txt`. You can find all these files in `.wLnKMeow/logs/instanceYYYYMMDDHHMMSS`, denoting the starting time of the game session.
+Apart from seeing the Leaderboads, you can see more detailed info about the game in the directory named `.wikilynx`. This is usally seen in the Program Files folder of Windows or in your Home Directory in Linux. We initially developed this software to conduct Wikipedia speed-runs as a competition in our college. So as a measure de security, the game logs all the URLs accessed in a game. Some other details are stored in a file named `report.txt`. You can find all these files in `.wikilynx/logs/instanceYYYYMMDDHHMMSS`, denoting the starting time of the game session.
 
-We have included some interesting levels by default. You can add your own levels in the `Edit Level` option in settings. You can also export your levels as a JSON file to share it with your friends. You can download levels from our server using the `Download Level` option or manually from [DAWN Public Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels). To get to know the game, get started with the level `flyingduck`.
+We have included some interesting levels by default. You can add/edit your own levels in the `Edit Level` option in settings. The dialog is basically integrated with a browser to help you navigate to the article and add them. You can also random generate articles if you're feeling lucky! You can export your levels as a JSON file to share it with your friends. More levels can be downloaded from our server using the `Download Level` option or manually from [DAWN Public Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels). To get to know the game, get started with the level `flyingduck`.
+
+## Terms, Licensing and Privacy Policy
+
+Our app is completely free and open source. This means you can use our code as per the terms of MIT License, explained in the LICENSE of this repository. We also use open source libraries to build the game. You as a user can contribute to this project. Read development section for more info on contributution.
+
+wikiLYNX is a game browser application. Since the game of Wikipedia speed-runs is browsing from one article to the other, this application is basically a browser with features and options attached to enhance gameplay. This means that almost all standard rules and practises of browsing applies to using the browser within this app as well.
+wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped around Chromium Embedded Framework (CEF), which means most of the things applicable for Chromium browsers applies here as well.
+
+As of wikiLYNX 1.5.0, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (latest version, custom levels etc) and for browsing as mentioned below.
+
+This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include your IP Address, Browser User agent, hardware info etc. For more info, read [PRIVACY.md](https://github.com/flamboyantpenguin/wikilynx/blob/master/docs/PRIVACY.md).
+
+Read [Terms section in Wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) for more info.
 
 ## Installation Instructions
 
@@ -33,7 +46,7 @@ The app is available for Windows and Linux.
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
 | [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
-| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage    |
+| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage, Flatpak, Snap    |
 
 You can find the installation files in [DAWN Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX) or in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
 
@@ -53,6 +66,7 @@ To compile this project, you need to have the following components installed in 
   - Qt WebEngine
   - Qt Positioning
   - Qt WebChannel
+  - Qt Multimedia
   - Qt Desktop (MSVC)
   - cmake
 - git
@@ -73,9 +87,10 @@ Use any IDE like Qt Creator to modify the files. Do note the following before yo
 
 The source files are in wikiLYNX directory.
 
+- docs container license, deployment documentation, linux desktop implementation assets and the Privacy Policy
 - wikiLYNX/header contains the necessary C++ header files
 - wikiLYNX/ui contains the Qt UI files
-- wikiLYNX/assets contains the assets for the game
+- wikiLYNX/assets contains the game assets
 - wikiLYNX/debian contains debian packaging info
 
 ## Feedback
@@ -87,7 +102,7 @@ You can submit your feedback about the project in the discussions page or in thi
 ```Txt
 wikiLYNX 1.5.0
 
-Last Updated: 07-11-2024
+Last Updated: 18-12-2024
 Made by DAWN/ペンギン
 ```
 
