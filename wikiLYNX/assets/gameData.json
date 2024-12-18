@@ -1,13 +1,13 @@
 {
-    "base": {
-        "version": "v1.5.0",
-        "availableIconThemes": "green#75fb4c#2854c5,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
-    },
     "info": {
         "allowReference": 0,
         "totemOfUndying": 0,
         "version": "v1.5.0",
         "iconTheme": "green"
+    },
+    "base": {
+        "version": "v1.5.0",
+        "availableIconThemes": "green#75fb4c#2854c5,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
     },
     "data": {
         "flyingduck": {

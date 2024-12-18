@@ -1,7 +1,8 @@
-FROM debian
+FROM debian:11
 
 RUN apt update && apt upgrade -y
-RUN apt install libglx-dev libgl1-mesa-dev qt6-webengine-dev qt6-webengine-dev-tools qt6-multimedia-dev cmake devscripts debhelper wget -y
+RUN apt install devscripts debhelper zip wget -y
+RUN apt install libgl1-mesa-dev libglx-dev qtwebengine5-dev qtwayland5 qtwayland5-private-dev qtwayland5-dev-tools g++ qtmultimedia5-dev libqt5multimedia5-plugins cmake -y
 
 ADD build /root
 

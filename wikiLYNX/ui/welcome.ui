@@ -411,6 +411,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <height>30</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>Generate a Random Level. Name of the level will be `random`</string>
+             </property>
              <property name="text">
               <string/>
              </property>

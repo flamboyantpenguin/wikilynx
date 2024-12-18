@@ -215,7 +215,7 @@
          <property name="font">
           <font>
            <family>Comfortaa</family>
-           <pointsize>11</pointsize>
+           <pointsize>10</pointsize>
            <bold>false</bold>
           </font>
          </property>

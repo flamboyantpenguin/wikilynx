@@ -48,6 +48,7 @@ int welcomeUI::initialise(int *totem) {
     theme = this->cfg["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
+    this->update();
 
     connect(ui->killToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
     connect(ui->allowSitesToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
@@ -223,6 +224,7 @@ void welcomeUI::checkCustom() {
         cFile.open(QIODevice::ReadOnly);
         auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
         this->cfg = iData = iData["info"].toObject();
+        this->cfg["iconTheme"] = "green";
 
         QJsonDocument document;
         QJsonObject temp;
@@ -232,7 +234,7 @@ void welcomeUI::checkCustom() {
 
         QFile::remove("./"+dirName+"/gData.json");
 
-        QByteArray bytes = document.toJson( QJsonDocument::Indented );
+        QByteArray bytes = document.toJson(QJsonDocument::Indented);
         QFile file("./"+dirName+"/gData.json");
         file.open(QIODevice::ReadWrite);
         QTextStream iStream(&file);
