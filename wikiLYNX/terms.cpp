@@ -21,6 +21,12 @@ terms::~terms()
 
 void terms::initialise() {
 
+    QFile p(":/base/info/PRIVACY.txt");
+    p.open(QIODevice::ReadOnly);
+    auto privacy = QString(p.readAll());
+    p.close();
+    ui->privacy->setText(privacy);
+
     QFile f(":/base/info/LICENSE.txt");
     f.open(QIODevice::ReadOnly);
     auto license = QString(f.readAll());
@@ -50,6 +56,12 @@ void terms::initialise() {
     auto courierPrimeOFL = QString(cP.readAll());
     cP.close();
     ui->courierPrimeOFL->setText(courierPrimeOFL);
+
+    QFile comP(":/base/fonts/Comfortaa_OFL.txt");
+    comP.open(QIODevice::ReadOnly);
+    auto comfortaaOFL = QString(comP.readAll());
+    comP.close();
+    ui->comfortaaOFL->setText(comfortaaOFL);
 
     QFile mP(":/base/info/LICENSE-MaterialIcons.txt");
     mP.open(QIODevice::ReadOnly);

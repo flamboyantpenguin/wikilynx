@@ -6,9 +6,8 @@ viewStats::viewStats(QWidget *parent)
     , ui(new Ui::viewStats)
 {
     ui->setupUi(this);
-    this->initialise();
     connect(ui->closeButton, &QPushButton::clicked, this, &viewStats::close);
-    connect(ui->levelSelect, &QComboBox::currentIndexChanged, this, &viewStats::loadData);
+    connect(ui->levelSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(loadData()));
 }
 
 viewStats::~viewStats()
@@ -22,8 +21,10 @@ int viewStats::initialise() {
     ui->levelSelect->clear();
     QFile statFile("./"+dirName+"/.stat");
     statFile.open(QIODevice::ReadOnly);
-    this->data = QJsonDocument::fromJson(statFile.readAll()).object();
-    ui->levelSelect->addItems(data.keys());
+    if (statFile.isOpen()) {
+        this->data = QJsonDocument::fromJson(statFile.readAll()).object();
+        ui->levelSelect->addItems(data.keys());
+    }
     statFile.close();
     return 0;
 }

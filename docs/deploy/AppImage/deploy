@@ -1,0 +1,90 @@
+#!/bin/bash
+
+
+# A simple script to automate AppImage building for wikiLYNX Game Browser
+# https://github.com/flamboyantpenguin/wikiLYNX
+
+
+# Project Vars
+ARCH=$(uname -m)
+ver="1.5.0"
+
+
+# Deploy vars
+export QMAKE=/usr/bin/qmake
+export APPIMAGE_EXTRACT_AND_RUN=1
+export DEPLOY_PLATFORM_THEMES=true
+export GST_PLUGIN_PATH=$APPDIR/usr/lib/gstreamer-1.0
+export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqeglfs.so"
+export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
+
+
+# Download Requirements
+downloadAppImagers() {
+    wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-$ARCH.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
+    git clone https://github.com/linuxdeploy/linuxdeploy-plugin-gstreamer.git
+    wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
+    cp linuxdeploy-plugin-gstreamer/linuxdeploy-plugin-gstreamer.sh .
+    chmod u+x *.sh
+    chmod u+x *.AppImage
+}
+
+
+# Build and Prepare Project
+prepareProject() {
+
+    wget https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v$ver.zip
+
+    mkdir -p AppDir/usr/{share,bin}
+    mkdir -p AppDir/usr/share/{applications,metainfo}
+    mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
+    APPDIR=$(realpath AppDir)
+
+
+    unzip v$ver.zip
+    cd wikilynx-$ver/wikiLYNX
+
+    # stateChanged was changed to checkStateChanged in Qt 6.7; We use Qt 5.15.2 for building AppImage
+    sed -i 's/checkStateChanged/stateChanged/g' welcome.cpp # stateChanged was changed to checkStateChanged in Qt 6.7; We use Qt 5.15.2 for building AppImage
+    sed -i 's/checkStateChanged/stateChanged/g' leveleditor.cpp
+    sed -i 's/currentIndexChanged/currentTextChanged/g' welcome.cpp # Still no use :/
+
+    cmake -DCMAKE_BUILD_TYPE=MinSizeRel .
+    make
+
+    cp wikilynx $APPDIR/usr/bin
+    cp ./assets/images/wikiLYNX_logo.svg $APPDIR/usr/share/icons/hicolor/scalable/apps
+    cp ../docs/desktop/wikilynx.desktop $APPDIR/usr/share/applications
+    cp ../docs/desktop/wikilynx.appdata.xml $APPDIR/usr/share/metainfo
+
+
+    cd $APPDIR/..
+    rm -rf wikilynx-$ver
+
+}
+
+
+# Deploy AppDir
+apt install kde-style-breeze -y
+downloadAppImagers
+prepareProject
+
+chmod u+x AppRun
+./linuxdeploy-x86_64.AppImage --appdir $APPDIR --custom-apprun=$APPDIR/../AppRun --plugin qt --plugin gstreamer
+
+# Fixes
+bash -c "rm -rf AppDir/usr/lib/libnss*"
+bash -c "cp -r /usr/lib/x86_64-linux-gnu/libcrypto* AppDir/usr/lib"
+bash -c "cp -r /usr/lib/x86_64-linux-gnu/libssl* AppDir/usr/lib"
+bash -c "cp AppRun AppDir/AppRun"
+
+# Make AppImage
+./appimagetool-x86_64.AppImage AppDir
+
+# Copy to output volume
+cp wiki*.AppImage /opt/output
+
+# Cleanup
+rm -rf AppDir *.zip *.AppImage

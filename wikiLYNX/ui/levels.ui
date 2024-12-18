@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>levels</class>
+ <widget class="QWidget" name="levels">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>739</width>
+    <height>58</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QLabel" name="label0">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>code</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label1">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>time</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label2">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>chk</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label3">
+     <property name="text">
+      <string>Clicks</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label4">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>difficulty</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="action0">
+     <property name="minimumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="download"/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="action1">
+     <property name="minimumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="download"/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="action2">
+     <property name="minimumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="download"/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,18 +1,15 @@
 #include "include/news.h"
 #include "ui/ui_news.h"
 
+
 news::news(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::news)
 {
     ui->setupUi(this);
-
-    connect(&manager, &QNetworkAccessManager::finished, this, &news::finished);
-
-    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, [](QTreeWidgetItem *item) { QDesktopServices::openUrl(QUrl(item->text(1))); });
+    ui->progressBar->hide();
     ui->treeWidget->setHeaderLabels(QStringList { tr("Title"), tr("Link"), tr("Date"), tr("Description") });
     ui->treeWidget->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    this->initialise();
 }
 
 
@@ -23,6 +20,8 @@ news::~news()
 
 
 void news::initialise() {
+    connect(&manager, &QNetworkAccessManager::finished, this, &news::finished);
+    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, [](QTreeWidgetItem *item) { QDesktopServices::openUrl(QUrl(item->text(1))); });
     this->fetch();
 }
 
@@ -62,11 +61,11 @@ void news::get(const QUrl &url)
      //   currentReply->disconnect(this);
      //   currentReply->deleteLater();
     //}
+    ui->progressBar->show();
     currentReply = manager.get(QNetworkRequest(this->url));
     if (currentReply) {
         connect(currentReply, &QNetworkReply::readyRead, this, &news::consumeData);
         connect(currentReply, &QNetworkReply::errorOccurred, this, &news::error);
-
     }
     xml.setDevice(currentReply);
 }
@@ -106,5 +105,6 @@ void news::parseXml()
     }
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
         qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
+    ui->progressBar->hide();
 
 }

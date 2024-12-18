@@ -22,7 +22,7 @@ public:
 private:
     QJsonObject data;
     Ui::viewStats *ui;
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
 
 private slots:
     void loadData();

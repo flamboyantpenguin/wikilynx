@@ -9,8 +9,11 @@
 #include <QJsonDocument>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QDesktopServices>
 #include <QNetworkAccessManager>
 
+
+#include "levels.h"
 
 namespace Ui {
 class getLevel;
@@ -27,7 +30,7 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event) override {
-        emit this->exitWindow();
+        emit this->closed();
         QDialog::closeEvent(event);
     }
 
@@ -35,14 +38,16 @@ private:
     int updateTable();
     QJsonObject cfg, iData, levelData;
     Ui::getLevel *ui;
-    QString dirName = ".wLnKMeow";
+    QString dirName = ".wikilynx";
 
 private slots:
+    void launchHelp();
     void setEditStatus();
-    void downloadLevel();
+    void deleteLevel(QString);
+    void downloadLevel(QString);
 
 signals:
-    void exitWindow();
+    void closed();
 };
 
 #endif // GETLEVEL_H

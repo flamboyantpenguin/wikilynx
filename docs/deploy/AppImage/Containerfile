@@ -1,0 +1,18 @@
+FROM debian:11
+
+RUN apt update && apt upgrade -y
+
+RUN apt install git patchelf fuse file libfuse2 wget zip -y
+RUN apt install libgl1-mesa-dev qtwayland5 qtwayland5-private-dev qtwayland5-dev-tools qtwebengine5-dev cmake libfuse2 g++ qtmultimedia5-dev libqt5multimedia5-plugins -y
+
+RUN groupadd fuse
+RUN usermod -a -G fuse root
+
+ADD AppRun /root
+ADD deploy /root
+
+WORKDIR /root
+
+VOLUME /opt/output
+
+CMD ["bash", "./deploy"]

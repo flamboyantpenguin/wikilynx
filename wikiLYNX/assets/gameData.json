@@ -1,274 +1,82 @@
 {
     "info": {
         "allowReference": 0,
-        "totemOfUndying": 0
+        "totemOfUndying": 0,
+        "version": "v1.5.0",
+        "iconTheme": "green"
+    },
+    "base": {
+        "version": "v1.5.0",
+        "availableIconThemes": "green#75fb4c#2854c5,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
     },
     "data": {
         "flyingduck": {
-            "checkpoints": 5,
+            "wiki?": 1,
             "difficulty": "easy",
             "time": 600,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/7_Up",
-                    "name": "7 UP"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/United_States",
-                    "name": "United States"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Federal_government_of_the_United_States",
-                    "name": "Federal Goverment of the United States"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/President_of_the_United_States",
-                    "name": "President of the United States"
-                },
-                "4": {
-                    "url": "https://en.wikipedia.org/wiki/Joe_Biden",
-                    "name": "Joe Biden"
-                }
-            }
+            "clicks" : 7,
+            "levels": "7_Up United_States Federal_government_of_the_United_States President_of_the_United_States Joe_Biden"
         },
         "pingus": {
-            "checkpoints": 4,
+            "wiki?": 1,
             "difficulty": "easy",
             "time": 600,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Shah_Rukh_Khan",
-                    "name": "Shah_Rukh_Khan"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Taj_Mahal",
-                    "name": "Taj_Mahal"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Roman_Empire",
-                    "name": "Roman_Empire"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/Solar_System",
-                    "name": "Solar_System"
-                }
-            }
+            "clicks" : 0,
+            "levels": "Shah_Rukh_Khan Taj_Mahal Roman_Empire Solar_System"
         },
         "cattomosfet!": {
-            "checkpoints": 5,
+            "wiki?": 1,
             "difficulty": "medium",
             "time": 900,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Paper",
-                    "name": "Paper"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Pollution",
-                    "name": "Pollution"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Snow_White_and_the_Seven_Dwarfs_(1937_film)",
-                    "name": "Snow_White_and_the_Seven_Dwarfs_(1937_film)"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/Isaac_Newton",
-                    "name": "Sir Isaac Newton"
-                },
-                "4": {
-                    "url": "https://en.wikipedia.org/wiki/Diode",
-                    "name": "Diode"
-                }
-            }
+            "clicks" : 0,
+            "levels": "Paper Pollution Snow_White_and_the_Seven_Dwarfs_(1937_film) Isaac_Newton Diode"
         },
         "blisteringbarnacles!": {
-            "checkpoints": 4,
+            "wiki?": 1,
             "difficulty": "hard",
             "time": 850,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Nintendo",
-                    "name": "Nintendo"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/ARCH_Motorcycle",
-                    "name": "ARCH_Motorcycle"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/V8_engine",
-                    "name": "V8 Engine"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/Captain_Haddock",
-                    "name": "Captain Haddock"
-                }
-            }
+            "levels": "Nintendo ARCH_Motorcycle V8_engine Captain_Haddock"
         },
         "debug": {
-            "checkpoints": 3,
+            "wiki?": 1,
             "difficulty": "debug",
             "time": 10,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Pencil",
-                    "name": "Pencil"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Paper",
-                    "name": "Paper"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Cat",
-                    "name": "Cat"
-                }
-            }
+            "levels": "Pencil Paper Cat"
         },
         "youseewhatyouthinkyousee": {
-            "checkpoints": 2,
+            "wiki?": 1,
             "difficulty": "bonus",
             "time": 1200,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Cat",
-                    "name": "Cat"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/MOSFET",
-                    "name": "MOSFET"
-                }
-            }
+            "clicks" : 0,
+            "levels": "Cat MOSFET"
         },
-        "maytheforcebewithyou": {
-            "checkpoints": 3,
+        "tranquility": {
+            "wiki?": 1,
             "difficulty": "medium",
             "time": 800,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/MrBeast",
-                    "name": "MrBeast"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Studio_Ghibli",
-                    "name": "Studio Ghiblo"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Light",
-                    "name": "Light"
-                }
-            }
+            "clicks" : 0,
+            "levels": "Silence Studio_Ghibli Light"
         },
         "toinfinityandbeyond": {
-            "checkpoints": 5,
+            "wiki?": 1,
             "difficulty": "easy",
             "time": 1000,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Buzz_Lightyear",
-                    "name": "Buzz Lightyear"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Apollo_11",
-                    "name": "Apollo_11"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas",
-                    "name": "Grand Theft Auto: San Andreas"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/The_Good,_the_Bad_and_the_Ugly",
-                    "name": "The Good, the Bad and the Ugly"
-                },
-                "4": {
-                    "url": "https://en.wikipedia.org/wiki/Mandalorians",
-                    "name": "Mandalorians"
-                }
-            }
+            "clicks" : 100,
+            "levels": "Buzz_Lightyear Apollo_11 Grand_Theft_Auto:_San_Andreas The_Good,_the_Bad_and_the_Ugly Mandalorians"
         },
         "wikiLYNX?": {
-            "checkpoints": 12,
-            "difficulty": "medium",
+            "wiki?": 1,
+            "difficulty": "hard",
             "time": 1200,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Wikipedia",
-                    "name": "Wikipedia"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Qt_(software)",
-                    "name": "Qt (software)"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Chromium_(web_browser)",
-                    "name": "Chromium (web browser)"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/University",
-                    "name": "University"
-                },
-                "4": {
-                    "url": "https://en.wikipedia.org/wiki/Speedrunning",
-                    "name": "Speedrunning"
-                },
-                "5": {
-                    "url": "https://en.wikipedia.org/wiki/Arch_Linux",
-                    "name": "Arch Linux"
-                },
-                "6": {
-                    "url": "https://en.wikipedia.org/wiki/Nokia",
-                    "name": "Nokia"
-                },
-                "7": {
-                    "url": "https://en.wikipedia.org/wiki/Rajagiri_School_of_Engineering_%26_Technology_(Autonomous)",
-                    "name": "RSET (Autonomous)"
-                },
-                "8": {
-                    "url": "https://en.wikipedia.org/wiki/Love",
-                    "name": "Love"
-                },
-                "9": {
-                    "url": "https://en.wikipedia.org/wiki/C%2B%2B",
-                    "name": "C++"
-                },
-                "10": {
-                    "url": "https://en.wikipedia.org/wiki/Team",
-                    "name": "Team"
-                },
-                "11": {
-                    "url": "https://en.wikipedia.org/wiki/Optimus_Prime",
-                    "name": "Optimus Prime"
-                }
-            }
+            "clicks" : 100,
+            "levels": "Wikipedia Qt_(software) Chromium_(web_browser) University Speedrunning Arch_Linux Nokia Rajagiri_School_of_Engineering_%26_Technology_(Autonomous) Love C%2B%2B Team Optimus_Prime"
         },
         "star": {
-            "checkpoints": 6,
+            "wiki?": 1,
             "difficulty": "special",
             "time": 1200,
-            "data": {
-                "0": {
-                    "url": "https://en.wikipedia.org/wiki/Star",
-                    "name": "Star"
-                },
-                "1": {
-                    "url": "https://en.wikipedia.org/wiki/Classroom",
-                    "name": "Classroom"
-                },
-                "2": {
-                    "url": "https://en.wikipedia.org/wiki/Notebook",
-                    "name": "Notebook"
-                },
-                "3": {
-                    "url": "https://en.wikipedia.org/wiki/Smile",
-                    "name": "Smile"
-                },
-                "4": {
-                    "url": "https://en.wikipedia.org/wiki/Letter_(message)",
-                    "name": "Letter"
-                },
-                "5": {
-                    "url": "https://en.wikipedia.org/wiki/Love",
-                    "name": "Love"
-                }
-            }
+            "clicks" : 100,
+            "levels": "Star Classroom Eye_contact Smile Letter_(message) Love"
         }
     }
 }

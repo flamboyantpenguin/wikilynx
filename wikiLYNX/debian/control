@@ -2,13 +2,13 @@ Source: wikilynx
 Section: games
 Priority: optional
 Maintainer: Penguin <penguin@pcland.co.in>
-Build-Depends: debhelper-compat ( =13), qt6-webengine-dev, cmake
+Build-Depends: debhelper-compat ( =11), qtmultimedia5-dev, libqt5multimedia5-plugins, build-essential, cmake, qtwayland5, qtwayland5-private-dev, qtwayland5-dev-tools
 Standards-Version: 4.6.0
 Homepage: https://github.com/flamboyantpenguin/wikilynx
 
 Package: wikilynx
 Architecture: any
-Depends: libqt6webenginewidgets6, libqt6widgets6, libqt6svg6
+Depends: libqt5webenginewidgets5, libqt5widgets5, libqt5svg5, libqt5multimedia5
 Description: Qt C++ app to play Wikipedia speedruns the right way
         A simple app based on Qt Webengine with some rules and features
         to play Wikipedia speedruns

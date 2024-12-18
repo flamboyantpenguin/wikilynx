@@ -24,9 +24,9 @@ public:
 protected:
     void closeEvent(QCloseEvent *event) override
     {
-        *(this->dontKillMe) = 1;
+        if (this->dontKillMe != nullptr) *(this->dontKillMe) = 1;
         QDialog::closeEvent(event);
-        *(this->dontKillMe) = 0;
+        if (this->dontKillMe != nullptr) *(this->dontKillMe) = 0;
     }
 
 private:

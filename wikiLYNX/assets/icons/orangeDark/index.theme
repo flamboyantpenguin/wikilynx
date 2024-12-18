@@ -1,0 +1,10 @@
+[Icon Theme]
+Name=orangeDark
+Comment=Material Icons from Google for Dark Themes
+
+Directories=main
+
+[main]
+Size=24
+Context=Actions
+Type=Fixed

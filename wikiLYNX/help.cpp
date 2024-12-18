@@ -13,3 +13,8 @@ help::~help()
 {
     delete ui;
 }
+
+
+void help::initialise(QString url) {
+    ui->webEngineView->load(QUrl::fromUserInput(url));
+}

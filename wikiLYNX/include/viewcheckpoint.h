@@ -2,7 +2,6 @@
 #define VIEWCHECKPOINT_H
 
 #include <QDialog>
-#include <QJsonObject>
 #include <QCloseEvent>
 #include <QHeaderView>
 
@@ -18,7 +17,7 @@ public:
     explicit viewcheckpoint(QWidget *parent = nullptr);
     ~viewcheckpoint();
     int *dontKillMe;
-    void initialise(QJsonObject*, int*, int*);
+    void initialise(QStringList*, int*);
 
 protected:
     void closeEvent(QCloseEvent *event) override

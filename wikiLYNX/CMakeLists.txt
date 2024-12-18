@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(wikilynx VERSION 1.3.0 LANGUAGES CXX)
+project(wikilynx VERSION 1.5.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS WebEngineWidgets)
 
 if (MSVC)
@@ -25,6 +25,8 @@ set(PROJECT_SOURCES
         include/gamewindow.h
         ui/gamewindow.ui
         assets/assets.qrc
+
+
         ui/welcome.ui include/welcome.h welcome.cpp
         viewhistory.cpp include/viewhistory.h ui/viewhistory.ui
         viewcheckpoint.cpp include/viewcheckpoint.h ui/viewcheckpoint.ui
@@ -32,12 +34,15 @@ set(PROJECT_SOURCES
         ui/about.ui about.cpp include/about.h
         ui/help.ui help.cpp include/help.h
         ui/terms.ui terms.cpp include/terms.h
-        ui/editlevel.ui editlevel.cpp include/editlevel.h
-        ui/editchk.ui editchk.cpp include/editchk.h
+        ui/levelmanager.ui levelmanager.cpp include/levelmanager.h
+        ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
         ui/viewstats.ui viewstats.cpp include/viewstats.h
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
         include/news.h news.cpp ui/news.ui
+        include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
+        include/levels.h levels.cpp ui/levels.ui
+        include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
 
 )
 
@@ -66,7 +71,7 @@ else()
 endif()
 
 
-target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt::WebEngineWidgets)
+target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
