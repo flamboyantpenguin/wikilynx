@@ -25,7 +25,7 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
     connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
-    connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
+    connect(ui->passcodeInput, SIGNAL(activated(int)), this, SLOT(showLevelInfo(int)));
 
     ui->initButton->setFocus();
 
@@ -79,7 +79,7 @@ bool welcomeUI::isDarkTheme() {
 }
 
 
-void welcomeUI::showLevelInfo() {
+void welcomeUI::showLevelInfo(int s) {
 
     QString lName = ui->passcodeInput->currentText();
     auto level = data[lName].toObject();
@@ -334,7 +334,6 @@ void welcomeUI::showAbout() {
 
 void checkUpdateWorker::process() { // Process. Start processing data.
 
-    int flg;
     QNetworkAccessManager manager;
     QUrl url("https://wikipedia.org");
     QNetworkReply *reply = manager.get(QNetworkRequest(url));

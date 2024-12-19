@@ -69,7 +69,7 @@ private slots:
     void checkCustom();
     void addCustom();
     void genRandomLevel();
-    void showLevelInfo();
+    void showLevelInfo(int s = 0);
     void showRules();
     void checkWorldEvent();
     void launchStatusOverview();

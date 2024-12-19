@@ -30,7 +30,7 @@ make DESTDIR=%{buildroot} install  # Use make install
 
 # GUI
 install -D -m 0644 ../docs/desktop/wikilynx.desktop %{buildroot}/usr/share/applications/wikilynx.desktop
-install -D -m 0644 ../docs/desktop/wikilynx.appdata.xml %{buildroot}/usr/share/metainfo/org.dawn.wikilynx.appdata.xml
+install -D -m 0644 ../docs/desktop/org.dawn.wikilynx.appdata.xml %{buildroot}/usr/share/metainfo/org.dawn.wikilynx.appdata.xml
 install -D -m 0644 ./assets/images/wikiLYNX_logo.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/wikiLYNX_logo.svg
 
 

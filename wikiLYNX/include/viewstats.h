@@ -25,7 +25,7 @@ private:
     QString dirName = ".wikilynx";
 
 private slots:
-    void loadData();
+    void loadData(int s = 0);
 };
 
 #endif // VIEWSTATS_H
