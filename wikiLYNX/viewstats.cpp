@@ -7,7 +7,7 @@ viewStats::viewStats(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->closeButton, &QPushButton::clicked, this, &viewStats::close);
-    connect(ui->levelSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(loadData()));
+    connect(ui->levelSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(loadData(int)));
 }
 
 viewStats::~viewStats()
@@ -30,7 +30,7 @@ int viewStats::initialise() {
 }
 
 
-void viewStats::loadData() {
+void viewStats::loadData(int s) {
 
     auto level = ui->levelSelect->currentText();
 

@@ -11,7 +11,8 @@ welcomeUI::welcomeUI(QDialog *parent)
 
     ui->setupUi(this);
     ui->editLevelButton->setEnabled(false);
-
+    ui->genRandTxt->hide();
+    ui->genRandPrg->hide();
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
@@ -25,7 +26,7 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
     connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
-    connect(ui->passcodeInput, &QComboBox::currentIndexChanged, this, &welcomeUI::showLevelInfo);
+    connect(ui->passcodeInput, SIGNAL(activated(int)), this, SLOT(showLevelInfo(int)));
 
     ui->initButton->setFocus();
 
@@ -79,7 +80,7 @@ bool welcomeUI::isDarkTheme() {
 }
 
 
-void welcomeUI::showLevelInfo() {
+void welcomeUI::showLevelInfo(int s) {
 
     QString lName = ui->passcodeInput->currentText();
     auto level = data[lName].toObject();
@@ -251,13 +252,23 @@ void welcomeUI::addCustom() {
 
 
 void welcomeUI::genRandomLevel() {
+    ui->genRandTxt->show();
+    ui->genRandPrg->show();
+    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
+    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
+    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
     disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
     levelEditorDlg.genRandomLevel(&(this->data), "random");
     levelEditorDlg.showMaximized();
+    levelEditorDlg.hide();
     //levelEditorDlg.hide();
     ui->passcodeInput->addItem("random");
     ui->passcodeInput->setCurrentText("random");
+    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
     connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
+    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
+    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
+
 }
 
 
@@ -334,7 +345,6 @@ void welcomeUI::showAbout() {
 
 void checkUpdateWorker::process() { // Process. Start processing data.
 
-    int flg;
     QNetworkAccessManager manager;
     QUrl url("https://wikipedia.org");
     QNetworkReply *reply = manager.get(QNetworkRequest(url));

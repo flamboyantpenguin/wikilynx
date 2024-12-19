@@ -9,11 +9,9 @@ version=1.5.0-1
 wget --output-document v${ver}.zip "https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v${ver}.zip"
 unzip -o v${ver}.zip
 cd wikilynx-${ver}/wikiLYNX
-
-# Fix for Qt 6.2 or lower
-sed 's/::checkStateChanged/::stateChanged/g' -i welcome.cpp 
+sed 's/::checkStateChanged/::stateChanged/g' -i welcome.cpp
 sed 's/::checkStateChanged/::stateChanged/g' -i leveleditor.cpp
-sed 's/::currentIndexChanged()/::currentIndexChanged(int)/g' -i welcome.cpp
+
 
 # Build
 echo "yes" | debuild -us -uc

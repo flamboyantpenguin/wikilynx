@@ -6,9 +6,13 @@
 
 
 # Project Vars
-ARCH=$(uname -m)
 ver="1.5.0"
+ARCH=$(uname -m)
 
+arch=$(dpkg --print-architecture)
+if [ $arch =  "i386" ]; then ARCH="i386";arch="i686";
+elif [ $arch =  "armhf" ]; then ARCH="armhf";
+else arch=$ARCH; fi
 
 # Deploy vars
 export QMAKE=/usr/bin/qmake
@@ -57,7 +61,7 @@ prepareProject() {
     cp wikilynx $APPDIR/usr/bin
     cp ./assets/images/wikiLYNX_logo.svg $APPDIR/usr/share/icons/hicolor/scalable/apps
     cp ../docs/desktop/wikilynx.desktop $APPDIR/usr/share/applications
-    cp ../docs/desktop/wikilynx.appdata.xml $APPDIR/usr/share/metainfo
+    cp ../docs/desktop/org.dawn.wikilynx.appdata.xml $APPDIR/usr/share/metainfo
 
 
     cd $APPDIR/..
@@ -67,6 +71,7 @@ prepareProject() {
 
 
 # Deploy AppDir
+echo $ARCH $arch
 apt install kde-style-breeze -y
 downloadAppImagers
 prepareProject
@@ -81,7 +86,7 @@ bash -c "cp -r /usr/lib/$ARCH-linux-gnu/libssl* AppDir/usr/lib"
 bash -c "cp AppRun AppDir/AppRun"
 
 # Make AppImage
-./appimagetool-$ARCH.AppImage AppDir
+./appimagetool-$arch.AppImage AppDir
 
 # Copy to output volume
 cp wiki*.AppImage /opt/output
