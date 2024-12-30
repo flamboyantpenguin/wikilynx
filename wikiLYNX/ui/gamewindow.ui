@@ -22,6 +22,7 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -78,7 +79,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QTextBrowser" name="textBrowser">
+       <widget class="QTextBrowser" name="appLogo">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -116,7 +117,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:11pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#000000&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#000000&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/wikiLYNX_logo.svg&quot; width=&quot;90&quot; height=&quot;60&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="textInteractionFlags">
@@ -137,6 +138,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <family>Comfortaa</family>
           <pointsize>12</pointsize>
           <bold>false</bold>
+          <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
         <property name="toolTip">
@@ -150,6 +152,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
         <property name="textFormat">
          <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
         <property name="textInteractionFlags">
          <set>Qt::TextInteractionFlag::NoTextInteraction</set>
@@ -169,6 +174,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <family>Courier Prime</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
+          <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
         <property name="toolTip">
@@ -181,7 +187,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <string>Counter</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
         <property name="textInteractionFlags">
          <set>Qt::TextInteractionFlag::NoTextInteraction</set>
@@ -200,6 +206,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <font>
           <family>Courier Prime</family>
           <bold>true</bold>
+          <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
         <property name="text">
@@ -317,7 +324,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>1010</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

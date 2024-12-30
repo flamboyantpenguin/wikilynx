@@ -1,7 +1,9 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 
+#include <QUrl>
 #include <QDialog>
+#include <QDesktopServices>
 
 #include "terms.h"
 
@@ -23,6 +25,8 @@ private:
 
 private slots:
     void showTerms();
+    bool isDarkTheme();
+    void launchFeedback();
 };
 
 #endif // ABOUT_H

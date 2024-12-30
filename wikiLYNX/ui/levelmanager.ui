@@ -28,6 +28,7 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -49,6 +50,7 @@
        <pointsize>34</pointsize>
        <italic>false</italic>
        <bold>false</bold>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -172,7 +174,10 @@
           <string/>
          </property>
          <property name="text">
-          <string>Load</string>
+          <string>Import</string>
+         </property>
+         <property name="icon">
+          <iconset theme="import"/>
          </property>
          <property name="checkable">
           <bool>false</bool>
@@ -202,6 +207,9 @@
          <property name="text">
           <string>Export</string>
          </property>
+         <property name="icon">
+          <iconset theme="export"/>
+         </property>
         </widget>
        </item>
        <item>
@@ -217,6 +225,7 @@
            <family>Comfortaa</family>
            <pointsize>10</pointsize>
            <bold>false</bold>
+           <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
          <property name="text">

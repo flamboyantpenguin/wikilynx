@@ -10,12 +10,26 @@ news::news(QWidget *parent)
     ui->progressBar->hide();
     ui->treeWidget->setHeaderLabels(QStringList { tr("Title"), tr("Link"), tr("Date"), tr("Description") });
     ui->treeWidget->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    QString logo = ui->appLogo->document()->toHtml();
+    if (theme == "Light") logo.replace("#181818", "#ffffff");
+    ui->appLogo->setHtml(logo);
 }
 
 
 news::~news()
 {
     delete ui;
+}
+
+
+bool news::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
 

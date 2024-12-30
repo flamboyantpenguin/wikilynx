@@ -31,6 +31,7 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -48,6 +49,7 @@
        <family>Comfortaa</family>
        <pointsize>32</pointsize>
        <bold>false</bold>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -342,7 +344,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QTextBrowser" name="textBrowser">
+      <widget class="QTextBrowser" name="appLogo">
        <property name="maximumSize">
         <size>
          <width>111</width>
@@ -455,6 +457,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
              <family>Noto Sans</family>
              <pointsize>10</pointsize>
              <bold>false</bold>
+             <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
            </property>
            <property name="toolTip">

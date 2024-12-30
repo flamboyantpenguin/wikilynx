@@ -16,5 +16,5 @@ whatsNew::~whatsNew()
 }
 
 void whatsNew::launchInfo() {
-    QDesktopServices::openUrl(QUrl::fromUserInput("https://github.com/flamboyantpenguin/wikilynx/releases/v1.5.0"));
+    QDesktopServices::openUrl(QUrl::fromUserInput("https://github.com/flamboyantpenguin/wikilynx/releases/v1.5.5"));
 }

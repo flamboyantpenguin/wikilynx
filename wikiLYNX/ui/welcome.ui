@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>452</height>
+    <width>530</width>
+    <height>481</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,20 +21,21 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>538</width>
-    <height>452</height>
+    <width>530</width>
+    <height>481</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>538</width>
-    <height>452</height>
+    <width>530</width>
+    <height>481</height>
    </size>
   </property>
   <property name="font">
    <font>
     <family>Comfortaa</family>
     <stylestrategy>PreferDefault</stylestrategy>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -83,7 +84,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#000000&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#181818&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/wikiLYNX_logo.svg&quot; width=&quot;90&quot; height=&quot;70&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
@@ -107,7 +108,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <family>Courier Prime</family>
          <pointsize>48</pointsize>
          <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>A simple app to play Wikipedia Speedruns the right way </string>
        </property>
        <property name="text">
         <string>wikiLYNX</string>
@@ -121,6 +126,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
    <item>
     <widget class="QLabel" name="label0">
+     <property name="toolTip">
+      <string/>
+     </property>
      <property name="text">
       <string>Welcome to wikiLYNX!</string>
      </property>
@@ -128,9 +136,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
-     <property name="cursor">
-      <cursorShape>CrossCursor</cursorShape>
-     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -148,13 +153,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <font>
            <family>Courier Prime</family>
            <stylestrategy>PreferDefault</stylestrategy>
+           <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="toolTip">
-          <string>Enter your name</string>
+          <string>Enter your name for Leaderboard entries </string>
          </property>
          <property name="inputMask">
           <string/>
@@ -176,82 +182,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,1,0,0" columnminimumwidth="0,1,0,0">
+          <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0">
            <property name="spacing">
             <number>6</number>
            </property>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Checkpoints: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label1">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::LeftToRight</enum>
-             </property>
-             <property name="autoFillBackground">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Level: </string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="chk">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier Prime</family>
-               <stylestrategy>PreferDefault</stylestrategy>
-              </font>
-             </property>
+           <item row="3" column="1">
+            <widget class="QProgressBar" name="genRandPrg">
              <property name="toolTip">
-              <string>Number of checkpoints</string>
+              <string>A random level is being generated, please wait</string>
              </property>
-             <property name="text">
-              <string>number of checkpoints</string>
+             <property name="maximum">
+              <number>0</number>
+             </property>
+             <property name="value">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -279,59 +223,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <font>
                <family>Courier Prime</family>
                <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
              </property>
              <property name="toolTip">
-              <string>Level difficulty</string>
+              <string>Difficulty of the selected level</string>
              </property>
              <property name="text">
               <string>level difficulty</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="passcodeInput">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier Prime</family>
-               <stylestrategy>PreferDefault</stylestrategy>
-              </font>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="toolTip">
-              <string>Select Level</string>
-             </property>
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-             <property name="insertPolicy">
-              <enum>QComboBox::InsertPolicy::InsertAlphabetically</enum>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLengthWithIcon</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Select Level</string>
              </property>
             </widget>
            </item>
@@ -372,28 +271,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
-            <widget class="QPushButton" name="genRandomLevel">
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="maximumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
-             <property name="toolTip">
-              <string>Generate a Random Level. Name of the level will be `random`</string>
-             </property>
              <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset theme="shuffle"/>
+              <string>Checkpoints: </string>
              </property>
             </widget>
            </item>
@@ -422,20 +315,117 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </property>
             </widget>
            </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="passcodeInput">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Courier Prime</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
+             </property>
+             <property name="acceptDrops">
+              <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string>Select inbuilt or custom levels</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <property name="insertPolicy">
+              <enum>QComboBox::InsertPolicy::InsertAlphabetically</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLengthWithIcon</enum>
+             </property>
+             <property name="placeholderText">
+              <string>Select Level</string>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="0">
             <widget class="QLabel" name="genRandTxt">
+             <property name="toolTip">
+              <string>A random level is being generated, please wait</string>
+             </property>
              <property name="text">
               <string>Generating Random...</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QProgressBar" name="genRandPrg">
-             <property name="maximum">
-              <number>0</number>
+           <item row="2" column="1">
+            <widget class="QLabel" name="chk">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="value">
-              <number>0</number>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Courier Prime</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Number of checkpoints of the selected level</string>
+             </property>
+             <property name="text">
+              <string>number of checkpoints</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Level: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -461,6 +451,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Fixed</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
@@ -472,7 +465,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <item>
         <layout class="QHBoxLayout" name="layout_playFooter">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="tip">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -497,6 +490,31 @@ li.checked::marker { content: &quot;\2612&quot;; }
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="genRandomLevel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>1000000</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Play a random level!</string>
+           </property>
+           <property name="text">
+            <string>Are you feeling lucky?</string>
+           </property>
+           <property name="icon">
+            <iconset theme="star"/>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="initButton">
            <property name="minimumSize">
             <size>
@@ -514,10 +532,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
             <font>
              <family>Courier Prime</family>
              <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
            </property>
            <property name="toolTip">
-            <string>Start Game</string>
+            <string>Start a Game of the selected level </string>
            </property>
            <property name="text">
             <string>INIT!</string>
@@ -544,22 +563,40 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QCheckBox" name="allowSitesToggle">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this allows you to access sites outside wikipedia.org in the game. By default, accessing sites outside wikipedia.org resets the browser URL to the current checkpoint. Turn this on if you're playing Non-Wikipedia levels &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
-          <string>Allow other sites outside Wikipedia (Access to reference links) </string>
+          <string>Allow external sites (Outside wikipedia.org)</string>
+         </property>
+         <property name="icon">
+          <iconset theme="globe"/>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="killToggle">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, using Alt + Tab or other methods to switch game window during a game session ends the application abruptly. This is implemented as a rule to prevent cheating. You can enable this checkbox if this feature concerns you &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string>Allow changing game window during game session</string>
+         </property>
+         <property name="icon">
+          <iconset theme="tab"/>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="keyboardToggle">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, keyboard is disabled while playing a game. You can disable keyboard lock by enabling this checkbox &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
-          <string>Enable Keyboard</string>
+          <string>Enable keyboard during game session</string>
+         </property>
+         <property name="icon">
+          <iconset theme="keyboard"/>
          </property>
         </widget>
        </item>
@@ -567,6 +604,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="1" column="1">
           <widget class="QComboBox" name="iconThemeSelect">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an icon theme &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -681,6 +721,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <height>61</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Project powered by DAWN</string>
+       </property>
        <property name="inputMethodHints">
         <set>Qt::InputMethodHint::ImhNone</set>
        </property>
@@ -700,7 +743,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#161616&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#181818&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/DAWN.svg&quot; width=&quot;100&quot; height=&quot;50&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textInteractionFlags">
@@ -736,7 +779,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </size>
        </property>
        <property name="toolTip">
-        <string>View Leaderboard</string>
+        <string>View Latest News about the game</string>
        </property>
        <property name="text">
         <string>News</string>
@@ -777,7 +820,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <cursorShape>WhatsThisCursor</cursorShape>
        </property>
        <property name="toolTip">
-        <string>Learn how to play</string>
+        <string>Learn how to play the game</string>
        </property>
        <property name="text">
         <string>Help</string>
@@ -794,9 +837,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <width>16777215</width>
          <height>16777215</height>
         </size>
-       </property>
-       <property name="cursor">
-        <cursorShape>WhatsThisCursor</cursorShape>
        </property>
        <property name="toolTip">
         <string>About wikiLYNX</string>
@@ -859,7 +899,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <font>
          <family>Courier Prime</family>
          <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>Network and Update Status. Click on the icon indicator to learn more </string>
        </property>
        <property name="text">
         <string>Loading</string>
@@ -884,8 +928,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </item>
      <item>
       <widget class="QLabel" name="version">
+       <property name="font">
+        <font>
+         <family>Courier Prime</family>
+         <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>Game Version</string>
+       </property>
        <property name="text">
-        <string>Version: 1.5.0 (Stable)</string>
+        <string>Version: 1.5.5 (Stable)</string>
        </property>
       </widget>
      </item>

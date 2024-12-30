@@ -46,9 +46,26 @@ public:
     QString theme;
     QJsonObject data, cfg, base;
 
+private:
+
     std::map<QString, QString> worldEvents = {
         { "2512", "christmas|Merry Christmas!" },
         { "0101", "newyear|Happy New Year!" }
+    };
+
+    QStringList tips = {
+        "Meow?",
+        "May the force be with you!",
+        "Welcome to wikiLYNX!",
+        "Did you know that this game was developed for a college event?",
+        "Contribute to this project on GitHub!",
+        "Did you find all the hidden easter eggs? ;)",
+        "Blondie is a reference to a certain Western Cowboy film released in 1966",
+        "This game is a bundle of messages for the world",
+        "Make this world a better place to live",
+        "Show off your custom levels in GitHub Discussions",
+        "Try random generated levels for a quick challenge!",
+        "Word of Advice: Don't code when you're tired or when your mind is in chaos!"
     };
 
 
@@ -111,8 +128,8 @@ class checkUpdateWorker : public QObject  {
     Q_OBJECT
 
 public:
-    std::string lVersion = "1.5.0-1";
-    std::string version = "1.5.0-1";
+    std::string lVersion = "1.5.5-1";
+    std::string version = "1.5.5-1";
 
 public slots:
     void process();

@@ -28,6 +28,7 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -41,7 +42,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QTextBrowser" name="logo">
+      <widget class="QTextBrowser" name="appLogo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -103,6 +104,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <family>Courier Prime</family>
          <pointsize>38</pointsize>
          <bold>false</bold>
+         <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
        <property name="text">
@@ -117,11 +119,26 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab_2">
+     <widget class="QWidget" name="privacyPolicyTab">
       <attribute name="title">
        <string>Privacy Policy</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QTextBrowser" name="privacy">
          <property name="html">
@@ -143,6 +160,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <string>License</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_8">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QTabWidget" name="MainView">
          <property name="sizePolicy">
@@ -177,6 +209,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>License</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="licenseView">
              <property name="inputMethodHints">
@@ -194,6 +241,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>Copying</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="copyingView">
              <property name="inputMethodHints">
@@ -211,6 +273,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>QtWebEngine</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="webEngineLicenseView">
              <property name="inputMethodHints">
@@ -228,6 +305,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>NotoSans OFL</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="notoOFL">
              <property name="inputMethodHints">
@@ -245,6 +337,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>CourierPrime OFL</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="courierPrimeOFL">
              <property name="inputMethodHints">
@@ -262,6 +369,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>Comfortaa OFL</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_10">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="comfortaaOFL">
              <property name="inputMethodHints">
@@ -279,6 +401,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <string>Material Icons</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QTextBrowser" name="materialLicenseView">
              <property name="inputMethodHints">

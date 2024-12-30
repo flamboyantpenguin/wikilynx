@@ -18,12 +18,13 @@ class news : public QDialog
     Q_OBJECT
 
 public:
-    QUrl url = QUrl::fromUserInput("https://feeds.pcland.co.in/Projects/wikiLYNX/RSS.xml");
+    QUrl url = QUrl::fromUserInput("https://feeds.dawn.org.in/Projects/wikiLYNX/RSS.xml");
     explicit news(QWidget *parent = nullptr);
     ~news();
 
 private:
     Ui::news *ui;
+    bool isDarkTheme();
     void parseXml();
     void get(const QUrl &url);
 

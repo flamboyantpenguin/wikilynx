@@ -56,6 +56,7 @@ protected:
 private slots:
     void showStats();
     void viewhistory();
+    bool isDarkTheme();
     void launchFeedBack();
 
 signals:

@@ -28,6 +28,7 @@
   <property name="font">
    <font>
     <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -50,6 +51,7 @@
       <font>
        <family>Courier Prime</family>
        <bold>true</bold>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -162,6 +164,7 @@
         <font>
          <family>Courier Prime</family>
          <bold>true</bold>
+         <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
        <property name="text">
@@ -179,7 +182,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>archives.pcland.co.in (Updates, News, Levels)</string>
+        <string>dawn.org.in (Updates, News, Levels)</string>
        </property>
       </widget>
      </item>
@@ -225,7 +228,7 @@
       </widget>
      </item>
      <item row="6" column="0">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="versionHelper">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -335,7 +338,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Version 1.5.0-1 (Stable)</string>
+        <string>Version 1.5.5-1 (Stable)</string>
        </property>
        <property name="flat">
         <bool>true</bool>

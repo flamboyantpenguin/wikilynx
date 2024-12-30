@@ -62,6 +62,7 @@ private:
 private slots:
     void playSound(QString sound);
     void launchLogs();
+    bool isDarkTheme();
     void viewCheckPoints();
     int missionAccomplished();
     int missionFailed(QString message);

@@ -22,6 +22,9 @@
         <file>info/PRIVACY.txt</file>
         <file>fonts/Comfortaa_OFL.txt</file>
         <file>fonts/Comfortaa-VariableFont_wght.ttf</file>
+        <file>images/wikiLYNX_logo.ico</file>
+        <file>images/DAWN_Dark.svg</file>
+        <file>images/DAWN_Light.svg</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>
@@ -447,5 +450,89 @@
         <file>icons/nordDark/main/shuffle.svg</file>
         <file>icons/nordLight/main/back.svg</file>
         <file>icons/nordLight/main/shuffle.svg</file>
+        <file>icons/nordDark/main/star.svg</file>
+        <file>icons/nordLight/main/star.svg</file>
+        <file>icons/greenDark/main/star.svg</file>
+        <file>icons/greenLight/main/star.svg</file>
+        <file>icons/blueDark/main/star.svg</file>
+        <file>icons/blueLight/main/star.svg</file>
+        <file>icons/redDark/main/star.svg</file>
+        <file>icons/redLight/main/star.svg</file>
+        <file>icons/yellowDark/main/star.svg</file>
+        <file>icons/yellowLight/main/star.svg</file>
+        <file>icons/orangeDark/main/star.svg</file>
+        <file>icons/orangeLight/main/star.svg</file>
+        <file>icons/monochromeDark/main/star.svg</file>
+        <file>icons/monochromeLight/main/star.svg</file>
+        <file>icons/greenDark/main/import.svg</file>
+        <file>icons/greenLight/main/import.svg</file>
+        <file>icons/blueDark/main/import.svg</file>
+        <file>icons/blueLight/main/import.svg</file>
+        <file>icons/redDark/main/import.svg</file>
+        <file>icons/redLight/main/import.svg</file>
+        <file>icons/yellowDark/main/import.svg</file>
+        <file>icons/yellowLight/main/import.svg</file>
+        <file>icons/orangeDark/main/import.svg</file>
+        <file>icons/orangeLight/main/import.svg</file>
+        <file>icons/nordDark/main/import.svg</file>
+        <file>icons/nordLight/main/import.svg</file>
+        <file>icons/monochromeDark/main/import.svg</file>
+        <file>icons/monochromeLight/main/import.svg</file>
+        <file>icons/greenDark/main/export.svg</file>
+        <file>icons/greenLight/main/export.svg</file>
+        <file>icons/blueDark/main/export.svg</file>
+        <file>icons/blueLight/main/export.svg</file>
+        <file>icons/redDark/main/export.svg</file>
+        <file>icons/redLight/main/export.svg</file>
+        <file>icons/yellowDark/main/export.svg</file>
+        <file>icons/yellowLight/main/export.svg</file>
+        <file>icons/orangeDark/main/export.svg</file>
+        <file>icons/orangeLight/main/export.svg</file>
+        <file>icons/nordDark/main/export.svg</file>
+        <file>icons/nordLight/main/export.svg</file>
+        <file>icons/monochromeDark/main/export.svg</file>
+        <file>icons/monochromeLight/main/export.svg</file>
+        <file>icons/greenDark/main/globe.svg</file>
+        <file>icons/greenLight/main/globe.svg</file>
+        <file>icons/blueDark/main/globe.svg</file>
+        <file>icons/blueLight/main/globe.svg</file>
+        <file>icons/redDark/main/globe.svg</file>
+        <file>icons/redLight/main/globe.svg</file>
+        <file>icons/yellowDark/main/globe.svg</file>
+        <file>icons/yellowLight/main/globe.svg</file>
+        <file>icons/orangeDark/main/globe.svg</file>
+        <file>icons/orangeLight/main/globe.svg</file>
+        <file>icons/nordDark/main/globe.svg</file>
+        <file>icons/nordLight/main/globe.svg</file>
+        <file>icons/monochromeDark/main/globe.svg</file>
+        <file>icons/monochromeLight/main/globe.svg</file>
+        <file>icons/greenDark/main/keyboard.svg</file>
+        <file>icons/greenLight/main/keyboard.svg</file>
+        <file>icons/blueDark/main/keyboard.svg</file>
+        <file>icons/blueLight/main/keyboard.svg</file>
+        <file>icons/redDark/main/keyboard.svg</file>
+        <file>icons/redLight/main/keyboard.svg</file>
+        <file>icons/yellowDark/main/keyboard.svg</file>
+        <file>icons/yellowLight/main/keyboard.svg</file>
+        <file>icons/orangeDark/main/keyboard.svg</file>
+        <file>icons/orangeLight/main/keyboard.svg</file>
+        <file>icons/nordDark/main/keyboard.svg</file>
+        <file>icons/nordLight/main/keyboard.svg</file>
+        <file>icons/monochromeDark/main/keyboard.svg</file>
+        <file>icons/monochromeLight/main/keyboard.svg</file>
+        <file>icons/greenDark/main/tab.svg</file>
+        <file>icons/greenLight/main/tab.svg</file>
+        <file>icons/blueDark/main/tab.svg</file>
+        <file>icons/blueLight/main/tab.svg</file>
+        <file>icons/redDark/main/tab.svg</file>
+        <file>icons/redLight/main/tab.svg</file>
+        <file>icons/yellowDark/main/tab.svg</file>
+        <file>icons/yellowLight/main/tab.svg</file>
+        <file>icons/orangeDark/main/tab.svg</file>
+        <file>icons/orangeLight/main/tab.svg</file>
+        <file>icons/nordDark/main/tab.svg</file>
+        <file>icons/nordLight/main/tab.svg</file>
+        <file>icons/monochromeDark/main/tab.svg</file>
+        <file>icons/monochromeLight/main/tab.svg</file>
     </qresource>
 </RCC>

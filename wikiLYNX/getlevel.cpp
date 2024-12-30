@@ -12,6 +12,7 @@ getLevel::getLevel(QWidget *parent)
     connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
     connect(ui->helpButton, &QPushButton::clicked, this, &getLevel::launchHelp);
     connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
+
 }
 
 
@@ -35,7 +36,7 @@ int getLevel::initialise() {
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
 
-    QUrl url("https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels/.info");
+    QUrl url("https://archive.dawn.org.in/DAWN/Projects/wikiLYNX/levels/.info");
     QNetworkRequest request(url);
 
     QNetworkReply *reply = manager->get(request);
@@ -132,7 +133,7 @@ void getLevel::downloadLevel(QString code) {
 
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
-    QUrl url("https://archive.pcland.co.in/DAWN/Projects/wikiLYNX/levels/"+this->levelData[code].toObject()["fname"].toString()); // Replace with the actual URL
+    QUrl url("https://archive.dawn.org.in/DAWN/Projects/wikiLYNX/levels/"+this->levelData[code].toObject()["fname"].toString()); // Replace with the actual URL
     QNetworkRequest request(url);
 
     QNetworkReply *reply = manager->get(request);

@@ -29,6 +29,7 @@
    <font>
     <family>Comfortaa</family>
     <pointsize>10</pointsize>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -45,6 +46,7 @@
       <font>
        <family>Courier Prime</family>
        <pointsize>28</pointsize>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -76,6 +78,7 @@
         <font>
          <family>Noto Sans</family>
          <pointsize>10</pointsize>
+         <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
        <property name="text">
