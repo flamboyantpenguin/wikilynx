@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>org.dawn.wikilynx</id>
+  <id>in.org.dawn.wikilynx</id>
   <metadata_license>MIT</metadata_license>
   <launchable type="desktop-id">wikilynx.desktop</launchable>
   <name>wikiLYNX</name>
@@ -8,15 +8,21 @@
   <description>
     <p>
             wikiLYNX is a free and open source app to play Wikipedia speed-runs. 
-            Navigate your way to reach the article as quick as possible!
-        </p>
+            Navigate your way through articles and clear checkpoints to win the game!
+    </p>
   </description>
   <provides>
     <binary>wikilynx</binary>
  </provides>
-  <url type="homepage">https://github.com/flamboyantpenguin/wikilynx</url>
+  <url type="homepage">https://projects.dawn.org.in/wikilynx</url>
+  <url type="faq">https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-FAQs</url>
+  <url type="help">https://github.com/flamboyantpenguin/wikilynx/wiki</url>
+  <url type="donation">https://buymeacoffee.com/flamboyantpenguin</url>
+  <url type="contact">mailto:penguin@dawn.org.in</url>
+  <url type="vcs-browser">https://github.com/flamboyantpenguin/wikilynx</url>
   <url type="bugtracker">https://github.com/flamboyantpenguin/wikilynx/issues</url>
   <releases>
+    <release version="1.5.5" date="2025-01-01T16:42:14.702+05:30"/>
     <release version="1.5.0" date="2024-12-18T16:42:14.702+05:30"/>
   </releases>
   <content_rating type="oars-1.0" />

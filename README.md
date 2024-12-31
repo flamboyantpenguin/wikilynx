@@ -1,17 +1,17 @@
 # wikiLYNX
 
-A simple browser app made using Qt C++ to play wikipedia speedruns the right way. The project was initially made for the wikiLYNX event conducted by [@jonesrison](https://jonesrison.github.io) at Rajagiri School of Engineering and Technology, Ernakulam, Kerala. Documentation is being updated.
+A simple browser app made using Qt C++ to play wikipedia speedruns the right way. The project was initially made for the wikiLYNX event conducted by [@jonesrison](https://jonesrison.github.io) at Rajagiri School of Engineering and Technology, Ernakulam, Kerala. 
 
 ## Introduction
 
 ### Wikipedia Speed-runs
 
-Wikipedia, one of the world's largest online encyclopedia is sort of a universe of hyperlinks. Deviating from a main article we were supposed to research for our assignment/project, to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into game of Wikipedia speed-runs. The player will be given an initial Wikipedia article from which one should find another article, perhaps completely unrelated to the initial topic, only through hyperlinks in the page.
-This game though not probably recognised by any international organisation, is commonly known to folks among social media as Wikipedia speed-run. The first one to reach, will be the winner!
+Wikipedia, one of the world's largest online encyclopedia is a universe of hyperlinks. While researching for our assignments, deviating from a main article to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into the game of Wikipedia speed-runs. In this game, one has to navigate from one article to the other, perhaps completely unrelated, through hyperlinks in the page.  in the page. The game, though not probably recognised by any international organisation, is commonly known to folks among social media as Wikipedia speed-run. Wikipedia itself calls it [Wikiracing](https://wikipedia.org/wiki/wikiracing)
 
 ### wikiLYNX Game Browser
 
-Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Some of these rules can still be disabled in this app, however we apply these rules by default. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends. The app is a simple C++ app based on Qt WebEngine.
+Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Do note that some of these rules can still be disabled in this app if you wish. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends. The app is a simple C++ app based on Qt WebEngine.
+
 If one happens to be someone interested in the game, one is invited to play the game and contribute to the development of this project.
 
 ### How to Play
@@ -62,7 +62,7 @@ wikiLYNX is made using Qt6 WebEngine. As of now the source is compatible for Win
 
 To compile this project, you need to have the following components installed in your system.
 
-- Qt6
+- Qt6/Qt5
   - Qt WebEngine
   - Qt Positioning
   - Qt WebChannel
@@ -100,9 +100,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.5.0
+wikiLYNX 1.5.5
 
-Last Updated: 18-12-2024
+Last Updated: 01-01-2025
 Made by DAWN/ペンギン
 ```
 
