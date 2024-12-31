@@ -20,6 +20,7 @@ public:
 
 private:
     Ui::help *ui;
+    bool isDarkTheme();
 
 };
 

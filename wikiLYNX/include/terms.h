@@ -17,6 +17,7 @@ public:
     ~terms();
 
 private:
+    bool isDarkTheme();
     void initialise();
     Ui::terms *ui;
 };

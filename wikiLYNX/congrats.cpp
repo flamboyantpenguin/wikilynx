@@ -11,11 +11,28 @@ congrats::congrats(QWidget *parent) :
     connect(ui->feedBackButton, &QPushButton::clicked, this, &congrats::launchFeedBack);
     connect(ui->viewHistory, SIGNAL(clicked()), this, SLOT(viewhistory()));
     connect(ui->viewStatsButton, &QPushButton::clicked, this, &congrats::showStats);
+
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    QString logo = ui->appLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
+    if (theme == "Light") logo.replace("#181818", "#ffffff");
+    ui->appLogo->setHtml(logo);
+
 }
+
 
 congrats::~congrats()
 {
     delete ui;
+}
+
+
+bool congrats::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
 

@@ -27,7 +27,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
   <property name="windowTitle">
@@ -44,6 +44,7 @@
       <font>
        <family>Courier Prime</family>
        <pointsize>21</pointsize>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">

@@ -10,12 +10,27 @@ news::news(QWidget *parent)
     ui->progressBar->hide();
     ui->treeWidget->setHeaderLabels(QStringList { tr("Title"), tr("Link"), tr("Date"), tr("Description") });
     ui->treeWidget->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    QString logo = ui->appLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
+    if (theme == "Light") logo.replace("#181818", "#ffffff");
+    ui->appLogo->setHtml(logo);
 }
 
 
 news::~news()
 {
     delete ui;
+}
+
+
+bool news::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
 
@@ -62,6 +77,7 @@ void news::get(const QUrl &url)
      //   currentReply->deleteLater();
     //}
     ui->progressBar->show();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     currentReply = manager.get(QNetworkRequest(this->url));
     if (currentReply) {
         connect(currentReply, &QNetworkReply::readyRead, this, &news::consumeData);
@@ -106,5 +122,6 @@ void news::parseXml()
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
         qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
     ui->progressBar->hide();
+    QApplication::restoreOverrideCursor();
 
 }

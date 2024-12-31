@@ -181,6 +181,8 @@ void levelManager::exportLevels() {
 
 
 void levelManager::downloadLevel() {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     getLevelDialog.initialise();
     getLevelDialog.show();
+    QApplication::restoreOverrideCursor();
 }

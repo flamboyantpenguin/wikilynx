@@ -10,9 +10,9 @@ welcomeUI::welcomeUI(QDialog *parent)
 {
 
     ui->setupUi(this);
-    ui->editLevelButton->setEnabled(false);
     ui->genRandTxt->hide();
     ui->genRandPrg->hide();
+    ui->editLevelButton->setEnabled(false);
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
@@ -45,10 +45,29 @@ int welcomeUI::initialise(int *totem) {
 
     // Set icon theme
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
+
+    QString logo = ui->appLogo->document()->toHtml();
+    QString pLogo = ui->privateLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
+    pLogo.replace("DAWN.svg", "DAWN_" + theme + ".svg");
+    if (theme == "Light") {
+        logo.replace("#181818", "#ffffff");
+        pLogo.replace("#181818", "#ffffff");
+    }
+    ui->appLogo->setHtml(logo);
+    ui->privateLogo->setHtml(pLogo);
+
+    // Set tip
+    QRandomGenerator *generator = QRandomGenerator::global();
+    int tip = generator->bounded(0, this->tips.count());
+    ui->label0->setText(tips[tip]);
+
     theme = this->cfg["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
+
+    //qDebug() << logo;
 
     connect(ui->killToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
     connect(ui->allowSitesToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
@@ -223,8 +242,8 @@ void welcomeUI::checkCustom() {
         ui->editLevelButton->setEnabled(true);
         cFile.open(QIODevice::ReadOnly);
         auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
-        this->cfg = iData = iData["info"].toObject();
-        this->cfg["iconTheme"] = "green";
+        this->cfg = iData["info"].toObject();
+        //this->cfg["iconTheme"] = "green";
 
         QJsonDocument document;
         QJsonObject temp;
@@ -252,6 +271,7 @@ void welcomeUI::addCustom() {
 
 
 void welcomeUI::genRandomLevel() {
+    this->setCursor(Qt::WaitCursor);
     ui->genRandTxt->show();
     ui->genRandPrg->show();
     disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
@@ -264,6 +284,7 @@ void welcomeUI::genRandomLevel() {
     //levelEditorDlg.hide();
     ui->passcodeInput->addItem("random");
     ui->passcodeInput->setCurrentText("random");
+    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::unsetCursor);
     connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
     connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
     connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
@@ -360,7 +381,7 @@ void checkUpdateWorker::process() { // Process. Start processing data.
     }
     reply->deleteLater();
 
-    url = QUrl("https://repo.pcland.co.in/QtOnline/wikiLYNX/.info/version.txt");
+    url = QUrl("https://repo.dawn.org.in/QtOnline/wikiLYNX/.info/version.txt");
     reply = manager.get(QNetworkRequest(url));
 
     QEventLoop loop2;

@@ -12,20 +12,33 @@ GameWindow::GameWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-    ui->clock->setAlignment(Qt::AlignCenter);
-    ui->counter->setAlignment(Qt::AlignCenter);
-
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
     connect(ui->exitButton, SIGNAL(clicked(bool)), this, SLOT(endGame()));
     connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
     connect(ui->showHistory, SIGNAL(clicked(bool)), this, SLOT(launchLogs()));
     connect(ui->viewChkButton, SIGNAL(clicked(bool)), this, SLOT(viewCheckPoints()));
 
+    QString theme = (isDarkTheme()) ? "Dark" : "Light";
+    QString logo = ui->appLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
+    if (theme == "Light") logo.replace("#181818", "#ffffff");
+    ui->appLogo->setHtml(logo);
+
 }
+
 
 GameWindow::~GameWindow()
 {
     delete ui;
+}
+
+
+bool GameWindow::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
 
@@ -117,10 +130,10 @@ void GameWindow::initAction() {
     QString uUrl = url.toString();
     if (this->gameData["wiki?"].toInt()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
 
-    ui->statusbar->showMessage("Next Checkpoint: "+levels[chk+1]);
     if (uUrl == levels[chk+1]) {
         this->missionAccomplished();
     }
+    if (chk+1 < levels.count()) ui->statusbar->showMessage("Next Checkpoint: "+levels[chk+1]);
 
 }
 

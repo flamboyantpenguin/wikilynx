@@ -18,6 +18,7 @@ statusOverview::~statusOverview()
 
 void statusOverview::initialise(int status) {
 
+    this->hehe = 0;
     ui->updateButton->hide();
     ui->wikiStatus->setText(this->code[status].split("|")[0]);
     ui->archiveStatus->setText(this->code[status].split("|")[1]);
@@ -33,6 +34,7 @@ void statusOverview::initialise(int status) {
         #else
             connect(ui->updateButton, &QPushButton::clicked, this, &statusOverview::launchLatestVersionInfo);
         #endif
+        ui->versionHelper->setText("New Version Available!");
     }
 
 }
@@ -56,6 +58,6 @@ void statusOverview::launchVersionInfo() {
 void statusOverview::developerHehe() {
     this->hehe++;
 
-    if (!(this->hehe % 7))
+    if ((this->hehe % 7) == 0)
         QMessageBox::information(this, "wikiLYNX", "What it takes to become a developer is the will to work on something for a good reason! Get started by checking the project on GitHub :)", QMessageBox::Ok);
 }

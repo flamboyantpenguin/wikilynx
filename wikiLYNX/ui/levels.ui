@@ -10,6 +10,11 @@
     <height>58</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <hintingpreference>PreferNoHinting</hintingpreference>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -19,6 +24,7 @@
      <property name="font">
       <font>
        <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -31,6 +37,7 @@
      <property name="font">
       <font>
        <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -43,6 +50,7 @@
      <property name="font">
       <font>
        <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">
@@ -62,6 +70,7 @@
      <property name="font">
       <font>
        <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
      <property name="text">

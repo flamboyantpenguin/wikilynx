@@ -14,15 +14,12 @@
 
 
 void loadFonts();
-void downloadUpdate();
 void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 
 
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
-std::string lVersion("1.5.0-1");
-std::string version("1.5.0-1");
 
 
 int main(int argc, char *argv[]) {

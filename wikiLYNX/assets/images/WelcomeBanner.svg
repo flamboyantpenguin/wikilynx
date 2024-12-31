@@ -23,12 +23,12 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="0.45440453"
-     inkscape:cx="1256.5896"
+     inkscape:cx="1255.4892"
      inkscape:cy="430.23339"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:window-width="1536"
+     inkscape:window-height="792"
      inkscape:window-x="0"
-     inkscape:window-y="32"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg25" /><defs
      id="defs1"><g
@@ -166,7 +166,7 @@
        id="tspan27"
        style="stroke-width:0.99975"
        x="1204.8735"
-       y="44.563816">Version 1.5.0</tspan></text><g
+       y="44.563816">Version 1.5.5</tspan></text><g
      id="g27"
      transform="matrix(0.94247949,0,0,0.95754937,1105.2145,631.24013)"><path
        d="m 0,0 c 113.19,0 226.38,0 343,0 0,55.11 0,110.22 0,167 -113.19,0 -226.38,0 -343,0 C 0,111.89 0,56.78 0,0 Z"

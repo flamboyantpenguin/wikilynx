@@ -20,6 +20,7 @@ public:
     ~viewStats();
 
 private:
+    bool isDarkTheme();
     QJsonObject data;
     Ui::viewStats *ui;
     QString dirName = ".wikilynx";
