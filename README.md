@@ -1,6 +1,6 @@
 # wikiLYNX
 
-A simple browser app made using Qt C++ to play wikipedia speedruns the right way. The project was initially made for the wikiLYNX event conducted by [@jonesrison](https://jonesrison.github.io) at Rajagiri School of Engineering and Technology, Ernakulam, Kerala. Documentation is being updated.
+A simple browser app made using Qt C++ to play wikipedia speedruns the right way. The project was initially made for the wikiLYNX event conducted by [@jonesrison](https://jonesrison.github.io) at Rajagiri School of Engineering and Technology, Ernakulam, Kerala.
 
 ![WelcomeDialog](https://projects.dawn.org.in/wikilynx/.cfg/assets/WelcomeDialog.png)
 
@@ -10,13 +10,14 @@ A simple browser app made using Qt C++ to play wikipedia speedruns the right way
 
 ### Wikipedia Speed-runs
 
-Wikipedia, one of the world's largest online encyclopedia is sort of a universe of hyperlinks. Deviating from a main article we were supposed to research for our assignment/project, to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into game of Wikipedia speed-runs. The player will be given an initial Wikipedia article from which one should find another article, perhaps completely unrelated to the initial topic, only through hyperlinks in the page.
-This game though not probably recognised by any international organisation, is commonly known to folks among social media as Wikipedia speed-run. The first one to reach, will be the winner!
+Wikipedia, one of the world's largest online encyclopedia is a universe of hyperlinks. While researching, deviating from an article to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into the game of Wikipedia speed-runs. The player's task is to navigate through a wikipedia page through hyperlinks to reach another article perhaps within a short time or limited path. 
+This game is commonly known to folks among social media as Wikipedia speed-run. Wikipedia itself calls it [Wikiracing](https://wikipedia.org/wiki/Wikiracing). 
 
 ### wikiLYNX Game Browser
 
-Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Some of these rules can still be disabled in this app, however we apply these rules by default. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends. The app is a simple C++ app based on Qt WebEngine.
-If one happens to be someone interested in the game, one is invited to play the game and contribute to the development of this project. 
+Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Do note that some of these rules can still be disabled in this app. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends. 
+
+The app is a simple C++ app based on Qt WebEngine. If one happens to be someone interested in the game, one is invited to play the game and contribute to the development of this project. 
 
 ### How to Play
 
@@ -52,7 +53,7 @@ The app is available for Windows and Linux.
 | [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
 | [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage, Flatpak, Snap    |
 
-You can find the installation files in [DAWN Archives](https://archive.pcland.co.in/DAWN/Projects/wikiLYNX) or in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
+You can find the installation files in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
 
 ## Updates
 
@@ -62,7 +63,7 @@ wikiLYNX does not provide support for older versions. So it's recommended that y
 
 ## Development
 
-wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@pcland.co.in](mailto:penguin@pcland.co.in).
+wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@dawn.org.in](mailto:penguin@pcland.co.in).
 
 ### Getting Started
 
