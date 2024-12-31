@@ -10,14 +10,14 @@ A simple browser app made using Qt C++ to play wikipedia speedruns the right way
 
 ### Wikipedia Speed-runs
 
-Wikipedia, one of the world's largest online encyclopedia is a universe of hyperlinks. While researching, deviating from an article to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into the game of Wikipedia speed-runs. The player's task is to navigate through a wikipedia page through hyperlinks to reach another article perhaps within a short time or limited path. 
-This game is commonly known to folks among social media as Wikipedia speed-run. Wikipedia itself calls it [Wikiracing](https://wikipedia.org/wiki/Wikiracing). 
+Wikipedia, one of the world's largest online encyclopedia is a universe of hyperlinks. While researching, deviating from an article to an article completely different from our initial plans is not an uncommon experience. This experience slowly developed into the game of Wikipedia speed-runs. The player's task is to navigate through a wikipedia page through hyperlinks to reach another article perhaps within a short time or limited path.
+This game is commonly known to folks among social media as Wikipedia speed-run. Wikipedia itself calls it [Wikiracing](https://wikipedia.org/wiki/Wikiracing).
 
 ### wikiLYNX Game Browser
 
-Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Do note that some of these rules can still be disabled in this app. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends. 
+Now a game must have rules! Though the game is not really documented by any Internation Organisation, we have formulated a set of rules we believe is the fundametal aspect of playing the game the right way. Do note that some of these rules can still be disabled in this app. wikiLYNX Game Browser implements these rules and gives you a game field to play the game with your friends.
 
-The app is a simple C++ app based on Qt WebEngine. If one happens to be someone interested in the game, one is invited to play the game and contribute to the development of this project. 
+The app is a simple C++ app based on Qt WebEngine. If one happens to be someone interested in the game, one is invited to play the game and contribute to the development of this project.
 
 ### How to Play
 
@@ -25,13 +25,13 @@ Each level in our game systems consists of a some checkpoints. A checkpoint is b
 
 The name you enter in the text field in the welcome dialog is used to register in the leaderboard. The leaderboard can have only 12 names for each level. If you leave the name line blank before starting a game session, your name will be registered as `Blondie`. You will know what this means if you have watch a certain Western Cowboy film released in 1966.
 
-By default, you are not allowed to access websites outside wikipedia.org. Doing so will restart the current checkpoint. You're also not allowed to change game window, this will end the game abruptly. Keyboard is also disabled during the game session. These policies can be turned off in settings. 
+By default, you are not allowed to access websites outside wikipedia.org. Doing so will restart the current checkpoint. You're also not allowed to change game window, this will end the game abruptly. Keyboard is also disabled during the game session. These policies can be turned off in settings.
 
-To learn more about the Gameplay, check the [wiki section on Gameplay](https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Gameplay). 
+To learn more about the Gameplay, check the [wiki section on Gameplay](https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Gameplay).
 
 ## Terms, Licensing and Privacy Policy
 
-Our app is completely free and open source. This means you can use our code as per the terms of MIT License, explained in the `LICENSE` file in this repository. We have also used open source libraries to develop the game. 
+Our app is completely free and open source. This means you can use our code as per the terms of MIT License, explained in the `LICENSE` file in this repository. We have also used open source libraries to develop the game.
 
 You as a user can contribute to this project. Read development section for more info on contributution.
 
@@ -63,7 +63,7 @@ wikiLYNX does not provide support for older versions. So it's recommended that y
 
 ## Development
 
-wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@dawn.org.in](mailto:penguin@pcland.co.in).
+wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@dawn.org.in](mailto:penguin@dawn.org.in).
 
 ### Getting Started
 

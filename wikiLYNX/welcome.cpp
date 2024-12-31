@@ -10,9 +10,9 @@ welcomeUI::welcomeUI(QDialog *parent)
 {
 
     ui->setupUi(this);
-    ui->editLevelButton->setEnabled(false);
     ui->genRandTxt->hide();
     ui->genRandPrg->hide();
+    ui->editLevelButton->setEnabled(false);
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
@@ -48,6 +48,7 @@ int welcomeUI::initialise(int *totem) {
 
     QString logo = ui->appLogo->document()->toHtml();
     QString pLogo = ui->privateLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
     pLogo.replace("DAWN.svg", "DAWN_" + theme + ".svg");
     if (theme == "Light") {
         logo.replace("#181818", "#ffffff");
@@ -241,8 +242,8 @@ void welcomeUI::checkCustom() {
         ui->editLevelButton->setEnabled(true);
         cFile.open(QIODevice::ReadOnly);
         auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
-        this->cfg = iData = iData["info"].toObject();
-        this->cfg["iconTheme"] = "green";
+        this->cfg = iData["info"].toObject();
+        //this->cfg["iconTheme"] = "green";
 
         QJsonDocument document;
         QJsonObject temp;

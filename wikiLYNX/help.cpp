@@ -10,6 +10,7 @@ help::help(QWidget *parent) :
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     QString logo = ui->appLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
     if (theme == "Light") logo.replace("#181818", "#ffffff");
     ui->appLogo->setHtml(logo);
 

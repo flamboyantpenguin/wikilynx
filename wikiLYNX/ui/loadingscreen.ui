@@ -29,7 +29,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Loading wikiLYNX</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../assets/assets.qrc">

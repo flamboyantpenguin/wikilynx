@@ -1,7 +1,7 @@
 Source: wikilynx
 Section: games
 Priority: optional
-Maintainer: Penguin <penguin@pcland.co.in>
+Maintainer: Penguin <penguin@dawn.org.in>
 Build-Depends: debhelper-compat ( =11), qtmultimedia5-dev, libqt5multimedia5-plugins, build-essential, cmake, qtwayland5, qtwayland5-private-dev, qtwayland5-dev-tools
 Standards-Version: 4.6.0
 Homepage: https://github.com/flamboyantpenguin/wikilynx

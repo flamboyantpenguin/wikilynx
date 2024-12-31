@@ -6,11 +6,11 @@
 
 
 # Project Vars
-ver="1.5.0"
+ver="1.5.5"
 ARCH=$(uname -m)
 
 arch=$(dpkg --print-architecture)
-if [ $arch =  "i386" ]; then ARCH="i386";arch="i686";
+if [ $arch =  "i386" ]; then ARCH="i386";arch="i686";export GSTREAMER_PLUGINS_DIR=/usr/lib/i386-linux-gnu/gstreamer-1.0;
 elif [ $arch =  "armhf" ]; then ARCH="armhf";
 else arch=$ARCH; fi
 
@@ -18,14 +18,13 @@ else arch=$ARCH; fi
 export QMAKE=/usr/bin/qmake
 export APPIMAGE_EXTRACT_AND_RUN=1
 export DEPLOY_PLATFORM_THEMES=true
-export GST_PLUGIN_PATH=$APPDIR/usr/lib/gstreamer-1.0
 export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqeglfs.so"
 export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
 
 
 # Download Requirements
 downloadAppImagers() {
-    wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage
+    wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$arch.AppImage
     wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-$ARCH.AppImage
     wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
     git clone https://github.com/linuxdeploy/linuxdeploy-plugin-gstreamer.git
@@ -77,6 +76,7 @@ downloadAppImagers
 prepareProject
 
 chmod u+x AppRun
+sed -i 's|AI\x02|\x00\x00\x00|' *.AppImage
 ./linuxdeploy-$ARCH.AppImage --appdir $APPDIR --custom-apprun=$APPDIR/../AppRun --plugin qt --plugin gstreamer
 
 # Fixes

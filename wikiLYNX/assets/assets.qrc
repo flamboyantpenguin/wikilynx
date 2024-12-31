@@ -25,6 +25,8 @@
         <file>images/wikiLYNX_logo.ico</file>
         <file>images/DAWN_Dark.svg</file>
         <file>images/DAWN_Light.svg</file>
+        <file>images/wikiLYNX_Dark.svg</file>
+        <file>images/wikiLYNX_Light.svg</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>

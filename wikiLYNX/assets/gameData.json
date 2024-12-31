@@ -1,9 +1,9 @@
 {
     "info": {
+        "iconTheme": "green",
         "allowReference": 0,
         "totemOfUndying": 0,
-        "version": "v1.5.5",
-        "iconTheme": "green"
+        "version": "v1.5.5"
     },
     "base": {
         "version": "v1.5.5",

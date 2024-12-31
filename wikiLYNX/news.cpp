@@ -13,6 +13,7 @@ news::news(QWidget *parent)
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     QString logo = ui->appLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
     if (theme == "Light") logo.replace("#181818", "#ffffff");
     ui->appLogo->setHtml(logo);
 }
@@ -76,6 +77,7 @@ void news::get(const QUrl &url)
      //   currentReply->deleteLater();
     //}
     ui->progressBar->show();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     currentReply = manager.get(QNetworkRequest(this->url));
     if (currentReply) {
         connect(currentReply, &QNetworkReply::readyRead, this, &news::consumeData);
@@ -120,5 +122,6 @@ void news::parseXml()
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
         qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
     ui->progressBar->hide();
+    QApplication::restoreOverrideCursor();
 
 }

@@ -13,6 +13,7 @@ about::about(QWidget *parent) :
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     QString logo = ui->appLogo->document()->toHtml();
     QString pLogo = ui->dawnLogo->document()->toHtml();
+    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
     pLogo.replace("DAWN.svg", "DAWN_" + theme + ".svg");
     if (theme == "Light") {
         logo.replace("#181818", "#ffffff");
