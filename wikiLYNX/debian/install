@@ -1,5 +1,5 @@
 ../docs/desktop/wikilynx.desktop usr/share/applications
-./assets/images/wikiLYNX_logo.svg   usr/share/icons/hicolor/scalable/apps
+../docs/desktop/in.org.dawn.wikilynx.svg  usr/share/icons/hicolor/scalable/apps
 ../LICENSE usr/share/license/wikilynx
 ../COPYING usr/share/license/wikilynx
 ../COPYING.QtWebEngine usr/share/license/wikilynx
@@ -7,4 +7,4 @@
 ../docs/license/NotoSans_OFL.txt    usr/share/license/wikilynx
 ../docs/license/CourierPrime_OFL.txt    usr/share/license/wikilynx
 ../docs/license/LICENSE-MaterialIcons.txt    usr/share/license/wikilynx
-../docs/desktop/wikilynx.appdata.xml   usr/share/metainfo
+../docs/desktop/in.org.dawn.wikilynx.appdata.xml   usr/share/metainfo
