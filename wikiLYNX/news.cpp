@@ -12,10 +12,9 @@ news::news(QWidget *parent)
     ui->treeWidget->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    QString logo = ui->appLogo->document()->toHtml();
-    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
-    if (theme == "Light") logo.replace("#181818", "#ffffff");
-    ui->appLogo->setHtml(logo);
+    ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
+    ui->appLogo->update();
+
 }
 
 

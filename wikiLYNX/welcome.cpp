@@ -45,17 +45,10 @@ int welcomeUI::initialise(int *totem) {
 
     // Set icon theme
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-
-    QString logo = ui->appLogo->document()->toHtml();
-    QString pLogo = ui->privateLogo->document()->toHtml();
-    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
-    pLogo.replace("DAWN.svg", "DAWN_" + theme + ".svg");
-    if (theme == "Light") {
-        logo.replace("#181818", "#ffffff");
-        pLogo.replace("#181818", "#ffffff");
-    }
-    ui->appLogo->setHtml(logo);
-    ui->privateLogo->setHtml(pLogo);
+    ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
+    ui->privateLogo->setIcon(QIcon(":/base/images/DAWN_" + theme + ".svg"));
+    ui->appLogo->update();
+    ui->privateLogo->update();
 
     // Set tip
     QRandomGenerator *generator = QRandomGenerator::global();
@@ -129,6 +122,7 @@ int welcomeUI::startGame() {
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
+    game->setFocus();
     return 0;
 
 }
@@ -136,6 +130,7 @@ int welcomeUI::startGame() {
 
 void welcomeUI::reset() {
     this->show();
+    this->setFocus();
     this->releaseKeyboard();
     *dontKillParse0 = 1;
     this->checkStatus();
@@ -281,7 +276,7 @@ void welcomeUI::genRandomLevel() {
     levelEditorDlg.genRandomLevel(&(this->data), "random");
     levelEditorDlg.showMaximized();
     levelEditorDlg.hide();
-    //levelEditorDlg.hide();
+    this->setFocus();
     ui->passcodeInput->addItem("random");
     ui->passcodeInput->setCurrentText("random");
     connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::unsetCursor);
