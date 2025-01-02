@@ -4,7 +4,7 @@ RUN rm /var/lib/dpkg/info/libc-bin*
 RUN apt clean && apt update
 RUN apt install libc-bin -y
 RUN apt install git patchelf fuse file libfuse2 wget zip -y
-RUN apt install appstreamcli libgl1-mesa-dev qtwayland5 qtwayland5-private-dev qtwayland5-dev-tools qtwebengine5-dev cmake libfuse2 g++ qtmultimedia5-dev libqt5multimedia5-plugins -y
+RUN apt install libgl1-mesa-dev qtwayland5 qtwayland5-private-dev qtwayland5-dev-tools qtwebengine5-dev cmake libfuse2 g++ qtmultimedia5-dev libqt5multimedia5-plugins -y
 RUN apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good -y
 
 RUN groupadd fuse
