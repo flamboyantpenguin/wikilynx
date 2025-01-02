@@ -11,16 +11,8 @@ about::about(QWidget *parent) :
     connect(ui->feedbackButton, &QPushButton::clicked, this, &about::launchFeedback);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    QString logo = ui->appLogo->document()->toHtml();
-    QString pLogo = ui->dawnLogo->document()->toHtml();
-    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
-    pLogo.replace("DAWN.svg", "DAWN_" + theme + ".svg");
-    if (theme == "Light") {
-        logo.replace("#181818", "#ffffff");
-        pLogo.replace("#181818", "#ffffff");
-    }
-    ui->appLogo->setHtml(logo);
-    ui->dawnLogo->setHtml(pLogo);
+    ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
+    ui->appLogo->update();
 
 }
 

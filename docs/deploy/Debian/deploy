@@ -12,6 +12,8 @@ cd wikilynx-${ver}/wikiLYNX
 sed 's/::checkStateChanged/::stateChanged/g' -i welcome.cpp
 sed 's/::checkStateChanged/::stateChanged/g' -i leveleditor.cpp
 
+# Apparently hintingpreference doesn't work in Qt5
+sed -i '/hintingpreference/d' ui/*.ui
 
 # Build
 echo "yes" | debuild -us -uc

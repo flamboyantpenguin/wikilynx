@@ -13,10 +13,9 @@ congrats::congrats(QWidget *parent) :
     connect(ui->viewStatsButton, &QPushButton::clicked, this, &congrats::showStats);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    QString logo = ui->appLogo->document()->toHtml();
-    logo.replace("wikiLYNX_logo.svg", "wikiLYNX_" + theme + ".svg");
-    if (theme == "Light") logo.replace("#181818", "#ffffff");
-    ui->appLogo->setHtml(logo);
+    if (theme == "Light") ui->appLogo->setIcon(QIcon(":/base/images/DAWN_Light.svg"));
+    else ui->appLogo->setIcon(QIcon(":/base/images/DAWN_Dark.svg"));
+    ui->appLogo->update();
 
 }
 

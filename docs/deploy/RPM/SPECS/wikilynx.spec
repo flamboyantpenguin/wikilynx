@@ -30,8 +30,8 @@ make DESTDIR=%{buildroot} install  # Use make install
 
 # GUI
 install -D -m 0644 ../docs/desktop/wikilynx.desktop %{buildroot}/usr/share/applications/wikilynx.desktop
-install -D -m 0644 ../docs/desktop/in.org.dawn.wikilynx.appdata.xml %{buildroot}/usr/share/metainfo/in.org.dawn.wikilynx.appdata.xml
-install -D -m 0644 ./assets/images/wikiLYNX_logo.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/wikiLYNX_logo.svg
+install -D -m 0644 ../docs/desktop/wikilynx.appdata.xml %{buildroot}/usr/share/metainfo/wikilynx.appdata.xml
+install -D -m 0644 ../wikiLYNX/assets/images/wikiLYNX_logo.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/wikiLYNX_logo.svg
 
 
 # Docs
@@ -57,11 +57,11 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 /usr/share/licenses/wikilynx/LICENSE-MaterialIcons.txt
 /usr/share/applications/wikilynx.desktop
 /usr/share/icons/hicolor/scalable/apps/wikiLYNX_logo.svg
-/usr/share/metainfo/in.org.dawn.wikilynx.appdata.xml
+/usr/share/metainfo/wikilynx.appdata.xml
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
-* Wed Jan 01 2025 Penguin <penguin@dawn.org.in> - 1.5.5-1
+* Wed Jan 02 2025 Penguin <penguin@dawn.org.in> - 1.5.5-1
 - Release 1.5.5
 
 * Wed Dec 18 2024 Penguin <penguin@dawn.org.in> - 1.5.0-1

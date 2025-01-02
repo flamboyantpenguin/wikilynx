@@ -49,48 +49,27 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QTextBrowser" name="appLogo">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QPushButton" name="appLogo">
        <property name="maximumSize">
         <size>
          <width>100</width>
          <height>75</height>
         </size>
        </property>
-       <property name="baseSize">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../assets/assets.qrc">
+         <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
+       </property>
+       <property name="iconSize">
         <size>
-         <width>71</width>
-         <height>0</height>
+         <width>100</width>
+         <height>100</height>
         </size>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::Shape::NoFrame</enum>
-       </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#181818&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/wikiLYNX_logo.svg&quot; width=&quot;90&quot; height=&quot;70&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="textInteractionFlags">
-        <set>Qt::TextInteractionFlag::NoTextInteraction</set>
-       </property>
-       <property name="openLinks">
+       <property name="flat">
         <bool>true</bool>
        </property>
       </widget>
@@ -708,52 +687,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QTextBrowser" name="privateLogo">
-       <property name="minimumSize">
-        <size>
-         <width>111</width>
-         <height>61</height>
-        </size>
-       </property>
+      <widget class="QPushButton" name="privateLogo">
        <property name="maximumSize">
         <size>
          <width>111</width>
          <height>61</height>
         </size>
        </property>
-       <property name="toolTip">
-        <string>Project powered by DAWN</string>
+       <property name="text">
+        <string/>
        </property>
-       <property name="inputMethodHints">
-        <set>Qt::InputMethodHint::ImhNone</set>
+       <property name="icon">
+        <iconset resource="../assets/assets.qrc">
+         <normaloff>:/base/images/DAWN.svg</normaloff>:/base/images/DAWN.svg</iconset>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::Shape::NoFrame</enum>
+       <property name="iconSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
        </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#181818&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/base/images/DAWN.svg&quot; width=&quot;100&quot; height=&quot;50&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="textInteractionFlags">
-        <set>Qt::TextInteractionFlag::NoTextInteraction</set>
-       </property>
-       <property name="openExternalLinks">
-        <bool>false</bool>
-       </property>
-       <property name="openLinks">
-        <bool>false</bool>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
