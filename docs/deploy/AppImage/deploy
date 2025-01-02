@@ -66,7 +66,7 @@ prepareProject() {
     make
 
     cp wikilynx $APPDIR/usr/bin
-    cp ./assets/images/wikiLYNX_logo.svg $APPDIR/usr/share/icons/hicolor/scalable/apps
+    cp ../docs/desktop/in.org.dawn.wikilynx.svg $APPDIR/usr/share/icons/hicolor/scalable/apps
     cp ../docs/desktop/wikilynx.desktop $APPDIR/usr/share/applications
     cp ../docs/desktop/in.org.dawn.wikilynx.appdata.xml $APPDIR/usr/share/metainfo
 

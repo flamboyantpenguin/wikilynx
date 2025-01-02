@@ -1,4 +1,4 @@
-wikilynx (1.5.5-1) unstable; urgency=medium
+wikilynx (1.5.5-2) unstable; urgency=medium
 
   * Fixed a bug where checkpoints weren't incremented on the status bar after clearing them 
   * Fixed a bug where default green theme not applied on new installations 
