@@ -61,7 +61,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
-* Wed Jan 02 2025 Penguin <penguin@dawn.org.in> - 1.5.5-1
+* Thu Jan 02 2025 Penguin <penguin@dawn.org.in> - 1.5.5-1
 - Release 1.5.5
 
 * Wed Dec 18 2024 Penguin <penguin@dawn.org.in> - 1.5.0-1
