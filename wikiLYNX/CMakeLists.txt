@@ -97,6 +97,12 @@ install(TARGETS wikilynx
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+if(UNIX AND NOT APPLE)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/../docs/desktop/in.org.dawn.wikilynx.appdata.svg DESTINATION share/icons/hicolor/scalable/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/../docs/desktop/in.org.dawn.wikilynx.appdata.xml DESTINATION share/metainfo)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/../docs/desktop/in.org.dawn.wikilynx.appdata.desktop DESTINATION share/applications)
+endif()
+
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(wikilynx)
 endif()
