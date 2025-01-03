@@ -10,6 +10,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QDesktopServices>
+#include <QStandardPaths>
 #include <QNetworkAccessManager>
 
 
@@ -38,7 +39,7 @@ private:
     int updateTable();
     QJsonObject cfg, iData, levelData;
     Ui::getLevel *ui;
-    QString dirName = ".wikilynx";
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 private slots:
     void launchHelp();

@@ -30,7 +30,7 @@ levelManager::~levelManager()
 
 void levelManager::initialise() {
 
-    QFile lFile("./"+dirName+"/gData.json");
+    QFile lFile(dirName+"/gData.json");
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
     auto temp = QJsonDocument::fromJson(lFile.readAll()).object();

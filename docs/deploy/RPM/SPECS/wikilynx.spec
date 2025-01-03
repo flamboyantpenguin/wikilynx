@@ -1,11 +1,11 @@
 Name:		wikilynx
 Version:	1.5.5
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	A simple Qt C++ app to play Wikipedia speed-run the right way
 URL:		https://github.com/flamboyantpenguin/wikilynx
 License:	MIT
 Source0:	https://github.com/flamboyantpenguin/wikilynx/archive/refs/tags/v1.5.5.tar.gz
-Source1:	https://repo.pcland.co.in/rpm/dawn.repo
+Source1:	https://repo.dawn.org.in/rpm/dawn.repo
 BuildRequires:	cmake, qt6-qtwebengine-devel, qt6-qtmultimedia-devel
 Requires:	qt6-qtwebengine, qt6-qtsvg, qt6-qtmultimedia
 
@@ -28,20 +28,6 @@ make
 cd build
 make DESTDIR=%{buildroot} install  # Use make install
 
-# GUI
-install -D -m 0644 ../docs/desktop/in.org.dawn.wikilynx.desktop %{buildroot}/usr/share/applications/in.org.dawn.wikilynx.desktop
-install -D -m 0644 ../docs/desktop/in.org.dawn.wikilynx.appdata.xml %{buildroot}/usr/share/metainfo/in.org.dawn.wikilynx.appdata.xml
-install -D -m 0644 ../docs/desktop/in.org.dawn.wikilynx.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/in.org.dawn.wikilynx.svg
-
-# Docs
-install -D -m 0644 ../LICENSE %{buildroot}/usr/share/licenses/wikilynx/LICENSE
-install -D -m 0644 ../COPYING %{buildroot}/usr/share/licenses/wikilynx/COPYING
-install -D -m 0644 ../COPYING.QtWebEngine %{buildroot}/usr/share/licenses/wikilynx/COPYING.QtWebEngine
-install -D -m 0644 ../docs/license/NotoSans_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/NotoSans_OFL.txt
-install -D -m 0644 ../docs/license/Comfortaa_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/Comfortaa_OFL.txt
-install -D -m 0644 ../docs/license/CourierPrime_OFL.txt %{buildroot}/usr/share/licenses/wikilynx/CourierPrime_OFL.txt
-install -D -m 0644 ../docs/license/LICENSE-MaterialIcons.txt %{buildroot}/usr/share/licenses/wikilynx/LICENSE-MaterialIcons.txt
-
 # Repo
 install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 
@@ -60,6 +46,14 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
+* Fri Jan 03 2025 Penguin <penguin@dawn.org.in> - 1.5.5-3
+- Release 1.5.5-3
+- Fixes for bundling flatpak
+
+* Thu Jan 02 2025 Penguin <penguin@dawn.org.in> - 1.5.5-3
+- Release 1.5.5-2
+- AppStream Fixes
+
 * Thu Jan 02 2025 Penguin <penguin@dawn.org.in> - 1.5.5-1
 - Release 1.5.5
 

@@ -7,6 +7,7 @@
 #include <fstream>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QStandardPaths>
 #include <QDesktopServices>
 
 #include "viewstats.h"
@@ -44,7 +45,7 @@ private:
     QJsonObject statData;
     void genReport();
     void updateStats();
-    QString dirName = ".wikilynx";
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 protected:
 

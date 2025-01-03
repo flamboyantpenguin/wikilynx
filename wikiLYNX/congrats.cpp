@@ -13,8 +13,7 @@ congrats::congrats(QWidget *parent) :
     connect(ui->viewStatsButton, &QPushButton::clicked, this, &congrats::showStats);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    if (theme == "Light") ui->appLogo->setIcon(QIcon(":/base/images/DAWN_Light.svg"));
-    else ui->appLogo->setIcon(QIcon(":/base/images/DAWN_Dark.svg"));
+    ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
 
 }
@@ -73,7 +72,7 @@ void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString 
 
 void congrats::viewhistory() {
 
-    QFile lFile("./"+dirName+"/logs/"+this->data["instanceName"].toString()+"/log.txt");
+    QFile lFile(dirName+"/logs/"+this->data["instanceName"].toString()+"/log.txt");
     lFile.open(QIODevice::ReadOnly);
     QString logs = QString(lFile.readAll());
     lFile.close();
@@ -90,7 +89,7 @@ void congrats::launchFeedBack() {
 
 void congrats::genReport() {
 
-    std::ofstream out("./"+dirName.toStdString()+"/logs/"+this->data["instanceName"].toString().toStdString()+"/report.txt", std::ios_base::app);
+    std::ofstream out(dirName.toStdString()+"/logs/"+this->data["instanceName"].toString().toStdString()+"/report.txt", std::ios_base::app);
     out << "Status: "+this->data["gameStatus"].toString().toStdString()+"\n";
     out << "Player Name: "+this->data["playerName"].toString().toStdString()+"\n";
     out << "Level Name: "+this->data["level"].toString().toStdString()+"\n";
@@ -106,7 +105,7 @@ void congrats::updateStats() {
 
     if (data["gameStatus"].toString() != "Passed") return;
 
-    QFile statFile("./"+dirName+"/.stat");
+    QFile statFile(dirName+"/.stat");
     statFile.open(QIODevice::ReadOnly);
     auto iData = QJsonDocument::fromJson(statFile.readAll()).object();
     this->statData = iData[statData["level"].toString()].toObject();
@@ -127,8 +126,8 @@ void congrats::updateStats() {
     iData[data["level"].toString()] = this->statData;
     document.setObject(iData);
 
-    QFile::remove("./"+dirName+"/.stat");
-    QFile file("./"+dirName+"/.stat");
+    QFile::remove(dirName+"/.stat");
+    QFile file(dirName+"/.stat");
     file.open(QIODevice::ReadWrite);
     file.write(document.toJson());
     file.flush();

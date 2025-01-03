@@ -185,7 +185,7 @@ int GameWindow::missionFailed(QString message){
 
 void GameWindow::launchLogs() {
 
-    QFile f("./"+dirName+"/logs/"+instance+"/log.txt");
+    QFile f(dirName+"/logs/"+instance+"/log.txt");
     f.open(QIODevice::ReadOnly);
     auto logs = QString(f.readAll());
     f.close();

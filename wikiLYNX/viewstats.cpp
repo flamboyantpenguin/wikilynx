@@ -33,7 +33,7 @@ bool viewStats::isDarkTheme() {
 int viewStats::initialise() {
 
     ui->levelSelect->clear();
-    QFile statFile("./"+dirName+"/.stat");
+    QFile statFile(dirName+"/.stat");
     statFile.open(QIODevice::ReadOnly);
     if (statFile.isOpen()) {
         this->data = QJsonDocument::fromJson(statFile.readAll()).object();

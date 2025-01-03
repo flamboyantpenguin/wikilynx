@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QJsonObject>
 #include <QMainWindow>
+#include <QStandardPaths>
 #include <QtMultimedia/QAudioOutput>
 #include <QtMultimedia/QMediaPlayer>
 
@@ -54,7 +55,7 @@ private:
     QString gamer, level;
     QString aTime, instance;
     viewHistory historyView;
-    QString dirName = ".wikilynx";
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     viewcheckpoint checkpointView;
     QTimer *timer = new QTimer(this);
     QString wikiURL = "https://wikipedia.org/wiki/";

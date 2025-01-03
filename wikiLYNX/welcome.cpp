@@ -37,7 +37,7 @@ welcomeUI::welcomeUI(QDialog *parent)
 
 int welcomeUI::initialise(int *totem) {
 
-    fs::create_directories("./"+dirName.toStdString());
+    fs::create_directories(dirName.toStdString());
     this->totemofUndying = totem;
 
     loadSettings();
@@ -147,7 +147,7 @@ void welcomeUI::loadSettings() {
     auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
     this->base = iData["base"].toObject();
     iData = iData["data"].toObject();
-    QFile sFile("./"+dirName+"/gData.json");
+    QFile sFile(dirName+"/gData.json");
     sFile.open(QIODevice::ReadOnly);
     auto nData = QJsonDocument::fromJson(sFile.readAll()).object();
     this->cfg = nData["info"].toObject();
@@ -196,7 +196,7 @@ void welcomeUI::updateSettings() {
 
 void welcomeUI::saveSettings() {
 
-    QFile lFile("./"+dirName+"/gData.json");
+    QFile lFile(dirName+"/gData.json");
     if (lFile.isOpen())
         lFile.close();
     lFile.open(QIODevice::ReadOnly);
@@ -217,8 +217,8 @@ void welcomeUI::saveSettings() {
 
     document.setObject(nContent);
 
-    QFile::remove("./"+dirName+"/gData.json");
-    QFile file("./"+dirName+"/gData.json");
+    QFile::remove(dirName+"/gData.json");
+    QFile file(dirName+"/gData.json");
     file.open(QIODevice::ReadWrite);
     file.write(document.toJson());
     file.flush();
@@ -228,10 +228,10 @@ void welcomeUI::saveSettings() {
 
 void welcomeUI::checkCustom() {
 
-    const char* file = ("./.wikilynx/gData.json");
+    const char* file = (dirName+"/gData.json").toStdString().c_str();
     struct stat sb;
 
-    if (stat(file, &sb) != 0 && !(sb.st_mode & S_IFDIR)) {
+    if (!(QFile(dirName+"/gData.json").exists())) {
 
         QFile cFile(":/cfg/gameData.json");
         ui->editLevelButton->setEnabled(true);
@@ -246,10 +246,10 @@ void welcomeUI::checkCustom() {
         temp.insert("info", this->cfg);
         document.setObject(temp);
 
-        QFile::remove("./"+dirName+"/gData.json");
+        QFile::remove(dirName+"/gData.json");
 
         QByteArray bytes = document.toJson(QJsonDocument::Indented);
-        QFile file("./"+dirName+"/gData.json");
+        QFile file(dirName+"/gData.json");
         file.open(QIODevice::ReadWrite);
         QTextStream iStream(&file);
         iStream << bytes;
@@ -295,15 +295,15 @@ void welcomeUI::showRules() {
 
 
 void welcomeUI::showLogs() {
-    fs::create_directories("./"+dirName.toStdString()+"/logs");
-    //QDesktopServices::openUrl(QUrl::fromLocalFile("./"+dirName+"/logs"));
+    fs::create_directories(dirName.toStdString()+"/logs");
+    //QDesktopServices::openUrl(QUrl::fromLocalFile(dirName+"/logs"));
     // Finally Fixed this :)
-    QDesktopServices::openUrl(QUrl::fromUserInput(QDir("./"+dirName+"/logs").absolutePath()));
+    QDesktopServices::openUrl(QUrl::fromUserInput(QDir(dirName+"/logs").absolutePath()));
 }
 
 
 void welcomeUI::clearLogs() {
-    QDir("./"+dirName+"/logs").removeRecursively();
+    QDir(dirName+"/logs").removeRecursively();
     QMessageBox::information(this, "wikiLYNX", "Logs cleared successfully!", QMessageBox::Ok);
 }
 
