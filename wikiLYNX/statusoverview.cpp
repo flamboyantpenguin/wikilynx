@@ -29,12 +29,12 @@ void statusOverview::initialise(int status) {
 
     if (status == 2) {
         ui->updateButton->show();
+        ui->versionHelper->setText("New Version Available!");
         #ifdef Q_OS_WIN
             connect(ui->updateButton, &QPushButton::clicked, this, &statusOverview::launchMaintenanceTool);
         #else
             connect(ui->updateButton, &QPushButton::clicked, this, &statusOverview::launchLatestVersionInfo);
         #endif
-        ui->versionHelper->setText("New Version Available!");
     }
 
 }

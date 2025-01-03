@@ -24,7 +24,7 @@ getLevel::~getLevel()
 
 int getLevel::initialise() {
 
-    QFile lFile("./"+dirName+"/gData.json");
+    QFile lFile(dirName+"/gData.json");
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
     auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
@@ -162,10 +162,10 @@ void getLevel::downloadLevel(QString code) {
     temp.insert("data", this->iData);
     document.setObject(temp);
 
-    QFile::remove("./"+dirName+"/gData.json");
+    QFile::remove(dirName+"/gData.json");
 
     QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file("./"+dirName+"/gData.json");
+    QFile file(dirName+"/gData.json");
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadWrite);
     QTextStream iStream(&file);
@@ -191,10 +191,10 @@ void getLevel::deleteLevel(QString code) {
     temp.insert("data", this->iData);
     document.setObject(temp);
 
-    QFile::remove("./"+dirName+"/gData.json");
+    QFile::remove(dirName+"/gData.json");
 
     QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file("./"+dirName+"/gData.json");
+    QFile file(dirName+"/gData.json");
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadWrite);
     QTextStream iStream(&file);

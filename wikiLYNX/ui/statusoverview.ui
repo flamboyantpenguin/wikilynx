@@ -338,7 +338,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Version 1.5.5-2 (Stable)</string>
+        <string>Version 1.5.5-3 (Stable)</string>
        </property>
        <property name="flat">
         <bool>true</bool>

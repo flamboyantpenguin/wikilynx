@@ -3,7 +3,7 @@
 # Debian Build script for Games.DAWN/wikiLYNX (https://github.com/flamboyantpenguin/wikilynx)
 
 ver=1.5.5
-version=1.5.5-2
+version=1.5.5-3
 
 # Prepare source
 wget --output-document v${ver}.zip "https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v${ver}.zip"

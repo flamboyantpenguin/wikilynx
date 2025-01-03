@@ -9,7 +9,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QProcess>
-
+#include <QStandardPaths>
 #include "levels.h"
 #include "leveleditor.h"
 #include "getlevel.h"
@@ -24,11 +24,11 @@ class levelManager : public QDialog
     Q_OBJECT
 
 public:
-    QString dirName = ".wikilynx";
     explicit levelManager(QWidget *parent = nullptr);
     ~levelManager();
     QJsonObject cfg, iData, uData;
     void initialise();
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 
 protected:
@@ -50,9 +50,8 @@ private slots:
     void downloadLevel();
     void genRandomLevel();
     void removeLevel(QString code);
+    void saveData(QString fname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/gData.json");
     void launchLevelEditor(QString code);
-    void saveData(QString fname = "./.wikilynx/gData.json");
-
 
 };
 

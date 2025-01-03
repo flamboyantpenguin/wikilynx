@@ -1,4 +1,4 @@
-wikilynx (1.5.5-2) unstable; urgency=medium
+wikilynx (1.5.5-3) unstable; urgency=medium
 
   * Fixed a bug where checkpoints weren't incremented on the status bar after clearing them 
   * Fixed a bug where default green theme not applied on new installations 
@@ -7,5 +7,6 @@ wikilynx (1.5.5-2) unstable; urgency=medium
   * Fonts should now be clear in Windows
   * New tips on welcome screen
   * Improved theming with light/dark variant images
+  * AppStream Fixes
 
- -- Penguin <penguin@dawn.org.in>  Wed, 02 Jan 2025 18:00:00 +0530
+ -- Penguin <penguin@dawn.org.in>  Fri, 03 Jan 2025 18:30:00 +0530

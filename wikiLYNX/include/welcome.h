@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QJsonDocument>
+#include <QStandardPaths>
 #include <QSystemTrayIcon>
 #include <QDesktopServices>
 
@@ -119,7 +120,7 @@ private:
     statusOverview overview;
 
     Ui::welcomeDialog *ui;
-    QString dirName = ".wikilynx";
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 };
 
@@ -128,8 +129,8 @@ class checkUpdateWorker : public QObject  {
     Q_OBJECT
 
 public:
-    std::string lVersion = "1.5.5-2";
-    std::string version = "1.5.5-2";
+    std::string version = "1.5.5-3";
+    std::string lVersion = "1.5.5-3";
 
 public slots:
     void process();

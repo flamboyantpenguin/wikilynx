@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>in.org.dawn.wikilynx</id>
   <metadata_license>MIT</metadata_license>
-  <launchable type="desktop-id">wikilynx.desktop</launchable>
+  <launchable type="desktop-id">in.org.dawn.wikilynx.desktop</launchable>
   <name>wikiLYNX</name>
   <summary>A simple app to play wikipedia speedruns the right way</summary>
   <description>
@@ -22,7 +22,7 @@
   <url type="vcs-browser">https://github.com/flamboyantpenguin/wikilynx</url>
   <url type="bugtracker">https://github.com/flamboyantpenguin/wikilynx/issues</url>
   <releases>
-    <release version="1.5.5" date="2025-01-02T18:00:00.000+05:30"/>
+    <release version="1.5.5" date="2025-01-03T18:30:00.000+05:30"/>
     <release version="1.5.0" date="2024-12-18T16:42:14.702+05:30"/>
   </releases>
   <screenshots>
