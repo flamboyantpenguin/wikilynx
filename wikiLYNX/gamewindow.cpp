@@ -151,11 +151,13 @@ int GameWindow::missionAccomplished() {
         *dontKillMe = 1;
         QString timeTaken = QString::number(countup);
         //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
+
         congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk, this->clicks);
         QMessageBox::information(this, "wikiLYNX", "You Won!!!", QMessageBox::Ok);
         congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
         congratsView.show();
         ui->field->deleteLater();
+        emit gameEnded();
         close();
     }
 
@@ -178,6 +180,7 @@ int GameWindow::missionFailed(QString message){
     congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     ui->field->deleteLater();
+    emit gameEnded();
     close();
     return 0;
 }
@@ -187,22 +190,42 @@ void GameWindow::launchLogs() {
 
     QFile f(dirName+"/logs/"+instance+"/log.txt");
     f.open(QIODevice::ReadOnly);
-    auto logs = QString(f.readAll());
+    QStringList logs = QString(f.readAll()).split("\n");
+    logs.pop_back();
     f.close();
-    historyView.dontKillMe = (this->dontKillMe);
-    historyView.initialise(&logs);
-    historyView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
-    historyView.show();
+
+    QList<QString> header("Logs");
+    QList<QList<QString>> listData;
+    QList<QList<QString>> actionData;
+    for (int i = 0; i < logs.count(); i++) {
+        listData.append(QList<QString>(logs.value(i)));
+        actionData.append(QList<QString> ("history"));
+    }
+
+    baselist = new baseList;
+    baselist->dontKillMe = (this->dontKillMe);
+    baselist->initList("Logs", "", &header, &listData, &actionData);
+    baselist->show();
 
 }
 
 
 void GameWindow::viewCheckPoints() {
 
-    checkpointView.dontKillMe = (this->dontKillMe);
-    checkpointView.initialise(&levels, &chk);
-    checkpointView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
-    checkpointView.show();
+    QList<QString> header("Checkpoints");
+    QList<QList<QString>> listData;
+    QList<QList<QString>> actionData;
+    for (int i = 0; i < levels.count(); i++) {
+        listData.append(QList<QString>(levels.value(i)));
+        QList<QString> tmp = (i <= chk) ? QList<QString>("check_circle") : QList<QString>("cancel");
+        actionData.append(tmp);
+    }
+
+    baselist = new baseList;
+    baselist->dontKillMe = (this->dontKillMe);
+    baselist->initList("Checkpoints", "", &header, &listData, &actionData);
+    baselist->show();
+
 }
 
 
@@ -234,6 +257,7 @@ void GameWindow::endGame() {
     congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
     ui->field->deleteLater();
+    emit gameEnded();
     close();
 
 }

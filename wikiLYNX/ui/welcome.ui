@@ -27,8 +27,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>530</width>
-    <height>481</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
@@ -105,6 +105,14 @@
    </item>
    <item>
     <widget class="QLabel" name="label0">
+     <property name="font">
+      <font>
+       <family>Comfortaa</family>
+       <pointsize>8</pointsize>
+       <stylestrategy>PreferDefault</stylestrategy>
+       <hintingpreference>PreferNoHinting</hintingpreference>
+      </font>
+     </property>
      <property name="toolTip">
       <string/>
      </property>
@@ -165,21 +173,27 @@
            <property name="spacing">
             <number>6</number>
            </property>
-           <item row="3" column="1">
-            <widget class="QProgressBar" name="genRandPrg">
-             <property name="toolTip">
-              <string>A random level is being generated, please wait</string>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="levelSelector">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="maximum">
-              <number>0</number>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
              </property>
-             <property name="value">
-              <number>0</number>
+             <property name="text">
+              <string>Select Level</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="difficulty">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_2">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -188,8 +202,8 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>221</width>
-               <height>21</height>
+               <width>12</width>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -198,18 +212,36 @@
                <height>16777215</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>Courier Prime</family>
-               <stylestrategy>PreferDefault</stylestrategy>
-               <hintingpreference>PreferNoHinting</hintingpreference>
-              </font>
+             <property name="text">
+              <string>Difficulty: </string>
              </property>
-             <property name="toolTip">
-              <string>Difficulty of the selected level</string>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
              </property>
              <property name="text">
-              <string>level difficulty</string>
+              <string>Level: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -250,107 +282,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Checkpoints: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>12</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Difficulty: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="passcodeInput">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier Prime</family>
-               <stylestrategy>PreferDefault</stylestrategy>
-               <hintingpreference>PreferNoHinting</hintingpreference>
-              </font>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="toolTip">
-              <string>Select inbuilt or custom levels</string>
-             </property>
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-             <property name="insertPolicy">
-              <enum>QComboBox::InsertPolicy::InsertAlphabetically</enum>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLengthWithIcon</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Select Level</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="genRandTxt">
-             <property name="toolTip">
-              <string>A random level is being generated, please wait</string>
-             </property>
-             <property name="text">
-              <string>Generating Random...</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1">
             <widget class="QLabel" name="chk">
              <property name="sizePolicy">
@@ -375,13 +306,19 @@
              <property name="toolTip">
               <string>Number of checkpoints of the selected level</string>
              </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
+             </property>
              <property name="text">
               <string>number of checkpoints</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label1">
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -394,17 +331,72 @@
                <height>16777215</height>
               </size>
              </property>
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             <property name="text">
+              <string>Checkpoints: </string>
              </property>
-             <property name="autoFillBackground">
-              <bool>false</bool>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="difficulty">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>221</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Courier Prime</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Difficulty of the selected level</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
              </property>
              <property name="text">
-              <string>Level: </string>
+              <string>level difficulty</string>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="genRandTxt">
+             <property name="toolTip">
+              <string>A random level is being generated, please wait</string>
+             </property>
+             <property name="text">
+              <string>Generating Random...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QProgressBar" name="genRandPrg">
+             <property name="toolTip">
+              <string>A random level is being generated, please wait</string>
+             </property>
+             <property name="maximum">
+              <number>0</number>
+             </property>
+             <property name="value">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -462,6 +454,14 @@
              <width>16777215</width>
              <height>32</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Comfortaa</family>
+             <pointsize>8</pointsize>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
            </property>
            <property name="text">
             <string>Add Custom Levels in Settings!</string>
@@ -581,7 +581,14 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="1" column="1">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Icon Theme: </string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
           <widget class="QComboBox" name="iconThemeSelect">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an icon theme &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -594,13 +601,6 @@
            </property>
            <property name="frame">
             <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Icon Theme: </string>
            </property>
           </widget>
          </item>
@@ -894,7 +894,7 @@
         <string>Game Version</string>
        </property>
        <property name="text">
-        <string>Version: 1.5.5 (Stable)</string>
+        <string>Version: 1.5.6</string>
        </property>
       </widget>
      </item>

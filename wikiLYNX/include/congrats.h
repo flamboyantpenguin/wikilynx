@@ -10,9 +10,8 @@
 #include <QStandardPaths>
 #include <QDesktopServices>
 
-#include "viewstats.h"
-#include "viewhistory.h"
-#include "viewcheckpoint.h"
+#include "baselist.h"
+#include "leaderboard.h"
 
 #define theGrandPlayers 12
 
@@ -38,9 +37,10 @@ public:
 
 private:
     QJsonObject data;
-    viewHistory hView;
-    viewcheckpoint cView;
-    viewStats statsDialog;
+
+    baseList *baselist;
+    leaderboard *statsDialog;
+
     Ui::congrats *ui;
     QJsonObject statData;
     void genReport();
@@ -48,7 +48,6 @@ private:
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 protected:
-
     void closeEvent(QCloseEvent *event) override {
         emit closed();
     }

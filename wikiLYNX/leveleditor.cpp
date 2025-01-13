@@ -186,7 +186,9 @@ void levelEditor::updateChkList() {
 
         connect(widget, &levels::action0, this, &levelEditor::removeChk);
 
-        item->setSizeHint(widget->sizeHint());
+        auto tmp = ui->header->sizeHint();
+        tmp.setHeight(widget->sizeHint().height());
+        item->setSizeHint(tmp);
         ui->list->addItem(item);
         ui->list->setItemWidget(item, widget);
 

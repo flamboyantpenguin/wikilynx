@@ -56,8 +56,13 @@ void statusOverview::launchVersionInfo() {
 
 
 void statusOverview::developerHehe() {
-    this->hehe++;
 
-    if ((this->hehe % 7) == 0)
-        QMessageBox::information(this, "wikiLYNX", "What it takes to become a developer is the will to work on something for a good reason! Get started by checking the project on GitHub :)", QMessageBox::Ok);
+    this->hehe++;
+    QString msg = "Developer Options enabled!";
+
+    if ((this->hehe) == 10) {
+        emit devEnabled();
+        QMessageBox::information(this, "wikiLYNX", msg, QMessageBox::Ok);
+    }
+
 }

@@ -25,7 +25,7 @@ class getLevel : public QDialog
     Q_OBJECT
 
 public:
-    int initialise();
+    int initialise(QJsonObject*);
     explicit getLevel(QWidget *parent = nullptr);
     ~getLevel();
 
@@ -37,7 +37,7 @@ protected:
 
 private:
     int updateTable();
-    QJsonObject cfg, iData, levelData;
+    QJsonObject* iData, levelData;
     Ui::getLevel *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 

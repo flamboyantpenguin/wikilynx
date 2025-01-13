@@ -20,6 +20,7 @@ void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);
 int totem = 0;
 int dontKill = 1;
 QApplication *app;
+QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 
 int main(int argc, char *argv[]) {
@@ -28,11 +29,12 @@ int main(int argc, char *argv[]) {
 
     loadFonts();
 
-    loadingScreen banner;
-    banner.setWindowFlags(Qt::FramelessWindowHint);
-    banner.show();
-    app->exec();
-    //QThread::msleep(500);
+    if (QFile(dirName+"/wikilynx/.showLoadingScreen").exists()) {
+        loadingScreen banner;
+        banner.setWindowFlags(Qt::FramelessWindowHint);
+        banner.show();
+        app->exec();
+    }
 
     welcomeUI dialog;
 

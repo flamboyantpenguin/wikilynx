@@ -26,8 +26,8 @@ class levelManager : public QDialog
 public:
     explicit levelManager(QWidget *parent = nullptr);
     ~levelManager();
-    QJsonObject cfg, iData, uData;
-    void initialise();
+    QJsonObject cfg, cData, iData, uData;
+    void initialise(int launchType = 0);
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 
@@ -38,20 +38,24 @@ protected:
 
 private:
     Ui::levelManager *ui;
-    levelEditor levelEditorDialog;
-    getLevel getLevelDialog;
+    levelEditor *levelEditorDialog;
+    getLevel *getLevelDialog;
 
 
 private slots:
+    void listDoubleClickEmitter(QListWidgetItem*);
     void addLevel();
     void updateTable();
     void importLevels();
-    void exportLevels();
+    void exportLevels(QString codeName = "");
     void downloadLevel();
     void genRandomLevel();
     void removeLevel(QString code);
-    void saveData(QString fname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/gData.json");
+    void saveData(QString fname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/gData.json", QJsonObject* data = nullptr);
     void launchLevelEditor(QString code);
+
+signals:
+    void listDoubleClicked(QString lname);
 
 };
 

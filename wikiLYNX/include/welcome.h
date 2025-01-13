@@ -20,7 +20,7 @@
 #include "about.h"
 #include "congrats.h"
 #include "whatsnew.h"
-#include "viewstats.h"
+#include "leaderboard.h"
 #include "gamewindow.h"
 #include "leveleditor.h"
 #include "levelmanager.h"
@@ -87,14 +87,16 @@ private slots:
     void checkCustom();
     void addCustom();
     void genRandomLevel();
-    void showLevelInfo(int s = 0);
+    void launchLevelSelector();
     void showRules();
     void checkWorldEvent();
     void launchStatusOverview();
+    void toggleDevOptions();
 
 
 public slots:
     int initialise(int*);
+    void setLevel(QString lname);
     void setStatus(int);
 
 
@@ -108,16 +110,16 @@ private:
         { 4, "Meow|meow" },
     };
 
-    news newsDialog;
-    help helpDialog;
+    news *newsDialog;
+    help *helpDialog;
     GameWindow *game;
-    about aboutDialog;
-    whatsNew whatsNewDialog;
+    about *aboutDialog;
+    whatsNew *whatsNewDialog;
 
-    viewStats statsDialog;
-    levelManager editDialog;
-    levelEditor levelEditorDlg;
-    statusOverview overview;
+    leaderboard *statsDialog;
+    levelManager *editDialog;
+    levelEditor *levelEditorDlg;
+    statusOverview *overview;
 
     Ui::welcomeDialog *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
@@ -129,8 +131,8 @@ class checkUpdateWorker : public QObject  {
     Q_OBJECT
 
 public:
-    std::string version = "1.5.5-3";
-    std::string lVersion = "1.5.5-3";
+    std::string version = "1.5.6-1";
+    std::string lVersion = "1.5.6-1";
 
 public slots:
     void process();

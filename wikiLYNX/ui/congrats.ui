@@ -451,8 +451,7 @@
           <widget class="QPushButton" name="closeButton">
            <property name="font">
             <font>
-             <family>Noto Sans</family>
-             <pointsize>10</pointsize>
+             <family>Comfortaa</family>
              <bold>false</bold>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>

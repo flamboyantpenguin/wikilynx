@@ -1,12 +1,12 @@
-#include "include/viewstats.h"
-#include "ui/ui_viewstats.h"
+#include "include/leaderboard.h"
+#include "ui/ui_leaderboard.h"
 
-viewStats::viewStats(QWidget *parent)
+leaderboard::leaderboard(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::viewStats)
+    , ui(new Ui::leaderboard)
 {
     ui->setupUi(this);
-    connect(ui->closeButton, &QPushButton::clicked, this, &viewStats::close);
+    connect(ui->closeButton, &QPushButton::clicked, this, &leaderboard::close);
     connect(ui->levelSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(loadData(int)));
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
@@ -15,13 +15,13 @@ viewStats::viewStats(QWidget *parent)
 
 }
 
-viewStats::~viewStats()
+leaderboard::~leaderboard()
 {
     delete ui;
 }
 
 
-bool viewStats::isDarkTheme() {
+bool leaderboard::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -30,10 +30,11 @@ bool viewStats::isDarkTheme() {
 }
 
 
-int viewStats::initialise() {
+int leaderboard::initialise() {
 
     ui->levelSelect->clear();
     QFile statFile(dirName+"/.stat");
+    if (!(statFile.exists())) return 0;
     statFile.open(QIODevice::ReadOnly);
     if (statFile.isOpen()) {
         this->data = QJsonDocument::fromJson(statFile.readAll()).object();
@@ -44,7 +45,7 @@ int viewStats::initialise() {
 }
 
 
-void viewStats::loadData(int s) {
+void leaderboard::loadData(int s) {
 
     auto level = ui->levelSelect->currentText();
 

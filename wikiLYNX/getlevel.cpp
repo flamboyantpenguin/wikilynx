@@ -22,19 +22,10 @@ getLevel::~getLevel()
 }
 
 
-int getLevel::initialise() {
+int getLevel::initialise(QJsonObject* data) {
 
-    QFile lFile(dirName+"/gData.json");
-    if (lFile.isOpen()) lFile.close();
-    lFile.open(QIODevice::ReadOnly);
-    auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
-    lFile.close();
-
-    this->cfg = temp["info"].toObject();
-    this->iData = temp["data"].toObject();
-
+    this->iData = data;
     QNetworkAccessManager *manager = new QNetworkAccessManager();
-
 
     QUrl url("https://archive.dawn.org.in/DAWN/Projects/wikiLYNX/levels/.info");
     QNetworkRequest request(url);
@@ -52,11 +43,8 @@ int getLevel::initialise() {
     }
 
     ui->status->setText("Connected!");
-    QByteArray data = reply->readAll();
-    QJsonDocument json = QJsonDocument::fromJson(data);
-    QJsonObject jsonObject = json.object();
 
-    this->levelData = jsonObject;
+    this->levelData = QJsonDocument::fromJson(reply->readAll()).object();
 
     QListWidgetItem *item = new QListWidgetItem();
     auto widget = new levels(this);
@@ -91,7 +79,7 @@ int getLevel::updateTable() {
         QListWidgetItem *item = new QListWidgetItem();
         auto widget = new levels(this);
 
-        if (this->iData.contains(l[i])) {
+        if (iData->contains(l[i])) {
             widget->setItem(l[i], \
                 QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
                 QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
@@ -122,13 +110,12 @@ int getLevel::updateTable() {
 
 void getLevel::downloadLevel(QString code) {
 
-    if (this->iData.contains(code)) {
+    if (iData->contains(code)) {
         this->deleteLevel(code);
         return;
     }
 
     ui->progressBar->show();
-
     ui->status->setText("Downloading...");
 
     QNetworkAccessManager *manager = new QNetworkAccessManager();
@@ -149,29 +136,11 @@ void getLevel::downloadLevel(QString code) {
     }
 
     ui->status->setText("Loading Level...");
-    QByteArray data = reply->readAll();
-    QJsonDocument json = QJsonDocument::fromJson(data);
-    QJsonObject jsonObject = json.object();
 
-    QJsonDocument document;
-    QJsonObject temp;
+    QJsonObject jsonObject = QJsonDocument::fromJson(reply->readAll()).object();
 
-    iData.insert(code, jsonObject[code].toObject());
+    iData->insert(code, jsonObject[code].toObject());
 
-    temp.insert("info", this->cfg);
-    temp.insert("data", this->iData);
-    document.setObject(temp);
-
-    QFile::remove(dirName+"/gData.json");
-
-    QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file(dirName+"/gData.json");
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadWrite);
-    QTextStream iStream(&file);
-    iStream << bytes;
-    file.flush();
-    file.close();
     this->updateTable();
     ui->status->setText("Done!");
 
@@ -182,25 +151,7 @@ void getLevel::downloadLevel(QString code) {
 
 void getLevel::deleteLevel(QString code) {
 
-    QJsonDocument document;
-    QJsonObject temp;
-
-    iData.remove(code);
-
-    temp.insert("info", this->cfg);
-    temp.insert("data", this->iData);
-    document.setObject(temp);
-
-    QFile::remove(dirName+"/gData.json");
-
-    QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file(dirName+"/gData.json");
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadWrite);
-    QTextStream iStream(&file);
-    iStream << bytes;
-    file.flush();
-    file.close();
+    iData->remove(code);
     this->updateTable();
     ui->status->setText("Deleted!");
 

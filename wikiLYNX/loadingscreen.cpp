@@ -44,7 +44,7 @@ void loadingScreen::setPrg(int i) {
 void Worker::process() { // Process. Start processing data.
     for (int i = 0; i < 100; i++) {
         emit progress(i);
-        QThread::msleep(20);
+        QThread::msleep(10);
     }
     emit finished();
 }

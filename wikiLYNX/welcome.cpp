@@ -1,6 +1,8 @@
 #include "include/welcome.h"
 #include "ui/ui_welcome.h"
 
+#include "include/loadingscreen.h"
+
 namespace fs = std::filesystem;
 
 
@@ -25,8 +27,8 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::loadSettings);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
     connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
+    connect(ui->levelSelector, &QPushButton::clicked, this, &welcomeUI::launchLevelSelector);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::launchStatusOverview);
-    connect(ui->passcodeInput, SIGNAL(activated(int)), this, SLOT(showLevelInfo(int)));
 
     ui->initButton->setFocus();
 
@@ -55,12 +57,13 @@ int welcomeUI::initialise(int *totem) {
     int tip = generator->bounded(0, this->tips.count());
     ui->label0->setText(tips[tip]);
 
+    // Check Debug mode
+    if (cfg.value("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
+
     theme = this->cfg["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
-
-    //qDebug() << logo;
 
     connect(ui->killToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
     connect(ui->allowSitesToggle, &QCheckBox::checkStateChanged, this, &welcomeUI::updateSettings);
@@ -92,13 +95,22 @@ bool welcomeUI::isDarkTheme() {
 }
 
 
-void welcomeUI::showLevelInfo(int s) {
+void welcomeUI::launchLevelSelector() {
 
-    QString lName = ui->passcodeInput->currentText();
+    editDialog = new levelManager;
+    editDialog->initialise(1);
+    connect(editDialog, &levelManager::listDoubleClicked, this, &welcomeUI::setLevel);
+    connect(editDialog, &levelManager::listDoubleClicked, editDialog, &levelManager::close);
+    editDialog->show();
+
+}
+
+
+void welcomeUI::setLevel(QString lName) {
+    ui->levelSelector->setText(lName);
     auto level = data[lName].toObject();
-    ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
     ui->difficulty->setText(level["difficulty"].toString());
-
+    ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
 }
 
 
@@ -107,14 +119,19 @@ int welcomeUI::startGame() {
     QString hex = "#" +this->base["availableIconThemes"].toString().split(",")[ui->iconThemeSelect->currentIndex()].split("#")[!(this->isDarkTheme()) + 1];
     QString bHex = (isDarkTheme()) ? "#000000" : "#ffffff";
 
-    QString passcode = ui->passcodeInput->currentText();
-    if (!data.contains(passcode)) {
+
+    // KDEPlatformTheme automatically adds accelerators to QPushButton
+    // https://stackoverflow.com/questions/32688153/how-to-disable-automatic-mnemonics-in-a-qt-application-on-kde
+    // https://bugs.kde.org/show_bug.cgi?id=337491
+    QString passcode = ui->levelSelector->text().remove(QRegularExpression("[\\&]"));
+
+    if (!data.contains(passcode) || passcode == "Select Level") {
         QMessageBox::critical(this, "wikiLYNX", "Invalid Code!", QMessageBox::Ok);
         return 1;
     }
 
-    this->game = new GameWindow;
-    connect(&(this->game->congratsView), &congrats::closed, this, &welcomeUI::reset);
+    game = new GameWindow;
+    connect(&(game->congratsView), &congrats::closed, this, &welcomeUI::reset);
     if (!(ui->keyboardToggle->isChecked())) this->grabKeyboard();
     this->hide();
     auto gData = data[passcode].toObject();
@@ -164,7 +181,9 @@ void welcomeUI::loadSettings() {
 
 void welcomeUI::updateUI() {
 
-    //ui->iconThemeSelect->clear();
+    ui->chk->setText("checkpoints");
+    ui->difficulty->setText("difficulty");
+    ui->levelSelector->setText("Select Level");
 
     for (int i = 0; i < this->base["availableIconThemes"].toString().split(",").count(); ++i) {
         ui->iconThemeSelect->addItem(this->base["availableIconThemes"].toString().split(",")[i].split("#")[0]);
@@ -176,16 +195,16 @@ void welcomeUI::updateUI() {
     *totemofUndying = cfg["totemOfUndying"].toInt();
     ui->killToggle->setChecked(cfg["totemOfUndying"].toInt());
 
-    ui->passcodeInput->clear();
-    ui->passcodeInput->addItems(this->data.keys());
-    ui->passcodeInput->removeItem(ui->passcodeInput->findText("debug"));
+    // Check this
+    //ui->passcodeInput->removeItem(ui->passcodeInput->findText("debug"));
+
 }
 
 
 void welcomeUI::updateSettings() {
     *totemofUndying = ui->killToggle->isChecked();
-    this->cfg["allowReference"] = ui->allowSitesToggle->isChecked();
     this->cfg["iconTheme"] = ui->iconThemeSelect->currentText();
+    this->cfg["allowReference"] = ui->allowSitesToggle->isChecked();
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     theme = this->cfg["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
@@ -206,7 +225,6 @@ void welcomeUI::saveSettings() {
 
     QJsonObject d = temp["data"].toObject();
 
-    //this->cfg = this->cfg;
     this->cfg["totemOfUndying"] = *totemofUndying;
 
     QJsonDocument document;
@@ -227,9 +245,6 @@ void welcomeUI::saveSettings() {
 
 
 void welcomeUI::checkCustom() {
-
-    const char* file = (dirName+"/gData.json").toStdString().c_str();
-    struct stat sb;
 
     if (!(QFile(dirName+"/gData.json").exists())) {
 
@@ -260,37 +275,45 @@ void welcomeUI::checkCustom() {
 
 
 void welcomeUI::addCustom() {
-    editDialog.initialise();
-    editDialog.show();
+    editDialog = new levelManager;
+    editDialog->initialise();
+    editDialog->show();
 }
 
 
 void welcomeUI::genRandomLevel() {
-    this->setCursor(Qt::WaitCursor);
+
+    levelEditorDlg = new levelEditor;
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     ui->genRandTxt->show();
     ui->genRandPrg->show();
-    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
-    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
-    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
-    disconnect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
-    levelEditorDlg.genRandomLevel(&(this->data), "random");
-    levelEditorDlg.showMaximized();
-    levelEditorDlg.hide();
+    disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
+    disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
+    disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
+    disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, this->levelEditorDlg, &levelEditor::close);
+    levelEditorDlg->genRandomLevel(&(this->data), "random");
+    levelEditorDlg->showMaximized();
+    levelEditorDlg->hide();
     this->setFocus();
-    ui->passcodeInput->addItem("random");
-    ui->passcodeInput->setCurrentText("random");
-    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::unsetCursor);
-    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
-    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, &this->levelEditorDlg, &levelEditor::close);
-    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
-    connect(&this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
+
+    ui->chk->setText("random");
+    ui->difficulty->setText("random");
+    ui->levelSelector->setText("random");
+
+    connect(this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
+    connect(this->levelEditorDlg, &levelEditor::genRandomFinished, &QApplication::restoreOverrideCursor);
+    connect(this->levelEditorDlg, &levelEditor::genRandomFinished, this->levelEditorDlg, &levelEditor::close);
+    connect(this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandTxt, &QProgressBar::hide);
+    connect(this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
 
 }
 
 
 void welcomeUI::showRules() {
-    helpDialog.initialise();
-    helpDialog.showMaximized();
+    helpDialog = new help;
+    helpDialog->initialise();
+    helpDialog->showMaximized();
 }
 
 
@@ -311,7 +334,8 @@ void welcomeUI::clearLogs() {
 void welcomeUI::setStatus(int c) {
 
     if (this->base["version"].toString() > this->cfg["version"].toString()) {
-        whatsNewDialog.show();
+        whatsNewDialog = new whatsNew;
+        whatsNewDialog->show();
         this->cfg["version"] = this->base["version"].toString();
         this->saveSettings();
     }
@@ -319,8 +343,23 @@ void welcomeUI::setStatus(int c) {
     ui->status->setText(code[c].split("|")[0]);
     ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].split("|")[1]));
     if (c != 0) checkWorldEvent();
-    overview.initialise(c);
+    overview = new statusOverview;
+    overview->initialise(c);
+    connect(overview, &statusOverview::devEnabled, this, &welcomeUI::toggleDevOptions);
     return;
+}
+
+
+void welcomeUI::toggleDevOptions() {
+    if (cfg.value("debug").toBool()) {
+        ui->version->setText(ui->version->text().remove(QRegularExpression(" \\(.*\\)")));
+        cfg["debug"] = false;
+    }
+    else {
+        ui->version->setText(ui->version->text() + " (Debug Mode)");
+        cfg["debug"] = true;
+    }
+    saveSettings();
 }
 
 
@@ -338,24 +377,30 @@ void welcomeUI::checkWorldEvent() {
 
 
 void welcomeUI::showStats() {
-    statsDialog.initialise();
-    statsDialog.showMaximized();
+    statsDialog = new leaderboard;
+    statsDialog->initialise();
+    statsDialog->showMaximized();
 }
 
 
 void welcomeUI::launchStatusOverview() {
-    //overiDataview.initialise();
-    overview.show();
+    if (overview != nullptr) overview->show();
 }
 
 
 void welcomeUI::showNews() {
-    newsDialog.initialise();
-    newsDialog.show();
+    newsDialog = new news;
+    newsDialog->initialise();
+    newsDialog->show();
 }
 
 void welcomeUI::showAbout() {
-    aboutDialog.show();
+    aboutDialog = new about;
+    if (cfg.value("debug").toBool()) {
+        aboutDialog->initDevMode();
+        connect(aboutDialog, &about::turnOffDev, this, &welcomeUI::toggleDevOptions);
+    }
+    aboutDialog->show();
 }
 
 

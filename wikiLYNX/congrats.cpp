@@ -72,13 +72,24 @@ void congrats::initialise(QString tTaken, QString sTime, QString eTime, QString 
 
 void congrats::viewhistory() {
 
-    QFile lFile(dirName+"/logs/"+this->data["instanceName"].toString()+"/log.txt");
-    lFile.open(QIODevice::ReadOnly);
-    QString logs = QString(lFile.readAll());
-    lFile.close();
-    hView.dontKillMe = nullptr;
-    hView.initialise(&logs);
-    hView.show();
+    QFile f(dirName+"/logs/"+data["instanceName"].toString()+"/log.txt");
+    f.open(QIODevice::ReadOnly);
+    QStringList logs = QString(f.readAll()).split("\n");
+    logs.pop_back();
+    f.close();
+
+    QList<QString> header("Logs");
+    QList<QList<QString>> listData;
+    QList<QList<QString>> actionData;
+    for (int i = 0; i < logs.count(); i++) {
+        listData.append(QList<QString>(logs.value(i)));
+        actionData.append(QList<QString> ("history"));
+    }
+
+    baselist = new baseList;
+    baselist->dontKillMe = nullptr;
+    baselist->initList("Logs", "", &header, &listData, &actionData);
+    baselist->show();
 }
 
 
@@ -136,6 +147,7 @@ void congrats::updateStats() {
 }
 
 void congrats::showStats() {
-    statsDialog.initialise();
-    statsDialog.show();
+    statsDialog = new leaderboard;
+    statsDialog->initialise();
+    statsDialog->show();
 }

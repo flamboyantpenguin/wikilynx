@@ -13,10 +13,8 @@
 #include <QtMultimedia/QAudioOutput>
 #include <QtMultimedia/QMediaPlayer>
 
-
+#include "baselist.h"
 #include "congrats.h"
-#include "viewhistory.h"
-#include "viewcheckpoint.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -35,6 +33,7 @@ public:
     ~GameWindow();
 
     int *dontKillMe;
+    baseList *baselist;
     congrats congratsView;
     int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
@@ -54,9 +53,7 @@ private:
     QJsonObject gameData;
     QString gamer, level;
     QString aTime, instance;
-    viewHistory historyView;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    viewcheckpoint checkpointView;
     QTimer *timer = new QTimer(this);
     QString wikiURL = "https://wikipedia.org/wiki/";
 
@@ -70,6 +67,9 @@ private slots:
     void updateCountdown();
     void initAction();
     void endGame();
+
+signals:
+    void gameEnded();
 
 };
 

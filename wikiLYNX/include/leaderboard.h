@@ -1,5 +1,5 @@
-#ifndef VIEWSTATS_H
-#define VIEWSTATS_H
+#ifndef LEADERBOARD_H
+#define LEADERBOARD_H
 
 #include <QFile>
 #include <QDialog>
@@ -8,26 +8,26 @@
 #include <QStandardPaths>
 
 namespace Ui {
-class viewStats;
+class leaderboard;
 }
 
-class viewStats : public QDialog
+class leaderboard : public QDialog
 {
     Q_OBJECT
 
 public:
     int initialise();
-    explicit viewStats(QWidget *parent = nullptr);
-    ~viewStats();
+    explicit leaderboard(QWidget *parent = nullptr);
+    ~leaderboard();
 
 private:
     bool isDarkTheme();
     QJsonObject data;
-    Ui::viewStats *ui;
+    Ui::leaderboard *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 private slots:
     void loadData(int s = 0);
 };
 
-#endif // VIEWSTATS_H
+#endif // LEADERBOARD_H
