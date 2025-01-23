@@ -62,7 +62,7 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prg
     this->levels = (*gData)["levels"].toString().split(" ");
 
     ui->progressBar->setValue(0);
-    if (this->gameData["wiki?"].toInt()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
+    if (this->gameData["wiki?"].toBool()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
     else ui->field->load(QUrl::fromUserInput(this->levels[0]));
 
     timer->start(100);
@@ -126,7 +126,7 @@ void GameWindow::initAction() {
     }
 
     QString uUrl = url.toString();
-    if (this->gameData["wiki?"].toInt()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
+    if (this->gameData["wiki?"].toBool()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
 
     if (uUrl == levels[chk+1]) {
         this->missionAccomplished();
@@ -217,7 +217,7 @@ void GameWindow::viewCheckPoints() {
     QList<QList<QString>> actionData;
     for (int i = 0; i < levels.count(); i++) {
         listData.append(QList<QString>(levels.value(i)));
-        QList<QString> tmp = (i <= chk) ? QList<QString>("check_circle") : QList<QString>("cancel");
+        QList<QString> tmp = (i <= chk) ? QList<QString>("online") : QList<QString>("offline");
         actionData.append(tmp);
     }
 

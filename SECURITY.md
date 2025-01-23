@@ -4,7 +4,7 @@ wikiLYNX is a Qt C++ app based on Qt WebEngine. It is a simple browser with some
 
 ## Supported Versions
 
-We expect users to be on the latest version. Thus, we won't be supporting older releases. The currently supported version is `wikiLYNX 1.5.5`.
+We expect users to be on the latest version. Thus, we won't be supporting older releases. The currently supported version is `wikiLYNX 1.5.6`.
 
 ## Reporting a Vulnerability
 

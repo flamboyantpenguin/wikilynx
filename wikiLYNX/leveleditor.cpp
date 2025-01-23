@@ -18,7 +18,6 @@ levelEditor::levelEditor(QWidget *parent) :
     connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
     connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
     connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
-    //connect(ui->list, &QListWidget::itemActivated, this, &levelEditor::updateIndex);
     connect(ui->url, &QLineEdit::returnPressed, this, &levelEditor::loadURL);
     connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
     connect(ui->webEngineView, &QWebEngineView::loadFinished, this, &levelEditor::genRandomReload);
@@ -38,21 +37,21 @@ levelEditor::~levelEditor()
 }
 
 
-void levelEditor::initialise(QJsonObject *lData, QString cde) {
+void levelEditor::initialise(ScoreSheet *gameData, QString cde) {
 
     this->code = cde;
     this->genRandom = -1;
-    this->gameData = lData;
-    this->levelInfo = (*this->gameData)[code].toObject();
+    this->gameData = gameData;
+    this->levelInfo = this->gameData->getLevel(cde);
     this->chkData = this->levelInfo["levels"].toString().split(" ");
 
     if (this->levelInfo["levels"].toString().isEmpty()) this->chkData.pop_front();
 
     ui->code->setText(code);
     ui->difficulty->setText(levelInfo["difficulty"].toString());
-    this->levelInfo["clicks"] = (*this->gameData)[code].toObject()["clicks"].toInt();
+    this->levelInfo["clicks"] = this->levelInfo["clicks"].toInt();
     ui->clicks->setText(QString::number(this->levelInfo["clicks"].toInt()));
-    this->levelInfo["time"] = (*this->gameData)[code].toObject()["time"].toDouble();
+    this->levelInfo["time"] = this->levelInfo["time"].toDouble();
     ui->timeTaken->setText(QString::number(this->levelInfo["time"].toDouble()));
 
     this->updateHeader();
@@ -60,13 +59,13 @@ void levelEditor::initialise(QJsonObject *lData, QString cde) {
     this->updateBrowser();
 
     if (!this->levelInfo.contains("wiki?")) ui->isWiki->setChecked(true);
-    else if (!(this->levelInfo["wiki?"].toInt())) ui->isWiki->setChecked(false);
+    else if (!(this->levelInfo["wiki?"].toBool())) ui->isWiki->setChecked(false);
     else ui->isWiki->setChecked(true);
 
 }
 
 
-void levelEditor::genRandomLevel(QJsonObject *lData, QString code) {
+void levelEditor::genRandomLevel(ScoreSheet *gameData, QString code) {
 
     ui->genRandIndicatorPrg->show();
     ui->genRandIndicatorText->show();
@@ -79,17 +78,15 @@ void levelEditor::genRandomLevel(QJsonObject *lData, QString code) {
     genRandom = (generator->bounded(2, 11)) + 1;
 
     this->code = code;
-    this->gameData = lData;
+    this->gameData = gameData;
 
     ui->code->setText(code);
     ui->difficulty->setText("genRandom");
     ui->clicks->setText(QString::number(0));
     ui->timeTaken->setText(QString::number(0));
 
-    this->levelInfo["wiki?"] = 1;
+    this->levelInfo["wiki?"] = true;
     ui->isWiki->setChecked(true);
-
-    //this->saveData();
 
     this->updateHeader();
     this->updateChkList();
@@ -152,9 +149,9 @@ void levelEditor::updateExtras() {
 
 void levelEditor::updateCodeName() {
 
-    this->gameData->remove(code);
+    this->gameData->removeLevel(code);
     this->code = ui->code->text();
-    this->gameData->insert(code, this->levelInfo);
+    this->gameData->updateLevel(code, this->levelInfo);
     //this->saveData();
 
 }
@@ -162,7 +159,7 @@ void levelEditor::updateCodeName() {
 
 void levelEditor::updateIsWiki() {
 
-    this->levelInfo["wiki?"] = (int) ui->isWiki->isChecked();
+    this->levelInfo["wiki?"] = ui->isWiki->isChecked();
     //this->saveData();
 
 }
@@ -217,7 +214,7 @@ void levelEditor::loadURL() {
 
 void levelEditor::previewArticle(QListWidgetItem *i) {
     auto itemWidget = (levels *) ui->list->itemWidget(i);
-    if (this->levelInfo["wiki?"].toInt()) {
+    if (this->levelInfo["wiki?"].toBool()) {
         ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org/wiki/"+itemWidget->getItem(0)));
     }
     else {
@@ -249,11 +246,9 @@ void levelEditor::updateIndex() {
 
 
 void levelEditor::saveData() {
-
     this->updateIndex();
     this->levelInfo["levels"] = this->chkData.join(" ");
-    (*(this->gameData))[this->code] = this->levelInfo;
-
+    this->gameData->updateLevel(this->code, this->levelInfo);
 }
 
 
@@ -263,7 +258,7 @@ void levelEditor::addChk() {
 
     if (!QUrl::fromUserInput(ui->url->text()).isValid()) return;
 
-    if (this->levelInfo["wiki?"].toInt()) {
+    if (this->levelInfo["wiki?"].toBool()) {
         if (url.contains("wikipedia.org/wiki")) url = url.split("wikipedia.org/wiki/")[1];
         else ui->isWiki->setChecked(false);
     }
@@ -277,10 +272,9 @@ void levelEditor::addChk() {
 
 
 void levelEditor::removeChk(QString chk) {
-
-    this->chkData.removeAt(chk.toInt());
+    this->chkData.removeAll(chk);
+    //this->chkData.removeAt(chk.toInt());
     this->updateChkList();
     this->updateHeader();
     this->saveData();
-
 }

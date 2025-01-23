@@ -510,6 +510,7 @@
            <property name="font">
             <font>
              <family>Courier Prime</family>
+             <pointsize>11</pointsize>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>

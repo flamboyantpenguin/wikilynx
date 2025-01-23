@@ -290,7 +290,6 @@
          <property name="font">
           <font>
            <family>Comfortaa</family>
-           <pointsize>10</pointsize>
            <bold>false</bold>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>

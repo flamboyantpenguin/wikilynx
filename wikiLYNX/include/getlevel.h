@@ -15,6 +15,7 @@
 
 
 #include "levels.h"
+#include "scoresheet.h"
 
 namespace Ui {
 class getLevel;
@@ -25,7 +26,7 @@ class getLevel : public QDialog
     Q_OBJECT
 
 public:
-    int initialise(QJsonObject*);
+    int initialise(ScoreSheet*);
     explicit getLevel(QWidget *parent = nullptr);
     ~getLevel();
 
@@ -37,18 +38,19 @@ protected:
 
 private:
     int updateTable();
-    QJsonObject* iData, levelData;
+    ScoreSheet *gameData;
+    QJsonObject levelData;
     Ui::getLevel *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 private slots:
     void launchHelp();
     void setEditStatus();
-    void deleteLevel(QString);
     void downloadLevel(QString);
 
 signals:
     void closed();
+    void levelsUpdated();
 };
 
 #endif // GETLEVEL_H

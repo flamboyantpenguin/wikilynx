@@ -6,15 +6,11 @@
 namespace fs = std::filesystem;
 
 
-welcomeUI::welcomeUI(QDialog *parent)
-    : QDialog(parent)
-    , ui(new Ui::welcomeDialog)
-{
+welcomeUI::welcomeUI(QDialog *parent) : QDialog(parent), ui(new Ui::welcomeDialog) {
 
     ui->setupUi(this);
     ui->genRandTxt->hide();
     ui->genRandPrg->hide();
-    ui->editLevelButton->setEnabled(false);
     connect(ui->newsButton, &QPushButton::clicked, this, &welcomeUI::showNews);
     connect(ui->initButton, &QPushButton::clicked, this, &welcomeUI::startGame);
     connect(ui->helpButton, &QPushButton::clicked, this, &welcomeUI::showRules);
@@ -24,7 +20,6 @@ welcomeUI::welcomeUI(QDialog *parent)
     connect(ui->statsButton, &QPushButton::clicked, this, &welcomeUI::showStats);
     connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::updateUI);
     connect(ui->editLevelButton, &QPushButton::clicked, this, &welcomeUI::addCustom);
-    connect(ui->refreshButton, &QPushButton::clicked, this, &welcomeUI::loadSettings);
     connect(ui->statusIndicator, &QPushButton::clicked, this, &welcomeUI::checkStatus);
     connect(ui->genRandomLevel, &QPushButton::clicked, this, &welcomeUI::genRandomLevel);
     connect(ui->levelSelector, &QPushButton::clicked, this, &welcomeUI::launchLevelSelector);
@@ -36,13 +31,17 @@ welcomeUI::welcomeUI(QDialog *parent)
 
 }
 
+welcomeUI::~welcomeUI() {
+    delete ui;
+}
+
 
 int welcomeUI::initialise(int *totem) {
 
     fs::create_directories(dirName.toStdString());
     this->totemofUndying = totem;
 
-    loadSettings();
+    gameData = new ScoreSheet(":/cfg/gameData.json", dirName+"/gData.json");
     updateUI();
 
     // Set icon theme
@@ -58,9 +57,9 @@ int welcomeUI::initialise(int *totem) {
     ui->label0->setText(tips[tip]);
 
     // Check Debug mode
-    if (cfg.value("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
+    if (gameData->getSettings().value("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
 
-    theme = this->cfg["iconTheme"].toString() + theme;
+    theme = gameData->getSettings()["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
@@ -98,7 +97,7 @@ bool welcomeUI::isDarkTheme() {
 void welcomeUI::launchLevelSelector() {
 
     editDialog = new levelManager;
-    editDialog->initialise(1);
+    editDialog->initialise(&gameData, 1);
     connect(editDialog, &levelManager::listDoubleClicked, this, &welcomeUI::setLevel);
     connect(editDialog, &levelManager::listDoubleClicked, editDialog, &levelManager::close);
     editDialog->show();
@@ -108,7 +107,7 @@ void welcomeUI::launchLevelSelector() {
 
 void welcomeUI::setLevel(QString lName) {
     ui->levelSelector->setText(lName);
-    auto level = data[lName].toObject();
+    QJsonObject level = gameData->getLevels()[lName].toObject();
     ui->difficulty->setText(level["difficulty"].toString());
     ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
 }
@@ -116,16 +115,15 @@ void welcomeUI::setLevel(QString lName) {
 
 int welcomeUI::startGame() {
 
-    QString hex = "#" +this->base["availableIconThemes"].toString().split(",")[ui->iconThemeSelect->currentIndex()].split("#")[!(this->isDarkTheme()) + 1];
+    QString hex = "#" +gameData->iconThemes.split(",")[ui->iconThemeSelect->currentIndex()].split("#")[!(this->isDarkTheme()) + 1];
     QString bHex = (isDarkTheme()) ? "#000000" : "#ffffff";
-
 
     // KDEPlatformTheme automatically adds accelerators to QPushButton
     // https://stackoverflow.com/questions/32688153/how-to-disable-automatic-mnemonics-in-a-qt-application-on-kde
     // https://bugs.kde.org/show_bug.cgi?id=337491
     QString passcode = ui->levelSelector->text().remove(QRegularExpression("[\\&]"));
 
-    if (!data.contains(passcode) || passcode == "Select Level") {
+    if (!gameData->getLevels().contains(passcode) || passcode == "Select Level") {
         QMessageBox::critical(this, "wikiLYNX", "Invalid Code!", QMessageBox::Ok);
         return 1;
     }
@@ -134,8 +132,10 @@ int welcomeUI::startGame() {
     connect(&(game->congratsView), &congrats::closed, this, &welcomeUI::reset);
     if (!(ui->keyboardToggle->isChecked())) this->grabKeyboard();
     this->hide();
-    auto gData = data[passcode].toObject();
-    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, this->cfg["allowReference"].toInt(), ui->playerName->text(), passcode);
+
+    QJsonObject gData = gameData->getLevel(passcode);
+
+    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, gameData->getSettings()["notwiki?"].toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
@@ -154,129 +154,41 @@ void welcomeUI::reset() {
 }
 
 
-void welcomeUI::loadSettings() {
-
-    this->checkCustom();
-
-    QFile cFile(":/cfg/gameData.json");
-    ui->editLevelButton->setEnabled(true);
-    cFile.open(QIODevice::ReadOnly);
-    auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
-    this->base = iData["base"].toObject();
-    iData = iData["data"].toObject();
-    QFile sFile(dirName+"/gData.json");
-    sFile.open(QIODevice::ReadOnly);
-    auto nData = QJsonDocument::fromJson(sFile.readAll()).object();
-    this->cfg = nData["info"].toObject();
-    nData = nData["data"].toObject();
-    auto d = iData.toVariantMap();
-    d.insert(nData.toVariantMap());
-    this->data = QJsonObject::fromVariantMap(d);
-    sFile.flush();
-    sFile.close();
-    cFile.close();
-
-}
-
-
 void welcomeUI::updateUI() {
 
     ui->chk->setText("checkpoints");
     ui->difficulty->setText("difficulty");
     ui->levelSelector->setText("Select Level");
 
-    for (int i = 0; i < this->base["availableIconThemes"].toString().split(",").count(); ++i) {
-        ui->iconThemeSelect->addItem(this->base["availableIconThemes"].toString().split(",")[i].split("#")[0]);
+    for (int i = 0; i < gameData->iconThemes.split(",").count(); ++i) {
+        ui->iconThemeSelect->addItem(gameData->iconThemes.split(",")[i].split("#")[0]);
     }
-    ui->iconThemeSelect->setCurrentText(this->cfg["iconTheme"].toString());
+    ui->iconThemeSelect->setCurrentText(gameData->getSettings()["iconTheme"].toString());
 
-    ui->allowSitesToggle->setChecked(this->cfg["allowReference"].toInt());
+    ui->allowSitesToggle->setChecked(gameData->getSettings()["allowReference"].toBool());
 
-    *totemofUndying = cfg["totemOfUndying"].toInt();
-    ui->killToggle->setChecked(cfg["totemOfUndying"].toInt());
-
-    // Check this
-    //ui->passcodeInput->removeItem(ui->passcodeInput->findText("debug"));
+    ui->killToggle->setChecked(gameData->getSettings()["totemOfUndying"].toBool());
 
 }
 
 
 void welcomeUI::updateSettings() {
-    *totemofUndying = ui->killToggle->isChecked();
-    this->cfg["iconTheme"] = ui->iconThemeSelect->currentText();
-    this->cfg["allowReference"] = ui->allowSitesToggle->isChecked();
+    gameData->updateSettings("totemOfUndying", ui->killToggle->isChecked());
+    //gameData->settings["totemOfUndying"] = ui->killToggle->isChecked();
+    gameData->updateSettings("iconTheme", ui->iconThemeSelect->currentText());
+    //gameData->settings["iconTheme"] = ui->iconThemeSelect->currentText();
+    gameData->updateSettings("allowReference", ui->allowSitesToggle->isChecked());
+    //gameData->settings["allowReference"] = ui->allowSitesToggle->isChecked();
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    theme = this->cfg["iconTheme"].toString() + theme;
+    theme = gameData->getSettings()["iconTheme"].toString() + theme;
     QIcon::setThemeName(theme);
     this->update();
-    saveSettings();
-}
-
-
-void welcomeUI::saveSettings() {
-
-    QFile lFile(dirName+"/gData.json");
-    if (lFile.isOpen())
-        lFile.close();
-    lFile.open(QIODevice::ReadOnly);
-    auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
-    lFile.flush();
-    lFile.close();
-
-    QJsonObject d = temp["data"].toObject();
-
-    this->cfg["totemOfUndying"] = *totemofUndying;
-
-    QJsonDocument document;
-    QJsonObject nContent;
-
-    nContent.insert("info", this->cfg);
-    nContent.insert("data", d);
-
-    document.setObject(nContent);
-
-    QFile::remove(dirName+"/gData.json");
-    QFile file(dirName+"/gData.json");
-    file.open(QIODevice::ReadWrite);
-    file.write(document.toJson());
-    file.flush();
-    file.close();
-}
-
-
-void welcomeUI::checkCustom() {
-
-    if (!(QFile(dirName+"/gData.json").exists())) {
-
-        QFile cFile(":/cfg/gameData.json");
-        ui->editLevelButton->setEnabled(true);
-        cFile.open(QIODevice::ReadOnly);
-        auto iData = QJsonDocument::fromJson(cFile.readAll()).object();
-        this->cfg = iData["info"].toObject();
-        //this->cfg["iconTheme"] = "green";
-
-        QJsonDocument document;
-        QJsonObject temp;
-
-        temp.insert("info", this->cfg);
-        document.setObject(temp);
-
-        QFile::remove(dirName+"/gData.json");
-
-        QByteArray bytes = document.toJson(QJsonDocument::Indented);
-        QFile file(dirName+"/gData.json");
-        file.open(QIODevice::ReadWrite);
-        QTextStream iStream(&file);
-        iStream << bytes;
-        file.flush();
-        file.close();
-    }
 }
 
 
 void welcomeUI::addCustom() {
     editDialog = new levelManager;
-    editDialog->initialise();
+    editDialog->initialise(&gameData);
     editDialog->show();
 }
 
@@ -292,7 +204,7 @@ void welcomeUI::genRandomLevel() {
     disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, ui->genRandPrg, &QProgressBar::hide);
     disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, this, &welcomeUI::startGame);
     disconnect(this->levelEditorDlg, &levelEditor::genRandomFinished, this->levelEditorDlg, &levelEditor::close);
-    levelEditorDlg->genRandomLevel(&(this->data), "random");
+    levelEditorDlg->genRandomLevel(gameData, "random");
     levelEditorDlg->showMaximized();
     levelEditorDlg->hide();
     this->setFocus();
@@ -333,11 +245,10 @@ void welcomeUI::clearLogs() {
 
 void welcomeUI::setStatus(int c) {
 
-    if (this->base["version"].toString() > this->cfg["version"].toString()) {
+    if (gameData->version > gameData->getSettings()["version"].toString()) {
         whatsNewDialog = new whatsNew;
         whatsNewDialog->show();
-        this->cfg["version"] = this->base["version"].toString();
-        this->saveSettings();
+        gameData->updateSettings("version", gameData->version);
     }
 
     ui->status->setText(code[c].split("|")[0]);
@@ -351,15 +262,15 @@ void welcomeUI::setStatus(int c) {
 
 
 void welcomeUI::toggleDevOptions() {
-    if (cfg.value("debug").toBool()) {
+    if (gameData->getSettings().value("debug").toBool()) {
         ui->version->setText(ui->version->text().remove(QRegularExpression(" \\(.*\\)")));
-        cfg["debug"] = false;
+        gameData->updateSettings("debug", false);
     }
     else {
         ui->version->setText(ui->version->text() + " (Debug Mode)");
-        cfg["debug"] = true;
+        gameData->updateSettings("debug", true);
     }
-    saveSettings();
+    gameData->saveData();
 }
 
 
@@ -396,7 +307,7 @@ void welcomeUI::showNews() {
 
 void welcomeUI::showAbout() {
     aboutDialog = new about;
-    if (cfg.value("debug").toBool()) {
+    if (gameData->getSettings().value("debug").toBool()) {
         aboutDialog->initDevMode();
         connect(aboutDialog, &about::turnOffDev, this, &welcomeUI::toggleDevOptions);
     }

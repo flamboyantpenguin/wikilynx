@@ -22,9 +22,9 @@ getLevel::~getLevel()
 }
 
 
-int getLevel::initialise(QJsonObject* data) {
+int getLevel::initialise(ScoreSheet* gameData) {
 
-    this->iData = data;
+    this->gameData = gameData;
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
     QUrl url("https://archive.dawn.org.in/DAWN/Projects/wikiLYNX/levels/.info");
@@ -79,7 +79,7 @@ int getLevel::updateTable() {
         QListWidgetItem *item = new QListWidgetItem();
         auto widget = new levels(this);
 
-        if (iData->contains(l[i])) {
+        if (gameData->getLevels().contains(l[i])) {
             widget->setItem(l[i], \
                 QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
                 QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
@@ -110,8 +110,14 @@ int getLevel::updateTable() {
 
 void getLevel::downloadLevel(QString code) {
 
-    if (iData->contains(code)) {
-        this->deleteLevel(code);
+    ui->list->setDisabled(true);
+
+    if (gameData->getLevels().contains(code)) {
+        gameData->removeLevel(code);
+        ui->status->setText("Deleted!");
+        emit levelsUpdated();
+        this->updateTable();
+        ui->list->setEnabled(true);
         return;
     }
 
@@ -139,21 +145,15 @@ void getLevel::downloadLevel(QString code) {
 
     QJsonObject jsonObject = QJsonDocument::fromJson(reply->readAll()).object();
 
-    iData->insert(code, jsonObject[code].toObject());
+    gameData->updateLevel(code, jsonObject[code].toObject());
 
     this->updateTable();
     ui->status->setText("Done!");
 
     ui->progressBar->hide();
+    emit levelsUpdated();
 
-}
-
-
-void getLevel::deleteLevel(QString code) {
-
-    iData->remove(code);
-    this->updateTable();
-    ui->status->setText("Deleted!");
+    ui->list->setEnabled(true);
 
 }
 

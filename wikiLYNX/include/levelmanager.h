@@ -13,6 +13,7 @@
 #include "levels.h"
 #include "leveleditor.h"
 #include "getlevel.h"
+#include "scoresheet.h"
 
 
 namespace Ui {
@@ -26,8 +27,7 @@ class levelManager : public QDialog
 public:
     explicit levelManager(QWidget *parent = nullptr);
     ~levelManager();
-    QJsonObject cfg, cData, iData, uData;
-    void initialise(int launchType = 0);
+    void initialise(ScoreSheet **gameData, int launchType = 0);
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 
@@ -37,25 +37,26 @@ protected:
     }
 
 private:
+    ScoreSheet *gameData;
     Ui::levelManager *ui;
     levelEditor *levelEditorDialog;
     getLevel *getLevelDialog;
 
 
 private slots:
-    void listDoubleClickEmitter(QListWidgetItem*);
     void addLevel();
     void updateTable();
     void importLevels();
-    void exportLevels(QString codeName = "");
     void downloadLevel();
     void genRandomLevel();
-    void removeLevel(QString code);
-    void saveData(QString fname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/gData.json", QJsonObject* data = nullptr);
-    void launchLevelEditor(QString code);
+    void removeLevel(QString);
+    void launchLevelEditor(QString);
+    void exportLevels(QString codeName = "");
+    void listDoubleClickEmitter(QListWidgetItem*);
+
 
 signals:
-    void listDoubleClicked(QString lname);
+    void listDoubleClicked(QString);
 
 };
 

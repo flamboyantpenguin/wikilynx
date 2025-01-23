@@ -25,6 +25,7 @@
 #include "leveleditor.h"
 #include "levelmanager.h"
 #include "statusoverview.h"
+#include "scoresheet.h"
 
 
 namespace Ui {
@@ -32,8 +33,7 @@ class welcomeDialog;
 }
 
 
-class welcomeUI : public QDialog
-{
+class welcomeUI : public QDialog {
     Q_OBJECT
 
 
@@ -41,11 +41,11 @@ public:
 
     QThread *thread;
     explicit welcomeUI(QDialog *parent = nullptr);
+    ~welcomeUI();
 
     int *dontKillParse0;
     int *totemofUndying;
     QString theme;
-    QJsonObject data, cfg, base;
 
 private:
 
@@ -81,10 +81,7 @@ private slots:
     void clearLogs();
     int startGame();
     void updateUI();
-    void loadSettings();
     void updateSettings();
-    void saveSettings();
-    void checkCustom();
     void addCustom();
     void genRandomLevel();
     void launchLevelSelector();
@@ -120,6 +117,8 @@ private:
     levelManager *editDialog;
     levelEditor *levelEditorDlg;
     statusOverview *overview;
+
+    ScoreSheet *gameData;
 
     Ui::welcomeDialog *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);

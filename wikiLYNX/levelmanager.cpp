@@ -28,16 +28,9 @@ levelManager::~levelManager()
 }
 
 
-void levelManager::initialise(int launchType) {
+void levelManager::initialise(ScoreSheet **gameData, int launchType) {
 
-    QFile lFile(dirName+"/gData.json");
-    if (lFile.isOpen()) lFile.close();
-    lFile.open(QIODevice::ReadOnly);
-    auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
-    lFile.close();
-
-    cfg = temp["info"].toObject();
-    cData = temp["data"].toObject();
+    this->gameData = *gameData;
 
     QListWidgetItem *item = new QListWidgetItem();
     auto widget = new levels(this);
@@ -55,7 +48,7 @@ void levelManager::initialise(int launchType) {
 
     if (launchType) {
         ui->title->setText("Select Level");
-        ui->tip->setText("Double a click a level to select it");
+        ui->tip->setText("Double click a level to select it");
         ui->showInbuiltLevelToggle->setChecked(true);
         updateTable();
         connect(ui->list, &QListWidget::itemDoubleClicked, this, &levelManager::listDoubleClickEmitter);
@@ -75,7 +68,8 @@ void levelManager::listDoubleClickEmitter(QListWidgetItem* item) {
 void levelManager::updateTable() {
 
     ui->list->clear();
-    auto l = this->cData.keys();
+    QJsonObject cLevels = gameData->getLevels("custom");
+    auto l = cLevels.keys();
 
     for (int i = 0; i < l.count(); i++) {
 
@@ -83,10 +77,10 @@ void levelManager::updateTable() {
         auto widget = new levels(this);
 
         widget->setItem(l[i], \
-            QString::number(cData[l[i]].toObject()["time"].toDouble()), \
-            QString::number(cData[l[i]].toObject()["clicks"].toInt()), \
-            QString::number(cData[l[i]].toObject()["levels"].toString().split(" ").count()), \
-            cData[l[i]].toObject()["difficulty"].toString(), \
+            QString::number(cLevels[l[i]].toObject()["time"].toDouble()), \
+            QString::number(cLevels[l[i]].toObject()["clicks"].toInt()), \
+            QString::number(cLevels[l[i]].toObject()["levels"].toString().split(" ").count()), \
+            cLevels[l[i]].toObject()["difficulty"].toString(), \
             "edit", "export", "delete");
 
         connect(widget, &levels::action0, this, &levelManager::launchLevelEditor);
@@ -101,27 +95,21 @@ void levelManager::updateTable() {
 
     if (ui->showInbuiltLevelToggle->isChecked()) {
 
-        QFile lFile(":/cfg/gameData.json");
-        if (lFile.isOpen()) lFile.close();
-        lFile.open(QIODevice::ReadOnly);
-        auto temp = QJsonDocument::fromJson(lFile.readAll()).object();
-        lFile.close();
-        iData = temp["data"].toObject();
-
-        auto l1 = iData.keys();
+        QJsonObject iLevels = gameData->getLevels("inbuilt");
+        auto l1 = iLevels.keys();
 
         for (int i = 0; i < l1.count(); i++) {
 
-            if (!(cfg.value("debug").toBool()) && l1[i] == "debug") continue;
+            if (!(gameData->getSettings().value("debug").toBool()) && l1[i] == "debug") continue;
 
             QListWidgetItem *item = new QListWidgetItem();
             auto widget = new levels(this);
 
             widget->setItem(l1[i], \
-                            QString::number(iData[l1[i]].toObject()["time"].toDouble()), \
-                            QString::number(iData[l1[i]].toObject()["clicks"].toInt()), \
-                            QString::number(iData[l1[i]].toObject()["levels"].toString().split(" ").count()), \
-                            iData[l1[i]].toObject()["difficulty"].toString(), \
+                            QString::number(iLevels[l1[i]].toObject()["time"].toDouble()), \
+                            QString::number(iLevels[l1[i]].toObject()["clicks"].toInt()), \
+                            QString::number(iLevels[l1[i]].toObject()["levels"].toString().split(" ").count()), \
+                            iLevels[l1[i]].toObject()["difficulty"].toString(), \
                             "neutralOnline", "export", "neutralOnline");
 
             //connect(widget, &levels::action0, this, &levelManager::launchLevelEditor);
@@ -143,59 +131,31 @@ void levelManager::addLevel() {
     QString lname = "level$date";
     lname.replace("$date", QDateTime::currentDateTime().toString("yyMMddHHmm"));
     levelEditorDialog = new levelEditor;
-    levelEditorDialog->initialise(&(this->cData), lname);
-    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(saveData()));
+    levelEditorDialog->initialise(gameData, lname);
+    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(updateTable()));
     levelEditorDialog->showMaximized();
 }
 
 
 void levelManager::genRandomLevel() {
     levelEditorDialog = new levelEditor;
-    levelEditorDialog->genRandomLevel(&(this->cData), "rand"+QDateTime::currentDateTime().toString("yyMMddHHmmss"));
-    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(saveData()));
+    levelEditorDialog->genRandomLevel(gameData, "rand"+QDateTime::currentDateTime().toString("yyMMddHHmmss"));
+    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(updateTable()));
     levelEditorDialog->showMaximized();
-}
-
-
-void levelManager::saveData(QString fname, QJsonObject* data) {
-
-    if (data == nullptr) {
-        data = &cData;
-    }
-
-    QJsonDocument document;
-    QJsonObject temp;
-
-    temp.insert("info", cfg);
-    temp.insert("data", *data);
-    document.setObject(temp);
-
-    QFile::remove(fname);
-
-    QByteArray bytes = document.toJson( QJsonDocument::Indented );
-    QFile file(fname);
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadWrite);
-    QTextStream iStream(&file);
-    iStream << bytes;
-    file.flush();
-    file.close();
-    this->initialise();
-
 }
 
 
 void levelManager::launchLevelEditor(QString code) {
     levelEditorDialog = new levelEditor;
-    levelEditorDialog->initialise(&(cData), code);
-    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(saveData()));
+    levelEditorDialog->initialise(gameData, code);
+    connect(levelEditorDialog, SIGNAL(closed()), this, SLOT(updateTable()));
     levelEditorDialog->showMaximized();
 }
 
 
 void levelManager::removeLevel(QString code) {
-    cData.remove(code);
-    this->saveData();
+    gameData->removeLevel(code);
+    this->updateTable();
 }
 
 
@@ -213,14 +173,9 @@ void levelManager::importLevels() {
     QFile lFile(filename);
     if (lFile.isOpen()) lFile.close();
     lFile.open(QIODevice::ReadOnly);
-    auto importData = QJsonDocument::fromJson(lFile.readAll()).object();
+    gameData->addLevels(QJsonDocument::fromJson(lFile.readAll()).object());
     lFile.close();
 
-    QVariantMap map = cData.toVariantMap();
-    map.insert(importData["data"].toObject().toVariantMap());
-    this->cData = QJsonObject::fromVariantMap(map);
-
-    this->saveData();
     this->updateTable();
 
 }
@@ -230,18 +185,19 @@ void levelManager::exportLevels(QString codeName) {
 
     QJsonObject* exportData = new QJsonObject;
     if (!(codeName.isEmpty())) {
-        if (iData.contains(codeName)) exportData->insert(codeName, iData[codeName].toObject());
-        else if (cData.contains(codeName)) exportData->insert(codeName, cData[codeName].toObject());
+        exportData->insert(codeName, gameData->getLevel(codeName));
     }
-    else {
+    else if (ui->list->selectedItems().count()) {
         QList selection = ui->list->selectedItems();
         for (int i = 0; i < selection.count(); i++) {
             auto item = selection[i];
             auto itemWidget = (levels *) ui->list->itemWidget(item);
             QString code = itemWidget->getItem(0);
-            if (iData.contains(code)) exportData->insert(code, iData[code].toObject());
-            else if (cData.contains(code)) exportData->insert(code, cData[code].toObject());
+            exportData->insert(code, gameData->getLevel(code));
         }
+    }
+    else {
+        *exportData = gameData->getLevels("custom");
     }
 
     QFileDialog dialog(this);
@@ -254,7 +210,7 @@ void levelManager::exportLevels(QString codeName) {
 
     if (filename == "") return;
 
-    this->saveData(filename, exportData);
+    gameData->saveData(&filename, nullptr, exportData);
 
 }
 
@@ -262,8 +218,8 @@ void levelManager::exportLevels(QString codeName) {
 void levelManager::downloadLevel() {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     getLevelDialog = new getLevel;
-    getLevelDialog->initialise(&cData);
-    connect(getLevelDialog, SIGNAL(closed()), this, SLOT(saveData()));
+    getLevelDialog->initialise(gameData);
+    connect(getLevelDialog, SIGNAL(levelsUpdated()), this, SLOT(updateTable()));
     getLevelDialog->show();
     QApplication::restoreOverrideCursor();
 }

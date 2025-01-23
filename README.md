@@ -107,9 +107,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.5.5
+wikiLYNX 1.5.6
 
-Last Updated: 03-01-2025 <Happy New Year!>
+Last Updated: 14-01-2025
 Made by DAWN/ペンギン
 ```
 

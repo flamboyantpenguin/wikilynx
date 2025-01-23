@@ -41,8 +41,7 @@ set(PROJECT_SOURCES
         include/levels.h levels.cpp ui/levels.ui
         include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
         include/baselist.h baselist.cpp ui/baselist.ui
-
-
+        include/scoresheet.h scoresheet.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

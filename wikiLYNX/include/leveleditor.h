@@ -10,6 +10,7 @@
 #include <QDesktopServices>
 
 #include "levels.h"
+#include "scoresheet.h"
 
 namespace Ui {
 class levelEditor;
@@ -21,12 +22,8 @@ class levelEditor : public QDialog
 
 public:
     explicit levelEditor(QWidget *parent = nullptr);
-    QString code;
-    QJsonObject levelInfo;
-    QStringList chkData;
-    QJsonObject *gameData;
-    void genRandomLevel(QJsonObject*, QString);
-    void initialise(QJsonObject *, QString);
+    void initialise(ScoreSheet *, QString);
+    void genRandomLevel(ScoreSheet*, QString);
     ~levelEditor();
 
 protected:
@@ -39,6 +36,10 @@ protected:
 
 
 private:
+    QString code;
+    QJsonObject levelInfo;
+    QStringList chkData;
+    ScoreSheet *gameData;
     int genRandom = 0;
     Ui::levelEditor *ui;
 

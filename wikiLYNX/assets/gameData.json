@@ -1,81 +1,81 @@
 {
     "info": {
         "iconTheme": "green",
-        "allowReference": 0,
-        "totemOfUndying": 0,
-        "version": "v1.5.5"
+        "notwiki?": false,
+        "totemOfUndying": true,
+        "version": "v1.5.6-1"
     },
     "base": {
-        "version": "v1.5.5",
-        "availableIconThemes": "green#75fb4c#48752c,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
+        "version": "v1.5.6-1",
+        "iconThemes": "green#75fb4c#48752c,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
     },
     "data": {
         "flyingduck": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "easy",
             "time": 600,
             "clicks" : 7,
             "levels": "7_Up United_States Federal_government_of_the_United_States President_of_the_United_States Joe_Biden"
         },
         "pingus": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "easy",
             "time": 600,
             "clicks" : 0,
             "levels": "Shah_Rukh_Khan Taj_Mahal Roman_Empire Solar_System"
         },
         "cattomosfet!": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "medium",
             "time": 900,
             "clicks" : 0,
-            "levels": "Paper Pollution Snow_White_and_the_Seven_Dwarfs_(1937_film) Isaac_Newton Diode"
+            "levels": "Paper Pollution Snow_White_and_the_Seven_Dwarfs_(true937_film) Isaac_Newton Diode"
         },
         "blisteringbarnacles!": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "hard",
             "time": 850,
             "levels": "Nintendo ARCH_Motorcycle V8_engine Captain_Haddock"
         },
         "debug": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "debug",
-            "time": 10,
+            "time": 100,
             "levels": "Pencil Paper Cat"
         },
         "youseewhatyouthinkyousee": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "bonus",
-            "time": 1200,
+            "time": 0,
             "clicks" : 0,
             "levels": "Cat MOSFET"
         },
         "tranquility": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "medium",
             "time": 800,
             "clicks" : 0,
             "levels": "Silence Studio_Ghibli Light"
         },
         "toinfinityandbeyond": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "easy",
-            "time": 1000,
-            "clicks" : 100,
-            "levels": "Buzz_Lightyear Apollo_11 Grand_Theft_Auto:_San_Andreas The_Good,_the_Bad_and_the_Ugly Mandalorians"
+            "time": 0,
+            "clicks" : 0,
+            "levels": "Buzz_Lightyear Apollo_truetrue Grand_Theft_Auto:_San_Andreas The_Good,_the_Bad_and_the_Ugly Mandalorians"
         },
         "wikiLYNX?": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "hard",
-            "time": 1200,
-            "clicks" : 100,
+            "time": 0,
+            "clicks" : 0,
             "levels": "Wikipedia Qt_(software) Chromium_(web_browser) University Speedrunning Arch_Linux Nokia Rajagiri_School_of_Engineering_%26_Technology_(Autonomous) Love C%2B%2B Team Optimus_Prime"
         },
         "star": {
-            "wiki?": 1,
+            "wiki?": true,
             "difficulty": "special",
-            "time": 1200,
-            "clicks" : 100,
+            "time": 0,
+            "clicks" : 0,
             "levels": "Star Classroom Eye_contact Smile Letter_(message) Love"
         }
     }
