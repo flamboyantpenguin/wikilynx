@@ -8,24 +8,23 @@
 
 
 namespace Ui {
-class levels;
+class Levels;
 }
 
-class levels : public QWidget
-{
+class Levels : public QWidget {
     Q_OBJECT
 
 public:
-    explicit levels(QWidget *parent = nullptr);
-    ~levels();
+    explicit Levels(QWidget *parent = nullptr);
+    ~Levels();
 
     int initialise();
     QString getItem(int n = 0);
-    void setItem(QString, QString, QString, QString, QString, QString, QString, QString);
+    void setItem(QStringList, QStringList);
 
 private:
-    Ui::levels *ui;
-    QList <QLabel*> labels;
+    Ui::Levels *ui;
+    QList <QLabel*> labelUI;
     QList <QPushButton*> actions;
 
 private slots:

@@ -2,27 +2,23 @@
 #include "ui/ui_getlevel.h"
 
 
-getLevel::getLevel(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::getLevel)
-{
+GetLevel::GetLevel(QWidget *parent) : QDialog(parent), ui(new Ui::GetLevel) {
     ui->setupUi(this);
     ui->progressBar->hide();
-    connect(ui->exitButton, &QPushButton::clicked, this, &getLevel::close);
-    connect(ui->list, &QListWidget::clicked, this, &getLevel::setEditStatus);
-    connect(ui->helpButton, &QPushButton::clicked, this, &getLevel::launchHelp);
-    connect(ui->refreshButton, &QPushButton::clicked, this, &getLevel::updateTable);
+    connect(ui->exitButton, &QPushButton::clicked, this, &GetLevel::close);
+    connect(ui->list, &QListWidget::clicked, this, &GetLevel::setEditStatus);
+    connect(ui->helpButton, &QPushButton::clicked, this, &GetLevel::launchHelp);
+    connect(ui->refreshButton, &QPushButton::clicked, this, &GetLevel::updateTable);
 
 }
 
 
-getLevel::~getLevel()
-{
+GetLevel::~GetLevel() {
     delete ui;
 }
 
 
-int getLevel::initialise(ScoreSheet* gameData) {
+int GetLevel::initialise(ScoreSheet* gameData) {
 
     this->gameData = gameData;
     QNetworkAccessManager *manager = new QNetworkAccessManager();
@@ -47,18 +43,16 @@ int getLevel::initialise(ScoreSheet* gameData) {
     this->levelData = QJsonDocument::fromJson(reply->readAll()).object();
 
     QListWidgetItem *item = new QListWidgetItem();
-    auto widget = new levels(this);
+    auto widget = new Levels(this);
 
     item->setSizeHint(widget->sizeHint());
     ui->header->addItem(item);
     ui->header->setItemWidget(item, widget);
 
-    widget->setItem("Code Name", \
-                    "Time", \
-                    "Clicks", \
-                    "Checkpoints", \
-                    "Difficulty", \
-                    "neutralOnline", "", "");
+    QStringList itemData = {"Code Name", "Time", "Clicks", "Checkpoints", "Difficulty"};
+    QStringList icons = {"neutralOnline"};
+
+    widget->setItem(itemData, icons);
 
     this->updateTable();
 
@@ -69,7 +63,7 @@ int getLevel::initialise(ScoreSheet* gameData) {
 }
 
 
-int getLevel::updateTable() {
+int GetLevel::updateTable() {
 
     auto l = this->levelData.keys();
     ui->list->clear();
@@ -77,26 +71,25 @@ int getLevel::updateTable() {
     for (int i = 0; i < this->levelData.count(); i++) {
 
         QListWidgetItem *item = new QListWidgetItem();
-        auto widget = new levels(this);
+        auto widget = new Levels(this);
 
-        if (gameData->getLevels().contains(l[i])) {
-            widget->setItem(l[i], \
-                QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
-                QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
-                QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
-                this->levelData[l[i]].toObject()["difficulty"].toString(), \
-                "delete", "", "");
+        QStringList itemData = {
+            QString::number(this->levelData[l[i]].toObject()["time"].toInt()),
+            QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()),
+            QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()),
+            this->levelData[l[i]].toObject()["difficulty"].toString()
+        };
+
+        if (gameData->GetLevels().contains(l[i])) {
+            QStringList icons = {"delete"};
+            widget->setItem(itemData, icons);
         }
         else {
-            widget->setItem(l[i], \
-                QString::number(this->levelData[l[i]].toObject()["time"].toInt()), \
-                QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()), \
-                QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()), \
-                this->levelData[l[i]].toObject()["difficulty"].toString(), \
-                "download", "", "");
+            QStringList icons = {"download"};
+            widget->setItem(itemData, icons);
         }
 
-        connect(widget, &levels::action0, this, &getLevel::downloadLevel);
+        connect(widget, &Levels::action0, this, &GetLevel::downloadLevel);
 
         item->setSizeHint(widget->sizeHint());
         ui->list->addItem(item);
@@ -108,11 +101,11 @@ int getLevel::updateTable() {
 }
 
 
-void getLevel::downloadLevel(QString code) {
+void GetLevel::downloadLevel(QString code) {
 
     ui->list->setDisabled(true);
 
-    if (gameData->getLevels().contains(code)) {
+    if (gameData->GetLevels().contains(code)) {
         gameData->removeLevel(code);
         ui->status->setText("Deleted!");
         emit levelsUpdated();
@@ -158,12 +151,12 @@ void getLevel::downloadLevel(QString code) {
 }
 
 
-void getLevel::setEditStatus() {
+void GetLevel::setEditStatus() {
     ui->status->setText("");
 }
 
 
-void getLevel::launchHelp()   {
+void GetLevel::launchHelp()   {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#downloading-levels"));
 }
 

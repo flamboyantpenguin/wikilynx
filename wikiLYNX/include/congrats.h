@@ -11,41 +11,31 @@
 #include <QDesktopServices>
 
 #include "baselist.h"
-#include "leaderboard.h"
-
-#define theGrandPlayers 12
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class congrats;
+class Congrats;
 }
 QT_END_NAMESPACE
 
-class congrats : public QDialog
-{
+class Congrats : public QDialog {
     Q_OBJECT
 
 public:
-    explicit congrats(QWidget *parent = nullptr);
-    ~congrats();
+    explicit Congrats(QWidget *parent = nullptr);
+    ~Congrats();
 
     //int chk;
     //int tChk;
-    int chk;
-    void initialise(QString, QString, QString, QString, QString, QString, QString, int, int);
+    void initialise(QJsonObject, QString);
 
 private:
     QJsonObject data;
 
-    baseList *baselist;
-    leaderboard *statsDialog;
+    BaseList *baselist;
 
-    Ui::congrats *ui;
-    QJsonObject statData;
-    void genReport();
-    void updateStats();
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    Ui::Congrats *ui;
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -54,7 +44,6 @@ protected:
 
 
 private slots:
-    void showStats();
     void viewhistory();
     bool isDarkTheme();
     void launchFeedBack();

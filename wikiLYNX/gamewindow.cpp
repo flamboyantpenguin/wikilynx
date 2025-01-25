@@ -5,18 +5,15 @@
 namespace fs = std::filesystem;
 
 
-GameWindow::GameWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::GameWindow)
-{
+GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::GameWindow) {
 
     ui->setupUi(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
-    connect(ui->exitButton, SIGNAL(clicked(bool)), this, SLOT(endGame()));
+    connect(ui->exitButton, SIGNAL(clicked()), this, SLOT(endGame()));
     connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
-    connect(ui->showHistory, SIGNAL(clicked(bool)), this, SLOT(launchLogs()));
-    connect(ui->viewChkButton, SIGNAL(clicked(bool)), this, SLOT(viewCheckPoints()));
+    connect(ui->showHistory, SIGNAL(clicked()), this, SLOT(launchLogs()));
+    connect(ui->viewChkButton, SIGNAL(clicked()), this, SLOT(viewCheckPoints()));
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
@@ -25,8 +22,7 @@ GameWindow::GameWindow(QWidget *parent)
 }
 
 
-GameWindow::~GameWindow()
-{
+GameWindow::~GameWindow() {
     delete ui;
 }
 
@@ -68,9 +64,7 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prg
     timer->start(100);
     this->playSound("init.wav");
 
-    this->instance = "instance"+QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
-    this->aTime = QTime::currentTime().toString("hh:mm:ss.zzz");
-    fs::create_directories(dirName.toStdString()+"/logs/"+instance.toStdString());
+    this->instance = QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
 
     return 0;
 
@@ -86,36 +80,37 @@ void GameWindow::updateCountdown() {
     if ((this->gameData["time"].toDouble() != 0.00)) counterText.replace("$t", "/ " + QString::number(this->gameData["time"].toDouble(), 'f', 2));
     else counterText.replace("$t", "");
 
-    ui->clock->setText(QTime::currentTime().toString("hh:mm:ss"));
     ui->counter->setText(counterText);
+    ui->clock->setText(QTime::currentTime().toString("hh:mm:ss"));
 
-    if (gameData["time"].toDouble() > 0 && countup >= gameData["time"].toDouble()) {
-        this->missionFailed("Timeout!");
-    }
+    if (gameData["time"].toDouble() > 0 && countup >= gameData["time"].toDouble()) endGame("Timeout!");
 
-    if (gameData["clicks"].toInt() > 0 && clicks > gameData["clicks"].toDouble()) {
-        this->missionFailed("Max Clicks Reached!");
-    }
+    if (gameData["clicks"].toInt() > 0 && clicks > gameData["clicks"].toDouble()) endGame("MaxClicks!");
 
 }
 
 
 void GameWindow::initAction() {
 
-    this->clicks++;
 
+    // Append Clicks
+    this->clicks++;
+    auto url = ui->field->page()->url();
+    QString clickTime = QDateTime::currentDateTime().toString("yyyy/MM/dd|hh:mm:ss.z");
+
+    // Update UI
     QString clicksText = "$c $t";
     clicksText.replace("$c", QString::number(clicks));
     if (this->gameData["clicks"].toInt()) clicksText.replace("$t", "/ " + QString::number(this->gameData["clicks"].toInt()));
     else clicksText.replace("$t", "");
     ui->clicks->setText(clicksText);
 
-    auto url = ui->field->page()->url();
-    std::ofstream out(dirName.toStdString()+"/logs/"+instance.toStdString()+"/log.txt", std::ios_base::app);
-    out << QDateTime::currentDateTime().toString("yyyy/MM/dd|hh:mm:ss.zzz").toStdString()+">>\t";
-    out << url.toString().toStdString()+"\n";
-    out.close();
 
+    // Append Log
+    this->log.append(clickTime+">>\t"+url.toString());
+
+
+    // Check Rule Violation
     if (!alD && !(url.toString().split("://")[1].split("/")[0].endsWith("wikipedia.org"))) {
             this->playSound("error.wav");
             *dontKillMe = 1;
@@ -125,86 +120,69 @@ void GameWindow::initAction() {
             return;
     }
 
+    // Check Game Status
     QString uUrl = url.toString();
     if (this->gameData["wiki?"].toBool()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
 
     if (uUrl == levels[chk+1]) {
-        this->missionAccomplished();
+        chk++;
+        int prg = (chk/ (float) (this->levels.count() - 1)) *100;
+        ui->progressBar->setValue(prg);
+        if (prg == 100) endGame("Win!");
     }
     if (chk+1 < levels.count()) ui->statusbar->showMessage("Next Checkpoint: "+levels[chk+1]);
 
 }
 
 
-int GameWindow::missionAccomplished() {
-
-    chk++;
-    int prg = (chk/ (float) (this->levels.count() - 1)) *100;
-    ui->progressBar->setValue(prg);
-
-    if (prg == 100) {
-
-        this->playSound("yay.wav");
-
-        auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
-        ui->statusbar->showMessage("You won!!!");
-        *dontKillMe = 1;
-        QString timeTaken = QString::number(countup);
-        //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-
-        congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Passed", this->gamer, this->level, this->chk, this->clicks);
-        QMessageBox::information(this, "wikiLYNX", "You Won!!!", QMessageBox::Ok);
-        congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
-        congratsView.show();
-        ui->field->deleteLater();
-        emit gameEnded();
-        close();
-    }
-
-    return 0;
-
-}
-
-
-int GameWindow::missionFailed(QString message){
-
-    this->playSound("error.wav");
+int GameWindow::endGame(QString message) {
 
     timer->stop();
-    auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
+
+    QJsonObject gameStat;
+
+    gameStat["log"] = (QString) log.join("\n").toUtf8().toBase64();
+    gameStat["level"] = level;
+    gameStat["gameStatus"] = message;
+    gameStat["playerName"] = gamer;
+    gameStat["clicks"] = QString::number(clicks);
+    gameStat["chk"] = QString::number(chk);
+    gameStat["timeTaken"] = QString::number(countup, 'f', 4);
+
     *dontKillMe = 1;
-    QString timeTaken = QString::number(countup);
-    //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-    QMessageBox::critical(this, "wikiLYNX", message, QMessageBox::Ok);
-    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Failed", this->gamer, this->level, this->chk, this->clicks);
-    congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
+    if (message != "You Won!") this->playSound("error.wav");
+    else this->playSound("yay.wav");
+
+    ui->statusbar->showMessage(code[message]);
+    if (message != "Aborted!") QMessageBox::critical(this, "wikiLYNX", code[message], QMessageBox::Ok);
+
+    // Launch Congrats Dialog
+    congratsView.initialise(gameStat, message);
+    //congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
     congratsView.show();
-    ui->field->deleteLater();
-    emit gameEnded();
+    ui->field->close();
+    //ui->field->deleteLater();
+    emit gameEnded(instance, gameStat);
     close();
     return 0;
+
 }
 
 
 void GameWindow::launchLogs() {
 
-    QFile f(dirName+"/logs/"+instance+"/log.txt");
-    f.open(QIODevice::ReadOnly);
-    QStringList logs = QString(f.readAll()).split("\n");
-    logs.pop_back();
-    f.close();
-
     QList<QString> header("Logs");
-    QList<QList<QString>> listData;
-    QList<QList<QString>> actionData;
-    for (int i = 0; i < logs.count(); i++) {
-        listData.append(QList<QString>(logs.value(i)));
+    QList<QStringList> listData;
+    QList<QStringList> actionData;
+    QStringList headerButtons = {"neutralOnline"};
+    for (int i = 0; i < log.count(); i++) {
+        listData.append(QList<QString>(log.value(i)));
         actionData.append(QList<QString> ("history"));
     }
 
-    baselist = new baseList;
+    baselist = new BaseList;
     baselist->dontKillMe = (this->dontKillMe);
-    baselist->initList("Logs", "", &header, &listData, &actionData);
+    baselist->initList("Logs", "", &header, &headerButtons, &listData, &actionData);
     baselist->show();
 
 }
@@ -213,17 +191,18 @@ void GameWindow::launchLogs() {
 void GameWindow::viewCheckPoints() {
 
     QList<QString> header("Checkpoints");
-    QList<QList<QString>> listData;
-    QList<QList<QString>> actionData;
+    QList<QStringList> listData;
+    QList<QStringList> actionData;
+    QStringList headerButtons = {"neutralOnline"};
     for (int i = 0; i < levels.count(); i++) {
         listData.append(QList<QString>(levels.value(i)));
         QList<QString> tmp = (i <= chk) ? QList<QString>("online") : QList<QString>("offline");
         actionData.append(tmp);
     }
 
-    baselist = new baseList;
+    baselist = new BaseList;
     baselist->dontKillMe = (this->dontKillMe);
-    baselist->initList("Checkpoints", "", &header, &listData, &actionData);
+    baselist->initList("Checkpoints", "", &header, &headerButtons, &listData, &actionData);
     baselist->show();
 
 }
@@ -241,23 +220,4 @@ void GameWindow::playSound(QString sound) {
         player->setVolume(50);
     #endif
     player->play();
-}
-
-
-void GameWindow::endGame() {
-
-    this->playSound("error.wav");
-
-    timer->stop();
-    auto cTime = QTime::currentTime().toString("hh:mm:ss.zzz");
-    *dontKillMe = 1;
-    QString timeTaken = QString::number(countup);
-    //ui->field->printToPdf("./gData/logs/"+instance+"/fPage.pdf");
-    congratsView.initialise(timeTaken, this->aTime, cTime, this->instance, "Aborted", this->gamer, this->level, this->chk, this->clicks);
-    congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
-    congratsView.show();
-    ui->field->deleteLater();
-    emit gameEnded();
-    close();
-
 }

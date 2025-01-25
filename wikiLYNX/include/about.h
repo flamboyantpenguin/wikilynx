@@ -11,21 +11,20 @@
 #include "terms.h"
 
 namespace Ui {
-class about;
+class About;
 }
 
-class about : public QDialog
-{
+class About : public QDialog {
     Q_OBJECT
 
 public:
     void initDevMode();
-    explicit about(QWidget *parent = nullptr);
-    ~about();
+    explicit About(QWidget *parent = nullptr);
+    ~About();
 
 private:
-    Ui::about *ui;
-    terms *termsDialog;
+    Ui::About *ui;
+    Terms *termsDialog;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 private slots:

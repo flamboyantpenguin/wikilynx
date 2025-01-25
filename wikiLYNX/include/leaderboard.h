@@ -7,24 +7,24 @@
 #include <QJsonObject>
 #include <QStandardPaths>
 
+#include "scoresheet.h"
+
 namespace Ui {
-class leaderboard;
+class LeaderBoard;
 }
 
-class leaderboard : public QDialog
-{
+class LeaderBoard : public QDialog {
     Q_OBJECT
 
 public:
-    int initialise();
-    explicit leaderboard(QWidget *parent = nullptr);
-    ~leaderboard();
+    int initialise(ScoreSheet *);
+    explicit LeaderBoard(QWidget *parent = nullptr);
+    ~LeaderBoard();
 
 private:
     bool isDarkTheme();
-    QJsonObject data;
-    Ui::leaderboard *ui;
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    ScoreSheet *gameData;
+    Ui::LeaderBoard *ui;
 
 private slots:
     void loadData(int s = 0);

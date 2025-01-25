@@ -17,19 +17,16 @@
 
 
 namespace Ui {
-class levelManager;
+class LevelManager;
 }
 
-class levelManager : public QDialog
-{
+class LevelManager : public QDialog {
     Q_OBJECT
 
 public:
-    explicit levelManager(QWidget *parent = nullptr);
-    ~levelManager();
+    explicit LevelManager(QWidget *parent = nullptr);
+    ~LevelManager();
     void initialise(ScoreSheet **gameData, int launchType = 0);
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -38,9 +35,9 @@ protected:
 
 private:
     ScoreSheet *gameData;
-    Ui::levelManager *ui;
-    levelEditor *levelEditorDialog;
-    getLevel *getLevelDialog;
+    Ui::LevelManager *ui;
+    LevelEditor *levelEditorDialog;
+    GetLevel *GetLevelDialog;
 
 
 private slots:

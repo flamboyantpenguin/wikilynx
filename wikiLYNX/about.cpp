@@ -1,15 +1,15 @@
 #include "include/about.h"
 #include "ui/ui_about.h"
 
-about::about(QWidget *parent) :
+About::About(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::about)
+    ui(new Ui::About)
 {
     ui->setupUi(this);
     ui->tabWidget->setTabVisible(2, false);
-    connect(ui->closeButton, &QPushButton::clicked, this, &about::close);
-    connect(ui->showLicense, &QPushButton::clicked, this, &about::showTerms);
-    connect(ui->feedbackButton, &QPushButton::clicked, this, &about::launchFeedback);
+    connect(ui->closeButton, &QPushButton::clicked, this, &About::close);
+    connect(ui->showLicense, &QPushButton::clicked, this, &About::showTerms);
+    connect(ui->feedbackButton, &QPushButton::clicked, this, &About::launchFeedback);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
@@ -17,13 +17,13 @@ about::about(QWidget *parent) :
 
 }
 
-about::~about()
+About::~About()
 {
     delete ui;
 }
 
 
-bool about::isDarkTheme() {
+bool About::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -32,25 +32,25 @@ bool about::isDarkTheme() {
 }
 
 
-void about::showTerms() {
-    termsDialog = new terms;
+void About::showTerms() {
+    termsDialog = new Terms;
     termsDialog->show();
 }
 
 
-void about::launchFeedback() {
+void About::launchFeedback() {
     QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
 }
 
 
-void about::initDevMode() {
+void About::initDevMode() {
     QString indicator = dirName+"/.showLoadingScreen";
 
     ui->tabWidget->setTabVisible(2, true);
-    connect(ui->viewDataDir, &QPushButton::clicked, this, &about::showAppData);
-    connect(ui->turnOffDev, &QPushButton::clicked, this, &about::turnOffDevMode);
-    connect(ui->selfDestruct, &QPushButton::clicked, this, &about::deleteAllData);
-    connect(ui->coolLoadingScreen, &QCheckBox::checkStateChanged, this, &about::toggleLoadingScreen);
+    connect(ui->viewDataDir, &QPushButton::clicked, this, &About::showAppData);
+    connect(ui->turnOffDev, &QPushButton::clicked, this, &About::turnOffDevMode);
+    connect(ui->selfDestruct, &QPushButton::clicked, this, &About::deleteAllData);
+    connect(ui->coolLoadingScreen, &QCheckBox::checkStateChanged, this, &About::toggleLoadingScreen);
 
     if (QFile(indicator).exists()) {
         ui->coolLoadingScreen->setChecked(true);
@@ -58,13 +58,13 @@ void about::initDevMode() {
 }
 
 
-void about::showAppData() {
+void About::showAppData() {
     QDesktopServices::openUrl(QUrl::fromUserInput(QDir(dirName).absolutePath()));
 }
 
 
-void about::deleteAllData() {
-    QString msg = "Are you sure you want to delete all app data? This will remove logs, gameData, custom levels and leaderboards!";
+void About::deleteAllData() {
+    QString msg = "Are you sure you want to delete all app data? This will remove logs, gameData, custom levels and LeaderBoards!";
     if ((QMessageBox::warning(this, "wikiLYNX", msg, QMessageBox::Ok | QMessageBox::Cancel)) == QMessageBox::Ok) {
         QDir(dirName).removeRecursively();
     }
@@ -77,7 +77,7 @@ void about::deleteAllData() {
 }
 
 
-void about::toggleLoadingScreen() {
+void About::toggleLoadingScreen() {
 
     QString indicator = dirName+"/.showLoadingScreen";
 
@@ -93,7 +93,7 @@ void about::toggleLoadingScreen() {
 }
 
 
-void about::turnOffDevMode() {
+void About::turnOffDevMode() {
     emit turnOffDev();
     QString msg = "Developer Options disabled!";
     QMessageBox::information(this, "wikiLYNX", msg, QMessageBox::Ok);

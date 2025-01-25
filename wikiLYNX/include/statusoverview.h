@@ -9,16 +9,15 @@
 
 
 namespace Ui {
-class statusOverview;
+class StatusOverview;
 }
 
-class statusOverview : public QDialog
-{
+class StatusOverview : public QDialog {
     Q_OBJECT
 
 public:
-    explicit statusOverview(QWidget *parent = nullptr);
-    ~statusOverview();
+    explicit StatusOverview(QWidget *parent = nullptr);
+    ~StatusOverview();
 
 private:
 
@@ -32,7 +31,7 @@ private:
        { 4, "Online|Online" },
     };
 
-    Ui::statusOverview *ui;
+    Ui::StatusOverview *ui;
 
 public slots:
     void initialise(int);

@@ -1,12 +1,10 @@
 #include "include/leaderboard.h"
 #include "ui/ui_leaderboard.h"
 
-leaderboard::leaderboard(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::leaderboard)
-{
+
+LeaderBoard::LeaderBoard(QWidget *parent) : QDialog(parent), ui(new Ui::LeaderBoard) {
     ui->setupUi(this);
-    connect(ui->closeButton, &QPushButton::clicked, this, &leaderboard::close);
+    connect(ui->closeButton, &QPushButton::clicked, this, &LeaderBoard::close);
     connect(ui->levelSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(loadData(int)));
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
@@ -15,13 +13,12 @@ leaderboard::leaderboard(QWidget *parent)
 
 }
 
-leaderboard::~leaderboard()
-{
+LeaderBoard::~LeaderBoard() {
     delete ui;
 }
 
 
-bool leaderboard::isDarkTheme() {
+bool LeaderBoard::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -30,26 +27,20 @@ bool leaderboard::isDarkTheme() {
 }
 
 
-int leaderboard::initialise() {
+int LeaderBoard::initialise(ScoreSheet *gameData) {
 
     ui->levelSelect->clear();
-    QFile statFile(dirName+"/.stat");
-    if (!(statFile.exists())) return 0;
-    statFile.open(QIODevice::ReadOnly);
-    if (statFile.isOpen()) {
-        this->data = QJsonDocument::fromJson(statFile.readAll()).object();
-        ui->levelSelect->addItems(data.keys());
-    }
-    statFile.close();
+    this->gameData = gameData;
+    ui->levelSelect->addItems(gameData->getStatLevels());
     return 0;
 }
 
 
-void leaderboard::loadData(int s) {
+void LeaderBoard::loadData(int s) {
 
-    auto level = ui->levelSelect->currentText();
+    QString level = ui->levelSelect->currentText();
 
-    QJsonObject leaderBoard = this->data.value(level).toObject();
+    QJsonObject leaderBoard = gameData->getLeaderBoard(level);
 
     ui->table->setRowCount(leaderBoard.count());
 

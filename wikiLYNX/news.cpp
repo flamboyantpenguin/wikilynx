@@ -2,10 +2,7 @@
 #include "ui/ui_news.h"
 
 
-news::news(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::news)
-{
+News::News(QWidget *parent) : QDialog(parent) , ui(new Ui::News) {
     ui->setupUi(this);
     ui->progressBar->hide();
     ui->treeWidget->setHeaderLabels(QStringList { tr("Title"), tr("Link"), tr("Date"), tr("Description") });
@@ -18,13 +15,12 @@ news::news(QWidget *parent)
 }
 
 
-news::~news()
-{
+News::~News() {
     delete ui;
 }
 
 
-bool news::isDarkTheme() {
+bool News::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -33,20 +29,20 @@ bool news::isDarkTheme() {
 }
 
 
-void news::initialise() {
-    connect(&manager, &QNetworkAccessManager::finished, this, &news::finished);
+void News::initialise() {
+    connect(&manager, &QNetworkAccessManager::finished, this, &News::finished);
     connect(ui->treeWidget, &QTreeWidget::itemActivated, this, [](QTreeWidgetItem *item) { QDesktopServices::openUrl(QUrl(item->text(1))); });
     this->fetch();
 }
 
 
-void news::fetch() {
+void News::fetch() {
     ui->treeWidget->clear();
     get(this->url);
 }
 
 
-void news::consumeData()
+void News::consumeData()
 {
     int statusCode = currentReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (statusCode >= 200 && statusCode < 300)
@@ -54,7 +50,7 @@ void news::consumeData()
 }
 
 
-void news::error(QNetworkReply::NetworkError)
+void News::error(QNetworkReply::NetworkError)
 {
     qWarning("error retrieving RSS feed");
     xml.clear();
@@ -63,13 +59,13 @@ void news::error(QNetworkReply::NetworkError)
     currentReply = nullptr;
 }
 
-void news::finished(QNetworkReply *reply)
+void News::finished(QNetworkReply *reply)
 {
     Q_UNUSED(reply);
 }
 
 
-void news::get(const QUrl &url)
+void News::get(const QUrl &url)
 {
     //if (currentReply) {
      //   currentReply->disconnect(this);
@@ -79,14 +75,14 @@ void news::get(const QUrl &url)
     QApplication::setOverrideCursor(Qt::WaitCursor);
     currentReply = manager.get(QNetworkRequest(this->url));
     if (currentReply) {
-        connect(currentReply, &QNetworkReply::readyRead, this, &news::consumeData);
-        connect(currentReply, &QNetworkReply::errorOccurred, this, &news::error);
+        connect(currentReply, &QNetworkReply::readyRead, this, &News::consumeData);
+        connect(currentReply, &QNetworkReply::errorOccurred, this, &News::error);
     }
     xml.setDevice(currentReply);
 }
 
 
-void news::parseXml()
+void News::parseXml()
 {
     while (!xml.atEnd()) {
         xml.readNext();

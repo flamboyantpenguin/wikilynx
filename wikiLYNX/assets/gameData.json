@@ -14,7 +14,7 @@
             "wiki?": true,
             "difficulty": "easy",
             "time": 600,
-            "clicks" : 7,
+            "clicks" : 0,
             "levels": "7_Up United_States Federal_government_of_the_United_States President_of_the_United_States Joe_Biden"
         },
         "pingus": {
@@ -35,12 +35,14 @@
             "wiki?": true,
             "difficulty": "hard",
             "time": 850,
+            "clicks" : 1000,
             "levels": "Nintendo ARCH_Motorcycle V8_engine Captain_Haddock"
         },
         "debug": {
             "wiki?": true,
             "difficulty": "debug",
             "time": 100,
+            "clicks" : 100,
             "levels": "Pencil Paper Cat"
         },
         "youseewhatyouthinkyousee": {

@@ -7,10 +7,12 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
-class ScoreSheet
-{
+
+class ScoreSheet {
+
+
 public:
-    ScoreSheet(QString iFName, QString lFName);
+    ScoreSheet(QString, QString);
     ~ScoreSheet();
 
     // Base
@@ -18,13 +20,26 @@ public:
     QString ver = "1.5.6";
     QString version = "1.5.6-1";
 
+    const int theGrandPlayers = 12;
+
+    // Game Log
+    QJsonObject getGameLog(QString instance = "");
+    void updateGameLog(QString, QJsonObject);
+    void clearLogs();
+
+    // Player Stats
+    QStringList getStatLevels();
+    QJsonObject getLeaderBoard(QString);
+    QString getPlayerStats(QString, QString);
+    void appendPlayerStats(QString, QString, QString);
+
     // Game Level
-    void addLevels(QJsonObject data);
-    void removeLevel(QString levelName);
-    QJsonObject getLevel(QString levelName);
-    QJsonObject getLevels(QString flag = "");
-    void updateLevel(QString code, QJsonObject data);
-    QJsonObject mergeJson(QJsonObject d1, QJsonObject d2);
+    void addLevels(QJsonObject);
+    void removeLevel(QString);
+    QJsonObject GetLevel(QString);
+    QJsonObject GetLevels(QString flag = "");
+    void updateLevel(QString, QJsonObject);
+    QJsonObject mergeJson(QJsonObject, QJsonObject);
 
     // Game Settings
     QJsonObject getSettings();
@@ -32,13 +47,19 @@ public:
     void updateSettings(QString, bool);
     void updateSettings(QString, QString);
 
-    // Save Data
-    void saveData(QString *fname = nullptr, QJsonObject *cfg = nullptr, QJsonObject *gameData = nullptr);
+    // Data Managers
+    static QJsonObject readTxtFile(QString);
+    static void writeTxtFile(QString, QJsonObject);
+    static QJsonObject readBinFile(QString, bool b64 = false);
+    static void writeBinFile(QString, QJsonObject, bool b64 = false);
 
 private:
     // File Names
-    QString iFName;
-    QString lFName;
+    QString stat; // Leaderboard
+    QString iFName; // Inbuilt Game Data
+    QString lFName; // Local Game Data
+    QString sLogFile; // Application Log
+    QString gLogFile; // Game Log
 
     // GameData Top-Level Objects
     QJsonObject levels;
@@ -51,8 +72,10 @@ private:
     // Data Management
     void reset();
     void loadData();
-    void loadLevels(QJsonObject gData);
-    void loadSettings(QJsonObject cfg, QJsonObject base);
+    void loadLevels(QJsonObject);
+    void loadSettings(QJsonObject, QJsonObject);
+    void saveData(QString *fname = nullptr, QJsonObject *cfg = nullptr, QJsonObject *gameData = nullptr);
+
 };
 
 #endif // SCORESHEET_H

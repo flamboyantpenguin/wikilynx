@@ -3,23 +3,28 @@
 
 #include "levels.h"
 #include <QDialog>
+#include <QTextBrowser>
+
 
 namespace Ui {
-class baseList;
+class BaseList;
 }
 
-class baseList : public QDialog
-{
+class BaseList : public QDialog {
     Q_OBJECT
 
 public:
     int *dontKillMe = nullptr;
-    int initList(QString title, QString tip, QList<QString> *header, QList<QList<QString>>* data = nullptr, QList<QList<QString>>* actions = nullptr);
-    explicit baseList(QWidget *parent = nullptr);
-    ~baseList();
+    QStringList desc0;
+    void setDesc(QStringList);
+    int initList(QString title, QString tip, QStringList *header = nullptr, QStringList *headerButtons = nullptr, QList<QStringList>* data = nullptr, QList<QStringList>* actions = nullptr);
+    explicit BaseList(QWidget *parent = nullptr);
+    ~BaseList();
 
 private:
-    Ui::baseList *ui;
+    int dockFontSize = 8;
+    QList<QStringList> data;
+    Ui::BaseList *ui;
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -27,6 +32,11 @@ protected:
         QDialog::closeEvent(event);
         if (this->dontKillMe != nullptr) *(this->dontKillMe) = 0;
     }
+
+private slots:
+    void increaseDockFont();
+    void decreaseDockFont();
+    void launchTop(QString);
 };
 
 #endif // BASELIST_H

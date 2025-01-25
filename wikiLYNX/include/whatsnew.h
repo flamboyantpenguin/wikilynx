@@ -5,19 +5,18 @@
 #include <QDesktopServices>
 
 namespace Ui {
-class whatsNew;
+class WhatsNew;
 }
 
-class whatsNew : public QDialog
-{
+class WhatsNew : public QDialog {
     Q_OBJECT
 
 public:
-    explicit whatsNew(QWidget *parent = nullptr);
-    ~whatsNew();
+    explicit WhatsNew(QWidget *parent = nullptr);
+    ~WhatsNew();
 
 private:
-    Ui::whatsNew *ui;
+    Ui::WhatsNew *ui;
 
 private slots:
     void launchInfo();

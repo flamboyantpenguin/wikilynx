@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>levels</class>
- <widget class="QWidget" name="levels">
+ <class>Levels</class>
+ <widget class="QWidget" name="Levels">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -258,6 +258,52 @@
    </item>
    <item>
     <spacer name="horizontalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Policy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label5">
+     <property name="text">
+      <string>label5</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_8">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Policy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label6">
+     <property name="text">
+      <string>label6</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_9">
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
      </property>

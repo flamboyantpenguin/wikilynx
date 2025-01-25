@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>leaderboard</class>
- <widget class="QDialog" name="leaderboard">
+ <class>LeaderBoard</class>
+ <widget class="QDialog" name="LeaderBoard">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>

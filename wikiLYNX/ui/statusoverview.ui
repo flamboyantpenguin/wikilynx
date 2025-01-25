@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>statusOverview</class>
- <widget class="QDialog" name="statusOverview">
+ <class>StatusOverview</class>
+ <widget class="QDialog" name="StatusOverview">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>

@@ -30,13 +30,13 @@ int main(int argc, char *argv[]) {
     loadFonts();
 
     if (QFile(dirName+"/wikilynx/.showLoadingScreen").exists()) {
-        loadingScreen banner;
+        LoadingScreen banner;
         banner.setWindowFlags(Qt::FramelessWindowHint);
         banner.show();
         app->exec();
     }
 
-    welcomeUI dialog;
+    WelcomeUI dialog;
 
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);

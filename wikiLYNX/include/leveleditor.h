@@ -13,18 +13,17 @@
 #include "scoresheet.h"
 
 namespace Ui {
-class levelEditor;
+class LevelEditor;
 }
 
-class levelEditor : public QDialog
-{
+class LevelEditor : public QDialog {
     Q_OBJECT
 
 public:
-    explicit levelEditor(QWidget *parent = nullptr);
+    explicit LevelEditor(QWidget *parent = nullptr);
     void initialise(ScoreSheet *, QString);
     void genRandomLevel(ScoreSheet*, QString);
-    ~levelEditor();
+    ~LevelEditor();
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -41,7 +40,7 @@ private:
     QStringList chkData;
     ScoreSheet *gameData;
     int genRandom = 0;
-    Ui::levelEditor *ui;
+    Ui::LevelEditor *ui;
 
 private slots:
     void addChk();

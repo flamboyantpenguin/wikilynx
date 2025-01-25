@@ -18,6 +18,7 @@
 #include "news.h"
 #include "help.h"
 #include "about.h"
+#include "baselist.h"
 #include "congrats.h"
 #include "whatsnew.h"
 #include "leaderboard.h"
@@ -33,15 +34,15 @@ class welcomeDialog;
 }
 
 
-class welcomeUI : public QDialog {
+class WelcomeUI : public QDialog {
     Q_OBJECT
 
 
 public:
 
     QThread *thread;
-    explicit welcomeUI(QDialog *parent = nullptr);
-    ~welcomeUI();
+    explicit WelcomeUI(QDialog *parent = nullptr);
+    ~WelcomeUI();
 
     int *dontKillParse0;
     int *totemofUndying;
@@ -78,6 +79,7 @@ private slots:
     void showAbout();
     void showLogs();
     void showNews();
+    void updateLogs(QString, QJsonObject);
     void clearLogs();
     int startGame();
     void updateUI();
@@ -107,16 +109,17 @@ private:
         { 4, "Meow|meow" },
     };
 
-    news *newsDialog;
+    News *newsDialog;
     help *helpDialog;
+    BaseList *baselist;
     GameWindow *game;
-    about *aboutDialog;
-    whatsNew *whatsNewDialog;
+    About *aboutDialog;
+    WhatsNew *whatsNewDialog;
 
-    leaderboard *statsDialog;
-    levelManager *editDialog;
-    levelEditor *levelEditorDlg;
-    statusOverview *overview;
+    LeaderBoard *statsDialog;
+    LevelManager *editDialog;
+    LevelEditor *levelEditorDlg;
+    StatusOverview *overview = nullptr;
 
     ScoreSheet *gameData;
 

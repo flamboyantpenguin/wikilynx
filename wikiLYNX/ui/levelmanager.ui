@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>levelManager</class>
- <widget class="QDialog" name="levelManager">
+ <class>LevelManager</class>
+ <widget class="QDialog" name="LevelManager">
   <property name="windowModality">
    <enum>Qt::WindowModality::NonModal</enum>
   </property>

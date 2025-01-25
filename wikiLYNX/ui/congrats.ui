@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>congrats</class>
- <widget class="QDialog" name="congrats">
+ <class>Congrats</class>
+ <widget class="QDialog" name="Congrats">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -74,19 +74,75 @@
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,1" columnminimumwidth="0,0,0,1">
-     <item row="0" column="2">
-      <widget class="QLabel" name="lnameLabel">
-       <property name="whatsThis">
-        <string>Name of the level you played </string>
-       </property>
+    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="1,0,1,0">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>level</string>
+        <string>Clicks</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <spacer name="horizontalSpacer_7">
+     <item row="3" column="3">
+      <spacer name="horizontalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="clicksLabel">
+       <property name="whatsThis">
+        <string>Number of clicks to finish the game</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLabel" name="timeTaken">
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This denotes the time taken to play the game. If you were unable to finish the game in time, this denotes the time taken to reach the last checkpoint. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>time</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Level:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <spacer name="horizontalSpacer_9">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -105,68 +161,8 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="chkCleared">
-       <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The number of Checkpoints you cleared&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>chk</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Level:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLabel" name="timeTaken">
-       <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This denotes the time taken to play the game. If you were unable to finish the game in time, this denotes the time taken to reach the last checkpoint. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>time</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLabel" name="startTime">
-       <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;System time when the game started &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>starttime</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>End Time: </string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QLabel" name="endTime">
-       <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;System time when the game ended &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>endtime</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <spacer name="horizontalSpacer_5">
+     <item row="2" column="3">
+      <spacer name="horizontalSpacer_10">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -178,62 +174,15 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Clicks</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <spacer name="horizontalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Start Time:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="clicksLabel">
+     <item row="0" column="2">
+      <widget class="QLabel" name="lnameLabel">
        <property name="whatsThis">
-        <string>Number of clicks to finish the game</string>
+        <string>Name of the level you played </string>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>level</string>
        </property>
       </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Time Taken: </string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item row="2" column="1">
       <spacer name="horizontalSpacer_4">
@@ -261,6 +210,16 @@
        </property>
       </spacer>
      </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="chkCleared">
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The number of Checkpoints you cleared&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>chk</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="3">
       <spacer name="horizontalSpacer_8">
        <property name="orientation">
@@ -274,8 +233,8 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="3">
-      <spacer name="horizontalSpacer_9">
+     <item row="3" column="1">
+      <spacer name="horizontalSpacer_5">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -287,57 +246,12 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="3">
-      <spacer name="horizontalSpacer_10">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Time Taken: </string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="3" column="3">
-      <spacer name="horizontalSpacer_11">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="4" column="3">
-      <spacer name="horizontalSpacer_12">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="5" column="3">
-      <spacer name="horizontalSpacer_13">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
     </layout>
    </item>
@@ -407,19 +321,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="viewStatsButton">
-           <property name="toolTip">
-            <string>View Leaderboard</string>
-           </property>
-           <property name="text">
-            <string>Leaderboard</string>
-           </property>
-           <property name="icon">
-            <iconset theme="trophy"/>
-           </property>
-          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="feedBackButton">

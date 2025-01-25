@@ -2,12 +2,10 @@
 #include "ui/ui_terms.h"
 
 
-terms::terms(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::terms)
-{
+Terms::Terms(QWidget *parent) : QDialog(parent), ui(new Ui::Terms) {
+
     ui->setupUi(this);
-    connect(ui->closeButton, &QPushButton::clicked, this, &terms::close);
+    connect(ui->closeButton, &QPushButton::clicked, this, &Terms::close);
     this->initialise();
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
@@ -17,13 +15,12 @@ terms::terms(QWidget *parent) :
 }
 
 
-terms::~terms()
-{
+Terms::~Terms() {
     delete ui;
 }
 
 
-bool terms::isDarkTheme() {
+bool Terms::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -32,7 +29,7 @@ bool terms::isDarkTheme() {
 }
 
 
-void terms::initialise() {
+void Terms::initialise() {
 
     QFile p(":/base/info/PRIVACY.txt");
     p.open(QIODevice::ReadOnly);

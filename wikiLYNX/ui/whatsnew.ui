@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>whatsNew</class>
- <widget class="QDialog" name="whatsNew">
+ <class>WhatsNew</class>
+ <widget class="QDialog" name="WhatsNew">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>

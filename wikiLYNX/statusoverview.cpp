@@ -2,21 +2,17 @@
 #include "ui/ui_statusoverview.h"
 
 
-statusOverview::statusOverview(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::statusOverview)
-{
+StatusOverview::StatusOverview(QWidget *parent) : QDialog(parent), ui(new Ui::StatusOverview) {
     ui->setupUi(this);
 }
 
 
-statusOverview::~statusOverview()
-{
+StatusOverview::~StatusOverview() {
     delete ui;
 }
 
 
-void statusOverview::initialise(int status) {
+void StatusOverview::initialise(int status) {
 
     this->hehe = 0;
     ui->updateButton->hide();
@@ -24,38 +20,38 @@ void statusOverview::initialise(int status) {
     ui->archiveStatus->setText(this->code[status].split("|")[1]);
     ui->wiki->setIcon(QIcon::fromTheme(this->code[status].split("|")[0].toLower()));
     ui->archive->setIcon(QIcon::fromTheme(this->code[status].split("|")[1].toLower()));
-    connect(ui->version, &QPushButton::clicked, this, &statusOverview::developerHehe);
-    connect(ui->infoButton, &QPushButton::clicked, this, &statusOverview::launchVersionInfo);
+    connect(ui->version, &QPushButton::clicked, this, &StatusOverview::developerHehe);
+    connect(ui->infoButton, &QPushButton::clicked, this, &StatusOverview::launchVersionInfo);
 
     if (status == 2) {
         ui->updateButton->show();
         ui->versionHelper->setText("New Version Available!");
         #ifdef Q_OS_WIN
-            connect(ui->updateButton, &QPushButton::clicked, this, &statusOverview::launchMaintenanceTool);
+            connect(ui->updateButton, &QPushButton::clicked, this, &StatusOverview::launchMaintenanceTool);
         #else
-            connect(ui->updateButton, &QPushButton::clicked, this, &statusOverview::launchLatestVersionInfo);
+            connect(ui->updateButton, &QPushButton::clicked, this, &StatusOverview::launchLatestVersionInfo);
         #endif
     }
 
 }
 
 
-void statusOverview::launchMaintenanceTool() {
+void StatusOverview::launchMaintenanceTool() {
     QDesktopServices::openUrl(QUrl::fromLocalFile("./maintenancetool.exe"));
 }
 
 
-void statusOverview::launchLatestVersionInfo() {
+void StatusOverview::launchLatestVersionInfo() {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/releases/latest"));
 }
 
 
-void statusOverview::launchVersionInfo() {
+void StatusOverview::launchVersionInfo() {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/releases/v"+cVersion));
 }
 
 
-void statusOverview::developerHehe() {
+void StatusOverview::developerHehe() {
 
     this->hehe++;
     QString msg = "Developer Options enabled!";

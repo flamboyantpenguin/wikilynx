@@ -2,47 +2,44 @@
 #include "ui/ui_leveleditor.h"
 
 
-levelEditor::levelEditor(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::levelEditor)
-{
+LevelEditor::LevelEditor(QWidget *parent) : QDialog(parent), ui(new Ui::LevelEditor) {
     ui->setupUi(this);
     ui->isWiki->setChecked(true);
     ui->genRandIndicatorPrg->hide();
     ui->genRandIndicatorText->hide();
-    connect(ui->homeButton, &QPushButton::clicked, this, &levelEditor::resetBrowser);
+    connect(ui->homeButton, &QPushButton::clicked, this, &LevelEditor::resetBrowser);
     connect(ui->backButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::back);
-    connect(ui->list, &QListWidget::itemDoubleClicked, this, &levelEditor::previewArticle);
-    connect(ui->getRandomButton, &QPushButton::clicked, this, &levelEditor::getRandomArticle);
-    connect(ui->addButton, &QPushButton::clicked, this, &levelEditor::addChk);
-    connect(ui->closeButton, &QPushButton::clicked, this, &levelEditor::close);
-    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
+    connect(ui->list, &QListWidget::itemDoubleClicked, this, &LevelEditor::previewArticle);
+    connect(ui->getRandomButton, &QPushButton::clicked, this, &LevelEditor::getRandomArticle);
+    connect(ui->addButton, &QPushButton::clicked, this, &LevelEditor::addChk);
+    connect(ui->closeButton, &QPushButton::clicked, this, &LevelEditor::close);
+    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &LevelEditor::updateBrowser);
     connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
-    connect(ui->url, &QLineEdit::returnPressed, this, &levelEditor::loadURL);
-    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &levelEditor::updateBrowser);
-    connect(ui->webEngineView, &QWebEngineView::loadFinished, this, &levelEditor::genRandomReload);
+    connect(ui->url, &QLineEdit::returnPressed, this, &LevelEditor::loadURL);
+    connect(ui->webEngineView, &QWebEngineView::urlChanged, this, &LevelEditor::updateBrowser);
+    connect(ui->webEngineView, &QWebEngineView::loadFinished, this, &LevelEditor::genRandomReload);
     connect(ui->refreshButton, &QPushButton::clicked, ui->webEngineView, &QWebEngineView::reload);
-    connect(ui->clicks, &QLineEdit::textChanged, this, &levelEditor::updateExtras);
-    connect(ui->code, &QLineEdit::textChanged, this, &levelEditor::updateCodeName);
-    connect(ui->timeTaken, &QLineEdit::textChanged, this, &levelEditor::updateExtras);
-    connect(ui->difficulty, &QLineEdit::textChanged, this, &levelEditor::updateExtras);
-    connect(ui->isWiki, &QCheckBox::checkStateChanged, this, &levelEditor::updateIsWiki);
+    connect(ui->clicks, &QLineEdit::textChanged, this, &LevelEditor::updateExtras);
+    connect(ui->code, &QLineEdit::textChanged, this, &LevelEditor::updateCodeName);
+    connect(ui->timeTaken, &QLineEdit::textChanged, this, &LevelEditor::updateExtras);
+    connect(ui->difficulty, &QLineEdit::textChanged, this, &LevelEditor::updateExtras);
+    connect(ui->isWiki, &QCheckBox::checkStateChanged, this, &LevelEditor::updateIsWiki);
 
 }
 
 
-levelEditor::~levelEditor()
+LevelEditor::~LevelEditor()
 {
     delete ui;
 }
 
 
-void levelEditor::initialise(ScoreSheet *gameData, QString cde) {
+void LevelEditor::initialise(ScoreSheet *gameData, QString cde) {
 
     this->code = cde;
     this->genRandom = -1;
     this->gameData = gameData;
-    this->levelInfo = this->gameData->getLevel(cde);
+    this->levelInfo = this->gameData->GetLevel(cde);
     this->chkData = this->levelInfo["levels"].toString().split(" ");
 
     if (this->levelInfo["levels"].toString().isEmpty()) this->chkData.pop_front();
@@ -65,7 +62,7 @@ void levelEditor::initialise(ScoreSheet *gameData, QString cde) {
 }
 
 
-void levelEditor::genRandomLevel(ScoreSheet *gameData, QString code) {
+void LevelEditor::genRandomLevel(ScoreSheet *gameData, QString code) {
 
     ui->genRandIndicatorPrg->show();
     ui->genRandIndicatorText->show();
@@ -97,7 +94,7 @@ void levelEditor::genRandomLevel(ScoreSheet *gameData, QString code) {
 }
 
 
-void levelEditor::genRandomReload() {
+void LevelEditor::genRandomReload() {
     if (genRandom == -1) return;
     if (!genRandom) {
         ui->genRandIndicatorPrg->hide();
@@ -112,22 +109,19 @@ void levelEditor::genRandomReload() {
 }
 
 
-void levelEditor::updateHeader() {
+void LevelEditor::updateHeader() {
 
     ui->header->clear();
     QListWidgetItem *item = new QListWidgetItem();
-    auto widget = new levels(this);
+    auto widget = new Levels(this);
 
     QString s("URL ($count)");
     s.replace("$count", QString::number(this->chkData.count()));
-    widget->setItem(s, \
-                    "", \
-                    "", \
-                    "", \
-                    "", \
-                    "neutralOnline", "", "");
 
-    //connect(widget, &levels::action0, this, &levelEditor::removeChks);
+    QStringList itemData = {s};
+    QStringList icons = {"neutralOnline"};
+
+    widget->setItem(itemData, icons);
 
     item->setSizeHint(widget->sizeHint());
     ui->header->addItem(item);
@@ -137,7 +131,7 @@ void levelEditor::updateHeader() {
 }
 
 
-void levelEditor::updateExtras() {
+void LevelEditor::updateExtras() {
 
     this->levelInfo["difficulty"] = ui->difficulty->text();
     this->levelInfo["time"] = ui->timeTaken->text().toDouble();
@@ -147,7 +141,7 @@ void levelEditor::updateExtras() {
 }
 
 
-void levelEditor::updateCodeName() {
+void LevelEditor::updateCodeName() {
 
     this->gameData->removeLevel(code);
     this->code = ui->code->text();
@@ -157,7 +151,7 @@ void levelEditor::updateCodeName() {
 }
 
 
-void levelEditor::updateIsWiki() {
+void LevelEditor::updateIsWiki() {
 
     this->levelInfo["wiki?"] = ui->isWiki->isChecked();
     //this->saveData();
@@ -165,23 +159,21 @@ void levelEditor::updateIsWiki() {
 }
 
 
-void levelEditor::updateChkList() {
+void LevelEditor::updateChkList() {
 
     ui->list->clear();
 
     for (int i = 0; i < this->chkData.count(); i++) {
 
         QListWidgetItem *item = new QListWidgetItem();
-        auto widget = new levels(this);
+        auto widget = new Levels(this);
 
-        widget->setItem(this->chkData[i], \
-                        "", \
-                        "", \
-                        "", \
-                        "", \
-                        "delete", "", "");
+        QStringList itemData = {this->chkData.value(i)};
+        QStringList icons = {"delete"};
 
-        connect(widget, &levels::action0, this, &levelEditor::removeChk);
+        widget->setItem(itemData, icons);
+
+        connect(widget, &Levels::action0, this, &LevelEditor::removeChk);
 
         auto tmp = ui->header->sizeHint();
         tmp.setHeight(widget->sizeHint().height());
@@ -197,23 +189,23 @@ void levelEditor::updateChkList() {
 }
 
 
-void levelEditor::getRandomArticle() {
+void LevelEditor::getRandomArticle() {
     ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org/wiki/Special:Random"));
 }
 
 
-void levelEditor::updateBrowser() {
+void LevelEditor::updateBrowser() {
     ui->url->setText(ui->webEngineView->url().toString());
 }
 
 
-void levelEditor::loadURL() {
+void LevelEditor::loadURL() {
     ui->webEngineView->load(QUrl::fromUserInput(ui->url->text()));
 }
 
 
-void levelEditor::previewArticle(QListWidgetItem *i) {
-    auto itemWidget = (levels *) ui->list->itemWidget(i);
+void LevelEditor::previewArticle(QListWidgetItem *i) {
+    auto itemWidget = (Levels *) ui->list->itemWidget(i);
     if (this->levelInfo["wiki?"].toBool()) {
         ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org/wiki/"+itemWidget->getItem(0)));
     }
@@ -223,21 +215,21 @@ void levelEditor::previewArticle(QListWidgetItem *i) {
 }
 
 
-void levelEditor::resetBrowser() {
+void LevelEditor::resetBrowser() {
     ui->webEngineView->load(QUrl::fromUserInput("https://wikipedia.org"));
 }
 
 
-void levelEditor::launchHelp()   {
+void LevelEditor::launchHelp()   {
     QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#level-editor"));
 }
 
 
-void levelEditor::updateIndex() {
+void LevelEditor::updateIndex() {
 
     for (int i = 0; i < ui->list->count(); i++) {
         auto item = ui->list->item(i);
-        auto itemWidget = (levels *) ui->list->itemWidget(item);
+        auto itemWidget = (Levels *) ui->list->itemWidget(item);
         this->chkData[i] = itemWidget->getItem(0);
     }
 
@@ -245,14 +237,14 @@ void levelEditor::updateIndex() {
 
 
 
-void levelEditor::saveData() {
+void LevelEditor::saveData() {
     this->updateIndex();
     this->levelInfo["levels"] = this->chkData.join(" ");
     this->gameData->updateLevel(this->code, this->levelInfo);
 }
 
 
-void levelEditor::addChk() {
+void LevelEditor::addChk() {
 
     QString url = ui->url->text();
 
@@ -271,7 +263,7 @@ void levelEditor::addChk() {
 }
 
 
-void levelEditor::removeChk(QString chk) {
+void LevelEditor::removeChk(QString chk) {
     this->chkData.removeAll(chk);
     //this->chkData.removeAt(chk.toInt());
     this->updateChkList();

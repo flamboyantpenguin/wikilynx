@@ -5,21 +5,20 @@
 #include <QFile>
 
 namespace Ui {
-class terms;
+class Terms;
 }
 
-class terms : public QDialog
-{
+class Terms : public QDialog {
     Q_OBJECT
 
 public:
-    explicit terms(QWidget *parent = nullptr);
-    ~terms();
+    explicit Terms(QWidget *parent = nullptr);
+    ~Terms();
 
 private:
     bool isDarkTheme();
     void initialise();
-    Ui::terms *ui;
+    Ui::Terms *ui;
 };
 
 #endif // TERMS_H
