@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>levelEditor</class>
- <widget class="QDialog" name="levelEditor">
+ <class>LevelEditor</class>
+ <widget class="QDialog" name="LevelEditor">
   <property name="windowModality">
    <enum>Qt::WindowModality::NonModal</enum>
   </property>
@@ -201,6 +201,15 @@
      </item>
      <item>
       <widget class="QListWidget" name="list">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+       </property>
        <property name="editTriggers">
         <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
        </property>
@@ -215,6 +224,9 @@
        </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::ResizeMode::Adjust</enum>
        </property>
        <property name="itemAlignment">
         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>

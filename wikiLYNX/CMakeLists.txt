@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(wikilynx VERSION 1.5.5 LANGUAGES CXX)
+project(wikilynx VERSION 1.5.6 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -26,24 +26,24 @@ set(PROJECT_SOURCES
         ui/gamewindow.ui
         assets/assets.qrc
 
-
         ui/welcome.ui include/welcome.h welcome.cpp
-        viewhistory.cpp include/viewhistory.h ui/viewhistory.ui
-        viewcheckpoint.cpp include/viewcheckpoint.h ui/viewcheckpoint.ui
         ui/congrats.ui congrats.cpp include/congrats.h
         ui/about.ui about.cpp include/about.h
-        ui/help.ui help.cpp include/help.h
+        ui/basebrowser.ui basebrowser.cpp include/basebrowser.h
         ui/terms.ui terms.cpp include/terms.h
         ui/levelmanager.ui levelmanager.cpp include/levelmanager.h
         ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
-        ui/viewstats.ui viewstats.cpp include/viewstats.h
+        ui/leaderboard.ui leaderboard.cpp include/leaderboard.h
         include/getlevel.h getlevel.cpp ui/getlevel.ui
         include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
         include/news.h news.cpp ui/news.ui
         include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
         include/levels.h levels.cpp ui/levels.ui
         include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
-
+        include/baselist.h baselist.cpp ui/baselist.ui
+        include/scoresheet.h scoresheet.cpp
+        renovatio.cpp
+        include/renovatio.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

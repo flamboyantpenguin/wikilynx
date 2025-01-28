@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>about</class>
- <widget class="QDialog" name="about">
+ <class>About</class>
+ <widget class="QDialog" name="About">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>
@@ -9,9 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>487</height>
+    <width>460</width>
+    <height>530</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
@@ -102,7 +108,13 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="tabBarAutoHide">
+      <bool>false</bool>
+     </property>
      <widget class="QWidget" name="aboutTab">
+      <attribute name="icon">
+       <iconset theme="info"/>
+      </attribute>
       <attribute name="title">
        <string>About</string>
       </attribute>
@@ -150,10 +162,11 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Comfortaa'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b83dba;&quot;&gt;wikiLYNX Game Browser Version 1.5.5&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b83dba;&quot;&gt;wikiLYNX Game Browser Version 1.5.6&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;A simple game browser to play wikipedia speed-runs the right way &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Made using Qt C++&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://projects.dawn.org.in/wikilynx&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#007af4;&quot;&gt;projects.dawn.org.in/wikilynx&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This project was made to conduct an event hosted by &lt;/span&gt;&lt;a href=&quot;https://jonesrison.github.io/&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#007af4;&quot;&gt;@jonesrison&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; at RSET, Ernakulam, Kerala. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Contact: &lt;/span&gt;&lt;a href=&quot;mailto:penguin@dawn.org.in&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#00aa00;&quot;&gt;penguin@dawn.org.in&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;View Project on GitHub: &lt;/span&gt;&lt;a href=&quot;https://github.com/flamboyantpenguin/wikilynx&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#00aa00;&quot;&gt;github.com/flamboyantpenguin/wikilynx&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
@@ -172,6 +185,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </layout>
      </widget>
      <widget class="QWidget" name="creditsTab">
+      <attribute name="icon">
+       <iconset theme="scroll"/>
+      </attribute>
       <attribute name="title">
        <string>Credits</string>
       </attribute>
@@ -231,6 +247,139 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="debugTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="icon">
+       <iconset theme="dev"/>
+      </attribute>
+      <attribute name="title">
+       <string>Debug</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="devMode_description">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is an experimental developer options menu. This menu is intended for enabling/disabling experimental features/options and inspecting system logs/reports &lt;/p&gt;&lt;p&gt;You many not find anything useful here as of wikiLYNX 1.5.6 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="coolLoadingScreen">
+         <property name="text">
+          <string>Disable Loading Screen</string>
+         </property>
+         <property name="icon">
+          <iconset theme="power"/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+         </property>
+         <item row="3" column="2">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="5" column="2">
+          <widget class="QPushButton" name="turnOffDev">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Turn off Dev Mode</string>
+           </property>
+           <property name="icon">
+            <iconset theme="toggle_off"/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="5" column="1">
+          <widget class="QPushButton" name="selfDestruct">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Delete all Data</string>
+           </property>
+           <property name="icon">
+            <iconset theme="delete"/>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QPushButton" name="viewDataDir">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>View all Data</string>
+           </property>
+           <property name="icon">
+            <iconset theme="save"/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

@@ -7,7 +7,7 @@ wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped 
 
 ## Data Collection
 
-As of wikiLYNX 1.5.5, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (latest version, custom levels etc) and for browsing as mentioned below.
+As of wikiLYNX 1.5.6, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (latest version, custom levels etc) and for browsing as mentioned below.
 
 This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include
 
@@ -36,6 +36,6 @@ To learn more about the data collection practises of GitHub, read their [Coockie
 
 As for external levels, it's your responsibility to understand the data collection practises of an external site before adding them to the browser. One must however note that sites have limited access to your system as compared to system browsers.
 
-If you find any discrepancies in this document or if you have any queries/suggestions, contact [penguin@pcland.co.in](mailto:penguin@pcland.co.in).
+If you find any discrepancies in this document or if you have any queries/suggestions, contact [penguin@dawn.org.in](mailto:penguin@dawn.org.in).
 
 If you read till here, you're a good person who respected the importance of privacy and security in this age! Thank you!

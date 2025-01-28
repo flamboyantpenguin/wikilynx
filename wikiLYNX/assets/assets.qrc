@@ -27,6 +27,8 @@
         <file>images/DAWN_Light.svg</file>
         <file>images/wikiLYNX_Dark.svg</file>
         <file>images/wikiLYNX_Light.svg</file>
+        <file>info/ReleaseNotes.txt</file>
+        <file>info/CREDITS.txt</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>
@@ -536,5 +538,89 @@
         <file>icons/nordLight/main/tab.svg</file>
         <file>icons/monochromeDark/main/tab.svg</file>
         <file>icons/monochromeLight/main/tab.svg</file>
+        <file>icons/blueDark/main/dev.svg</file>
+        <file>icons/blueDark/main/power.svg</file>
+        <file>icons/blueDark/main/save.svg</file>
+        <file>icons/blueDark/main/scroll.svg</file>
+        <file>icons/blueDark/main/toggle_off.svg</file>
+        <file>icons/blueDark/main/toggle_on.svg</file>
+        <file>icons/blueLight/main/dev.svg</file>
+        <file>icons/blueLight/main/power.svg</file>
+        <file>icons/blueLight/main/save.svg</file>
+        <file>icons/blueLight/main/scroll.svg</file>
+        <file>icons/blueLight/main/toggle_off.svg</file>
+        <file>icons/blueLight/main/toggle_on.svg</file>
+        <file>icons/yellowDark/main/dev.svg</file>
+        <file>icons/yellowDark/main/power.svg</file>
+        <file>icons/yellowDark/main/save.svg</file>
+        <file>icons/yellowDark/main/scroll.svg</file>
+        <file>icons/yellowDark/main/toggle_off.svg</file>
+        <file>icons/yellowDark/main/toggle_on.svg</file>
+        <file>icons/yellowLight/main/dev.svg</file>
+        <file>icons/yellowLight/main/power.svg</file>
+        <file>icons/yellowLight/main/save.svg</file>
+        <file>icons/yellowLight/main/scroll.svg</file>
+        <file>icons/yellowLight/main/toggle_off.svg</file>
+        <file>icons/yellowLight/main/toggle_on.svg</file>
+        <file>icons/nordDark/main/dev.svg</file>
+        <file>icons/nordDark/main/power.svg</file>
+        <file>icons/nordDark/main/save.svg</file>
+        <file>icons/nordDark/main/scroll.svg</file>
+        <file>icons/nordDark/main/toggle_off.svg</file>
+        <file>icons/nordDark/main/toggle_on.svg</file>
+        <file>icons/nordLight/main/dev.svg</file>
+        <file>icons/nordLight/main/power.svg</file>
+        <file>icons/nordLight/main/save.svg</file>
+        <file>icons/nordLight/main/scroll.svg</file>
+        <file>icons/nordLight/main/toggle_off.svg</file>
+        <file>icons/nordLight/main/toggle_on.svg</file>
+        <file>icons/redDark/main/dev.svg</file>
+        <file>icons/redDark/main/power.svg</file>
+        <file>icons/redDark/main/save.svg</file>
+        <file>icons/redDark/main/scroll.svg</file>
+        <file>icons/redDark/main/toggle_off.svg</file>
+        <file>icons/redDark/main/toggle_on.svg</file>
+        <file>icons/redLight/main/dev.svg</file>
+        <file>icons/redLight/main/power.svg</file>
+        <file>icons/redLight/main/save.svg</file>
+        <file>icons/redLight/main/scroll.svg</file>
+        <file>icons/redLight/main/toggle_off.svg</file>
+        <file>icons/redLight/main/toggle_on.svg</file>
+        <file>icons/orangeDark/main/dev.svg</file>
+        <file>icons/orangeDark/main/power.svg</file>
+        <file>icons/orangeDark/main/save.svg</file>
+        <file>icons/orangeDark/main/scroll.svg</file>
+        <file>icons/orangeDark/main/toggle_off.svg</file>
+        <file>icons/orangeDark/main/toggle_on.svg</file>
+        <file>icons/orangeLight/main/dev.svg</file>
+        <file>icons/orangeLight/main/power.svg</file>
+        <file>icons/orangeLight/main/save.svg</file>
+        <file>icons/orangeLight/main/scroll.svg</file>
+        <file>icons/orangeLight/main/toggle_off.svg</file>
+        <file>icons/orangeLight/main/toggle_on.svg</file>
+        <file>icons/greenDark/main/dev.svg</file>
+        <file>icons/greenDark/main/power.svg</file>
+        <file>icons/greenDark/main/save.svg</file>
+        <file>icons/greenDark/main/scroll.svg</file>
+        <file>icons/greenDark/main/toggle_off.svg</file>
+        <file>icons/greenDark/main/toggle_on.svg</file>
+        <file>icons/greenLight/main/dev.svg</file>
+        <file>icons/greenLight/main/power.svg</file>
+        <file>icons/greenLight/main/save.svg</file>
+        <file>icons/greenLight/main/scroll.svg</file>
+        <file>icons/greenLight/main/toggle_off.svg</file>
+        <file>icons/greenLight/main/toggle_on.svg</file>
+        <file>icons/monochromeDark/main/dev.svg</file>
+        <file>icons/monochromeDark/main/power.svg</file>
+        <file>icons/monochromeDark/main/save.svg</file>
+        <file>icons/monochromeDark/main/scroll.svg</file>
+        <file>icons/monochromeDark/main/toggle_off.svg</file>
+        <file>icons/monochromeDark/main/toggle_on.svg</file>
+        <file>icons/monochromeLight/main/dev.svg</file>
+        <file>icons/monochromeLight/main/power.svg</file>
+        <file>icons/monochromeLight/main/save.svg</file>
+        <file>icons/monochromeLight/main/scroll.svg</file>
+        <file>icons/monochromeLight/main/toggle_off.svg</file>
+        <file>icons/monochromeLight/main/toggle_on.svg</file>
     </qresource>
 </RCC>

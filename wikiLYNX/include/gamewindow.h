@@ -13,10 +13,8 @@
 #include <QtMultimedia/QAudioOutput>
 #include <QtMultimedia/QMediaPlayer>
 
-
+#include "baselist.h"
 #include "congrats.h"
-#include "viewhistory.h"
-#include "viewcheckpoint.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,8 +23,7 @@ class GameWindow;
 }
 QT_END_NAMESPACE
 
-class GameWindow : public QMainWindow
-{
+class GameWindow : public QMainWindow {
     Q_OBJECT
 
 
@@ -35,41 +32,48 @@ public:
     ~GameWindow();
 
     int *dontKillMe;
-    congrats congratsView;
+    Congrats congratsView;
     int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
 private:
-
     // Game Variables
     int chk = 0;
     int clicks = -1;
+    float endTime = 0;
+    float countup = 0;
+
+    std::map<QString, QString> code = {
+       { "Aborted!", "Game Aborted!" },
+       { "Win!", "You won!" },
+       { "Timeout!", "Timeout!" },
+       { "MaxClicks!", "Max Clicks Reached" }
+    };
 
 
     int alD = 1;
     bool domain;
-    float endTime = 0;
-    float countup = 0;
+    QStringList log;
     QStringList levels;
+    BaseList *baselist;
     Ui::GameWindow *ui;
     QJsonObject gameData;
     QString gamer, level;
-    QString aTime, instance;
-    viewHistory historyView;
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    viewcheckpoint checkpointView;
+    QString instance;
     QTimer *timer = new QTimer(this);
     QString wikiURL = "https://wikipedia.org/wiki/";
+
 
 private slots:
     void playSound(QString sound);
     void launchLogs();
     bool isDarkTheme();
     void viewCheckPoints();
-    int missionAccomplished();
-    int missionFailed(QString message);
     void updateCountdown();
     void initAction();
-    void endGame();
+    int endGame(QString message = "Aborted!");
+
+signals:
+    void gameEnded(QString, QJsonObject);
 
 };
 

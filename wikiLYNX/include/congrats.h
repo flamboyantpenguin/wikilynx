@@ -8,54 +8,44 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QStandardPaths>
-#include <QDesktopServices>
 
-#include "viewstats.h"
-#include "viewhistory.h"
-#include "viewcheckpoint.h"
-
-#define theGrandPlayers 12
+#include "baselist.h"
+#include "basebrowser.h"
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class congrats;
+class Congrats;
 }
 QT_END_NAMESPACE
 
-class congrats : public QDialog
-{
+class Congrats : public QDialog {
     Q_OBJECT
 
 public:
-    explicit congrats(QWidget *parent = nullptr);
-    ~congrats();
+    explicit Congrats(QWidget *parent = nullptr);
+    ~Congrats();
 
     //int chk;
     //int tChk;
-    int chk;
-    void initialise(QString, QString, QString, QString, QString, QString, QString, int, int);
+    void initialise(QJsonObject, QString);
 
 private:
     QJsonObject data;
-    viewHistory hView;
-    viewcheckpoint cView;
-    viewStats statsDialog;
-    Ui::congrats *ui;
-    QJsonObject statData;
-    void genReport();
-    void updateStats();
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+    BaseList *baselist = nullptr;
+    BaseBrowser *feedbackBrowser = nullptr;
+
+    Ui::Congrats *ui;
 
 protected:
-
     void closeEvent(QCloseEvent *event) override {
         emit closed();
+        QDialog::closeEvent(event);
     }
 
 
 private slots:
-    void showStats();
     void viewhistory();
     bool isDarkTheme();
     void launchFeedBack();

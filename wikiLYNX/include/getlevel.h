@@ -15,19 +15,19 @@
 
 
 #include "levels.h"
+#include "scoresheet.h"
 
 namespace Ui {
-class getLevel;
+class GetLevel;
 }
 
-class getLevel : public QDialog
-{
+class GetLevel : public QDialog {
     Q_OBJECT
 
 public:
-    int initialise();
-    explicit getLevel(QWidget *parent = nullptr);
-    ~getLevel();
+    int initialise(ScoreSheet*);
+    explicit GetLevel(QWidget *parent = nullptr);
+    ~GetLevel();
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -37,18 +37,18 @@ protected:
 
 private:
     int updateTable();
-    QJsonObject cfg, iData, levelData;
-    Ui::getLevel *ui;
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    ScoreSheet *gameData;
+    QJsonObject levelData;
+    Ui::GetLevel *ui;
 
 private slots:
     void launchHelp();
     void setEditStatus();
-    void deleteLevel(QString);
     void downloadLevel(QString);
 
 signals:
     void closed();
+    void levelsUpdated();
 };
 
 #endif // GETLEVEL_H

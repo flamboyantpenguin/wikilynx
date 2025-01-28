@@ -1,0 +1,12 @@
+Release Notes
+
+- New and improved Level Selector Dialog
+- Introducing Developer Options. Though it can't do much as of now, it will be helpful for upcoming releases
+- GameData storage has been changed with major Improvements. Storage usage will be less!
+- Logs are now shown as a list of previous instances of opening a directory
+- Show Logs. Show previous games as a list instead of opening the directory
+- Code cleanup. A lot of embarassing fixes, necessary changes and improvements
+- Performance Improvements
+- Minor UI fixes
+
+Released On: 31/01/2025

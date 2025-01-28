@@ -10,20 +10,19 @@
 #include <QUrl>
 
 namespace Ui {
-class news;
+class News;
 }
 
-class news : public QDialog
-{
+class News : public QDialog {
     Q_OBJECT
 
 public:
     QUrl url = QUrl::fromUserInput("https://feeds.dawn.org.in/Projects/wikiLYNX/RSS.xml");
-    explicit news(QWidget *parent = nullptr);
-    ~news();
+    explicit News(QWidget *parent = nullptr);
+    ~News();
 
 private:
-    Ui::news *ui;
+    Ui::News *ui;
     bool isDarkTheme();
     void parseXml();
     void get(const QUrl &url);

@@ -7,7 +7,7 @@ wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped 
 
 ## Data Collection
 
-As of wikiLYNX 1.5.5, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (latest version, custom levels etc) and for browsing as mentioned below.
+As of wikiLYNX 1.5.6, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (latest version, custom levels etc) and for browsing as mentioned below.
 
 This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include
 

@@ -13,23 +13,20 @@
 #include "levels.h"
 #include "leveleditor.h"
 #include "getlevel.h"
+#include "scoresheet.h"
 
 
 namespace Ui {
-class levelManager;
+class LevelManager;
 }
 
-class levelManager : public QDialog
-{
+class LevelManager : public QDialog {
     Q_OBJECT
 
 public:
-    explicit levelManager(QWidget *parent = nullptr);
-    ~levelManager();
-    QJsonObject cfg, iData, uData;
-    void initialise();
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
+    explicit LevelManager(QWidget *parent = nullptr);
+    ~LevelManager();
+    void initialise(ScoreSheet **gameData, int launchType = 0);
 
 protected:
     void closeEvent(QCloseEvent *event) override {
@@ -37,21 +34,26 @@ protected:
     }
 
 private:
-    Ui::levelManager *ui;
-    levelEditor levelEditorDialog;
-    getLevel getLevelDialog;
+    ScoreSheet *gameData;
+    Ui::LevelManager *ui;
+    LevelEditor *levelEditorDialog;
+    GetLevel *GetLevelDialog;
 
 
 private slots:
     void addLevel();
     void updateTable();
     void importLevels();
-    void exportLevels();
     void downloadLevel();
     void genRandomLevel();
-    void removeLevel(QString code);
-    void saveData(QString fname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/gData.json");
-    void launchLevelEditor(QString code);
+    void removeLevel(QString);
+    void launchLevelEditor(QString);
+    void exportLevels(QString codeName = "");
+    void listDoubleClickEmitter(QListWidgetItem*);
+
+
+signals:
+    void listDoubleClicked(QString);
 
 };
 

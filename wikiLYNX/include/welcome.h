@@ -3,52 +3,50 @@
 #include <filesystem>
 
 #include <QDir>
-#include <QFile>
 #include <QString>
 #include <QThread>
-#include <QResource>
 #include <QJsonObject>
 #include <QMessageBox>
-#include <QTextStream>
 #include <QJsonDocument>
 #include <QStandardPaths>
-#include <QSystemTrayIcon>
-#include <QDesktopServices>
 
+// UI Dialogs
 #include "news.h"
-#include "help.h"
 #include "about.h"
+#include "baselist.h"
 #include "congrats.h"
 #include "whatsnew.h"
-#include "viewstats.h"
 #include "gamewindow.h"
+#include "leaderboard.h"
 #include "leveleditor.h"
+#include "basebrowser.h"
 #include "levelmanager.h"
 #include "statusoverview.h"
 
+// GameData Manager
+#include "scoresheet.h"
+
+// Update Checker
+#include "renovatio.h"
 
 namespace Ui {
 class welcomeDialog;
 }
 
 
-class welcomeUI : public QDialog
-{
+class WelcomeUI : public QDialog {
     Q_OBJECT
 
-
 public:
-
     QThread *thread;
-    explicit welcomeUI(QDialog *parent = nullptr);
+    explicit WelcomeUI(QDialog *parent = nullptr);
+    ~WelcomeUI();
 
     int *dontKillParse0;
     int *totemofUndying;
     QString theme;
-    QJsonObject data, cfg, base;
 
 private:
-
     std::map<QString, QString> worldEvents = {
         { "2512", "christmas|Merry Christmas!" },
         { "0101", "newyear|Happy New Year!" }
@@ -69,7 +67,6 @@ private:
         "Word of Advice: Don't code when you're tired or when your mind is in chaos!"
     };
 
-
 private slots:
     void checkStatus();
     bool isDarkTheme();
@@ -78,28 +75,27 @@ private slots:
     void showAbout();
     void showLogs();
     void showNews();
+    void updateLogs(QString, QJsonObject);
     void clearLogs();
     int startGame();
     void updateUI();
-    void loadSettings();
     void updateSettings();
-    void saveSettings();
-    void checkCustom();
     void addCustom();
     void genRandomLevel();
-    void showLevelInfo(int s = 0);
+    void launchLevelSelector();
     void showRules();
     void checkWorldEvent();
     void launchStatusOverview();
+    void toggleDevOptions();
 
 
 public slots:
     int initialise(int*);
+    void setLevel(QString lname);
     void setStatus(int);
 
 
 private:
-
     std::map<int, QString> code = {
         { 0, "Offline|offline" },
         { 1, "Online|online" },
@@ -108,34 +104,21 @@ private:
         { 4, "Meow|meow" },
     };
 
-    news newsDialog;
-    help helpDialog;
+    News *newsDialog;
     GameWindow *game;
-    about aboutDialog;
-    whatsNew whatsNewDialog;
+    BaseList *baselist;
+    About *aboutDialog;
+    BaseBrowser *helpDialog;
+    WhatsNew *whatsNewDialog;
 
-    viewStats statsDialog;
-    levelManager editDialog;
-    levelEditor levelEditorDlg;
-    statusOverview overview;
+    LeaderBoard *statsDialog;
+    LevelManager *editDialog;
+    LevelEditor *levelEditorDlg;
+    StatusOverview *overview = nullptr;
+
+    ScoreSheet *gameData;
 
     Ui::welcomeDialog *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
-};
-
-
-class checkUpdateWorker : public QObject  {
-    Q_OBJECT
-
-public:
-    std::string version = "1.5.5-3";
-    std::string lVersion = "1.5.5-3";
-
-public slots:
-    void process();
-
-signals:
-    void finished();
-    void status(int);
 };

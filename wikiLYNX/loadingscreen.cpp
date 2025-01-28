@@ -1,10 +1,7 @@
 #include "include/loadingscreen.h"
 #include "ui/ui_loadingscreen.h"
 
-loadingScreen::loadingScreen(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::loadingScreen)
-{
+LoadingScreen::LoadingScreen(QWidget *parent) : QDialog(parent), ui(new Ui::LoadingScreen) {
     ui->setupUi(this);
 
 
@@ -20,9 +17,9 @@ loadingScreen::loadingScreen(QWidget *parent)
     connect( thread, &QThread::started, worker, &Worker::process);
     connect( worker, &Worker::finished, thread, &QThread::quit);
     connect( worker, &Worker::finished, worker, &Worker::deleteLater);
-    connect(worker, &Worker::progress, this, &loadingScreen::setPrg);
+    connect(worker, &Worker::progress, this, &LoadingScreen::setPrg);
     connect( thread, &QThread::finished, thread, &QThread::deleteLater);
-    connect( thread, &QThread::finished, this, &loadingScreen::close);
+    connect( thread, &QThread::finished, this, &LoadingScreen::close);
     thread->start();
 
     ui->progressBar->setStyleSheet(styleSheet);
@@ -30,13 +27,12 @@ loadingScreen::loadingScreen(QWidget *parent)
 
 }
 
-loadingScreen::~loadingScreen()
-{
+LoadingScreen::~LoadingScreen() {
     delete ui;
 }
 
 
-void loadingScreen::setPrg(int i) {
+void LoadingScreen::setPrg(int i) {
     ui->progressBar->setValue(i);
 }
 
@@ -44,7 +40,7 @@ void loadingScreen::setPrg(int i) {
 void Worker::process() { // Process. Start processing data.
     for (int i = 0; i < 100; i++) {
         emit progress(i);
-        QThread::msleep(20);
+        QThread::msleep(10);
     }
     emit finished();
 }

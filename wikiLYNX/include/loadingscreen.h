@@ -7,34 +7,19 @@
 #include <QThread>
 
 namespace Ui {
-class loadingScreen;
+class LoadingScreen;
 }
 
-class loadingScreen : public QDialog
-{
+class LoadingScreen : public QDialog {
     Q_OBJECT
 
 public:
-    explicit loadingScreen(QWidget *parent = nullptr);
-    ~loadingScreen();
-
-    /*
-     *
-     * class Worker(QObject):
-finished = pyqtSignal()
-progress = pyqtSignal(int)
-def progressbar(self):
-for i in range(101):
-self.progress.emit(i)
-sleep(progressBarTime)
-self.finished.emit()
-     * */
+    explicit LoadingScreen(QWidget *parent = nullptr);
+    ~LoadingScreen();
 
 private:
-    //QThread thread;
-    //Worker worker;
     void setPrg(int i);
-    Ui::loadingScreen *ui;
+    Ui::LoadingScreen *ui;
 
 };
 

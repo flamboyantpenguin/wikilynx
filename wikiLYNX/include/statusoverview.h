@@ -7,23 +7,23 @@
 #include <QMessageBox>
 #include <QDesktopServices>
 
+#include "whatsnew.h"
+
 
 namespace Ui {
-class statusOverview;
+class StatusOverview;
 }
 
-class statusOverview : public QDialog
-{
+class StatusOverview : public QDialog {
     Q_OBJECT
 
 public:
-    explicit statusOverview(QWidget *parent = nullptr);
-    ~statusOverview();
+    explicit StatusOverview(QWidget *parent = nullptr);
+    ~StatusOverview();
 
 private:
-
     int hehe = 0;
-    QString cVersion = "1.5.5";
+    QString cVersion = "1.5.6";
     std::map<int, QString> code = {
        { 0, "Offline|Offline" },
        { 1, "Online|Online" },
@@ -32,16 +32,21 @@ private:
        { 4, "Online|Online" },
     };
 
-    Ui::statusOverview *ui;
+    WhatsNew *whatsnew = nullptr;
+    Ui::StatusOverview *ui;
 
 public slots:
-    void initialise(int);
+    void initialise(int, QString);
 
 private slots:
     void developerHehe();
     void launchVersionInfo();
     void launchMaintenanceTool();
     void launchLatestVersionInfo();
+
+signals:
+    void devEnabled();
+
 };
 
 #endif // STATUSOVERVIEW_H

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# RPM Build script for Games.DAWN/wikiLYNX (https://github.com/flamboyantpenguin/wikilynx)
+
+version="1.5.6-1"
+
+
+# Build
+spectool -g -R SPECS/*.spec
+rpmbuild -ba SPECS/*.spec
+
+# Copy
+cp -r ~/rpmbuild/SRPMS/wikilynx-$version.fc41.src.rpm /opt/output
+cp -r ~/rpmbuild/RPMS/$(uname -m)/wikilynx-$version.fc41.$(uname -m).rpm /opt/output
