@@ -1,10 +1,8 @@
 #include "include/about.h"
 #include "ui/ui_about.h"
 
-About::About(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::About)
-{
+
+About::About(QWidget *parent) : QDialog(parent), ui(new Ui::About) {
     ui->setupUi(this);
     ui->tabWidget->setTabVisible(2, false);
     connect(ui->closeButton, &QPushButton::clicked, this, &About::close);
@@ -15,11 +13,19 @@ About::About(QWidget *parent) :
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
 
+    QFile p(":/base/info/CREDITS.txt");
+    p.open(QIODevice::ReadOnly);
+    auto releaseNotes = QString(p.readAll());
+    p.close();
+    ui->credits->setText(releaseNotes);
+
 }
 
-About::~About()
-{
+
+About::~About() {
     delete ui;
+    //if (termsDialog != nullptr) termsDialog->deleteLater();
+    //if (feedbackBrowser != nullptr) feedbackBrowser->deleteLater();
 }
 
 
@@ -34,12 +40,15 @@ bool About::isDarkTheme() {
 
 void About::showTerms() {
     termsDialog = new Terms;
-    termsDialog->show();
+    termsDialog->showMaximized();
 }
 
 
 void About::launchFeedback() {
-    QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
+    feedbackBrowser = new BaseBrowser();
+    feedbackBrowser->initialise("Feedback", "https://forms.gle/SScZKbFLFBffdVay8");
+    feedbackBrowser->showMaximized();
+    //QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
 }
 
 

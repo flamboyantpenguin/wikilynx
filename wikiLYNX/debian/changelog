@@ -1,12 +1,12 @@
 wikilynx (1.5.6-1) unstable; urgency=medium
 
-  * Fixed a bug where checkpoints weren't incremented on the status bar after clearing them 
-  * Fixed a bug where default green theme not applied on new installations 
-  * Updated documentation
-  * Project now hosted on dawn.org.in
-  * Fonts should now be clear in Windows
-  * New tips on welcome screen
-  * Improved theming with light/dark variant images
-  * AppStream Fixes
+  * New and improved Level Selector Dialog
+  * Introducing Developer Options
+  * GameData storage has been changed with major Improvements
+  * Logs are now shown as a list of previous instances of opening a directory
+  * Show Logs. Show previous games as a list instead of opening the directory
+  * Code cleanup. A lot of embarassing fixes, necessary changes and improvements
+  * Performance Improvements
+  * Minor UI fixes
 
- -- Penguin <penguin@dawn.org.in>  Tue, 14 Jan 2025 18:30:00 +0530
+ -- Penguin <penguin@dawn.org.in>  Fri, 31 Jan 2025 18:30:00 +0530

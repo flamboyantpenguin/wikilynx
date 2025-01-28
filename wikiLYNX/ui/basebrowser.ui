@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>help</class>
- <widget class="QDialog" name="help">
+ <class>BaseBrowser</class>
+ <widget class="QDialog" name="BaseBrowser">
   <property name="windowModality">
    <enum>Qt::WindowModality::WindowModal</enum>
   </property>
@@ -38,7 +38,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Help</string>
+   <string>Web Browser</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../assets/assets.qrc">

@@ -3,31 +3,31 @@
 #include <filesystem>
 
 #include <QDir>
-#include <QFile>
 #include <QString>
 #include <QThread>
-#include <QResource>
 #include <QJsonObject>
 #include <QMessageBox>
-#include <QTextStream>
 #include <QJsonDocument>
 #include <QStandardPaths>
-#include <QSystemTrayIcon>
-#include <QDesktopServices>
 
+// UI Dialogs
 #include "news.h"
-#include "help.h"
 #include "about.h"
 #include "baselist.h"
 #include "congrats.h"
 #include "whatsnew.h"
-#include "leaderboard.h"
 #include "gamewindow.h"
+#include "leaderboard.h"
 #include "leveleditor.h"
+#include "basebrowser.h"
 #include "levelmanager.h"
 #include "statusoverview.h"
+
+// GameData Manager
 #include "scoresheet.h"
 
+// Update Checker
+#include "renovatio.h"
 
 namespace Ui {
 class welcomeDialog;
@@ -37,9 +37,7 @@ class welcomeDialog;
 class WelcomeUI : public QDialog {
     Q_OBJECT
 
-
 public:
-
     QThread *thread;
     explicit WelcomeUI(QDialog *parent = nullptr);
     ~WelcomeUI();
@@ -49,7 +47,6 @@ public:
     QString theme;
 
 private:
-
     std::map<QString, QString> worldEvents = {
         { "2512", "christmas|Merry Christmas!" },
         { "0101", "newyear|Happy New Year!" }
@@ -100,7 +97,6 @@ public slots:
 
 
 private:
-
     std::map<int, QString> code = {
         { 0, "Offline|offline" },
         { 1, "Online|online" },
@@ -110,10 +106,10 @@ private:
     };
 
     News *newsDialog;
-    help *helpDialog;
-    BaseList *baselist;
     GameWindow *game;
+    BaseList *baselist;
     About *aboutDialog;
+    BaseBrowser *helpDialog;
     WhatsNew *whatsNewDialog;
 
     LeaderBoard *statsDialog;
@@ -126,20 +122,4 @@ private:
     Ui::welcomeDialog *ui;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
-};
-
-
-class checkUpdateWorker : public QObject  {
-    Q_OBJECT
-
-public:
-    std::string version = "1.5.6-1";
-    std::string lVersion = "1.5.6-1";
-
-public slots:
-    void process();
-
-signals:
-    void finished();
-    void status(int);
 };

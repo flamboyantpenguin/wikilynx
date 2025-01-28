@@ -12,7 +12,9 @@ StatusOverview::~StatusOverview() {
 }
 
 
-void StatusOverview::initialise(int status) {
+void StatusOverview::initialise(int status, QString version) {
+
+    this->cVersion = version;
 
     this->hehe = 0;
     ui->updateButton->hide();
@@ -32,6 +34,7 @@ void StatusOverview::initialise(int status) {
             connect(ui->updateButton, &QPushButton::clicked, this, &StatusOverview::launchLatestVersionInfo);
         #endif
     }
+    else if (!status || status == 3) ui->versionHelper->setText("Update Check Failed!");
 
 }
 
@@ -47,7 +50,9 @@ void StatusOverview::launchLatestVersionInfo() {
 
 
 void StatusOverview::launchVersionInfo() {
-    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/releases/v"+cVersion));
+    whatsnew = new WhatsNew(this->cVersion);
+    whatsnew->show();
+    //QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/releases/v"+cVersion));
 }
 
 

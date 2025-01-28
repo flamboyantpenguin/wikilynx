@@ -115,7 +115,8 @@ void ScoreSheet::loadSettings(QJsonObject cfg, QJsonObject base) {
 
     // Load Version
     this->version = base["version"].toString();
-    this->ver = base["version"].toString().remove(QRegularExpression("-."));
+    static QRegularExpression shortVer("-.");
+    this->ver = base["version"].toString().remove(shortVer);
 
 }
 
@@ -256,9 +257,11 @@ QStringList ScoreSheet::getStatLevels() {
 
 QString ScoreSheet::getPlayerStats(QString level, QString player) {
     QJsonObject statData = readBinFile(stat, true);
-    if (statData.contains(level))
-        for (QString key : statData[level].toObject().keys())
-            if (statData[level].toObject()[key] == player) return key;
+    if (statData.contains(level)) {
+        QStringList players = statData[level].toObject().keys();
+        for (const QString &key : std::as_const(players))
+            if (statData[level].toObject().value(key) == player) return key;
+    }
     return "";
 }
 

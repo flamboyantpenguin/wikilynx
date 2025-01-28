@@ -64,7 +64,8 @@ void LevelManager::updateTable() {
     ui->list->clear();
     QJsonObject cLevels = gameData->GetLevels("custom");
 
-    for (QString cKey : cLevels.keys()) {
+    QStringList cKeys = cLevels.keys();
+    for (const QString &cKey : std::as_const(cKeys)) {
 
         QListWidgetItem *item = new QListWidgetItem();
         auto widget = new Levels(this);
@@ -94,7 +95,8 @@ void LevelManager::updateTable() {
 
         QJsonObject iLevels = gameData->GetLevels("inbuilt");
 
-        for (QString lKey : iLevels.keys()) {
+        QStringList iKeys = iLevels.keys();
+        for (const QString &lKey : std::as_const(iKeys)) {
 
             if (!(gameData->getSettings().value("debug").toBool()) && lKey == "debug") continue;
 
@@ -166,7 +168,7 @@ void LevelManager::importLevels() {
     dialog.setFileMode(QFileDialog::ExistingFile);
     dialog.setAcceptMode(QFileDialog::AcceptOpen);
     dialog.setNameFilter(tr("JSON Files (*.json)"));
-    if (dialog.exec()) filename = dialog.selectedFiles()[0];
+    if (dialog.exec()) filename = dialog.selectedFiles().value(0);
 
     if (filename == "") return;
 
@@ -178,6 +180,16 @@ void LevelManager::importLevels() {
 
 
 void LevelManager::exportLevels(QString codeName) {
+
+    QFileDialog dialog(this);
+    QString filename;
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.selectFile("export.json");
+    dialog.setNameFilter(tr("JSON Files (*.json)"));
+    if (dialog.exec()) filename = dialog.selectedFiles().value(0);
+
+    if (filename == "") return;
 
     QJsonObject* exportData = new QJsonObject;
     if (!(codeName.isEmpty())) {
@@ -195,16 +207,6 @@ void LevelManager::exportLevels(QString codeName) {
     else {
         *exportData = gameData->GetLevels("custom");
     }
-
-    QFileDialog dialog(this);
-    QString filename;
-    dialog.setFileMode(QFileDialog::AnyFile);
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-    dialog.selectFile("export.json");
-    dialog.setNameFilter(tr("JSON Files (*.json)"));
-    if (dialog.exec()) filename = dialog.selectedFiles()[0];
-
-    if (filename == "") return;
 
     gameData->writeTxtFile(filename, *exportData);
 

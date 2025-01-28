@@ -1,12 +1,10 @@
-#include "include/help.h"
-#include "ui/ui_help.h"
+#include "include/basebrowser.h"
+#include "ui/ui_basebrowser.h"
 
-help::help(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::help)
-{
+BaseBrowser::BaseBrowser(QWidget *parent) : QDialog(parent), ui(new Ui::BaseBrowser) {
+
     ui->setupUi(this);
-    connect(ui->closeButton, &QPushButton::clicked, this, &help::close);
+    connect(ui->closeButton, &QPushButton::clicked, this, &BaseBrowser::close);
 
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
@@ -14,13 +12,12 @@ help::help(QWidget *parent) :
 
 }
 
-help::~help()
-{
+BaseBrowser::~BaseBrowser() {
     delete ui;
 }
 
 
-bool help::isDarkTheme() {
+bool BaseBrowser::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
     int luminance = (0.299 * backgroundColor.red() +
                      0.587 * backgroundColor.green() +
@@ -29,6 +26,7 @@ bool help::isDarkTheme() {
 }
 
 
-void help::initialise(QString url) {
+void BaseBrowser::initialise(QString title, QString url) {
+    this->setWindowTitle(title);
     ui->webEngineView->load(QUrl::fromUserInput(url));
 }

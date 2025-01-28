@@ -18,6 +18,7 @@
   </property>
   <property name="font">
    <font>
+    <family>Comfortaa</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -274,6 +275,12 @@
    </item>
    <item>
     <widget class="QLabel" name="label5">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
+      </font>
+     </property>
      <property name="text">
       <string>label5</string>
      </property>
@@ -297,6 +304,12 @@
    </item>
    <item>
     <widget class="QLabel" name="label6">
+     <property name="font">
+      <font>
+       <family>Courier Prime</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
+      </font>
+     </property>
      <property name="text">
       <string>label6</string>
      </property>

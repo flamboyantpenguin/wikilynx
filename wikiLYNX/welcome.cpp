@@ -27,8 +27,6 @@ WelcomeUI::WelcomeUI(QDialog *parent) : QDialog(parent), ui(new Ui::welcomeDialo
 
     ui->initButton->setFocus();
 
-    this->checkStatus();
-
 }
 
 WelcomeUI::~WelcomeUI() {
@@ -43,6 +41,9 @@ int WelcomeUI::initialise(int *totem) {
 
     gameData = new ScoreSheet(":/cfg/gameData.json", dirName);
     updateUI();
+
+    // Check for Updates
+    this->checkStatus();
 
     // Set icon theme
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
@@ -59,7 +60,7 @@ int WelcomeUI::initialise(int *totem) {
     // Check Debug mode
     if (gameData->getSettings().value("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
 
-    theme = gameData->getSettings()["iconTheme"].toString() + theme;
+    theme = gameData->getSettings().value("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
@@ -74,12 +75,11 @@ int WelcomeUI::initialise(int *totem) {
 
 void WelcomeUI::checkStatus() {
     thread = new QThread();
-    checkUpdateWorker* worker = new checkUpdateWorker();
+    Renovatio* worker = new Renovatio(gameData->version);
     worker->moveToThread(thread);
-    connect(thread, &QThread::started, worker, &checkUpdateWorker::process);
-    connect(worker, &checkUpdateWorker::finished, thread, &QThread::quit);
-    connect(worker, &checkUpdateWorker::finished, worker, &checkUpdateWorker::deleteLater);
-    connect(worker, &checkUpdateWorker::status, this, &WelcomeUI::setStatus);
+    connect(thread, &QThread::started, worker, &Renovatio::process);
+    connect(worker, &Renovatio::finished, thread, &QThread::quit);
+    connect(worker, &Renovatio::status, this, &WelcomeUI::setStatus);
     connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     thread->start();
 }
@@ -107,7 +107,7 @@ void WelcomeUI::launchLevelSelector() {
 
 void WelcomeUI::setLevel(QString lName) {
     ui->levelSelector->setText(lName);
-    QJsonObject level = gameData->GetLevels()[lName].toObject();
+    QJsonObject level = gameData->GetLevels().value(lName).toObject();
     ui->difficulty->setText(level["difficulty"].toString());
     ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
 }
@@ -121,7 +121,8 @@ int WelcomeUI::startGame() {
     // KDEPlatformTheme automatically adds accelerators to QPushButton
     // https://stackoverflow.com/questions/32688153/how-to-disable-automatic-mnemonics-in-a-qt-application-on-kde
     // https://bugs.kde.org/show_bug.cgi?id=337491
-    QString passcode = ui->levelSelector->text().remove(QRegularExpression("[\\&]"));
+    static QRegularExpression accelerator("[\\&]");
+    QString passcode = ui->levelSelector->text().remove(accelerator);
 
     if (!gameData->GetLevels().contains(passcode) || passcode == "Select Level") {
         QMessageBox::critical(this, "wikiLYNX", "Invalid Code!", QMessageBox::Ok);
@@ -136,7 +137,7 @@ int WelcomeUI::startGame() {
 
     QJsonObject gData = gameData->GetLevel(passcode);
 
-    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, gameData->getSettings()["notwiki?"].toInt(), ui->playerName->text(), passcode);
+    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, gameData->getSettings().value("notwiki").toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
@@ -164,24 +165,21 @@ void WelcomeUI::updateUI() {
     for (int i = 0; i < gameData->iconThemes.split(",").count(); ++i) {
         ui->iconThemeSelect->addItem(gameData->iconThemes.split(",")[i].split("#")[0]);
     }
-    ui->iconThemeSelect->setCurrentText(gameData->getSettings()["iconTheme"].toString());
+    ui->iconThemeSelect->setCurrentText(gameData->getSettings().value("iconTheme").toString());
 
-    ui->allowSitesToggle->setChecked(gameData->getSettings()["allowReference"].toBool());
+    ui->allowSitesToggle->setChecked(gameData->getSettings().value("allowReference").toBool());
 
-    ui->killToggle->setChecked(gameData->getSettings()["totemOfUndying"].toBool());
+    ui->killToggle->setChecked(gameData->getSettings().value("totemOfUndying").toBool());
 
 }
 
 
 void WelcomeUI::updateSettings() {
     gameData->updateSettings("totemOfUndying", ui->killToggle->isChecked());
-    //gameData->settings["totemOfUndying"] = ui->killToggle->isChecked();
     gameData->updateSettings("iconTheme", ui->iconThemeSelect->currentText());
-    //gameData->settings["iconTheme"] = ui->iconThemeSelect->currentText();
     gameData->updateSettings("allowReference", ui->allowSitesToggle->isChecked());
-    //gameData->settings["allowReference"] = ui->allowSitesToggle->isChecked();
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    theme = gameData->getSettings()["iconTheme"].toString() + theme;
+    theme = gameData->getSettings().value("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);
     this->update();
 }
@@ -224,8 +222,8 @@ void WelcomeUI::genRandomLevel() {
 
 
 void WelcomeUI::showRules() {
-    helpDialog = new help;
-    helpDialog->initialise();
+    helpDialog = new BaseBrowser;
+    helpDialog->initialise("Help");
     helpDialog->showMaximized();
 }
 
@@ -243,11 +241,15 @@ void WelcomeUI::showLogs() {
     QStringList headerButtons = {"neutralOnline"};
     QStringList header = {"Instance", "Checkpoints", "Clicks", "Status", "Level", "Player", "Time Taken"};
 
-    for (QString instance : logs.keys()) {
+    QStringList keys = logs.keys();
+
+    for (const QString &instance : std::as_const(keys)) {
         QJsonObject log = logs.value(instance).toObject();
         QList<QString> logEntry;
         logEntry.append(instance);
-        for (QString key : log.keys()) {
+
+        QStringList logKeys = log.keys();
+        for (const QString &key : std::as_const(logKeys)) {
             if (key != "log") logEntry.append(log[key].toString());
             else desc.append(QString::fromUtf8(QByteArray::fromBase64(log.value(key).toString().toUtf8())));
         }
@@ -276,8 +278,8 @@ void WelcomeUI::clearLogs() {
 
 void WelcomeUI::setStatus(int c) {
 
-    if (gameData->version > gameData->getSettings()["version"].toString()) {
-        whatsNewDialog = new WhatsNew;
+    if (gameData->version > gameData->getSettings().value("version").toString()) {
+        whatsNewDialog = new WhatsNew(gameData->ver);
         whatsNewDialog->show();
         gameData->updateSettings("version", gameData->version);
     }
@@ -286,7 +288,7 @@ void WelcomeUI::setStatus(int c) {
     ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].split("|")[1]));
     if (c != 0) checkWorldEvent();
     overview = new StatusOverview;
-    overview->initialise(c);
+    overview->initialise(c, gameData->ver);
     connect(overview, &StatusOverview::devEnabled, this, &WelcomeUI::toggleDevOptions);
     return;
 }
@@ -294,7 +296,8 @@ void WelcomeUI::setStatus(int c) {
 
 void WelcomeUI::toggleDevOptions() {
     if (gameData->getSettings().value("debug").toBool()) {
-        ui->version->setText(ui->version->text().remove(QRegularExpression(" \\(.*\\)")));
+        static QRegularExpression s(" \\(.*\\)");
+        ui->version->setText(ui->version->text().remove(s));
         gameData->updateSettings("debug", false);
     }
     else {
@@ -342,49 +345,4 @@ void WelcomeUI::showAbout() {
         connect(aboutDialog, &About::turnOffDev, this, &WelcomeUI::toggleDevOptions);
     }
     aboutDialog->show();
-}
-
-
-void checkUpdateWorker::process() { // Process. Start processing data.
-
-    QNetworkAccessManager manager;
-    QUrl url("https://wikipedia.org");
-    QNetworkReply *reply = manager.get(QNetworkRequest(url));
-
-    QEventLoop loop;
-    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    if (reply->error() != QNetworkReply::NoError) {
-        reply->deleteLater();
-        emit status(0);
-        return;
-    }
-    reply->deleteLater();
-
-    url = QUrl("https://repo.dawn.org.in/QtOnline/wikiLYNX/.info/version.txt");
-    reply = manager.get(QNetworkRequest(url));
-
-    QEventLoop loop2;
-    QObject::connect(reply, &QNetworkReply::finished, &loop2, &QEventLoop::quit);
-    loop2.exec();
-
-    if (reply->error() != QNetworkReply::NoError) {
-        reply->deleteLater();
-        qDebug() << "Error fetching latest version information:" << reply->errorString();
-        emit status(3);
-        return;
-    }
-    else {
-        QByteArray data = reply->read(7);
-        lVersion = QString::fromLocal8Bit(data).toStdString();
-    }
-    reply->deleteLater();
-
-    if (strcmp(lVersion.c_str(), version.c_str()) > 0) emit status(2);
-    else if (strcmp(lVersion.c_str(), version.c_str()) < 0) emit status(4);
-    else emit status(1);
-
-    emit finished();
-
 }

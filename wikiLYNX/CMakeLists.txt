@@ -29,7 +29,7 @@ set(PROJECT_SOURCES
         ui/welcome.ui include/welcome.h welcome.cpp
         ui/congrats.ui congrats.cpp include/congrats.h
         ui/about.ui about.cpp include/about.h
-        ui/help.ui help.cpp include/help.h
+        ui/basebrowser.ui basebrowser.cpp include/basebrowser.h
         ui/terms.ui terms.cpp include/terms.h
         ui/levelmanager.ui levelmanager.cpp include/levelmanager.h
         ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
@@ -42,6 +42,8 @@ set(PROJECT_SOURCES
         include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
         include/baselist.h baselist.cpp ui/baselist.ui
         include/scoresheet.h scoresheet.cpp
+        renovatio.cpp
+        include/renovatio.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

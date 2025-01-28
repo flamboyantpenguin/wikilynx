@@ -77,6 +77,9 @@ void Congrats::viewhistory() {
 
 
 void Congrats::launchFeedBack() {
-    QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
+    feedbackBrowser = new BaseBrowser();
+    feedbackBrowser->initialise("Feedback", "https://forms.gle/SScZKbFLFBffdVay8");
+    feedbackBrowser->showMaximized();
+    //QDesktopServices::openUrl(QUrl("https://forms.gle/SScZKbFLFBffdVay8"));
 }
 

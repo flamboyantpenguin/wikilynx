@@ -9,6 +9,7 @@
 #include <QDesktopServices>
 
 #include "terms.h"
+#include "basebrowser.h"
 
 namespace Ui {
 class About;
@@ -24,7 +25,8 @@ public:
 
 private:
     Ui::About *ui;
-    Terms *termsDialog;
+    Terms *termsDialog = nullptr;
+    BaseBrowser *feedbackBrowser = nullptr;
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 private slots:

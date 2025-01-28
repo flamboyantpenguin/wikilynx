@@ -22,24 +22,25 @@
   <url type="vcs-browser">https://github.com/flamboyantpenguin/wikilynx</url>
   <url type="bugtracker">https://github.com/flamboyantpenguin/wikilynx/issues</url>
   <releases>
+    <release version="1.5.6" date="2025-01-31T18:30:00.000+05:30"/>
     <release version="1.5.5" date="2025-01-03T18:30:00.000+05:30"/>
     <release version="1.5.0" date="2024-12-18T16:42:14.702+05:30"/>
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://projects.dawn.org.in/wikilynx/.cfg/assets/Banner_WelcomeDialog_Plasma.png</image>
+      <image>https://cdn.dawn.org.in/projects/wikilynx/screenshots/Banner_WelcomeDialog_Plasma.png</image>
       <caption>Welcome Dialog opened in KDE Plasma Desktop</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://projects.dawn.org.in/wikilynx/.cfg/assets/Banner_GameWindow_Plasma.png</image>
+      <image>https://cdn.dawn.org.in/projects/wikilynx/screenshots/Banner_GameWindow_Plasma.png</image>
       <caption>A Game Session in progress</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://projects.dawn.org.in/wikilynx/.cfg/assets/LevelEditorDialog.png</image>
+      <image>https://cdn.dawn.org.in/projects/wikilynx/screenshots/LevelEditorDialog.png</image>
       <caption>Level Editor Dialog</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://projects.dawn.org.in/wikilynx/.cfg/assets/Banner_The_wikiLYNX_Experience.png</image>
+      <image>https://cdn.dawn.org.in/projects/wikilynx/screenshots/Banner_The_wikiLYNX_Experience.png</image>
       <caption>Welcome and About Dialog in KDE Plasma Desktop</caption>
     </screenshot>
   </screenshots>

@@ -27,6 +27,8 @@
         <file>images/DAWN_Light.svg</file>
         <file>images/wikiLYNX_Dark.svg</file>
         <file>images/wikiLYNX_Light.svg</file>
+        <file>info/ReleaseNotes.txt</file>
+        <file>info/CREDITS.txt</file>
     </qresource>
     <qresource prefix="/cfg">
         <file>gameData.json</file>

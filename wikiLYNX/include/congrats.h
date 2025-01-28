@@ -8,9 +8,9 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QStandardPaths>
-#include <QDesktopServices>
 
 #include "baselist.h"
+#include "basebrowser.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -33,13 +33,15 @@ public:
 private:
     QJsonObject data;
 
-    BaseList *baselist;
+    BaseList *baselist = nullptr;
+    BaseBrowser *feedbackBrowser = nullptr;
 
     Ui::Congrats *ui;
 
 protected:
     void closeEvent(QCloseEvent *event) override {
         emit closed();
+        QDialog::closeEvent(event);
     }
 
 

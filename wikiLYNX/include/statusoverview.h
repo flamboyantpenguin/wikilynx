@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QDesktopServices>
 
+#include "whatsnew.h"
+
 
 namespace Ui {
 class StatusOverview;
@@ -20,7 +22,6 @@ public:
     ~StatusOverview();
 
 private:
-
     int hehe = 0;
     QString cVersion = "1.5.6";
     std::map<int, QString> code = {
@@ -31,10 +32,11 @@ private:
        { 4, "Online|Online" },
     };
 
+    WhatsNew *whatsnew = nullptr;
     Ui::StatusOverview *ui;
 
 public slots:
-    void initialise(int);
+    void initialise(int, QString);
 
 private slots:
     void developerHehe();

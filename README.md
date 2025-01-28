@@ -2,9 +2,11 @@
 
 A simple browser app made using Qt C++ to play wikipedia speedruns the right way. The project was initially made for the wikiLYNX event conducted by [@jonesrison](https://jonesrison.github.io) at Rajagiri School of Engineering and Technology, Ernakulam, Kerala.
 
-![WelcomeDialog](https://projects.dawn.org.in/wikilynx/.cfg/assets/WelcomeDialog.png)
+![WelcomeDialog](https://cdn.dawn.org.in/projects/wikilynx/screenshots/WelcomeDialog.png)
 
-![GameWindow](https://projects.dawn.org.in/wikilynx/.cfg/assets/GameWindow.png)
+![GameWindow](https://cdn.dawn.org.in/projects/wikilynx/screenshots/GameWindow.png)
+
+![The_wikiLYNX_Experience](https://cdn.dawn.org.in/projects/wikilynx/screenshots/Banner_The_wikiLYNX_Experience.png)
 
 ## Introduction
 
@@ -38,7 +40,7 @@ You as a user can contribute to this project. Read development section for more 
 wikiLYNX is a game browser application. Since the game of Wikipedia speed-runs is browsing from one article to the other, this application is basically a browser with features and options attached to enhance gameplay. This means that almost all standard rules and practises of browsing applies to using the browser within this app as well.
 wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped around Chromium Embedded Framework (CEF), which means most of the things applicable for Chromium browsers applies here as well.
 
-As of wikiLYNX 1.5.5, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (update check and downloading custom levels) and for browsing as mentioned below.
+As of wikiLYNX 1.5.6, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (update check and downloading custom levels) and for browsing as mentioned below.
 
 This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include your IP Address, Browser User agent, hardware info etc. For more info, read [PRIVACY.md](https://github.com/flamboyantpenguin/wikilynx/blob/master/docs/PRIVACY.md).
 
@@ -107,10 +109,10 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.5.6
+wikiLYNX 1.5.6-1
 
-Last Updated: 14-01-2025
+Last Updated: 31-01-2025
 Made by DAWN/ペンギン
 ```
 
-![DAWN](https://github.com/user-attachments/assets/e634151e-0178-4168-aca4-9664237d7ace)
+![DAWN](https://cdn.dawn.org.in/base/logo/DAWN.svg)
