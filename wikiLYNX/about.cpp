@@ -53,7 +53,7 @@ void About::launchFeedback() {
 
 
 void About::initDevMode() {
-    QString indicator = dirName+"/.showLoadingScreen";
+    QString indicator = dirName+"/.disableSplash";
 
     ui->tabWidget->setTabVisible(2, true);
     connect(ui->viewDataDir, &QPushButton::clicked, this, &About::showAppData);
@@ -88,7 +88,7 @@ void About::deleteAllData() {
 
 void About::toggleLoadingScreen() {
 
-    QString indicator = dirName+"/.showLoadingScreen";
+    QString indicator = dirName+"/.disableSplash";
 
     if (ui->coolLoadingScreen->isChecked()) {
         QFile file(indicator);

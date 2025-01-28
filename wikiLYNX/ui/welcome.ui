@@ -170,25 +170,19 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0">
+           <property name="sizeConstraint">
+            <enum>QLayout::SizeConstraint::SetFixedSize</enum>
+           </property>
            <property name="spacing">
             <number>6</number>
            </property>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="levelSelector">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
+           <item row="3" column="0">
+            <widget class="QLabel" name="genRandTxt">
+             <property name="toolTip">
+              <string>A random level is being generated, please wait</string>
              </property>
              <property name="text">
-              <string>Select Level</string>
+              <string>Generating Random...</string>
              </property>
             </widget>
            </item>
@@ -217,8 +211,8 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label1">
+           <item row="2" column="1">
+            <widget class="QLabel" name="chk">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -231,17 +225,24 @@
                <height>16777215</height>
               </size>
              </property>
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             <property name="font">
+              <font>
+               <family>Courier Prime</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
              </property>
-             <property name="autoFillBackground">
-              <bool>false</bool>
+             <property name="toolTip">
+              <string>Number of checkpoints of the selected level</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
              </property>
              <property name="text">
-              <string>Level: </string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+              <string>number of checkpoints</string>
              </property>
             </widget>
            </item>
@@ -282,41 +283,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="chk">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier Prime</family>
-               <stylestrategy>PreferDefault</stylestrategy>
-               <hintingpreference>PreferNoHinting</hintingpreference>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Number of checkpoints of the selected level</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Shape::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <property name="text">
-              <string>number of checkpoints</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_4">
              <property name="sizePolicy">
@@ -333,6 +299,66 @@
              </property>
              <property name="text">
               <string>Checkpoints: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QProgressBar" name="genRandPrg">
+             <property name="toolTip">
+              <string>A random level is being generated, please wait</string>
+             </property>
+             <property name="maximum">
+              <number>0</number>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Level: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="levelSelector">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Select Level</string>
              </property>
             </widget>
            </item>
@@ -374,29 +400,6 @@
              </property>
              <property name="text">
               <string>level difficulty</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="genRandTxt">
-             <property name="toolTip">
-              <string>A random level is being generated, please wait</string>
-             </property>
-             <property name="text">
-              <string>Generating Random...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QProgressBar" name="genRandPrg">
-             <property name="toolTip">
-              <string>A random level is being generated, please wait</string>
-             </property>
-             <property name="maximum">
-              <number>0</number>
-             </property>
-             <property name="value">
-              <number>0</number>
              </property>
             </widget>
            </item>

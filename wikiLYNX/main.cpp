@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     loadFonts();
 
-    if (QFile(dirName+"/wikilynx/.showLoadingScreen").exists()) {
+    if (!(QFile(dirName+"/wikilynx/.disableSplash").exists() || getenv("WIKILYNX_DISABLESPLASH") != NULL)) {
         LoadingScreen banner;
         banner.setWindowFlags(Qt::FramelessWindowHint);
         banner.show();
@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
     }
 
     WelcomeUI dialog;
-
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
     //dialog.setWindowFlags(Qt::WindowStaysOnTopHint);

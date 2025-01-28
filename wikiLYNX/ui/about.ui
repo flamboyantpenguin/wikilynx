@@ -280,7 +280,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <item>
         <widget class="QCheckBox" name="coolLoadingScreen">
          <property name="text">
-          <string>Enable Loading Screen</string>
+          <string>Disable Loading Screen</string>
          </property>
          <property name="icon">
           <iconset theme="power"/>

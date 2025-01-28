@@ -67,7 +67,6 @@ private:
         "Word of Advice: Don't code when you're tired or when your mind is in chaos!"
     };
 
-
 private slots:
     void checkStatus();
     bool isDarkTheme();
