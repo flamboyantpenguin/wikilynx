@@ -50,8 +50,8 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
-* Fri Jan 31 2025 Penguin <penguin@dawn.org.in> - 1.5.6-1
-- Release 1.5.6-1
+* Sat Feb 01 2025 Penguin <penguin@dawn.org.in> - 1.5.6-2
+- Release 1.5.6
 - Repository now supports AppStream Metainfo
 
 * Fri Jan 03 2025 Penguin <penguin@dawn.org.in> - 1.5.5-3

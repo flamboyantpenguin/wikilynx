@@ -2,6 +2,7 @@
 
 
 Renovatio::Renovatio(QString version) {
+    qDebug() << version;
     this->version = version.toStdString();
     this->lVersion = version.toStdString();
     connect(this, &Renovatio::finished, this, &Renovatio::deleteLater);
@@ -42,7 +43,8 @@ void Renovatio::process() { // Process. Start processing data.
         return;
     }
     else {
-        QByteArray data = reply->read(7);
+        QByteArray data = reply->read(8);
+        qDebug() << QString::fromLocal8Bit(data);
         lVersion = QString::fromLocal8Bit(data).toStdString();
     }
     reply->deleteLater();
