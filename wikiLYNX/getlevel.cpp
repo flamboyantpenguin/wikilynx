@@ -74,6 +74,7 @@ int GetLevel::updateTable() {
         auto widget = new Levels(this);
 
         QStringList itemData = {
+            l[i],
             QString::number(this->levelData[l[i]].toObject()["time"].toInt()),
             QString::number(this->levelData[l[i]].toObject()["clicks"].toInt()),
             QString::number(this->levelData[l[i]].toObject()["checkpoints"].toInt()),
