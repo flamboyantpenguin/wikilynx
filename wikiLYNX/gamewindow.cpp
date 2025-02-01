@@ -171,13 +171,13 @@ int GameWindow::endGame(QString message) {
 
 void GameWindow::launchLogs() {
 
-    QList<QString> header("Logs");
+    QStringList header = {"Logs"};
     QList<QStringList> listData;
     QList<QStringList> actionData;
     QStringList headerButtons = {"neutralOnline"};
     for (int i = 0; i < log.count(); i++) {
-        listData.append(QList<QString>(log.value(i)));
-        actionData.append(QList<QString> ("history"));
+        listData.append(QStringList(log.value(i)));
+        actionData.append(QStringList ("history"));
     }
 
     baselist = new BaseList;
@@ -190,13 +190,13 @@ void GameWindow::launchLogs() {
 
 void GameWindow::viewCheckPoints() {
 
-    QList<QString> header("Checkpoints");
+    QStringList header = {"Checkpoints"};
     QList<QStringList> listData;
     QList<QStringList> actionData;
     QStringList headerButtons = {"neutralOnline"};
     for (int i = 0; i < levels.count(); i++) {
-        listData.append(QList<QString>(levels.value(i)));
-        QList<QString> tmp = (i <= chk) ? QList<QString>("online") : QList<QString>("offline");
+        listData.append(QStringList (levels.value(i)));
+        QStringList tmp = (i <= chk) ? QStringList("online") : QStringList("offline");
         actionData.append(tmp);
     }
 

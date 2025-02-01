@@ -245,7 +245,7 @@ void WelcomeUI::showLogs() {
 
     for (const QString &instance : std::as_const(keys)) {
         QJsonObject log = logs.value(instance).toObject();
-        QList<QString> logEntry;
+        QStringList logEntry;
         logEntry.append(instance);
 
         QStringList logKeys = log.keys();
@@ -254,7 +254,7 @@ void WelcomeUI::showLogs() {
             else desc.append(QString::fromUtf8(QByteArray::fromBase64(log.value(key).toString().toUtf8())));
         }
         listData.append(logEntry);
-        actionData.append(QList<QString> ("history"));
+        actionData.append(QStringList ("history"));
     }
 
     baselist = new BaseList;

@@ -59,7 +59,7 @@ void Congrats::viewhistory() {
     QString tmp = QString::fromUtf8(QByteArray::fromBase64(data.value("log").toString().toUtf8()));
     QStringList logs = tmp.split("\n");
 
-    QList<QString> header("Logs");
+    QStringList header = {"Logs"};
     QList<QStringList> listData;
     QList<QStringList> actionData;
     QStringList headerButtons = {"neutralOnline"};
