@@ -109,7 +109,7 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.5.6-1
+wikiLYNX 1.5.6-2
 
 Last Updated: 01-02-2025
 Made by DAWN/ペンギン
