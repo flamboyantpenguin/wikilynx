@@ -11,4 +11,4 @@ this_dir="$(readlink -f "$(dirname "$0")")"
 source "$this_dir"/apprun-hooks/"linuxdeploy-plugin-gstreamer.sh"
 source "$this_dir"/apprun-hooks/"linuxdeploy-plugin-qt-hook.sh"
 
-exec "$this_dir"/AppRun.wrapped
+exec "$this_dir"/wikilynx

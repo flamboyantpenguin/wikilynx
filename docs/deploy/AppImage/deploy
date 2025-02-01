@@ -29,7 +29,6 @@ downloadAppImagers() {
     wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-$ARCH.AppImage
     wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
     git clone https://github.com/linuxdeploy/linuxdeploy-plugin-gstreamer.git
-    wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
     cp linuxdeploy-plugin-gstreamer/linuxdeploy-plugin-gstreamer.sh .
     chmod u+x *.sh
     chmod u+x *.AppImage
@@ -88,7 +87,8 @@ bash -c "rm -rf AppDir/usr/lib/libnss*" # Fix for QtWebEngine
 bash -c "cp -rf $lib/libcrypto* AppDir/usr/lib" # Fix for QtWebEngine
 bash -c "cp -rf $lib/libssl* AppDir/usr/lib" # Fix for QtWebEngine
 bash -c "cp -rf $lib/libfribidi* AppDir/usr/lib" # Fix for i386 AppImage
-bash -c "cp AppRun AppDir/AppRun"
+bash -c "cp AppRun AppDir/AppRun" # Copy Custom AppRun
+bash -c "mv AppDir/AppRun.wrapped AppDir/wikilynx" # This makes sure the appimage runs with the correct name
 
 # Make AppImage
 ./appimagetool-$arch.AppImage AppDir
