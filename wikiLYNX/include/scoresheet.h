@@ -37,8 +37,9 @@ public:
     // Game Level
     void addLevels(QJsonObject);
     void removeLevel(QString);
-    QJsonObject GetLevel(QString);
-    QJsonObject GetLevels(QString flag = "");
+    QJsonObject getLevel(QString);
+    QJsonObject getLevels(QString flag = "");
+    QString getLevelPresence(QString levelName);
     void updateLevel(QString, QJsonObject);
     QJsonObject mergeJson(QJsonObject, QJsonObject);
 

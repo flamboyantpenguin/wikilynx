@@ -4,6 +4,7 @@
 #include <QList>
 #include <QLabel>
 #include <QWidget>
+#include <QSpacerItem>
 #include <QPushButton>
 
 
@@ -21,10 +22,12 @@ public:
     int initialise();
     QString getItem(int n = 0);
     void setItem(QStringList, QStringList);
+    void setLabelSize(int, int);
 
 private:
     Ui::Levels *ui;
     QList <QLabel*> labelUI;
+    QList <QSpacerItem*> spacers;
     QList <QPushButton*> actions;
 
 private slots:

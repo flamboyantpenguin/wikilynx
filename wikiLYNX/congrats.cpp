@@ -42,7 +42,7 @@ void Congrats::initialise(QJsonObject statInfo, QString stat) {
         ui->mainLabel->setText(QString("Mission Failed"));
         ui->message->setText(QString("Oops. Seems you couldn't complete the challenge in time. Try again!"));
     }
-    else if (stat == "Aborted") {
+    else if (stat == "Aborted!") {
         ui->mainLabel->setText(QString("Mission Aborted"));
         ui->message->setText(QString("Game ended abruptly."));
     }

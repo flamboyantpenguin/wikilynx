@@ -15,6 +15,14 @@ Levels::Levels(QWidget *parent) : QWidget(parent), ui(new Ui::Levels) {
     labelUI.append(ui->label5);
     labelUI.append(ui->label6);
 
+    spacers.append(ui->horizontalSpacer);
+    spacers.append(ui->horizontalSpacer_2);
+    spacers.append(ui->horizontalSpacer_3);
+    spacers.append(ui->horizontalSpacer_4);
+    spacers.append(ui->horizontalSpacer_5);
+    spacers.append(ui->horizontalSpacer_6);
+    //spacers.append(ui->buttonSpacer);
+
 }
 
 Levels::~Levels() {
@@ -24,20 +32,17 @@ Levels::~Levels() {
 
 void Levels::setItem(QStringList labels, QStringList icons) {
 
-    if (labels.value(0).isEmpty()) ui->label0->hide();
-    else ui->label0->setText(labels.value(0));
-    if (labels.value(1).isEmpty()) ui->label1->hide();
-    else ui->label1->setText(labels.value(1));
-    if (labels.value(2).isEmpty()) ui->label2->hide();
-    else ui->label2->setText(labels.value(2));
-    if (labels.value(3).isEmpty()) ui->label3->hide();
-    else ui->label3->setText(labels.value(3));
-    if (labels.value(4).isEmpty()) ui->label4->hide();
-    else ui->label4->setText(labels.value(4));
-    if (labels.value(5).isEmpty()) ui->label5->hide();
-    else ui->label5->setText(labels.value(5));
-    if (labels.value(6).isEmpty()) ui->label6->hide();
-    else ui->label6->setText(labels.value(6));
+    for (int i = 0; i < labels.count(); i++) {
+        labelUI[i]->setText(labels.value(i));
+    }
+
+    for (int i = labels.count(); i < labelUI.count(); i++) {
+        labelUI[i]->hide();
+        labelUI[i]->setMinimumWidth(0);
+        if (i != labels.count() && i < spacers.length()) spacers[i]->changeSize(0, 0);
+    }
+
+    if (labels.count() == 1) labelUI[0]->setMaximumWidth(16777215);
     //ui->label1->setText(label1);
     //ui->label2->setText(label2);
     //ui->label3->setText(label3);
@@ -54,6 +59,14 @@ void Levels::setItem(QStringList labels, QStringList icons) {
 
 QString Levels::getItem(int n) {
     return labelUI[n]->text();
+}
+
+
+void Levels::setLabelSize(int label, int size) {
+    if (label < labelUI.length()) {
+        labelUI[label]->setMinimumWidth(size);
+        labelUI[label]->setMaximumWidth(size);
+    }
 }
 
 

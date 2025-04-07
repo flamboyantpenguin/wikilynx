@@ -73,7 +73,6 @@ void ScoreSheet::writeTxtFile(QString fname, QJsonObject obj) {
     QJsonDocument document;
     document.setObject(obj);
     QByteArray bytes = document.toJson(QJsonDocument::Indented);
-    qDebug() << bytes.toBase64();
     QFile file(fname);
     if (file.isOpen()) file.close();
     file.open(QIODevice::WriteOnly);
@@ -188,20 +187,27 @@ void ScoreSheet::saveData(QString *fname, QJsonObject *cfg, QJsonObject *gameDat
 }
 
 
-QJsonObject ScoreSheet::GetLevel(QString levelName) {
+QJsonObject ScoreSheet::getLevel(QString levelName) {
     if (this->iLevels.contains(levelName))
         return this->iLevels[levelName].toObject();
     return this->levels[levelName].toObject();
 }
 
 
-QJsonObject ScoreSheet::GetLevels(QString flag) {
+QJsonObject ScoreSheet::getLevels(QString flag) {
     if (flag == "inbuilt")
         return this->iLevels;
     else if (flag == "custom")
         return this->levels;
     else
         return mergeJson(iLevels, levels);
+}
+
+
+QString ScoreSheet::getLevelPresence(QString levelName) {
+    if (iLevels.contains(levelName)) return "inbuilt";
+    else if (levels.contains(levelName)) return "custom";
+    else return "";
 }
 
 
@@ -250,7 +256,6 @@ void ScoreSheet::appendPlayerStats(QString level, QString player, QString timeTa
 
 QStringList ScoreSheet::getStatLevels() {
     QJsonObject statData = readBinFile(stat, true);
-    //qDebug() << statData.keys();
     return statData.keys();
 }
 

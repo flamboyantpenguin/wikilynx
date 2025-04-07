@@ -39,7 +39,7 @@ void LevelEditor::initialise(ScoreSheet *gameData, QString cde) {
     this->code = cde;
     this->genRandom = -1;
     this->gameData = gameData;
-    this->levelInfo = this->gameData->GetLevel(cde);
+    this->levelInfo = this->gameData->getLevel(cde);
     this->chkData = this->levelInfo["levels"].toString().split(" ");
 
     if (this->levelInfo["levels"].toString().isEmpty()) this->chkData.pop_front();

@@ -107,7 +107,7 @@ void WelcomeUI::launchLevelSelector() {
 
 void WelcomeUI::setLevel(QString lName) {
     ui->levelSelector->setText(lName);
-    QJsonObject level = gameData->GetLevels().value(lName).toObject();
+    QJsonObject level = gameData->getLevel(lName);
     ui->difficulty->setText(level["difficulty"].toString());
     ui->chk->setText(QString::number(level["levels"].toString().split(" ").count()));
 }
@@ -124,7 +124,7 @@ int WelcomeUI::startGame() {
     static QRegularExpression accelerator("[\\&]");
     QString passcode = ui->levelSelector->text().remove(accelerator);
 
-    if (!gameData->GetLevels().contains(passcode) || passcode == "Select Level") {
+    if (gameData->getLevelPresence(passcode).isEmpty() || passcode == "Select Level") {
         QMessageBox::critical(this, "wikiLYNX", "Invalid Code!", QMessageBox::Ok);
         return 1;
     }
@@ -135,7 +135,7 @@ int WelcomeUI::startGame() {
     if (!(ui->keyboardToggle->isChecked())) this->grabKeyboard();
     this->hide();
 
-    QJsonObject gData = gameData->GetLevel(passcode);
+    QJsonObject gData = gameData->getLevel(passcode);
 
     game->initialise(&gData, dontKillParse0, hex+"|"+bHex, gameData->getSettings().value("notwiki").toInt(), ui->playerName->text(), passcode);
     *dontKillParse0 = 0;
@@ -229,6 +229,9 @@ void WelcomeUI::showRules() {
 
 
 void WelcomeUI::showLogs() {
+
+    // No longer required :'‑)
+
     //fs::create_directories(dirName.toStdString()+"/logs");
     //QDesktopServices::openUrl(QUrl::fromLocalFile(dirName+"/logs"));
     // Finally Fixed this :)

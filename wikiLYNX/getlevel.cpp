@@ -81,7 +81,7 @@ int GetLevel::updateTable() {
             this->levelData[l[i]].toObject()["difficulty"].toString()
         };
 
-        if (gameData->GetLevels().contains(l[i])) {
+        if (!(gameData->getLevelPresence(l[i]).isEmpty())) {
             QStringList icons = {"delete"};
             widget->setItem(itemData, icons);
         }
@@ -106,7 +106,7 @@ void GetLevel::downloadLevel(QString code) {
 
     ui->list->setDisabled(true);
 
-    if (gameData->GetLevels().contains(code)) {
+    if (!(gameData->getLevelPresence(code).isEmpty())) {
         gameData->removeLevel(code);
         ui->status->setText("Deleted!");
         emit levelsUpdated();

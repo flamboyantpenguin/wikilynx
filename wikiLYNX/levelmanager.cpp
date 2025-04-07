@@ -33,7 +33,8 @@ void LevelManager::initialise(ScoreSheet **gameData, int launchType) {
     auto widget = new Levels(this);
 
     QStringList itemData = {"Code", "Time (s)", "Clicks", "Checkpoints", "Difficulty"};
-    QStringList icons = {"neutralOnline", "neutralOnline", "neutralOnline"};
+    //QStringList icons = {"neutralOnline", "neutralOnline", "neutralOnline"};
+    QStringList icons;
 
     widget->setItem(itemData, icons);
     item->setSizeHint(widget->sizeHint());
@@ -61,71 +62,58 @@ void LevelManager::listDoubleClickEmitter(QListWidgetItem* item) {
 
 void LevelManager::updateTable() {
 
-    ui->list->clear();
-    QJsonObject cLevels = gameData->GetLevels("custom");
+    QJsonObject gameLevels;
+    if (ui->showInbuiltLevelToggle->isChecked()) gameLevels = gameData->getLevels();
+    else gameLevels = gameData->getLevels("custom");
 
-    QStringList cKeys = cLevels.keys();
-    for (const QString &cKey : std::as_const(cKeys)) {
+    ui->list->clear();
+
+    QStringList levelNames = gameLevels.keys();
+    for (const QString &levelName : std::as_const(levelNames)) {
 
         QListWidgetItem *item = new QListWidgetItem();
         auto widget = new Levels(this);
 
         QStringList itemData {
-            cKey,
-            QString::number(cLevels[cKey].toObject()["time"].toDouble()),
-            QString::number(cLevels[cKey].toObject()["clicks"].toInt()),
-            QString::number(cLevels[cKey].toObject()["levels"].toString().split(" ").count()),
-            cLevels[cKey].toObject()["difficulty"].toString(),
+            levelName,
+            !(gameLevels[levelName].toObject()["time"].toDouble()) ? "nolimit" : QString::number(gameLevels[levelName].toObject()["time"].toDouble()),
+            !(gameLevels[levelName].toObject()["clicks"].toInt()) ? "nolimit" : QString::number(gameLevels[levelName].toObject()["clicks"].toInt()),
+            QString::number(gameLevels[levelName].toObject()["levels"].toString().split(" ").count()),
+            gameLevels[levelName].toObject()["difficulty"].toString(),
         };
-        QStringList icons = {"edit", "export", "delete"};
 
+
+        QStringList icons;
+        if (gameData->getLevelPresence(levelName) == "inbuilt") {
+            //QStringList icons = {"export", "neutralOnline", "neutralOnline"};
+            icons = {"export"};
+            connect(widget, &Levels::action0, this, &LevelManager::exportLevels);
+
+        }
+        else {
+            icons = {"edit", "export", "delete"};
+            connect(widget, &Levels::action0, this, &LevelManager::launchLevelEditor);
+            connect(widget, &Levels::action1, this, &LevelManager::exportLevels);
+            connect(widget, &Levels::action2, this, &LevelManager::removeLevel);
+        }
+
+        //qDebug() << ui->list->width();
+        //widget->setLabelSize(0, (int) ui->list->width());
         widget->setItem(itemData, icons);
-
-        connect(widget, &Levels::action0, this, &LevelManager::launchLevelEditor);
-        connect(widget, &Levels::action1, this, &LevelManager::exportLevels);
-        connect(widget, &Levels::action2, this, &LevelManager::removeLevel);
-
         item->setSizeHint(widget->sizeHint());
         ui->list->addItem(item);
         ui->list->setItemWidget(item, widget);
 
+
+        auto tmp = ui->header->sizeHint();
+        tmp.setHeight(widget->sizeHint().height());
+        item->setSizeHint(tmp);
+        ui->list->addItem(item);
+        ui->list->setItemWidget(item, widget);
+
+
     }
 
-    if (ui->showInbuiltLevelToggle->isChecked()) {
-
-        QJsonObject iLevels = gameData->GetLevels("inbuilt");
-
-        QStringList iKeys = iLevels.keys();
-        for (const QString &lKey : std::as_const(iKeys)) {
-
-            if (!(gameData->getSettings().value("debug").toBool()) && lKey == "debug") continue;
-
-            QListWidgetItem *item = new QListWidgetItem();
-            auto widget = new Levels(this);
-
-            QStringList itemData {
-                lKey,
-                QString::number(iLevels[lKey].toObject()["time"].toDouble()),
-                QString::number(iLevels[lKey].toObject()["clicks"].toInt()),
-                QString::number(iLevels[lKey].toObject()["levels"].toString().split(" ").count()),
-                iLevels[lKey].toObject()["difficulty"].toString()
-            };
-            QStringList icons = {"neutralOnline", "export", "neutralOnline"};
-
-            widget->setItem(itemData, icons);
-
-            //connect(widget, &levels::action0, this, &LevelManager::launchLevelEditor);
-            connect(widget, &Levels::action1, this, &LevelManager::exportLevels);
-            //connect(widget, &levels::action2, this, &LevelManager::removeLevel);
-
-            auto tmp = ui->header->sizeHint();
-            tmp.setHeight(widget->sizeHint().height());
-            item->setSizeHint(tmp);
-            ui->list->addItem(item);
-            ui->list->setItemWidget(item, widget);
-
-        }
-    }
 }
 
 
@@ -193,7 +181,7 @@ void LevelManager::exportLevels(QString codeName) {
 
     QJsonObject* exportData = new QJsonObject;
     if (!(codeName.isEmpty())) {
-        exportData->insert(codeName, gameData->GetLevel(codeName));
+        exportData->insert(codeName, gameData->getLevel(codeName));
     }
     else if (ui->list->selectedItems().count()) {
         QList selection = ui->list->selectedItems();
@@ -201,11 +189,11 @@ void LevelManager::exportLevels(QString codeName) {
             auto item = selection[i];
             auto itemWidget = (Levels *) ui->list->itemWidget(item);
             QString code = itemWidget->getItem(0);
-            exportData->insert(code, gameData->GetLevel(code));
+            exportData->insert(code, gameData->getLevel(code));
         }
     }
     else {
-        *exportData = gameData->GetLevels("custom");
+        *exportData = gameData->getLevels("custom");
     }
 
     gameData->writeTxtFile(filename, *exportData);
