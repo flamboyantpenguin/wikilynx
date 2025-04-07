@@ -1,5 +1,5 @@
 #include "include/news.h"
-#include "ui/ui_news.h"
+#include "forms/ui_news.h"
 
 
 News::News(QWidget *parent) : QDialog(parent) , ui(new Ui::News) {

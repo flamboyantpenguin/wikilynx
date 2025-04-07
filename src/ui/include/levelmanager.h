@@ -10,10 +10,12 @@
 #include <QFileDialog>
 #include <QProcess>
 #include <QStandardPaths>
+
 #include "levels.h"
 #include "leveleditor.h"
 #include "getlevel.h"
-#include "scoresheet.h"
+
+#include <include/scoresheet.h>
 
 
 namespace Ui {

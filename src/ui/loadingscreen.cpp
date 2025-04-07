@@ -1,5 +1,5 @@
 #include "include/loadingscreen.h"
-#include "ui/ui_loadingscreen.h"
+#include "forms/ui_loadingscreen.h"
 
 LoadingScreen::LoadingScreen(QWidget *parent) : QDialog(parent), ui(new Ui::LoadingScreen) {
     ui->setupUi(this);

@@ -1,5 +1,5 @@
 #include "include/leveleditor.h"
-#include "ui/ui_leveleditor.h"
+#include "forms/ui_leveleditor.h"
 
 
 LevelEditor::LevelEditor(QWidget *parent) : QDialog(parent), ui(new Ui::LevelEditor) {

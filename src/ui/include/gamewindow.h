@@ -16,6 +16,8 @@
 #include "baselist.h"
 #include "congrats.h"
 
+#include <include/oscillator.h>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -62,9 +64,10 @@ private:
     QTimer *timer = new QTimer(this);
     QString wikiURL = "https://wikipedia.org/wiki/";
 
+    Oscillator *soundSystem;
+
 
 private slots:
-    void playSound(QString sound);
     void launchLogs();
     bool isDarkTheme();
     void viewCheckPoints();

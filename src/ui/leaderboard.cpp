@@ -1,5 +1,5 @@
 #include "include/leaderboard.h"
-#include "ui/ui_leaderboard.h"
+#include "forms/ui_leaderboard.h"
 
 
 LeaderBoard::LeaderBoard(QWidget *parent) : QDialog(parent), ui(new Ui::LeaderBoard) {

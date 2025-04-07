@@ -1,5 +1,5 @@
 #include "include/baselist.h"
-#include "ui/ui_baselist.h"
+#include "forms/ui_baselist.h"
 
 BaseList::BaseList(QWidget *parent) : QDialog(parent), ui(new Ui::BaseList) {
     ui->setupUi(this);

@@ -1,5 +1,5 @@
 #include "include/gamewindow.h"
-#include "ui/ui_gamewindow.h"
+#include "forms/ui_gamewindow.h"
 
 
 namespace fs = std::filesystem;
@@ -19,11 +19,14 @@ GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::GameWi
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
 
+    soundSystem = new Oscillator();
+
 }
 
 
 GameWindow::~GameWindow() {
     delete ui;
+    delete soundSystem;
 }
 
 
@@ -62,7 +65,8 @@ int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prg
     else ui->field->load(QUrl::fromUserInput(this->levels[0]));
 
     timer->start(100);
-    this->playSound("init.wav");
+    soundSystem->playSound("init");
+    //this->playSound("init.wav");
 
     this->instance = QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
 
@@ -112,7 +116,8 @@ void GameWindow::initAction() {
 
     // Check Rule Violation
     if (!alD && !(url.toString().split("://")[1].split("/")[0].endsWith("wikipedia.org"))) {
-            this->playSound("error.wav");
+            soundSystem->playSound("error");
+            //this->playSound("error.wav");
             *dontKillMe = 1;
             QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings", QMessageBox::Ok);
             *dontKillMe = 0;
@@ -150,8 +155,8 @@ int GameWindow::endGame(QString message) {
     gameStat["timeTaken"] = QString::number(countup, 'f', 4);
 
     *dontKillMe = 1;
-    if (message != "You Won!") this->playSound("error.wav");
-    else this->playSound("yay.wav");
+    if (message != "You Won!") soundSystem->playSound("error"); //this->playSound("error.wav");
+    else soundSystem->playSound("yay"); //this->playSound("yay.wav");
 
     ui->statusbar->showMessage(code[message]);
     if (message != "Aborted!") QMessageBox::critical(this, "wikiLYNX", code[message], QMessageBox::Ok);
@@ -205,19 +210,4 @@ void GameWindow::viewCheckPoints() {
     baselist->initList("Checkpoints", "", &header, &headerButtons, &listData, &actionData);
     baselist->show();
 
-}
-
-
-void GameWindow::playSound(QString sound) {
-    QMediaPlayer *player = new QMediaPlayer;
-    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QAudioOutput *audioOutput = new QAudioOutput;
-        player->setAudioOutput(audioOutput);
-        player->setSource(QUrl("qrc:/base/audio/"+sound));
-        audioOutput->setVolume(50);
-    #else
-        player->setMedia(QUrl("qrc:/base/audio/"+sound));
-        player->setVolume(50);
-    #endif
-    player->play();
 }

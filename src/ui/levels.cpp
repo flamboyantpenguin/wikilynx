@@ -1,5 +1,5 @@
 #include "include/levels.h"
-#include "ui/ui_levels.h"
+#include "forms/ui_levels.h"
 
 Levels::Levels(QWidget *parent) : QWidget(parent), ui(new Ui::Levels) {
     ui->setupUi(this);

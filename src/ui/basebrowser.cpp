@@ -1,5 +1,5 @@
 #include "include/basebrowser.h"
-#include "ui/ui_basebrowser.h"
+#include "forms/ui_basebrowser.h"
 
 BaseBrowser::BaseBrowser(QWidget *parent) : QDialog(parent), ui(new Ui::BaseBrowser) {
 

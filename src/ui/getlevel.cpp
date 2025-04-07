@@ -1,5 +1,5 @@
 #include "include/getlevel.h"
-#include "ui/ui_getlevel.h"
+#include "forms/ui_getlevel.h"
 
 
 GetLevel::GetLevel(QWidget *parent) : QDialog(parent), ui(new Ui::GetLevel) {

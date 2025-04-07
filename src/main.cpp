@@ -1,8 +1,5 @@
-#include "include/welcome.h"
-#include "include/loadingscreen.h"
-
-#include "ui/ui_welcome.h"
-#include "ui/ui_loadingscreen.h"
+#include <include/welcome.h>
+#include <include/loadingscreen.h>
 
 #include <fstream>
 #include <QDialog>
@@ -10,8 +7,6 @@
 #include <QFontDatabase>
 #include <QMessageBox>
 #include <QString>
-#include <QNetworkReply>
-
 
 void loadFonts();
 void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);

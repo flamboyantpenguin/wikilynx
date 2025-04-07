@@ -1,5 +1,5 @@
 #include "include/whatsnew.h"
-#include "ui/ui_whatsnew.h"
+#include "forms/ui_whatsnew.h"
 
 
 WhatsNew::WhatsNew(QString ver, QWidget *parent) : QDialog(parent), ui(new Ui::WhatsNew) {

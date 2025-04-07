@@ -1,5 +1,5 @@
 #include "include/welcome.h"
-#include "ui/ui_welcome.h"
+#include "forms/ui_welcome.h"
 
 #include "include/loadingscreen.h"
 

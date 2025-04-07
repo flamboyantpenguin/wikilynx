@@ -1,5 +1,5 @@
 #include "include/terms.h"
-#include "ui/ui_terms.h"
+#include "forms/ui_terms.h"
 
 
 Terms::Terms(QWidget *parent) : QDialog(parent), ui(new Ui::Terms) {

@@ -1,5 +1,5 @@
 #include "include/statusoverview.h"
-#include "ui/ui_statusoverview.h"
+#include "forms/ui_statusoverview.h"
 
 
 StatusOverview::StatusOverview(QWidget *parent) : QDialog(parent), ui(new Ui::StatusOverview) {

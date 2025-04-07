@@ -7,7 +7,7 @@
 #include <QJsonObject>
 #include <QStandardPaths>
 
-#include "scoresheet.h"
+#include <include/scoresheet.h>
 
 namespace Ui {
 class LeaderBoard;

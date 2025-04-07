@@ -24,10 +24,10 @@
 #include "statusoverview.h"
 
 // GameData Manager
-#include "scoresheet.h"
+#include <include/scoresheet.h>
 
 // Update Checker
-#include "renovatio.h"
+#include <include/renovatio.h>
 
 namespace Ui {
 class welcomeDialog;

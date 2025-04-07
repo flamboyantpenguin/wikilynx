@@ -10,41 +10,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Multimedia)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS WebEngineWidgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Multimedia WebEngineWidgets Network)
 
 if (MSVC)
-    #find_package(jsoncpp CONFIG REQUIRED)
     set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/assets/logo.rc")
-    #qt_add_executable(photosurfaceexample main.cpp ${app_icon_resource_windows})
 endif (MSVC)
 
 set(PROJECT_SOURCES
         main.cpp
-        gamewindow.cpp
-        include/gamewindow.h
-        ui/gamewindow.ui
         assets/assets.qrc
-
-        ui/welcome.ui include/welcome.h welcome.cpp
-        ui/congrats.ui congrats.cpp include/congrats.h
-        ui/about.ui about.cpp include/about.h
-        ui/basebrowser.ui basebrowser.cpp include/basebrowser.h
-        ui/terms.ui terms.cpp include/terms.h
-        ui/levelmanager.ui levelmanager.cpp include/levelmanager.h
-        ui/leveleditor.ui leveleditor.cpp include/leveleditor.h
-        ui/leaderboard.ui leaderboard.cpp include/leaderboard.h
-        include/getlevel.h getlevel.cpp ui/getlevel.ui
-        include/loadingscreen.h loadingscreen.cpp ui/loadingscreen.ui
-        include/news.h news.cpp ui/news.ui
-        include/statusoverview.h statusoverview.cpp ui/statusoverview.ui
-        include/levels.h levels.cpp ui/levels.ui
-        include/whatsnew.h whatsnew.cpp ui/whatsnew.ui
-        include/baselist.h baselist.cpp ui/baselist.ui
-        include/scoresheet.h scoresheet.cpp
-        renovatio.cpp
-        include/renovatio.h
 )
+
+add_subdirectory(ui)
+add_subdirectory(game)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(wikilynx
@@ -70,8 +48,8 @@ else()
     endif()
 endif()
 
-
-target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia)
+target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets wikilynx_game wikilynx_ui)
+#target_link_libraries(wikilynx PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::Network wikilynx_game wikilynx_ui)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -89,7 +67,7 @@ set_target_properties(wikilynx PROPERTIES
 )
 
 include(GNUInstallDirs)
-include_directories("ui include")
+#include_directories("game ui")
 
 install(TARGETS wikilynx
     BUNDLE DESTINATION .

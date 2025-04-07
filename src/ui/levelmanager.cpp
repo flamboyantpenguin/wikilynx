@@ -1,5 +1,5 @@
 #include "include/levelmanager.h"
-#include "ui/ui_levelmanager.h"
+#include "forms/ui_levelmanager.h"
 
 
 #include <QMessageBox>

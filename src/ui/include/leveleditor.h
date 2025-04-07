@@ -10,7 +10,7 @@
 #include <QDesktopServices>
 
 #include "levels.h"
-#include "scoresheet.h"
+#include <include/scoresheet.h>
 
 namespace Ui {
 class LevelEditor;
