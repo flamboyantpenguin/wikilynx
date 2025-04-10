@@ -28,7 +28,7 @@ bool Congrats::isDarkTheme() {
 }
 
 
-void Congrats::initialise(QJsonObject statInfo, QString stat) {
+void Congrats::initialise(QJsonObject statInfo, int stat) {
 
     this->data = statInfo;
 
@@ -38,15 +38,15 @@ void Congrats::initialise(QJsonObject statInfo, QString stat) {
     double tmp = statInfo["timeTaken"].toString().toDouble()/(60.0);
     ui->timeTaken->setText(QString::number(tmp)+" minutes ("+statInfo["timeTaken"].toString()+" seconds) ");
 
-    if (stat == "Timeout!") {
+    if (stat == 1) {
         ui->mainLabel->setText(QString("Mission Failed"));
         ui->message->setText(QString("Oops. Seems you couldn't complete the challenge in time. Try again!"));
     }
-    else if (stat == "Aborted!") {
+    else if (stat == 3) {
         ui->mainLabel->setText(QString("Mission Aborted"));
         ui->message->setText(QString("Game ended abruptly."));
     }
-    else if (stat == "MaxClicks!") {
+    else if (stat == 2) {
         ui->mainLabel->setText(QString("Mission Failed"));
         ui->message->setText(QString("Oops. Seems you couldn't complete the challenge within minimum clicks. Try again!"));
     }

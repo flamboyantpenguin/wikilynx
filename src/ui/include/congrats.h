@@ -28,7 +28,7 @@ public:
 
     //int chk;
     //int tChk;
-    void initialise(QJsonObject, QString);
+    void initialise(QJsonObject, int);
 
 private:
     QJsonObject data;

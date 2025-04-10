@@ -1,10 +1,6 @@
 #include "include/levelmanager.h"
 #include "forms/ui_levelmanager.h"
 
-
-#include <QMessageBox>
-
-
 LevelManager::LevelManager(QWidget *parent) : QDialog(parent), ui(new Ui::LevelManager) {
     ui->setupUi(this);
     ui->status->setText("");
@@ -42,11 +38,15 @@ void LevelManager::initialise(ScoreSheet **gameData, int launchType) {
     ui->header->setItemWidget(item, widget);
 
     if (launchType) {
-        ui->title->setText("Select Level");
-        ui->tip->setText("Double click a level to select it");
+        this->setWindowTitle("Select Level");
+        ui->title->hide();
+        //ui->title->setText("Select Level");
+        ui->tip->hide();
+        //ui->tip->setText("Double click a level to select it");
         ui->showInbuiltLevelToggle->setChecked(true);
         updateTable();
-        connect(ui->list, &QListWidget::itemDoubleClicked, this, &LevelManager::listDoubleClickEmitter);
+        connect(ui->list, &QListWidget::itemClicked, this, &LevelManager::itemClickEmitter);
+        connect(ui->list, &QListWidget::itemClicked, this, &LevelManager::close);
         return;
     }
     updateTable();
@@ -54,9 +54,9 @@ void LevelManager::initialise(ScoreSheet **gameData, int launchType) {
 }
 
 
-void LevelManager::listDoubleClickEmitter(QListWidgetItem* item) {
+void LevelManager::itemClickEmitter(QListWidgetItem* item) {
     auto itemWidget = (Levels *) ui->list->itemWidget(item);
-    emit listDoubleClicked(itemWidget->getItem());
+    emit itemClicked(itemWidget->getItem());
 }
 
 

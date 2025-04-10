@@ -36,10 +36,9 @@ WelcomeUI::~WelcomeUI() {
 
 int WelcomeUI::initialise(int *totem) {
 
-    fs::create_directories(dirName.toStdString());
     this->totemofUndying = totem;
 
-    gameData = new ScoreSheet(":/cfg/gameData.json", dirName);
+    this->gameData = new ScoreSheet();
     updateUI();
 
     // Check for Updates
@@ -58,9 +57,9 @@ int WelcomeUI::initialise(int *totem) {
     ui->label0->setText(tips[tip]);
 
     // Check Debug mode
-    if (gameData->getSettings().value("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
+    if (gameData->getSetting("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
 
-    theme = gameData->getSettings().value("iconTheme").toString() + theme;
+    theme = gameData->getSetting("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);
     qDebug() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
@@ -96,11 +95,13 @@ bool WelcomeUI::isDarkTheme() {
 
 void WelcomeUI::launchLevelSelector() {
 
-    editDialog = new LevelManager;
-    editDialog->initialise(&gameData, 1);
-    connect(editDialog, &LevelManager::listDoubleClicked, this, &WelcomeUI::setLevel);
-    connect(editDialog, &LevelManager::listDoubleClicked, editDialog, &LevelManager::close);
-    editDialog->show();
+
+    LevelManager *levelSelector = new LevelManager();
+    levelSelector->initialise(&gameData, 1);
+    connect(levelSelector, &LevelManager::itemClicked, this, &WelcomeUI::setLevel);
+    //connect(levelSelector, &LevelManager::itemClicked, levelSelector, &LevelManager::close);
+    //editDialog->show();
+    levelSelector->showMaximized();
 
 }
 
@@ -129,15 +130,14 @@ int WelcomeUI::startGame() {
         return 1;
     }
 
-    game = new GameWindow;
+    GameBoi *gameSystem = new GameBoi(this->gameData, passcode, ui->playerName->text());
+    game = new GameWindow(gameSystem, this->dontKillParse0, hex+"|"+bHex);
     connect(&(game->congratsView), &Congrats::closed, this, &WelcomeUI::reset);
     connect(game, &GameWindow::gameEnded, this, &WelcomeUI::updateLogs);
     if (!(ui->keyboardToggle->isChecked())) this->grabKeyboard();
     this->hide();
 
-    QJsonObject gData = gameData->getLevel(passcode);
-
-    game->initialise(&gData, dontKillParse0, hex+"|"+bHex, gameData->getSettings().value("notwiki").toInt(), ui->playerName->text(), passcode);
+    //game->initialise(this->gameSystem, dontKillParse0, hex+"|"+bHex, gameData->getSettings().value("notwiki").toInt(), , passcode);
     *dontKillParse0 = 0;
     QThread::msleep(500);
     game->showFullScreen();
@@ -165,11 +165,11 @@ void WelcomeUI::updateUI() {
     for (int i = 0; i < gameData->iconThemes.split(",").count(); ++i) {
         ui->iconThemeSelect->addItem(gameData->iconThemes.split(",")[i].split("#")[0]);
     }
-    ui->iconThemeSelect->setCurrentText(gameData->getSettings().value("iconTheme").toString());
+    ui->iconThemeSelect->setCurrentText(gameData->getSetting("iconTheme").toString());
 
-    ui->allowSitesToggle->setChecked(gameData->getSettings().value("allowReference").toBool());
+    ui->allowSitesToggle->setChecked(gameData->getSetting("allowReference").toBool());
 
-    ui->killToggle->setChecked(gameData->getSettings().value("totemOfUndying").toBool());
+    ui->killToggle->setChecked(gameData->getSetting("totemOfUndying").toBool());
 
 }
 
@@ -179,7 +179,7 @@ void WelcomeUI::updateSettings() {
     gameData->updateSettings("iconTheme", ui->iconThemeSelect->currentText());
     gameData->updateSettings("allowReference", ui->allowSitesToggle->isChecked());
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
-    theme = gameData->getSettings().value("iconTheme").toString() + theme;
+    theme = gameData->getSetting("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);
     this->update();
 }
@@ -281,7 +281,7 @@ void WelcomeUI::clearLogs() {
 
 void WelcomeUI::setStatus(int c) {
 
-    if (gameData->version > gameData->getSettings().value("version").toString()) {
+    if (gameData->version > gameData->getSetting("version").toString()) {
         whatsNewDialog = new WhatsNew(gameData->ver);
         whatsNewDialog->show();
         gameData->updateSettings("version", gameData->version);
@@ -298,7 +298,7 @@ void WelcomeUI::setStatus(int c) {
 
 
 void WelcomeUI::toggleDevOptions() {
-    if (gameData->getSettings().value("debug").toBool()) {
+    if (gameData->getSetting("debug").toBool()) {
         static QRegularExpression s(" \\(.*\\)");
         ui->version->setText(ui->version->text().remove(s));
         gameData->updateSettings("debug", false);
@@ -343,7 +343,7 @@ void WelcomeUI::showNews() {
 
 void WelcomeUI::showAbout() {
     aboutDialog = new About;
-    if (gameData->getSettings().value("debug").toBool()) {
+    if (gameData->getSetting("debug").toBool()) {
         aboutDialog->initDevMode();
         connect(aboutDialog, &About::turnOffDev, this, &WelcomeUI::toggleDevOptions);
     }

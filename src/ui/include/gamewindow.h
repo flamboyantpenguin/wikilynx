@@ -1,22 +1,15 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
-#include <QFile>
-#include <QTimer>
 #include <QString>
-#include <fstream>
-#include <filesystem>
 #include <QMessageBox>
-#include <QJsonObject>
 #include <QMainWindow>
-#include <QStandardPaths>
-#include <QtMultimedia/QAudioOutput>
-#include <QtMultimedia/QMediaPlayer>
 
 #include "baselist.h"
 #include "congrats.h"
 
-#include <include/oscillator.h>
+#include <include/gameboi.h>
+#include <include/scoresheet.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -30,50 +23,43 @@ class GameWindow : public QMainWindow {
 
 
 public:
-    GameWindow(QWidget *parent = nullptr);
+    GameWindow(GameBoi *gameSystem, int *dontKillMeParse, QString prgHex,
+               QWidget *parent = nullptr);
     ~GameWindow();
 
     int *dontKillMe;
     Congrats congratsView;
-    int initialise(QJsonObject*, int*, QString, int, QString, QString);
 
 private:
-    // Game Variables
-    int chk = 0;
-    int clicks = -1;
-    float endTime = 0;
-    float countup = 0;
-
-    std::map<QString, QString> code = {
-       { "Aborted!", "Game Aborted!" },
-       { "Win!", "You won!" },
-       { "Timeout!", "Timeout!" },
-       { "MaxClicks!", "Max Clicks Reached" }
+    std::map<int, QString> endCodes = {
+       { 0, "You won!"},
+       { 1, "Timeout!"},
+       { 2, "Max Clicks Reached!" },
+       { 3, "Game Aborted!" }
     };
 
 
-    int alD = 1;
-    bool domain;
-    QStringList log;
-    QStringList levels;
+    std::map<QString, QString> messageCodes = {
+        { "RLV", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings" }
+    };
+
     BaseList *baselist;
     Ui::GameWindow *ui;
-    QJsonObject gameData;
-    QString gamer, level;
-    QString instance;
-    QTimer *timer = new QTimer(this);
-    QString wikiURL = "https://wikipedia.org/wiki/";
 
-    Oscillator *soundSystem;
-
+    GameBoi *gameSystem;
 
 private slots:
+    void startGame();
+    void click(QUrl);
     void launchLogs();
     bool isDarkTheme();
+    void updatePRG(int);
     void viewCheckPoints();
-    void updateCountdown();
-    void initAction();
-    int endGame(QString message = "Aborted!");
+    void updateCountdown(QString);
+    int endGame(QJsonObject, int);
+    void showMessage(QString warning);
+    void updateClicks(QString, QString);
+
 
 signals:
     void gameEnded(QString, QJsonObject);

@@ -35,7 +35,7 @@
    <string>Status Overview</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -350,7 +350,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

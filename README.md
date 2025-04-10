@@ -109,9 +109,9 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.5.6-3
+wikiLYNX 1.6.0-1
 
-Last Updated: 01-02-2025
+Last Updated: 10-04-2025
 Made by DAWN/ペンギン
 
 Happy Year of the Snake!

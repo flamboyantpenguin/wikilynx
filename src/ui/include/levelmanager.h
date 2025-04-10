@@ -14,9 +14,9 @@
 #include "levels.h"
 #include "leveleditor.h"
 #include "getlevel.h"
+#include <QMessageBox>
 
 #include <include/scoresheet.h>
-
 
 namespace Ui {
 class LevelManager;
@@ -51,11 +51,11 @@ private slots:
     void removeLevel(QString);
     void launchLevelEditor(QString);
     void exportLevels(QString codeName = "");
-    void listDoubleClickEmitter(QListWidgetItem*);
+    void itemClickEmitter(QListWidgetItem*);
 
 
 signals:
-    void listDoubleClicked(QString);
+    void itemClicked(QString);
 
 };
 

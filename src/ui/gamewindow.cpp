@@ -5,30 +5,78 @@
 namespace fs = std::filesystem;
 
 
-GameWindow::GameWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::GameWindow) {
+GameWindow::GameWindow(GameBoi *gameSystem, int *dontKillMeParse, QString prgHex,
+                       QWidget *parent) : QMainWindow(parent), ui(new Ui::GameWindow) {
 
     ui->setupUi(this);
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
-    connect(ui->exitButton, SIGNAL(clicked()), this, SLOT(endGame()));
-    connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::initAction);
-    connect(ui->showHistory, SIGNAL(clicked()), this, SLOT(launchLogs()));
-    connect(ui->viewChkButton, SIGNAL(clicked()), this, SLOT(viewCheckPoints()));
+    // Parse GameBoi instance
+    this->gameSystem = gameSystem;
 
+    // Connect Signals of UI Elements to Slots
+    connect(ui->showHistory, SIGNAL(clicked()), this, SLOT(launchLogs()));
+    connect(ui->exitButton, SIGNAL(clicked()), gameSystem, SLOT(endGame()));
+    connect(ui->viewChkButton, SIGNAL(clicked()), this, SLOT(viewCheckPoints()));
+    //connect(ui->viewChkButton, SIGNAL(clicked()), this, SLOT(viewCheckPoints()));
+
+    // Link GameBoi Subsystem to UI elements
+    connect(gameSystem, SIGNAL(chkSuccess(int)), this, SLOT(updatePRG(int)));
+    connect(gameSystem, SIGNAL(counter(QString)), this, SLOT(updateCountdown(QString)));
+    connect(gameSystem, SIGNAL(sendMessage(QString)), this, SLOT(showMessage(QString)));
+    connect(gameSystem, SIGNAL(end(QJsonObject,int)), this, SLOT(endGame(QJsonObject,int)));
+    connect(gameSystem, SIGNAL(clicked(QString, QString)), this, SLOT(updateClicks(QString,QString)));
+
+
+    // Set Logo according to Theme
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
 
-    soundSystem = new Oscillator();
+
+    // Set Progress Bar Theme
+    QFile plt(":/base/pallete/bannerPrg.plt");
+    plt.open(QIODevice::ReadOnly);
+    QString styleSheet = plt.readAll();
+    plt.close();
+    styleSheet.replace("#39ff14", prgHex.split("|")[0]);
+    styleSheet.replace("#181818", prgHex.split("|")[1]);
+    ui->progressBar->setStyleSheet(styleSheet);
+
+    // Parse dontKillMe Pointer
+    this->dontKillMe = dontKillMeParse;
+
+    // Initialise Progress Bar as 0
+    ui->progressBar->setValue(0);
+
+    // Load Checkpoint[0]
+    ui->field->load(QUrl::fromUserInput(gameSystem->getCurrentChk()));
+    // This ensures the game starts only when the page loads
+    connect(ui->field, &QWebEngineView::loadFinished, this, &GameWindow::startGame);
+
 
 }
 
 
 GameWindow::~GameWindow() {
     delete ui;
-    delete soundSystem;
 }
 
+void GameWindow::startGame() {
+    gameSystem->startGame();
+    connect(ui->field, &QWebEngineView::urlChanged, this, &GameWindow::click);
+    disconnect(ui->field, &QWebEngineView::loadFinished, this, &GameWindow::startGame);
+}
+
+void GameWindow::click(QUrl url) {
+    gameSystem->click(url.toString());
+}
+
+void GameWindow::showMessage(QString message) {
+    *dontKillMe = 1;
+    QMessageBox::critical(this, "wikiLYNX", messageCodes[message], QMessageBox::Ok);
+    *dontKillMe = 0;
+    if (message == "RLV") ui->field->load(QUrl::fromUserInput(gameSystem->getCurrentChk()));
+}
 
 bool GameWindow::isDarkTheme() {
     QColor backgroundColor = qApp->palette().color(QPalette::Window);
@@ -38,139 +86,42 @@ bool GameWindow::isDarkTheme() {
     return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
+// Update UI Aspects
 
-int GameWindow::initialise(QJsonObject *gData, int *dontKillMeParse, QString prgHex, int aRD, QString playerName, QString levelName) {
-
-    QFile plt(":/base/pallete/bannerPrg.plt");
-    plt.open(QIODevice::ReadOnly);
-    QString styleSheet = plt.readAll();
-    plt.close();
-
-    styleSheet.replace("#39ff14", prgHex.split("|")[0]);
-    styleSheet.replace("#181818", prgHex.split("|")[1]);
-
-    ui->progressBar->setStyleSheet(styleSheet);
-
-    if (playerName.isEmpty()) this->gamer = "Blondie";
-    else this->gamer = playerName;
-
-    this->alD = aRD;
-    this->level = levelName;
-    this->gameData = *gData;
-    this->dontKillMe = dontKillMeParse;
-    this->levels = (*gData)["levels"].toString().split(" ");
-
-    ui->progressBar->setValue(0);
-    if (this->gameData["wiki?"].toBool()) ui->field->load(QUrl::fromUserInput(wikiURL+this->levels[0]));
-    else ui->field->load(QUrl::fromUserInput(this->levels[0]));
-
-    timer->start(100);
-    soundSystem->playSound("init");
-    //this->playSound("init.wav");
-
-    this->instance = QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
-
-    return 0;
-
-}
-
-
-void GameWindow::updateCountdown() {
-
-    countup = countup + 0.1;
-
-    QString counterText = "$c $t";
-    counterText.replace("$c", QString::number(countup, 'f', 2));
-    if ((this->gameData["time"].toDouble() != 0.00)) counterText.replace("$t", "/ " + QString::number(this->gameData["time"].toDouble(), 'f', 2));
-    else counterText.replace("$t", "");
-
-    ui->counter->setText(counterText);
-    ui->clock->setText(QTime::currentTime().toString("hh:mm:ss"));
-
-    if (gameData["time"].toDouble() > 0 && countup >= gameData["time"].toDouble()) endGame("Timeout!");
-
-    if (gameData["clicks"].toInt() > 0 && clicks > gameData["clicks"].toDouble()) endGame("MaxClicks!");
-
-}
-
-
-void GameWindow::initAction() {
-
-
-    // Append Clicks
-    this->clicks++;
-    auto url = ui->field->page()->url();
-    QString clickTime = QDateTime::currentDateTime().toString("yyyy/MM/dd|hh:mm:ss.z");
+// Update Click Count and Next Checkpoint URL
+void GameWindow::updateClicks(QString clicks, QString level) {
 
     // Update UI
-    QString clicksText = "$c $t";
-    clicksText.replace("$c", QString::number(clicks));
-    if (this->gameData["clicks"].toInt()) clicksText.replace("$t", "/ " + QString::number(this->gameData["clicks"].toInt()));
-    else clicksText.replace("$t", "");
-    ui->clicks->setText(clicksText);
-
-
-    // Append Log
-    this->log.append(clickTime+">>\t"+url.toString());
-
-
-    // Check Rule Violation
-    if (!alD && !(url.toString().split("://")[1].split("/")[0].endsWith("wikipedia.org"))) {
-            soundSystem->playSound("error");
-            //this->playSound("error.wav");
-            *dontKillMe = 1;
-            QMessageBox::critical(this, "wikiLYNX", "Rule Violation! You're not allowed to visit sites outide wikipedia.org in this level! Change this in settings", QMessageBox::Ok);
-            *dontKillMe = 0;
-            ui->field->load(QUrl::fromUserInput(wikiURL+levels[chk]));
-            return;
-    }
-
-    // Check Game Status
-    QString uUrl = url.toString();
-    if (this->gameData["wiki?"].toBool()) uUrl = uUrl.split("wikipedia.org/wiki/")[1];
-
-    if (uUrl == levels[chk+1]) {
-        chk++;
-        int prg = (chk/ (float) (this->levels.count() - 1)) *100;
-        ui->progressBar->setValue(prg);
-        if (prg == 100) endGame("Win!");
-    }
-    if (chk+1 < levels.count()) ui->statusbar->showMessage("Next Checkpoint: "+levels[chk+1]);
+    ui->clicks->setText(clicks);
+    ui->statusbar->showMessage("Next Checkpoint: "+level);
 
 }
 
+// Update Countdown/Countup
+void GameWindow::updateCountdown(QString counter) {
 
-int GameWindow::endGame(QString message) {
+    ui->counter->setText(counter);
+    ui->clock->setText(QTime::currentTime().toString("hh:mm:ss"));
 
-    timer->stop();
+}
 
-    QJsonObject gameStat;
+// Update Progress Bar
+void GameWindow::updatePRG(int value) {
+    ui->progressBar->setValue(value);
+}
 
-    gameStat["log"] = (QString) log.join("\n").toUtf8().toBase64();
-    gameStat["level"] = level;
-    gameStat["gameStatus"] = message;
-    gameStat["playerName"] = gamer;
-    gameStat["clicks"] = QString::number(clicks);
-    gameStat["chk"] = QString::number(chk);
-    gameStat["timeTaken"] = QString::number(countup, 'f', 4);
+
+int GameWindow::endGame(QJsonObject gameStat, int code) {
 
     *dontKillMe = 1;
-    if (message != "You Won!") soundSystem->playSound("error"); //this->playSound("error.wav");
-    else soundSystem->playSound("yay"); //this->playSound("yay.wav");
+    ui->statusbar->showMessage(endCodes[code]);
+    if (code != 3) QMessageBox::information(this, "wikiLYNX", endCodes[code], QMessageBox::Ok);
 
-    ui->statusbar->showMessage(code[message]);
-    if (message != "Aborted!") QMessageBox::critical(this, "wikiLYNX", code[message], QMessageBox::Ok);
-
-    // Launch Congrats Dialog
-    congratsView.initialise(gameStat, message);
-    //congratsView.setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint);
+    congratsView.initialise(gameStat, code);
     congratsView.show();
     ui->field->close();
-    //ui->field->deleteLater();
-    emit gameEnded(instance, gameStat);
     close();
     return 0;
-
 }
 
 
@@ -180,8 +131,8 @@ void GameWindow::launchLogs() {
     QList<QStringList> listData;
     QList<QStringList> actionData;
     QStringList headerButtons = {"neutralOnline"};
-    for (int i = 0; i < log.count(); i++) {
-        listData.append(QStringList(log.value(i)));
+    for (int i = 0; i < this->gameSystem->logs.count(); i++) {
+        listData.append(QStringList(this->gameSystem->logs.value(i)));
         actionData.append(QStringList ("history"));
     }
 
@@ -199,9 +150,9 @@ void GameWindow::viewCheckPoints() {
     QList<QStringList> listData;
     QList<QStringList> actionData;
     QStringList headerButtons = {"neutralOnline"};
-    for (int i = 0; i < levels.count(); i++) {
-        listData.append(QStringList (levels.value(i)));
-        QStringList tmp = (i <= chk) ? QStringList("online") : QStringList("offline");
+    for (int i = 0; i < this->gameSystem->getLevels().count(); i++) {
+        listData.append(QStringList (this->gameSystem->getLevels().value(i)));
+        QStringList tmp = (i <= gameSystem->getChk()) ? QStringList("online") : QStringList("offline");
         actionData.append(tmp);
     }
 

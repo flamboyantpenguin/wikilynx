@@ -42,7 +42,7 @@
    <string>Welcome to wikiLYNX</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -60,7 +60,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../assets/assets.qrc">
+        <iconset resource="../../assets/assets.qrc">
          <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
        </property>
        <property name="iconSize">
@@ -702,7 +702,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../assets/assets.qrc">
+        <iconset resource="../../assets/assets.qrc">
          <normaloff>:/base/images/DAWN.svg</normaloff>:/base/images/DAWN.svg</iconset>
        </property>
        <property name="iconSize">
@@ -907,7 +907,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

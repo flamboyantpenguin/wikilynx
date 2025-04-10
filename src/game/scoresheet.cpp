@@ -1,10 +1,7 @@
 #include "include/scoresheet.h"
 
-ScoreSheet::ScoreSheet(QString iFName, QString lFName) {
-    this->iFName = iFName;
-    this->stat = lFName+"/.stats";
-    this->gLogFile = lFName+"/.log";
-    this->lFName = lFName+"/gData.dat";
+ScoreSheet::ScoreSheet() {
+    std::filesystem::create_directories(dirName.toStdString());
     loadData();
 }
 
@@ -150,8 +147,8 @@ void ScoreSheet::removeLevel(QString levelName) {
 }
 
 
-QJsonObject ScoreSheet::getSettings() {
-    return this->settings;
+QJsonValue ScoreSheet::getSetting(QString key) {
+    return this->settings.value(key);
 }
 
 
@@ -186,11 +183,17 @@ void ScoreSheet::saveData(QString *fname, QJsonObject *cfg, QJsonObject *gameDat
 
 }
 
-
 QJsonObject ScoreSheet::getLevel(QString levelName) {
     if (this->iLevels.contains(levelName))
         return this->iLevels[levelName].toObject();
     return this->levels[levelName].toObject();
+}
+
+
+QJsonValue ScoreSheet::getLevel(QString levelName, QString key) {
+    if (this->iLevels.contains(levelName))
+        return this->iLevels[levelName].toObject().value(key);
+    return this->levels[levelName].toObject().value(key);
 }
 
 

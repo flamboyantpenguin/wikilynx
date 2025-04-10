@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(wikilynx VERSION 1.5.6 LANGUAGES CXX)
+project(wikilynx VERSION 1.6.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

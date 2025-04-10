@@ -3,10 +3,10 @@
         "iconTheme": "green",
         "notwiki?": false,
         "totemOfUndying": true,
-        "version": "v1.5.6-3"
+        "version": "v1.6.0-1"
     },
     "base": {
-        "version": "v1.5.6-3",
+        "version": "v1.6.0-1",
         "iconThemes": "green#75fb4c#48752c,monochrome#ffffff#000000,orange#ff7f2a#d45500,red#ea3323#bb271a,blue#75fbfd#2854c5,yellow#ffff55#b89230,nord#81a1c1#4c566a"
     },
     "data": {

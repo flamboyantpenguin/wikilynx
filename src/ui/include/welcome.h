@@ -1,6 +1,5 @@
-#include <sys/stat.h>
 #include <fstream>
-#include <filesystem>
+#include <sys/stat.h>
 
 #include <QDir>
 #include <QString>
@@ -24,7 +23,8 @@
 #include "statusoverview.h"
 
 // GameData Manager
-#include <include/scoresheet.h>
+#include <include/gameboi.h>
+//#include <include/scoresheet.h>
 
 // Update Checker
 #include <include/renovatio.h>
@@ -116,9 +116,9 @@ private:
     LevelEditor *levelEditorDlg;
     StatusOverview *overview = nullptr;
 
+    //GameBoi *gameSystem;
     ScoreSheet *gameData;
 
     Ui::welcomeDialog *ui;
-    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
 };

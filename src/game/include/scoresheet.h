@@ -7,19 +7,20 @@
 #include <QJsonObject>
 #include <QDataStream>
 #include <QJsonDocument>
+#include <QStandardPaths>
 
 
 class ScoreSheet {
 
 
 public:
-    ScoreSheet(QString, QString);
+    ScoreSheet();
     ~ScoreSheet();
 
     // Base
     QString iconThemes;
-    QString ver = "1.5.6";
-    QString version = "1.5.6-3";
+    QString ver = "1.6.0";
+    QString version = "1.6.0-1";
 
     const int theGrandPlayers = 12;
 
@@ -37,6 +38,7 @@ public:
     // Game Level
     void addLevels(QJsonObject);
     void removeLevel(QString);
+    QJsonValue getLevel(QString, QString);
     QJsonObject getLevel(QString);
     QJsonObject getLevels(QString flag = "");
     QString getLevelPresence(QString levelName);
@@ -44,7 +46,7 @@ public:
     QJsonObject mergeJson(QJsonObject, QJsonObject);
 
     // Game Settings
-    QJsonObject getSettings();
+    QJsonValue getSetting(QString);
     void updateSettings(QString, int);
     void updateSettings(QString, bool);
     void updateSettings(QString, QString);
@@ -57,11 +59,12 @@ public:
 
 private:
     // File Names
-    QString stat; // Leaderboard
-    QString iFName; // Inbuilt Game Data
-    QString lFName; // Local Game Data
+    QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation); // Local Game Data
+    QString stat = dirName+"/.stats"; // Leaderboard
+    QString iFName = ":/cfg/gameData.json"; // Inbuilt Game Data
+    QString lFName = dirName+"/gData.dat";
     QString sLogFile; // Application Log
-    QString gLogFile; // Game Log
+    QString gLogFile = dirName+"/.log"; // Game Log
 
     // GameData Top-Level Objects
     QJsonObject levels;
