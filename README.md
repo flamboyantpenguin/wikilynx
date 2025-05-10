@@ -52,20 +52,20 @@ The app is available for Windows and Linux.
 
 | Platform                                                                                                                 | Auto Update Support | System Architecture  | OS Version            |
 | -------------------------------------------------------------------------------------------------------------------------|------------- | -------------------- | --------------------- |
-| [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
-| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage, Flatpak, Snap    |
+| [<img src="https://github.com/user-attachments/assets/410801d9-79a6-4a69-b783-976f0592ecdb" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Installation#windows)                   |      ☑️      |  amd64               | Windows 10 and above  |
+| [<img src="https://github.com/user-attachments/assets/041eb89f-7c98-4e18-b3c9-ac448558a9dd" width="48">](https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Installation#linux)                   |      ☑️      |  amd64, i386, arm64, armhf | Debian, RPM, Arch, AppImage, Flatpak, Snap    |
 
 You can find the installation files in [GitHub Releases](https://github.com/flamboyantpenguin/wikilynx/releases/latest). To learn more about installation, please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Installation).
 
 ## Updates
 
-To update wikiLYNX, you can use the Maintenance Tool in Windows or update packages via your respective package managers for Linux. You can access Maintenance Tool from wikiLYNX start menu folder. AppImage users can download the latest binary from the GitHub release page. 
+To update wikiLYNX, you can use the Maintenance Tool in Windows or update packages via your respective package managers for Linux. You can access Maintenance Tool from wikiLYNX start menu folder. AppImage users can download the latest binary from the GitHub release page.
 
-wikiLYNX does not provide support for older versions. So it's recommended that you update the app to the latest version as soon as possible to avoid possible securirty vulnerabilites or bugs and enjoy new features. 
+wikiLYNX does not provide support for older versions. So it's recommended that you update the app to the latest version as soon as possible to avoid possible securirty vulnerabilites or bugs and enjoy new features.
 
 ## Development
 
-wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read this [section](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) or contact me at [penguin@dawn.org.in](mailto:penguin@dawn.org.in).
+wikiLYNX is made using Qt WebEngine. As of now the source is compatible for Windows and Linux (should be compatible for macOS as well). You can contribute to the project by adding a PR to this repo. Do follow basic contribution guidelines. If you want to contribute to the project but is unsure where to get started, read the [dev section of the wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Dev-%7C-Basics) or contact me at [penguin@dawn.org.in](mailto:penguin@dawn.org.in).
 
 ### Getting Started
 
@@ -82,7 +82,7 @@ To compile this project, you need to have the following components installed in 
 - gcc/msvc (project not tested in clang; should work)
 
 After this clone this repository and start contributing. You can contact me via email or raise an issue on GitHub if you
-encounter errors during build. For more info please refer the [wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Development).
+encounter errors during build. For more info please refer to the [dev page of the wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Dev-%7C-Basics).
 
 ### Contribute
 
