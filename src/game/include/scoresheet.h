@@ -60,6 +60,7 @@ public:
 private:
     // File Names
     QString dirName = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation); // Local Game Data
+
     QString stat = dirName+"/.stats"; // Leaderboard
     QString iFName = ":/cfg/gameData.json"; // Inbuilt Game Data
     QString lFName = dirName+"/gData.dat";

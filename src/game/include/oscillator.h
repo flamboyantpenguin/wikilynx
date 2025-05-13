@@ -16,6 +16,7 @@ private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
 
+    // Pre-defined Sounds
     std::map<QString, QString> sounds = {
         { "error", "qrc:/base/audio/error.wav" },
         { "init", "qrc:/base/audio/init.wav" },

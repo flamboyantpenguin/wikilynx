@@ -287,8 +287,8 @@ void WelcomeUI::setStatus(int c) {
         gameData->updateSettings("version", gameData->version);
     }
 
-    ui->status->setText(code[c].split("|")[0]);
-    ui->statusIndicator->setIcon(QIcon::fromTheme(code[c].split("|")[1]));
+    ui->status->setText(Renovatio::statuscode[c].split("|")[0]);
+    ui->statusIndicator->setIcon(QIcon::fromTheme(Renovatio::statuscode[c].split("|")[1]));
     if (c != 0) checkWorldEvent();
     overview = new StatusOverview;
     overview->initialise(c, gameData->ver);

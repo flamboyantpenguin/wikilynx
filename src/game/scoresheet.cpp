@@ -13,6 +13,7 @@ ScoreSheet::~ScoreSheet() {
 
 QJsonObject ScoreSheet::readBinFile(QString fname, bool b64) {
 
+    // Experimental base64 support. Assumes the text file stores JSON data as base64
     if (b64) {
         QFile file(fname);
         if (file.isOpen()) file.close();
@@ -23,6 +24,7 @@ QJsonObject ScoreSheet::readBinFile(QString fname, bool b64) {
         file.close();
         return QJsonDocument::fromJson(QByteArray::fromBase64(data)).object();
     }
+    // This one reads the JSON data from binary blob (Standard serialization)
     QFile file(fname);
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadOnly);
@@ -35,6 +37,7 @@ QJsonObject ScoreSheet::readBinFile(QString fname, bool b64) {
 
 
 QJsonObject ScoreSheet::readTxtFile(QString fname) {
+    // Read JSON
     QFile file(fname);
     if (file.isOpen()) file.close();
     file.open(QIODevice::ReadOnly);
@@ -45,6 +48,8 @@ QJsonObject ScoreSheet::readTxtFile(QString fname) {
 
 
 void ScoreSheet::writeBinFile(QString fname, QJsonObject obj, bool b64) {
+
+    // Experimental base64 support. Encodes the data to base64 before writing to file
     if (b64) {
         QFile file(fname);
         if (file.isOpen()) file.close();
@@ -57,6 +62,7 @@ void ScoreSheet::writeBinFile(QString fname, QJsonObject obj, bool b64) {
         file.close();
         return;
     }
+    // Writes the JSON as binary
     QFile file(fname);
     if (file.isOpen()) file.close();
     file.open(QIODevice::WriteOnly);
@@ -67,6 +73,8 @@ void ScoreSheet::writeBinFile(QString fname, QJsonObject obj, bool b64) {
 
 
 void ScoreSheet::writeTxtFile(QString fname, QJsonObject obj) {
+
+    // Write JSON as TXT
     QJsonDocument document;
     document.setObject(obj);
     QByteArray bytes = document.toJson(QJsonDocument::Indented);
@@ -81,15 +89,21 @@ void ScoreSheet::writeTxtFile(QString fname, QJsonObject obj) {
 
 void ScoreSheet::loadData() {
 
+    // Read GameData from QRC (embedded in the executable on build)
     QJsonObject iData = readTxtFile(iFName);
 
+    // Load inbuilt levels
     this->iLevels = iData["data"].toObject();
 
+    // Load initial settings value
     loadSettings(iData["info"].toObject(), iData["base"].toObject());
+    // Write a local GameData file if it doesn't exist. Load them with intial values
     if (!QFile(lFName).exists()) saveData();
 
+    // Read local GameData
     QJsonObject lData = readBinFile(lFName);
 
+    // Load custom levels and user preferences
     loadLevels(lData["data"].toObject());
     loadSettings(lData["info"].toObject(), iData["base"].toObject());}
 
@@ -101,6 +115,8 @@ void ScoreSheet::reset() {
 
 
 void ScoreSheet::loadSettings(QJsonObject cfg, QJsonObject base) {
+
+    //ToDo: Handle invalid values
 
     //Load Settings
     this->base = base;
@@ -122,6 +138,7 @@ void ScoreSheet::loadLevels(QJsonObject gData) {
 }
 
 
+// Merge two QJsonObjects
 QJsonObject ScoreSheet::mergeJson(QJsonObject d1, QJsonObject d2) {
     QVariantMap map = d1.toVariantMap();
     map.insert(d2.toVariantMap());
@@ -129,47 +146,55 @@ QJsonObject ScoreSheet::mergeJson(QJsonObject d1, QJsonObject d2) {
 }
 
 
+// Append levels
 void ScoreSheet::addLevels(QJsonObject data) {
     this->levels = mergeJson(this->levels, data);
     this->saveData();
 }
 
 
+// Replace current a level with new one
 void ScoreSheet::updateLevel(QString code, QJsonObject data) {
     this->levels[code] = data;
     this->saveData();
 }
 
 
+// Delete level
 void ScoreSheet::removeLevel(QString levelName) {
     this->levels.remove(levelName);
     this->saveData();
 }
 
 
+// Safe way to get a setting value by key
 QJsonValue ScoreSheet::getSetting(QString key) {
     return this->settings.value(key);
 }
 
 
+// Safe way (not yet) to update a setting by key (Override: QString)
 void ScoreSheet::updateSettings(QString key, QString value) {
     settings[key] = value;
     saveData();
 }
 
 
+// Safe way (not yet) to update a setting by key (Override: bool)
 void ScoreSheet::updateSettings(QString key, bool value) {
     settings[key] = value;
     saveData();
 }
 
 
+// Safe way (not yet) to update a setting by key (Override: int)
 void ScoreSheet::updateSettings(QString key, int value) {
     settings[key] = value;
     saveData();
 }
 
 
+// Save data to file
 void ScoreSheet::saveData(QString *fname, QJsonObject *cfg, QJsonObject *gameData) {
 
     if (fname == nullptr) fname = &(this->lFName);
@@ -183,6 +208,8 @@ void ScoreSheet::saveData(QString *fname, QJsonObject *cfg, QJsonObject *gameDat
 
 }
 
+
+// Safge way to get level data
 QJsonObject ScoreSheet::getLevel(QString levelName) {
     if (this->iLevels.contains(levelName))
         return this->iLevels[levelName].toObject();
@@ -190,6 +217,7 @@ QJsonObject ScoreSheet::getLevel(QString levelName) {
 }
 
 
+// Safe way to get key-values inside levels
 QJsonValue ScoreSheet::getLevel(QString levelName, QString key) {
     if (this->iLevels.contains(levelName))
         return this->iLevels[levelName].toObject().value(key);
@@ -197,6 +225,7 @@ QJsonValue ScoreSheet::getLevel(QString levelName, QString key) {
 }
 
 
+// Safe way to get a QJsonObject containing all level data
 QJsonObject ScoreSheet::getLevels(QString flag) {
     if (flag == "inbuilt")
         return this->iLevels;
@@ -207,6 +236,7 @@ QJsonObject ScoreSheet::getLevels(QString flag) {
 }
 
 
+// Checks whether a level exists
 QString ScoreSheet::getLevelPresence(QString levelName) {
     if (iLevels.contains(levelName)) return "inbuilt";
     else if (levels.contains(levelName)) return "custom";
@@ -214,13 +244,15 @@ QString ScoreSheet::getLevelPresence(QString levelName) {
 }
 
 
+// Write log to file
 void ScoreSheet::updateGameLog(QString instance, QJsonObject log) {
     QJsonObject logs = readBinFile(gLogFile);
     logs.insert(instance, log);
     writeBinFile(gLogFile, logs);
 }
 
-
+\
+// Read data from log based on instance name (datetime stamp)
 QJsonObject ScoreSheet::getGameLog(QString instance) {
     QJsonObject logs = readBinFile(gLogFile);
     if (instance == "") return logs;
@@ -228,11 +260,13 @@ QJsonObject ScoreSheet::getGameLog(QString instance) {
 }
 
 
+// Delete log file (Logs are not stored in scoresheet instance memory)
 void ScoreSheet::clearLogs() {
     QFile(gLogFile).remove();
 }
 
 
+// Update stats (ToDo: Improve this)
 void ScoreSheet::appendPlayerStats(QString level, QString player, QString timeTaken) {
 
     QJsonObject leaderBoard = readBinFile(stat, true);
@@ -257,12 +291,14 @@ void ScoreSheet::appendPlayerStats(QString level, QString player, QString timeTa
 }
 
 
+// Get all levels registered in Stats
 QStringList ScoreSheet::getStatLevels() {
     QJsonObject statData = readBinFile(stat, true);
     return statData.keys();
 }
 
 
+// Get the stats info of a player
 QString ScoreSheet::getPlayerStats(QString level, QString player) {
     QJsonObject statData = readBinFile(stat, true);
     if (statData.contains(level)) {
@@ -274,6 +310,7 @@ QString ScoreSheet::getPlayerStats(QString level, QString player) {
 }
 
 
+// Get Leaderboard of a level
 QJsonObject ScoreSheet::getLeaderBoard(QString level) {
     return readBinFile(stat, true).value(level).toObject();
 }

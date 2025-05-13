@@ -1,12 +1,12 @@
 #include <include/welcome.h>
 #include <include/loadingscreen.h>
 
-#include <fstream>
+//#include <fstream>
 #include <QDialog>
+#include <QString>
+#include <QMessageBox>
 #include <QApplication>
 #include <QFontDatabase>
-#include <QMessageBox>
-#include <QString>
 
 void loadFonts();
 void onFocusChanged(QWidget *oldFocus, QWidget *newFocus);

@@ -2,7 +2,6 @@
 #define GAMEBOI_H
 
 #include <QTimer>
-#include <filesystem>
 #include <QStandardPaths>
 
 #include "scoresheet.h"

@@ -96,14 +96,6 @@ public slots:
 
 
 private:
-    std::map<int, QString> code = {
-        { 0, "Offline|offline" },
-        { 1, "Online|online" },
-        { 2, "Update Available|upgrade" },
-        { 3, "Update Check Failed|neutralOnline" },
-        { 4, "Meow|meow" },
-    };
-
     News *newsDialog;
     GameWindow *game;
     BaseList *baselist;
