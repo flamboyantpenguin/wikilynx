@@ -44,7 +44,7 @@ As of wikiLYNX 1.5.6, the application *does not collect* any type of data for st
 
 This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include your IP Address, Browser User agent, hardware info etc. For more info, read [PRIVACY.md](https://github.com/flamboyantpenguin/wikilynx/blob/master/docs/PRIVACY.md).
 
-Read [Terms section in Wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Development) for more info.
+Read [Terms section in Wiki](https://github.com/flamboyantpenguin/wikilynx/wiki/Doc-%7C-Terms) for more info.
 
 ## Installation Instructions
 
