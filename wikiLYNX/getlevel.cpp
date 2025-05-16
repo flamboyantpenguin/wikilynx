@@ -158,6 +158,5 @@ void GetLevel::setEditStatus() {
 
 
 void GetLevel::launchHelp()   {
-    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#downloading-levels"));
+    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Gameplay#downloading-levels"));
 }
-
