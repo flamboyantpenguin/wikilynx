@@ -1,4 +1,5 @@
 #include <include/welcome.h>
+#include <include/modernstarter.h>
 #include <include/loadingscreen.h>
 
 //#include <fstream>
@@ -34,8 +35,11 @@ int main(int argc, char *argv[]) {
     WelcomeUI dialog;
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
-    //dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
+    dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
     dialog.show();
+
+    //ModernStarter dialog;
+    //dialog.show();
 
     QObject::connect(&a, &QApplication::focusChanged, onFocusChanged);
 

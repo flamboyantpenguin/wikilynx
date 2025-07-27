@@ -12,7 +12,6 @@ std::map<int, QString> Renovatio::statuscode = {
 Renovatio::Renovatio(QString version) {
     this->version = version.toStdString();
     this->lVersion = version.toStdString();
-    connect(this, &Renovatio::finished, this, &Renovatio::deleteLater);
 }
 
 
@@ -21,7 +20,7 @@ Renovatio::~Renovatio() {
 }
 
 
-void Renovatio::process() {
+void Renovatio::fetchVersionInfo() {
 
     // Connect to wikipedia.org. This serves as the internet check for the app
     QNetworkAccessManager manager;
@@ -33,7 +32,7 @@ void Renovatio::process() {
 
     // Check for errors
     if (reply->error() != QNetworkReply::NoError) {
-        reply->deleteLater();
+        //reply->deleteLater();
         emit status(0);
         return;
     }
@@ -48,7 +47,7 @@ void Renovatio::process() {
 
     // Check for errors
     if (reply->error() != QNetworkReply::NoError) {
-        reply->deleteLater();
+        //reply->deleteLater();
         qDebug() << "Error fetching latest version information:" << reply->errorString();
         emit status(3);
         return;
@@ -66,4 +65,28 @@ void Renovatio::process() {
 
     emit finished();
 
+}
+
+
+void Renovatio::brew() {
+
+    QNetworkAccessManager manager;
+    QNetworkReply *reply = manager.get(QNetworkRequest(teaLeaf));
+
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    // Check for errors
+    if (reply->error() != QNetworkReply::NoError) {
+        //reply->deleteLater();
+        qDebug() << "Water hot enough? " << reply->errorString();
+        QString t = "Water hot enough? ";
+        emit tea(t); // Default tea string. If you see this on the welcome dialog, fetching tea failed
+        return;
+    }
+    else {
+        emit tea(QString::fromLocal8Bit(reply->readLine()));
+    }
+    reply->deleteLater();
 }

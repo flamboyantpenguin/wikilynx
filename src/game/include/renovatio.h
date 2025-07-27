@@ -19,15 +19,19 @@ public:
 private:
     std::string version;
     std::string lVersion;
+
     QUrl wikiURL = QUrl::fromUserInput("https://wikipedia.org"); // The URL of Wikipedia, the free encyclopedia
+    QUrl teaLeaf = QUrl::fromUserInput("https://cdn.dawn.org.in/tea/"); // Get  from DAWN CDN
     QUrl versionURL = QUrl::fromUserInput("https://projects.dawn.org.in/wikilynx/.cfg/version.txt"); // The latest available version is fetched from here
 
 public slots:
-    void process();
+    void brew(); // Get tea
+    void fetchVersionInfo();
 
 signals:
     void finished();
     void status(int); // The integer emitted here denotes the connectivity and update status
+    void tea(QString);
 };
 
 #endif // RENOVATIO_H

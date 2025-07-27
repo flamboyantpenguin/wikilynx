@@ -52,9 +52,9 @@ int WelcomeUI::initialise(int *totem) {
     ui->privateLogo->update();
 
     // Set tip
-    QRandomGenerator *generator = QRandomGenerator::global();
-    int tip = generator->bounded(0, this->tips.count());
-    ui->label0->setText(tips[tip]);
+    //QRandomGenerator *generator = QRandomGenerator::global();
+    //int tip = generator->bounded(0, this->tips.count());
+    //ui->label0->setText(tips[tip]);
 
     // Check Debug mode
     if (gameData->getSetting("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
@@ -76,10 +76,17 @@ void WelcomeUI::checkStatus() {
     thread = new QThread();
     Renovatio* worker = new Renovatio(gameData->version);
     worker->moveToThread(thread);
-    connect(thread, &QThread::started, worker, &Renovatio::process);
-    connect(worker, &Renovatio::finished, thread, &QThread::quit);
-    connect(worker, &Renovatio::status, this, &WelcomeUI::setStatus);
+
+    connect(thread, &QThread::started, worker, &Renovatio::fetchVersionInfo);
+    connect(thread, &QThread::started, worker, &Renovatio::brew);
+
     connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+    connect(thread, &QThread::finished, worker, &Renovatio::deleteLater);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+
+    connect(worker, &Renovatio::status, this, &WelcomeUI::setStatus);
+    connect(worker, &Renovatio::tea, ui->label0, &QLabel::setText);
+
     thread->start();
 }
 

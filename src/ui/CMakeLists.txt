@@ -21,6 +21,7 @@ set(SOURCES
 #qt5_wrap_cpp(UI_MOC ${UI_HEADERS}) # or qt_wrap_cpp for newer
 set(CMAKE_AUTOUIC ON)
 add_library(wikilynx_ui ${SOURCES} ${UI_MOC}
-    ../assets/assets.qrc)
+    ../assets/assets.qrc
+)
 target_include_directories(wikilynx_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(wikilynx_ui PUBLIC Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia wikilynx_game)
