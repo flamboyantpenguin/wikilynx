@@ -22,6 +22,7 @@ void StatusOverview::initialise(int status, QString version) {
     ui->archiveStatus->setText(this->code[status].split("|")[1]);
     ui->wiki->setIcon(QIcon::fromTheme(this->code[status].split("|")[0].toLower()));
     ui->archive->setIcon(QIcon::fromTheme(this->code[status].split("|")[1].toLower()));
+    ui->version->setText("Version " + version);
     connect(ui->version, &QPushButton::clicked, this, &StatusOverview::developerHehe);
     connect(ui->infoButton, &QPushButton::clicked, this, &StatusOverview::launchVersionInfo);
 

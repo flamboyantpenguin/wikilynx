@@ -50,6 +50,7 @@ int WelcomeUI::initialise(int *totem) {
     ui->privateLogo->setIcon(QIcon(":/base/images/DAWN_" + theme + ".svg"));
     ui->appLogo->update();
     ui->privateLogo->update();
+    ui->version->setText(gameData->version);
 
     // Set tip
     //QRandomGenerator *generator = QRandomGenerator::global();
@@ -57,7 +58,7 @@ int WelcomeUI::initialise(int *totem) {
     //ui->label0->setText(tips[tip]);
 
     // Check Debug mode
-    if (gameData->getSetting("debug").toBool()) ui->version->setText(ui->version->text() + " (Debug Mode)");
+    if (gameData->getSetting("debug").toBool()) ui->version->setText(gameData->version + " (Debug Mode)");
 
     theme = gameData->getSetting("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);

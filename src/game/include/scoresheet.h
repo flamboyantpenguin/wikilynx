@@ -19,8 +19,8 @@ public:
 
     // Base
     QString iconThemes;
-    QString ver = "1.6.0";
-    QString version = "1.6.0-1";
+    QString ver = "1.5.8";
+    QString version = "1.5.8-1";
 
     const int theGrandPlayers = 12;
 

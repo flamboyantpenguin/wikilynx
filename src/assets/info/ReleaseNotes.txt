@@ -1,14 +1,11 @@
 Release Notes
 
-- New and improved Level Selector Dialog
-- Introducing Developer Options. Though it can't do much as of now, it will be helpful for upcoming releases
-- GameData storage has been changed with major Improvements. Storage usage will be less!
-- Logs are now shown as a list of previous instances of opening a directory
-- Show Logs. Show previous games as a list instead of opening the directory
-- Code cleanup. A lot of embarassing fixes, necessary changes and improvements
 - Performance Improvements
-- Minor UI fixes
+- Major Code Refactor
+- Level Selector is now maxmized
+- Fixed #63: Game Incorrectly shows as sucess when aborted
+- Fixed #66: License button fix
+- Fixed #62: Game counter starts only when page loads
+- Embarassing fixes, necessary changes and improvements
 
-Released On: 01/02/2025
-
-Happy Year of the Snake!
+Released On: 23/09/2025
