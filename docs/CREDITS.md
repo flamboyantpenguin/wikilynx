@@ -18,6 +18,6 @@ The simple sounds you hear when you start, abort/fail or win a game is made usin
 
 I can't deny the power of generative AI technology in this era. I found them helpful to learn some difficult parts of app development, namely Debian, Flatpak and AppImage packaging within a short time.
 
-The forces of the world perhaps aligned in the right timing and in the right direction caused events that led to the development of this game. 
+The forces of the world perhaps aligned in the right timing and in the right direction caused events that led to the development of this game.
 
 I'm honoured to be part of this serendipitous encounter.

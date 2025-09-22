@@ -4,8 +4,8 @@ set -e
 # Install apt repo
 
 echo "Installing APT repo..."
-sh -c "curl https://repo.dawn.org.in/.keys/dawn-pgp.public >> /usr/share/keyrings/dawn-pgp.public"
-sh -c "echo deb [signed-by=/usr/share/keyrings/dawn-pgp.public] https://repo.dawn.org.in/apt stable main > /etc/apt/sources.list.d/dawn.list"
+sh -c "curl https://repo.dawn.org.in/.keys/dawn-repo.gpg >> /usr/share/keyrings/dawn-repo.gpg" 
+sh -c "echo deb [signed-by=/usr/share/keyrings/dawn-repo.gpg] https://repo.dawn.org.in/apt stable main > /etc/apt/sources.list.d/dawn.list" 
 echo "Updating APT cache..."
 apt update || true
 

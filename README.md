@@ -40,7 +40,7 @@ You as a user can contribute to this project. Read development section for more 
 wikiLYNX is a game browser application. Since the game of Wikipedia speed-runs is browsing from one article to the other, this application is basically a browser with features and options attached to enhance gameplay. This means that almost all standard rules and practises of browsing applies to using the browser within this app as well.
 wikiLYNX makes use of QtWebEngine to implement browsers. QtWebEngine is wrapped around Chromium Embedded Framework (CEF), which means most of the things applicable for Chromium browsers applies here as well.
 
-As of wikiLYNX 1.5.6, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (update check and downloading custom levels) and for browsing as mentioned below.
+As of wikiLYNX 1.5.8, the application *does not collect* any type of data for statistics or for any other purposes. The app interacts with network only to make requests to fetch information (update check and downloading custom levels) and for browsing as mentioned below.
 
 This does not prevent websites you visit via the in-app browsers from collecting some info based on their site practises. These info include your IP Address, Browser User agent, hardware info etc. For more info, read [PRIVACY.md](https://github.com/flamboyantpenguin/wikilynx/blob/master/docs/PRIVACY.md).
 
@@ -61,7 +61,7 @@ You can find the installation files in [GitHub Releases](https://github.com/flam
 
 To update wikiLYNX, you can use the Maintenance Tool in Windows or update packages via your respective package managers for Linux. You can access Maintenance Tool from wikiLYNX start menu folder. AppImage users can download the latest binary from the GitHub release page. 
 
-wikiLYNX does not provide support for older versions. So it's recommended that you update the app to the latest version as soon as possible to avoid possible securirty vulnerabilites or bugs and enjoy new features. 
+wikiLYNX does not provide support for older versions. So it's recommended that you update the app to the latest version as soon as possible to avoid possible securirty vulnerabilites or bugs and enjoy new features.
 
 ## Development
 
@@ -109,12 +109,10 @@ You can submit your feedback about the project in the discussions page or in thi
 ## About
 
 ```Txt
-wikiLYNX 1.6.0-1
+wikiLYNX 1.5.8-1
 
-Last Updated: 10-04-2025
+Last Updated: 22-09-2025
 Made by DAWN/ペンギン
-
-Happy Year of the Snake!
 ```
 
 ![DAWN](https://cdn.dawn.org.in/base/logo/DAWN.svg)

@@ -1,10 +1,10 @@
 Name:		wikilynx
-Version:	1.5.6
-Release:	3%{?dist}
+Version:	1.5.8
+Release:	1%{?dist}
 Summary:	A simple Qt C++ app to play Wikipedia speed-run the right way
 URL:		https://github.com/flamboyantpenguin/wikilynx
 License:	MIT
-Source0:	https://github.com/flamboyantpenguin/wikilynx/archive/refs/tags/v1.5.6.tar.gz
+Source0:	https://github.com/flamboyantpenguin/wikilynx/archive/refs/tags/v1.5.8.tar.gz
 Source1:	https://repo.dawn.org.in/rpm/dawn.repo
 BuildRequires:	cmake, qt6-qtwebengine-devel, qt6-qtmultimedia-devel
 Requires:	qt6-qtwebengine, qt6-qtsvg, qt6-qtmultimedia
@@ -45,6 +45,10 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 %config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
+* Tue Sep 23 2025 Penguin <penguin@dawn.org.in> - 1.5.8-1
+- Release 1.5.8
+- Major Code Revamp
+
 * Sat Feb 01 2025 Penguin <penguin@dawn.org.in> - 1.5.6-3
 - Release 1.5.6
 - Repository now supports AppStream Metainfo
