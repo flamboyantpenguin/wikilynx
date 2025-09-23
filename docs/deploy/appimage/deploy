@@ -6,7 +6,6 @@
 
 
 # Project Vars
-ver="1.5.8" # Project Version
 ARCH=$(uname -m) # System Architecture
 
 # This happens if you don't follow a universal code for architectures ):[
@@ -42,7 +41,7 @@ downloadAppImagers() {
 # Build and Prepare Project
 prepareProject() {
 
-    wget https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v$ver.zip
+    wget https://github.com/flamboyantpenguin/wikilynx/archive/refs/heads/master.zip
 
     mkdir -p AppDir/usr/{share,bin}
     mkdir -p AppDir/usr/share/{applications,metainfo}
@@ -50,8 +49,8 @@ prepareProject() {
     APPDIR=$(realpath AppDir)
 
 
-    unzip v$ver.zip
-    cd wikilynx-$ver/wikiLYNX
+    unzip wikilynx-master.zip
+    cd wikilynx-master/wikiLYNX
 
     # stateChanged was changed to checkStateChanged in Qt 6.7; We use Qt 5.15.2 for building AppImage
     sed -i 's/checkStateChanged/stateChanged/g' about.cpp
@@ -68,7 +67,7 @@ prepareProject() {
     make install
 
     cd $APPDIR/..
-    rm -rf wikilynx-$ver
+    rm -rf wikilynx-master
 
 }
 
