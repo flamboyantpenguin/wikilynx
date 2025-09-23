@@ -10,5 +10,5 @@ spectool -g -R SPECS/*.spec
 rpmbuild -ba SPECS/*.spec
 
 # Copy
-cp -r ~/rpmbuild/SRPMS/wikilynx-$version.fc41.src.rpm /opt/output
-cp -r ~/rpmbuild/RPMS/$(uname -m)/wikilynx-$version.fc41.$(uname -m).rpm /opt/output
+cp -r ~/rpmbuild/SRPMS/wikilynx-$version.fc42.src.rpm /opt/output
+cp -r ~/rpmbuild/RPMS/$(uname -m)/wikilynx-$version.fc42.$(uname -m).rpm /opt/output

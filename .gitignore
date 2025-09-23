@@ -1,4 +1,4 @@
 .vscode/*
 build*
 .debhelper*
-wikiLYNX/CMakeLists.txt.user
+*CMakeLists.txt.user
