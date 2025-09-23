@@ -221,7 +221,7 @@ void LevelEditor::resetBrowser() {
 
 
 void LevelEditor::launchHelp()   {
-    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay#level-editor"));
+    QDesktopServices::openUrl(QUrl("https://github.com/flamboyantpenguin/wikilynx/wiki/Game-%7C-Gameplay#level-editor"));
 }
 
 
