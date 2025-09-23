@@ -2,13 +2,17 @@
 
 # Debian Build script for Games.DAWN/wikiLYNX (https://github.com/flamboyantpenguin/wikilynx)
 
-ver=1.5.8
-version=1.5.8-1
-
 # Prepare source
-wget --output-document v${ver}.zip "https://github.com/flamboyantpenguin/wikiLYNX/archive/refs/tags/v${ver}.zip"
-unzip -o v${ver}.zip
-cd wikilynx-${ver}/wikiLYNX
+mkdir wikilynx-$ver
+mv debian wikilynx-$ver
+cd wikilynx-$ver
+
+wget https://github.com/flamboyantpenguin/wikilynx/archive/refs/heads/master.tar.gz
+tar xavf master.tar.gz
+mv debian wikilynx-master/wikiLYNX
+cd wikilynx-master/wikiLYNX
+
+# Qt5 Options
 sed 's/::checkStateChanged/::stateChanged/g' -i about.cpp
 sed 's/::checkStateChanged/::stateChanged/g' -i welcome.cpp
 sed 's/::checkStateChanged/::stateChanged/g' -i leveleditor.cpp
@@ -18,7 +22,7 @@ sed 's/::checkStateChanged/::stateChanged/g' -i levelmanager.cpp
 sed -i '/hintingpreference/d' ui/*.ui
 
 # Build
-echo "yes" | debuild -us -uc
+dpkg-buildpackage -us -uc
 
 # Copy output
 cp ../wikilynx_${version}_$(dpkg --print-architecture).deb /opt/output

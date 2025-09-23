@@ -4,7 +4,9 @@
 	dh $@ --buildsystem=cmake
 
 override_dh_auto_configure:
-	dh_auto_configure -- \
+	ls -l
+	ls -l wikiLYNX || echo "wikiLYNX missing!"
+	dh_auto_configure --sourcedir=wikiLYNX -- \
 		-DCMAKE_BUILD_TYPE=MinSizeRel
 
 #override_dh_auto_build:

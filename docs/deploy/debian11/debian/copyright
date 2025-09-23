@@ -8,7 +8,7 @@ Copyright: 2025, Penguin
            2012-2023, Quote-Unquote Apps (Courier Prime)
            2011-2023, The Comfortaa Project Authors
            2014-2023, Google LLC (Noto Sans, Material Icons)
-License: MIT and LGPL-3.0 and OFL-1.1 and SIL-OPEN-FONT
+License: MIT and LGPL-3.0 and OFL-1.1
 
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,7 +33,7 @@ License: LGPL-3.0
  This software uses the Qt6 framework, The Qt Company Ltd. Licensed under
  the LGPL v3.
  .
- Please read /usr/share/licenses/wikilynx/COPYING for the license text.
+ Please read /usr/share/common-licenses/LGPL-3 for the license text.
 
 License: OFL-1.1
  This Font Software is licensed under the SIL Open Font License, Version 1.1.
@@ -47,8 +47,8 @@ License: OFL-1.1
  Please read /usr/share/licenses/wikilynx/NotoSans_OFL.txt for the license text.
 
 License: BSD-3
- This software uses QtWebEngine, which includes code from the Chromium project 
- and is licensed under BSD-3 Clause License. Please read 
+ This software uses QtWebEngine, which includes code from the Chromium project
+ and is licensed under BSD-3 Clause License. Please read
  /usr/share/licenses/wikilynx/COPYING.QtWebEngine for the license text.
 
 License: Apache-2.0

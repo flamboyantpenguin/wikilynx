@@ -1,0 +1,14 @@
+FROM debian:12
+
+RUN apt update && apt upgrade -y
+RUN apt install devscripts debhelper zip wget -y
+RUN apt install build-essential libgl1-mesa-dev libglx-dev qt6-webengine-dev qt6-wayland-dev qt6-wayland-dev-tools qt6-multimedia-dev cmake -y
+
+ADD deploy /root
+ADD debian /root/debian
+
+WORKDIR /root
+
+VOLUME /opt/output
+
+CMD ["bash", "./deploy"]
