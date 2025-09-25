@@ -5,6 +5,7 @@ RUN apt install devscripts debhelper zip wget -y
 RUN apt install build-essential cmake libgl1-mesa-dev libglx-dev qtwebengine5-dev qtwayland5 qtwayland5-private-dev qtwayland5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins -y
 
 ADD deploy /root
+ADD debian /root/debian
 
 WORKDIR /root
 

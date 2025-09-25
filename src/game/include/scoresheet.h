@@ -1,6 +1,7 @@
 #ifndef SCORESHEET_H
 #define SCORESHEET_H
 
+#include <QDir>
 #include <QList>
 #include <QFile>
 #include <QString>
@@ -9,9 +10,7 @@
 #include <QJsonDocument>
 #include <QStandardPaths>
 
-
 class ScoreSheet {
-
 
 public:
     ScoreSheet();

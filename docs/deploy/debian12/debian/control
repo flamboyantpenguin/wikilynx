@@ -8,7 +8,7 @@ Homepage: https://github.com/flamboyantpenguin/wikilynx
 
 Package: wikilynx
 Architecture: any
-Depends: ${misc} ${shlibs} gstreamer1.0-plugins-good
+Depends: ${misc:Depends}, ${shlibs:Depends}, gstreamer1.0-plugins-good
 Description: Qt C++ app to play Wikipedia speedruns the right way
  A simple app based on Qt Webengine with some rules and features
  to play Wikipedia speedruns

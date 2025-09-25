@@ -18,7 +18,7 @@ Navigate your way through articles in Wikipedia through hyperlinks.
 %build
 mkdir -p build
 cd build
-cmake ../wikiLYNX -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=MinSizeRel   # Set install prefix
+cmake ../src -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=MinSizeRel   # Set install prefix
 make
 
 %install

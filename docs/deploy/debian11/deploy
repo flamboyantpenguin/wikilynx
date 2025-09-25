@@ -2,27 +2,27 @@
 
 # Debian Build script for Games.DAWN/wikiLYNX (https://github.com/flamboyantpenguin/wikilynx)
 
+# Branch
+BRANCH="master"
+
 # Prepare source
 mkdir wikilynx-$ver
 mv debian wikilynx-$ver
 cd wikilynx-$ver
 
-wget https://github.com/flamboyantpenguin/wikilynx/archive/refs/heads/master.tar.gz
-tar xavf master.tar.gz
-mv debian wikilynx-master/wikiLYNX
-cd wikilynx-master/wikiLYNX
+wget https://github.com/flamboyantpenguin/wikilynx/archive/refs/heads/$BRANCH.tar.gz
+tar xavf $BRANCH.tar.gz
+mv debian wikilynx-$BRANCH/src
+cd wikilynx-$BRANCH/src
 
-# Qt5 Options
-sed 's/::checkStateChanged/::stateChanged/g' -i about.cpp
-sed 's/::checkStateChanged/::stateChanged/g' -i welcome.cpp
-sed 's/::checkStateChanged/::stateChanged/g' -i leveleditor.cpp
-sed 's/::checkStateChanged/::stateChanged/g' -i levelmanager.cpp
+# Deprecated Function Shenanigans
+sed 's/::checkStateChanged/::stateChanged/g' -i ui/*.cpp
 
 # Apparently hintingpreference doesn't work in Qt5
-sed -i '/hintingpreference/d' ui/*.ui
+sed -i '/hintingpreference/d' ui/forms/*.ui
 
 # Build
 dpkg-buildpackage -us -uc
 
 # Copy output
-cp ../wikilynx_${version}_$(dpkg --print-architecture).deb /opt/output
+mv ../wikilynx*$(dpkg --print-architecture).deb /opt/output

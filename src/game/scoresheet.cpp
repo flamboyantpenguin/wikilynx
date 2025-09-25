@@ -1,7 +1,7 @@
 #include "include/scoresheet.h"
 
 ScoreSheet::ScoreSheet() {
-    std::filesystem::create_directories(dirName.toStdString());
+    QDir().mkpath(dirName);
     loadData();
 }
 
