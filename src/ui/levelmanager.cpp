@@ -85,13 +85,12 @@ void LevelManager::updateTable() {
 
         QStringList icons;
         if (gameData->getLevelPresence(levelName) == "inbuilt") {
-            //QStringList icons = {"export", "neutralOnline", "neutralOnline"};
-            icons = {"export"};
+            icons = QStringList({"export"});
             connect(widget, &Levels::action0, this, &LevelManager::exportLevels);
 
         }
         else {
-            icons = {"edit", "export", "delete"};
+            icons = QStringList({"edit", "export", "delete"});
             connect(widget, &Levels::action0, this, &LevelManager::launchLevelEditor);
             connect(widget, &Levels::action1, this, &LevelManager::exportLevels);
             connect(widget, &Levels::action2, this, &LevelManager::removeLevel);
