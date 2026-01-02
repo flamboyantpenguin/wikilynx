@@ -15,7 +15,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -23,7 +23,7 @@
    <string>News</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -47,7 +47,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../assets/assets.qrc">
+        <iconset resource="../../assets/assets.qrc">
          <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
        </property>
        <property name="iconSize">
@@ -68,7 +68,7 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Playwrite DE SAS</family>
          <pointsize>32</pointsize>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -108,7 +108,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

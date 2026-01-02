@@ -6,11 +6,7 @@ WhatsNew::WhatsNew(QString ver, QWidget *parent) : QDialog(parent), ui(new Ui::W
     ui->setupUi(this);
 
     this->ver = ver;
-    QFile p(":/base/info/ReleaseNotes.txt");
-    p.open(QIODevice::ReadOnly);
-    auto releaseNotes = QString(p.readAll());
-    p.close();
-    ui->textBrowser->setText(releaseNotes);
+    ui->textBrowser->setText(Util::justReadThisFile(":/base/info/ReleaseNotes.txt"));
 
     connect(ui->closeButton, &QPushButton::clicked, this, &WhatsNew::close);
     connect(ui->infoButton, &QPushButton::clicked, this, &WhatsNew::launchInfo);

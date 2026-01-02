@@ -33,7 +33,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <stylestrategy>PreferDefault</stylestrategy>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
@@ -84,8 +84,8 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
-         <pointsize>48</pointsize>
+         <family>Playwrite DE SAS</family>
+         <pointsize>32</pointsize>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -107,7 +107,7 @@
     <widget class="QLabel" name="label0">
      <property name="font">
       <font>
-       <family>Comfortaa</family>
+       <family>Oldenburg</family>
        <pointsize>8</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
        <hintingpreference>PreferNoHinting</hintingpreference>
@@ -138,7 +138,7 @@
         <widget class="QLineEdit" name="playerName">
          <property name="font">
           <font>
-           <family>Courier Prime</family>
+           <family>Playwrite DE SAS</family>
            <stylestrategy>PreferDefault</stylestrategy>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
@@ -227,7 +227,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Courier Prime</family>
+               <family>Playwrite DE SAS</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -271,6 +271,13 @@
                <width>21</width>
                <height>21</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Oldenburg</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
              </property>
              <property name="toolTip">
               <string>Refresh the list</string>
@@ -357,6 +364,13 @@
                <height>30</height>
               </size>
              </property>
+             <property name="font">
+              <font>
+               <family>Oldenburg</family>
+               <stylestrategy>PreferDefault</stylestrategy>
+               <hintingpreference>PreferNoHinting</hintingpreference>
+              </font>
+             </property>
              <property name="text">
               <string>Select Level</string>
              </property>
@@ -384,7 +398,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Courier Prime</family>
+               <family>Playwrite DE SAS</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -485,6 +499,13 @@
              <height>1000000</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Play a random level!</string>
            </property>
@@ -512,7 +533,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Courier Prime</family>
+             <family>Oldenburg</family>
              <pointsize>11</pointsize>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
@@ -522,7 +543,7 @@
             <string>Start a Game of the selected level </string>
            </property>
            <property name="text">
-            <string>INIT!</string>
+            <string>Init</string>
            </property>
            <property name="icon">
             <iconset theme="play"/>
@@ -594,6 +615,13 @@
          </item>
          <item row="0" column="1">
           <widget class="QComboBox" name="iconThemeSelect">
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an icon theme &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -633,6 +661,13 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Add your own custom levels</string>
            </property>
@@ -652,6 +687,13 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Show Logs folder</string>
            </property>
@@ -670,6 +712,13 @@
              <width>16777215</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <stylestrategy>PreferDefault</stylestrategy>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
            </property>
            <property name="toolTip">
             <string>Clear Logs</string>
@@ -737,6 +786,13 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Oldenburg</family>
+         <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
        <property name="toolTip">
         <string>View Latest News about the game</string>
        </property>
@@ -756,6 +812,13 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Oldenburg</family>
+         <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
        <property name="toolTip">
         <string>View Leaderboard</string>
        </property>
@@ -774,6 +837,13 @@
          <width>16777215</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Oldenburg</family>
+         <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
        </property>
        <property name="cursor">
         <cursorShape>WhatsThisCursor</cursorShape>
@@ -796,6 +866,13 @@
          <width>16777215</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Oldenburg</family>
+         <stylestrategy>PreferDefault</stylestrategy>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
        </property>
        <property name="toolTip">
         <string>About wikiLYNX</string>
@@ -856,7 +933,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Playwrite DE SAS</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -889,7 +966,7 @@
       <widget class="QLabel" name="version">
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Playwrite DE SAS</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>

@@ -6,6 +6,8 @@
 #include <QDialog>
 #include <QThread>
 
+#include "util.h"
+
 namespace Ui {
 class LoadingScreen;
 }

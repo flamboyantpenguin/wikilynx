@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QMainWindow>
 
+#include "util.h"
 #include "baselist.h"
 #include "congrats.h"
 

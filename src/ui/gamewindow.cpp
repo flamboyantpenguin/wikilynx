@@ -34,10 +34,7 @@ GameWindow::GameWindow(GameBoi *gameSystem, int *dontKillMeParse, QString prgHex
 
 
     // Set Progress Bar Theme
-    QFile plt(":/base/pallete/bannerPrg.plt");
-    plt.open(QIODevice::ReadOnly);
-    QString styleSheet = plt.readAll();
-    plt.close();
+    QString styleSheet = Util::justReadThisFile(":/base/pallete/bannerPrg.plt");
     styleSheet.replace("#39ff14", prgHex.split("|")[0]);
     styleSheet.replace("#181818", prgHex.split("|")[1]);
     ui->progressBar->setStyleSheet(styleSheet);

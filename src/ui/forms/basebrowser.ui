@@ -33,7 +33,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -41,7 +41,7 @@
    <string>Web Browser</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
@@ -71,7 +71,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../assets/assets.qrc">
+        <iconset resource="../../assets/assets.qrc">
          <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
        </property>
        <property name="iconSize">
@@ -99,12 +99,12 @@
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>60</height>
+         <height>99</height>
         </size>
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Playwrite DE SAS</family>
          <pointsize>40</pointsize>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -161,6 +161,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="closeButton">
+       <property name="font">
+        <font>
+         <family>Oldenburg</family>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
        <property name="text">
         <string>Close</string>
        </property>
@@ -184,7 +190,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

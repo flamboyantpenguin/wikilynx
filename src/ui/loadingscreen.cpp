@@ -4,12 +4,6 @@
 LoadingScreen::LoadingScreen(QWidget *parent) : QDialog(parent), ui(new Ui::LoadingScreen) {
     ui->setupUi(this);
 
-
-    QFile plt(":/base/pallete/bannerPrg.plt");
-    plt.open(QIODevice::ReadOnly);
-    auto styleSheet = plt.readAll();
-    plt.close();
-
     QThread* thread = new QThread();
     Worker* worker = new Worker();
     worker->moveToThread(thread);
@@ -22,7 +16,7 @@ LoadingScreen::LoadingScreen(QWidget *parent) : QDialog(parent), ui(new Ui::Load
     connect( thread, &QThread::finished, this, &LoadingScreen::close);
     thread->start();
 
-    ui->progressBar->setStyleSheet(styleSheet);
+    ui->progressBar->setStyleSheet(Util::justReadThisFile(":/base/pallete/bannerPrg.plt"));
 
 
 }

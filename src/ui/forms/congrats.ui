@@ -30,7 +30,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -38,7 +38,7 @@
    <string>wikiLYNX</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -46,7 +46,7 @@
     <widget class="QLabel" name="mainLabel">
      <property name="font">
       <font>
-       <family>Comfortaa</family>
+       <family>Playwrite DE SAS</family>
        <pointsize>32</pointsize>
        <bold>false</bold>
        <hintingpreference>PreferNoHinting</hintingpreference>
@@ -67,6 +67,12 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Oldenburg</family>
+       <hintingpreference>PreferNoHinting</hintingpreference>
+      </font>
      </property>
      <property name="text">
       <string>It seems you won! Here are the stats</string>
@@ -269,7 +275,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../assets/assets.qrc">
+        <iconset resource="../../assets/assets.qrc">
          <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
        </property>
        <property name="iconSize">
@@ -295,6 +301,12 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arvo</family>
+           <hintingpreference>PreferNoHinting</hintingpreference>
+          </font>
          </property>
          <property name="whatsThis">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Right click on a value to learn more about it&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;What did you expect? :&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -324,6 +336,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="feedBackButton">
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Rate us!</string>
            </property>
@@ -337,6 +355,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="viewHistory">
+           <property name="font">
+            <font>
+             <family>Oldenburg</family>
+             <hintingpreference>PreferNoHinting</hintingpreference>
+            </font>
+           </property>
            <property name="toolTip">
             <string>View Logs</string>
            </property>
@@ -352,7 +376,7 @@
           <widget class="QPushButton" name="closeButton">
            <property name="font">
             <font>
-             <family>Comfortaa</family>
+             <family>Oldenburg</family>
              <bold>false</bold>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -377,7 +401,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -5,6 +5,8 @@
 #include <QDialog>
 #include <QDesktopServices>
 
+#include "util.h"
+
 namespace Ui {
 class WhatsNew;
 }

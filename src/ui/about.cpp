@@ -13,11 +13,7 @@ About::About(QWidget *parent) : QDialog(parent), ui(new Ui::About) {
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
 
-    QFile p(":/base/info/CREDITS.txt");
-    p.open(QIODevice::ReadOnly);
-    auto releaseNotes = QString(p.readAll());
-    p.close();
-    ui->credits->setText(releaseNotes);
+    ui->credits->setText(Util::justReadThisFile((":/base/info/CREDITS.txt")));
 
 }
 
@@ -92,7 +88,9 @@ void About::toggleLoadingScreen() {
 
     if (ui->coolLoadingScreen->isChecked()) {
         QFile file(indicator);
-        file.open(QIODevice::WriteOnly);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QFile("Error: Unable to create disableSplash placeholder. Perhaps a perm error?");
+        }
         file.close();
     }
     else {

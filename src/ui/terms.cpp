@@ -1,7 +1,6 @@
 #include "include/terms.h"
 #include "forms/ui_terms.h"
 
-
 Terms::Terms(QWidget *parent) : QDialog(parent), ui(new Ui::Terms) {
 
     ui->setupUi(this);
@@ -11,7 +10,6 @@ Terms::Terms(QWidget *parent) : QDialog(parent), ui(new Ui::Terms) {
     QString theme = (isDarkTheme()) ? "Dark" : "Light";
     ui->appLogo->setIcon(QIcon(":/base/images/wikiLYNX_" + theme + ".svg"));
     ui->appLogo->update();
-
 }
 
 
@@ -28,55 +26,22 @@ bool Terms::isDarkTheme() {
     return luminance < 128;  // If luminance is low, it's likely a dark theme.
 }
 
-
 void Terms::initialise() {
 
-    QFile p(":/base/info/PRIVACY.txt");
-    p.open(QIODevice::ReadOnly);
-    auto privacy = QString(p.readAll());
-    p.close();
-    ui->privacy->setText(privacy);
+    ui->privacy->setText(Util::justReadThisFile(":/base/info/PRIVACY.txt"));
 
-    QFile f(":/base/info/LICENSE.txt");
-    f.open(QIODevice::ReadOnly);
-    auto license = QString(f.readAll());
-    f.close();
-    ui->licenseView->setText(license);
+    ui->licenseView->setText(Util::justReadThisFile(":/base/info/LICENSE.txt"));
 
-    QFile c(":/base/info/COPYING.txt");
-    c.open(QIODevice::ReadOnly);
-    auto copying = QString(c.readAll());
-    c.close();
-    ui->copyingView->setText(copying);
+    ui->copyingView->setText(Util::justReadThisFile(":/base/info/COPYING.txt"));
 
-    QFile w(":/base/info/COPYING.QtWebEngine.txt");
-    w.open(QIODevice::ReadOnly);
-    auto copyingWeb = QString(w.readAll());
-    w.close();
-    ui->webEngineLicenseView->setText(copyingWeb);
+    ui->webEngineLicenseView->setText(Util::justReadThisFile(":/base/info/COPYING.QtWebEngine.txt"));
 
-    QFile n(":/base/fonts/NotoSans_OFL.txt");
-    n.open(QIODevice::ReadOnly);
-    auto notoOFL = QString(n.readAll());
-    n.close();
-    ui->notoOFL->setText(notoOFL);
+    ui->notoOFL->setText(Util::justReadThisFile(":/base/fonts/NotoSans_OFL.txt"));
 
-    QFile cP(":/base/fonts/CourierPrime_OFL.txt");
-    cP.open(QIODevice::ReadOnly);
-    auto courierPrimeOFL = QString(cP.readAll());
-    cP.close();
-    ui->courierPrimeOFL->setText(courierPrimeOFL);
+    ui->courierPrimeOFL->setText(Util::justReadThisFile(":/base/fonts/CourierPrime_OFL.txt"));
 
-    QFile comP(":/base/fonts/Comfortaa_OFL.txt");
-    comP.open(QIODevice::ReadOnly);
-    auto comfortaaOFL = QString(comP.readAll());
-    comP.close();
-    ui->comfortaaOFL->setText(comfortaaOFL);
+    ui->comfortaaOFL->setText(Util::justReadThisFile(":/base/fonts/Comfortaa_OFL.txt"));
 
-    QFile mP(":/base/info/LICENSE-MaterialIcons.txt");
-    mP.open(QIODevice::ReadOnly);
-    auto materialLicense = QString(mP.readAll());
-    mP.close();
-    ui->materialLicenseView->setText(materialLicense);
+    ui->materialLicenseView->setText(Util::justReadThisFile(":/base/info/LICENSE-MaterialIcons.txt"));
 
 }
