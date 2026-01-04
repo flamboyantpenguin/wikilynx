@@ -17,7 +17,10 @@ QJsonObject ScoreSheet::readBinFile(QString fname, bool b64) {
     if (b64) {
         QFile file(fname);
         if (file.isOpen()) file.close();
-        file.open(QIODevice::ReadOnly);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Cannot open " << fname << " for read | " << file.errorString();
+            return QJsonObject();
+        }
         QDataStream in(&file);
         QByteArray data;
         in >> data;
@@ -26,10 +29,13 @@ QJsonObject ScoreSheet::readBinFile(QString fname, bool b64) {
     }
     // This one reads the JSON data from binary blob (Standard serialization)
     QFile file(fname);
-    if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadOnly);
-    QDataStream in(&file);
     QJsonObject data;
+    if (file.isOpen()) file.close();
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Cannot open " << fname << " for read | " << file.errorString();
+        return QJsonObject();
+    }
+    QDataStream in(&file);
     in >> data;
     file.close();
     return data;
@@ -40,7 +46,10 @@ QJsonObject ScoreSheet::readTxtFile(QString fname) {
     // Read JSON
     QFile file(fname);
     if (file.isOpen()) file.close();
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Cannot open " << fname << " for read | " << file.errorString();
+        return QJsonObject();
+    }
     QJsonObject data = QJsonDocument::fromJson(file.readAll()).object();
     file.close();
     return data;
@@ -53,7 +62,11 @@ void ScoreSheet::writeBinFile(QString fname, QJsonObject obj, bool b64) {
     if (b64) {
         QFile file(fname);
         if (file.isOpen()) file.close();
-        file.open(QIODevice::WriteOnly);
+        if (!file.open(QIODevice::WriteOnly)) {
+            qCritical() << "Cannot open" << fname << "for write |" << file.errorString();
+            throw FileError("Cannot open bin file");
+            Q_UNREACHABLE();
+        }
         QDataStream out(&file);
         QJsonDocument document;
         document.setObject(obj);
@@ -65,7 +78,11 @@ void ScoreSheet::writeBinFile(QString fname, QJsonObject obj, bool b64) {
     // Writes the JSON as binary
     QFile file(fname);
     if (file.isOpen()) file.close();
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qCritical() << "Cannot open" << fname << "for write |" << file.errorString();
+        throw FileError("Cannot open bin file");
+        Q_UNREACHABLE();
+    }
     QDataStream out(&file);
     out << obj;
     file.close();
@@ -80,7 +97,11 @@ void ScoreSheet::writeTxtFile(QString fname, QJsonObject obj) {
     QByteArray bytes = document.toJson(QJsonDocument::Indented);
     QFile file(fname);
     if (file.isOpen()) file.close();
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qCritical() << "Cannot open" << fname << "for write |" << file.errorString();
+        throw FileError("Cannot open bin file");
+        Q_UNREACHABLE();
+    }
     QTextStream iStream(&file);
     iStream << bytes;
     file.close();

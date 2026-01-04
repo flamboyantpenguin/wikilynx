@@ -1,0 +1,97 @@
+---
+
+name: Build Edge
+"on":
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "CMakeLists.txt"
+      - "deploy/**"
+      - ".gitea/workflows/build-edge.yaml"
+  workflow_dispatch: {}
+
+jobs:
+  build-appimage:
+    runs-on: ubuntu-latest
+    container:
+      volumes:
+        - "source:/source"
+        - "output:/output"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: source
+
+      - name: Copy Source
+        run: |
+          cp -r source/* /source
+
+      - name: Build amd64
+        env:
+          ARCH: amd64
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-$ARCH \
+          -f Containerfile --platform=linux/$ARCH .
+
+          docker run --rm -v "source:/source" \
+          -v "output:/output" --platform linux/$ARCH builder-$ARCH
+
+      - name: Build i386
+        env:
+          ARCH: i386
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-$ARCH \
+          -f Containerfile --platform=linux/$ARCH .
+
+          docker run --rm -v "source:/source" \
+          -v "output:/output" --platform linux/$ARCH builder-$ARCH
+
+      - name: Build arm64
+        env:
+          ARCH: arm64
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-$ARCH \
+          -f Containerfile --platform=linux/$ARCH .
+
+          docker run --rm -v "source:/source" \
+          -v "output:/output" --platform linux/$ARCH builder-$ARCH
+
+      - name: Build armhf
+        env:
+          ARCH: armhf
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-$ARCH \
+          -f Containerfile --platform=linux/$ARCH .
+
+          docker run --rm -v "source:/source" \
+          -v "output:/output" --platform linux/$ARCH builder-$ARCH
+
+      - name: Publish to Packages
+        run: |
+          curl --user ${{ vars.maintainer }}:${{ secrets.TOKEN }} \
+          --upload-file /output/wikiLYNX-x86_64.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-x86_64.AppImage
+
+          curl --user ${{ vars.maintainer }}:${{ secrets.TOKEN }} \
+          --upload-file /output/wikiLYNX-i686.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-i386.AppImage
+
+          curl --user ${{ vars.maintainer }}:${{ secrets.TOKEN }} \
+          --upload-file /output/wikiLYNX-aarch64.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-arm64.AppImage
+
+          curl --user ${{ vars.maintainer }}:${{ secrets.TOKEN }} \
+          --upload-file /output/wikiLYNX-armhf.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-armhf.AppImage

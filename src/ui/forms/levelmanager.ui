@@ -191,7 +191,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -213,7 +213,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -232,7 +232,7 @@
         <widget class="QPushButton" name="randomButton">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -254,7 +254,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -291,7 +291,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -319,7 +319,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <bold>false</bold>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>

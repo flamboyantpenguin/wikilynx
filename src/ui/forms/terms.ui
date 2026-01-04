@@ -444,7 +444,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <widget class="QPushButton" name="closeButton">
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>

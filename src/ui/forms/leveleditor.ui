@@ -239,7 +239,7 @@
         <widget class="QPushButton" name="helpButton">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -354,7 +354,7 @@
         <widget class="QPushButton" name="getRandomButton">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>
@@ -370,7 +370,7 @@
         <widget class="QPushButton" name="addButton">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
            <hintingpreference>PreferNoHinting</hintingpreference>
           </font>
          </property>

@@ -107,7 +107,7 @@
     <widget class="QLabel" name="label0">
      <property name="font">
       <font>
-       <family>Oldenburg</family>
+       <family>Arvo</family>
        <pointsize>8</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
        <hintingpreference>PreferNoHinting</hintingpreference>
@@ -274,7 +274,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Oldenburg</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -366,7 +366,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Oldenburg</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -501,7 +501,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -533,7 +533,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <pointsize>11</pointsize>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
@@ -617,7 +617,7 @@
           <widget class="QComboBox" name="iconThemeSelect">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -663,7 +663,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -689,7 +689,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -715,7 +715,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <stylestrategy>PreferDefault</stylestrategy>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
@@ -788,7 +788,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -814,7 +814,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -840,7 +840,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
@@ -869,7 +869,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <stylestrategy>PreferDefault</stylestrategy>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>

@@ -172,7 +172,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <pointsize>12</pointsize>
           <bold>false</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
@@ -221,7 +221,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
@@ -267,7 +267,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <bold>true</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
@@ -303,7 +303,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
@@ -344,7 +344,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
@@ -385,7 +385,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>
@@ -423,7 +423,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Oldenburg</family>
+          <family>Arvo</family>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
         </property>

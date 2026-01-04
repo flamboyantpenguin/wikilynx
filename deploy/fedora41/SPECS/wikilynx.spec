@@ -13,7 +13,7 @@ Requires:	qt6-qtwebengine, qt6-qtsvg, qt6-qtmultimedia
 Navigate your way through articles in Wikipedia through hyperlinks.
 
 %prep
-%setup -q
+%setup -n wikilynx-master
 
 %build
 mkdir -p build

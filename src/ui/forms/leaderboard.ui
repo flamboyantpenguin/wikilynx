@@ -120,7 +120,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -145,7 +145,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -238,7 +238,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>

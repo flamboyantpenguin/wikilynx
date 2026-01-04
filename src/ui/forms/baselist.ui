@@ -50,7 +50,7 @@
       <widget class="QLabel" name="tip">
        <property name="font">
         <font>
-         <family>Oldenburg</family>
+         <family>Arvo</family>
         </font>
        </property>
        <property name="text">
@@ -100,7 +100,7 @@
         <widget class="QPushButton" name="action2">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
           </font>
          </property>
          <property name="text">
@@ -112,7 +112,7 @@
         <widget class="QPushButton" name="action1">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
           </font>
          </property>
          <property name="text">
@@ -124,7 +124,7 @@
         <widget class="QPushButton" name="closeButton">
          <property name="font">
           <font>
-           <family>Oldenburg</family>
+           <family>Arvo</family>
           </font>
          </property>
          <property name="text">
@@ -197,7 +197,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QPushButton" name="increaseFontSize">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
             </font>
            </property>
            <property name="text">
@@ -212,7 +212,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QPushButton" name="decreaseFontSize">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
             </font>
            </property>
            <property name="text">

@@ -70,7 +70,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Oldenburg</family>
+       <family>Arvo</family>
        <hintingpreference>PreferNoHinting</hintingpreference>
       </font>
      </property>
@@ -338,7 +338,7 @@
           <widget class="QPushButton" name="feedBackButton">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
            </property>
@@ -357,7 +357,7 @@
           <widget class="QPushButton" name="viewHistory">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
            </property>
@@ -376,7 +376,7 @@
           <widget class="QPushButton" name="closeButton">
            <property name="font">
             <font>
-             <family>Oldenburg</family>
+             <family>Arvo</family>
              <bold>false</bold>
              <hintingpreference>PreferNoHinting</hintingpreference>
             </font>
