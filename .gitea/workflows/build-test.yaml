@@ -1,0 +1,55 @@
+---
+
+name: Build Test
+"on":
+  pull_request:
+    paths:
+      - "src/**"
+      - "CMakeLists.txt"
+      - "deploy/**"
+      - ".gitea/workflows/build-test.yaml"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.runner }}
+    container:
+      image: debian:13
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            qt: 6
+            platform: linux
+            packages: "qt6-base-dev qt6-webengine-dev qt6-multimedia-dev"
+          - runner: ubuntu-latest
+            qt: 5
+            platform: linux
+            packages: "qtbase5-dev qtwebengine5-dev qtmultimedia5-dev"
+
+    name: Build Test Qt${{ matrix.qt }}
+    steps:
+      - name: Install Qt
+        if: ${{ matrix.platform == 'linux' }}
+        run: |
+          apt update && apt upgrade -y
+          apt install -y \
+          nodejs build-essential cmake ninja-build ${{ matrix.packages }}
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Qt5 Shenanigans
+        if: ${{ matrix.qt == 5 }}
+        run: |
+          sed 's/::checkStateChanged/::stateChanged/g' -i src/ui/*.cpp
+          sed '/hintingpreference/d' -i src/ui/forms/*.ui
+
+      - name: Configure
+        run: |
+          cmake -S . -B build -G Ninja
+
+      - name: Build and Install
+        run: |
+          cmake --build build --parallel
+          cmake --install build
