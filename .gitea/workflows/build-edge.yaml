@@ -95,7 +95,7 @@ jobs:
               cd ${{ github.workspace }}
               apt update && apt upgrade -y && \
               apt install git devscripts cmake ${{matrix.packages}} -y
-              bash deploy/debian/deployDebian edge && && mv ../wikilynx_*.deb .
+              bash deploy/debian/deployDebian edge && mv ../wikilynx_*.deb .
             "
 
       - name: Publish to Packages
