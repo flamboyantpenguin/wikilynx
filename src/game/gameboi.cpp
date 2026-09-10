@@ -70,6 +70,7 @@ void GameBoi::click(QString url) {
         int prg = (chk/ (float) (levels.count() - 1)) *100;
         emit chkSuccess(prg);
         if (prg == 100) endGame(0);
+        else emitClicks();
         return;
     }
 

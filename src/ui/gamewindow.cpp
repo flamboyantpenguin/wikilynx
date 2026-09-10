@@ -91,6 +91,7 @@ void GameWindow::updateClicks(QString clicks, QString level) {
     // Update UI
     ui->clicks->setText(clicks);
     ui->statusbar->showMessage("Next Checkpoint: "+level);
+    ui->checkpointValue->setText(level);
 
 }
 
