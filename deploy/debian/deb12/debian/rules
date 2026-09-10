@@ -11,4 +11,3 @@ override_dh_auto_configure:
 #	uscan --download-current-version || echo "Uscan failed to fetch source"
 #	tar xavf extras.tar.gz
 #	dh_auto_build
-

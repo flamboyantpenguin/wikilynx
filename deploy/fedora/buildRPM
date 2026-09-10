@@ -1,0 +1,38 @@
+#!/bin/bash
+
+PROJECT="wikilynx"
+
+# RPM Build script for Games.DAWN/wikiLYNX (https://github.com/flamboyantpenguin/wikilynx)
+set -e
+
+# Install dependencies
+dnf install git qt6-qtwebengine-devel qt6-qtmultimedia-devel cmake wget mesa-libGL-devel rpmdevtools rpmlint -y
+
+SOURCE_DIR=$(pwd)
+BUILD_DIR="$(mktemp -d)"
+HASH="$(git rev-parse --short HEAD)"
+VER=$(awk '/^Version:/ {print $2}' $SOURCE_DIR/deploy/fedora/SPECS/$PROJECT.spec)
+
+mv $SOURCE_DIR/deploy/fedora/SPECS $BUILD_DIR
+git archive --format=tar.gz --prefix=$PROJECT-$VER HEAD > $BUILD_DIR/SOURCES/$PROJECT-$VER.tar.gz
+
+cd $BUILD_DIR
+spectool -g -R SPECS/*.spec
+
+if [ "$CHANNEL" != "release" ]; then
+	rpmbuild -ba SPECS/$PROJECT.spec
+elif [ "$CHANNEL" != "edge" ]; then
+	rpmbuild -ba SPECS/$PROJECT.spec --define "rel 0.git$HASH"
+else
+	echo "Usage: $0 <release|edge>"
+	exit 1
+fi
+
+mv ~/rpmbuild/SRPMS/*fc42.src.rpm $SOURCE_DIR
+mv ~/rpmbuild/RPMS/$(uname -m)/*.rpm $SOURCE_DIR
+
+# Build
+
+# Copy
+#mv ~/rpmbuild/SRPMS/*fc42.src.rpm /opt/output
+#mv ~/rpmbuild/RPMS/$(uname -m)/*fc42.$(uname -m).rpm /opt/output

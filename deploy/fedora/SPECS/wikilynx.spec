@@ -1,11 +1,10 @@
 Name:		wikilynx
 Version:	1.5.8
-Release:	1%{?dist}
+Release:	%{?rel}%{!?rel:1}%{?dist}
 Summary:	A simple Qt C++ app to play Wikipedia speed-run the right way
 URL:		https://github.com/flamboyantpenguin/wikilynx
 License:	MIT
-Source0:	https://github.com/flamboyantpenguin/wikilynx/archive/refs/tags/v1.5.8.tar.gz
-Source1:	https://repo.dawn.org.in/rpm/dawn.repo
+Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	cmake, qt6-qtwebengine-devel, qt6-qtmultimedia-devel
 Requires:	qt6-qtwebengine, qt6-qtsvg, qt6-qtmultimedia
 
@@ -18,7 +17,7 @@ Navigate your way through articles in Wikipedia through hyperlinks.
 %build
 mkdir -p build
 cd build
-cmake ../src -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=MinSizeRel   # Set install prefix
+cmake .. -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=MinSizeRel   # Set install prefix
 make
 
 %install
@@ -26,9 +25,6 @@ make
 # bin
 cd build
 make DESTDIR=%{buildroot} install  # Use make install
-
-# Repo
-install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 
 %files
 /usr/bin/wikilynx
@@ -42,7 +38,6 @@ install -D -m 0644 %{SOURCE1} %{buildroot}/etc/yum.repos.d/dawn.repo
 /usr/share/applications/in.org.dawn.wikilynx.desktop
 /usr/share/icons/hicolor/scalable/apps/in.org.dawn.wikilynx.svg
 /usr/share/metainfo/in.org.dawn.wikilynx.appdata.xml
-%config(noreplace) /etc/yum.repos.d/dawn.repo
 
 %changelog
 * Tue Sep 23 2025 Penguin <penguin@dawn.org.in> - 1.5.8-1

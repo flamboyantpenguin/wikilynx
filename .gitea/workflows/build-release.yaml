@@ -13,7 +13,6 @@ name: Build Release
 
 jobs:
   build-debian:
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -21,34 +20,33 @@ jobs:
         target: [amd64, i386, arm64, armhf]
         include:
           - version: 11
-            packages: "qtwebengine5-dev qtmultimedia5-dev \
-              qtwayland5-private-dev qtwayland5-dev-tools"
+            packages: "qtwebengine5-dev qtmultimedia5-dev qtwayland5-private-dev qtwayland5-dev-tools"
           - version: 12
-            packages: "qt6-webengine-dev qt6-multimedia-dev \
-              qt6-wayland-dev qt6-wayland-dev-tools"
+            packages: "qt6-webengine-dev qt6-multimedia-dev qt6-wayland-dev qt6-wayland-dev-tools"
 
-    name: Build for Debian ${{matrix.version}} on ${{matrix.target}}
+    name: Build for Debian ${{ matrix.version }} on ${{ matrix.target }}
+
+    container:
+      image: debian:${{ matrix.version }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Qt5 Shenanigans Again
-        if: ${{matrix.version}} == 11
+      - name: Install dependencies
         run: |
-          sed 's/::checkStateChanged/::stateChanged/g' -i src/ui/*.cpp
+          apt update && apt upgrade -y
+          apt install -y git devscripts cmake ${{ matrix.packages }}
+
+      - name: Qt5 Shenanigans Again
+        if: ${{ matrix.version == 11 }}
+        run: |
+          sed -i 's/::checkStateChanged/::stateChanged/g' src/ui/*.cpp
 
       - name: Build
         run: |
-          docker run --rm \
-            --platform linux/${{matrix.target}} \
-            --volumes-from=${{env.JOB_CONTAINER_NAME}} \
-            docker.io/debian:${{matrix.version}} \
-            bash -c "
-              cd ${{ github.workspace }}
-              apt update && apt upgrade -y && \
-              apt install git devscripts cmake ${{matrix.packages}} -y
-              bash deploy/debian/deployDebian release && mv ../wikilynx_*.deb .
-            "
+          bash deploy/debian/deployDebian release
+          mv ../wikilynx_*.deb .
 
       - name: Publish to Packages
         run: |
