@@ -48,11 +48,9 @@ int main(int argc, char *argv[]) {
 
 
 void loadFonts() {
-    QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Bold.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/CourierPrime-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/Comfortaa-VariableFont_wght.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-VariableFont_wdth,wght.ttf");
-    QFontDatabase::addApplicationFont(":/base/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf");
+    QDir d(":/base/fonts");
+    for (const auto &f : d.entryList({"*.ttf", "*.otf"}, QDir::Files))
+        if (QFontDatabase::addApplicationFont(":/base/fonts/" + f) == 0) qWarning() << "Error: Failed to load font: " << f;
 }
 
 

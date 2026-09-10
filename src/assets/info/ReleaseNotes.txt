@@ -1,11 +1,12 @@
 Release Notes
 
 - Performance Improvements
+- New Font!
 - Major Code Refactor
-- Level Selector is now maxmized
-- Fixed #63: Game Incorrectly shows as sucess when aborted
+- Level Selector is now maximized
+- Fixed #63: Game Incorrectly shows as success when aborted
 - Fixed #66: License button fix
 - Fixed #62: Game counter starts only when page loads
-- Embarassing fixes, necessary changes and improvements
+- Embarrassing fixes, necessary changes and improvements
 
-Released On: 23/09/2025
+Released On: 02/Jan/2026

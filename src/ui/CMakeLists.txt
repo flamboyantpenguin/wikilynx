@@ -15,13 +15,14 @@ set(SOURCES
     terms.cpp include/terms.h forms/terms.ui
     welcome.cpp include/welcome.h forms/welcome.ui
     whatsnew.cpp include/whatsnew.h forms/whatsnew.ui
+    include/util.h util.cpp
 )
+
+set(QRC ../assets/assets.qrc)
 
 #qt_wrap_ui(UI_WRAP ${UI_UIS}) # Only needed for older Qt versions
 #qt5_wrap_cpp(UI_MOC ${UI_HEADERS}) # or qt_wrap_cpp for newer
 set(CMAKE_AUTOUIC ON)
-add_library(wikilynx_ui ${SOURCES} ${UI_MOC}
-    ../assets/assets.qrc
-)
+add_library(wikilynx_ui ${SOURCES} ${UI_MOC} ${QRC})
 target_include_directories(wikilynx_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(wikilynx_ui PUBLIC Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::WebEngineWidgets Qt${QT_VERSION_MAJOR}::Multimedia wikilynx_game)

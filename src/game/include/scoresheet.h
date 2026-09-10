@@ -1,6 +1,7 @@
 #ifndef SCORESHEET_H
 #define SCORESHEET_H
 
+#include <QDir>
 #include <QList>
 #include <QFile>
 #include <QString>
@@ -9,9 +10,12 @@
 #include <QJsonDocument>
 #include <QStandardPaths>
 
+class FileError : public std::runtime_error {
+public:
+    using std::runtime_error::runtime_error;
+};
 
 class ScoreSheet {
-
 
 public:
     ScoreSheet();

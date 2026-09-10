@@ -1,0 +1,97 @@
+#!/bin/bash
+
+
+# A simple script to automate AppImage building for wikiLYNX Game Browser
+# https://github.com/flamboyantpenguin/wikilynx
+
+
+# Project Vars
+WD="/root"
+SOURCE="/source"
+OUTPUT="/output"
+ARCH=$(uname -m) # System Architecture
+
+# This happens if you don't follow a universal code for architectures ):[
+arch=$(dpkg --print-architecture)
+if [ $arch =  "i386" ]; then ARCH="i386";arch="i686";lib="/usr/lib/i386-linux-gnu";export GSTREAMER_PLUGINS_DIR=$lib/gstreamer-1.0;
+elif [ $arch =  "armhf" ]; then ARCH="armhf";lib="/usr/lib/arm-linux-gnueabihf";export GSTREAMER_PLUGINS_DIR=$lib/gstreamer-1.0;
+else arch=$ARCH;lib="/usr/lib/$ARCH-linux-gnu"; fi
+
+# Deploy vars
+export QMAKE=/usr/bin/qmake
+export APPIMAGE_EXTRACT_AND_RUN=1
+export DEPLOY_PLATFORM_THEMES=true
+export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so;libqwayland-egl.so;libqxcb.so;libqeglfs.so"
+export EXTRA_QT_PLUGINS="waylandcompositor;svg;tls;multimedia;mediaservice;imageformats;audio;styles;position;platforms;iconengines;platformthemes"
+
+# Download Requirements
+downloadAppImagers() {
+    wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$arch.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-$ARCH.AppImage
+    wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/latest/download/linuxdeploy-plugin-qt-$ARCH.AppImage
+    git clone https://github.com/linuxdeploy/linuxdeploy-plugin-gstreamer.git
+    cp linuxdeploy-plugin-gstreamer/linuxdeploy-plugin-gstreamer.sh .
+    chmod u+x *.sh
+    chmod u+x *.AppImage
+
+    # Apparently AppImages won't work properly in Containers. I faced this issue only for arm64 and armhf
+    # Refer https://github.com/AppImage/AppImageKit/issues/828 for more info
+    if [[ "$arch" == "aarch64" || "$arch" == "armhf" ]]; then sed '0,/AI\x02/{s|AI\x02|\x00\x00\x00|}' -i *.AppImage;fi;
+}
+
+
+# Build and Prepare Project
+buildProject() {
+
+	cp -r $SOURCE/* $WD
+
+    mkdir -p AppDir/usr/{share,bin}
+    mkdir -p AppDir/usr/share/{applications,metainfo}
+    mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
+    APPDIR=$(realpath AppDir)
+
+	cd $WD
+
+    # Deprecated Function Shenanigans
+    sed 's/::checkStateChanged/::stateChanged/g' -i src/ui/*.cpp
+    
+    # Apparently hintingpreference doesn't work in some versions of Qt6 either
+    sed '/hintingpreference/d' -i src/ui/forms/*.ui
+
+    # Build
+    cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX:PATH=$APPDIR/usr .
+    make
+
+    # Install
+    make install
+
+    cd $APPDIR/..
+
+}
+
+
+# Deploy AppDir
+echo $ARCH $arch
+apt install kde-style-breeze -y
+downloadAppImagers
+buildProject
+
+chmod u+x $WD/AppRun
+./linuxdeploy-$ARCH.AppImage --appdir $APPDIR --custom-apprun=$APPDIR/../AppRun --plugin qt --plugin gstreamer
+
+# Fixes
+bash -c "rm -rf AppDir/usr/lib/libnss*" # Fix for QtWebEngine
+bash -c "cp -rf $lib/libcrypto* AppDir/usr/lib" # Fix for QtWebEngine
+bash -c "cp -rf $lib/libssl* AppDir/usr/lib" # Fix for QtWebEngine
+bash -c "cp -rf $lib/libfribidi* AppDir/usr/lib" # Fix for i386 AppImage
+bash -c "cp $WD/AppRun AppDir/AppRun" # Copy Custom AppRun
+bash -c "mv -f AppDir/AppRun.wrapped AppDir/wikilynx" # This makes sure the appimage runs with the correct name
+
+# Make AppImage
+./appimagetool-$arch.AppImage AppDir
+
+# Copy AppImage to output volume
+cp wiki*.AppImage $OUTPUT
+
+# Cleanup
+rm -rf AppDir *.AppImage

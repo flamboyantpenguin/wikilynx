@@ -9,6 +9,7 @@
 #include <QDesktopServices>
 
 #include "terms.h"
+#include "util.h"
 #include "basebrowser.h"
 
 namespace Ui {

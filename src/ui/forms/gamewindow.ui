@@ -21,7 +21,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -29,7 +29,7 @@
    <string>wikiLYNX</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../assets/assets.qrc">
+   <iconset resource="../../assets/assets.qrc">
     <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
   </property>
   <property name="tabShape">
@@ -50,6 +50,12 @@
      <width>800</width>
      <height>554</height>
     </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arvo</family>
+     <hintingpreference>PreferNoHinting</hintingpreference>
+    </font>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
     <property name="sizeConstraint">
@@ -111,7 +117,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../assets/assets.qrc">
+           <iconset resource="../../assets/assets.qrc">
             <normaloff>:/base/images/wikiLYNX_logo.svg</normaloff>:/base/images/wikiLYNX_logo.svg</iconset>
           </property>
           <property name="iconSize">
@@ -166,7 +172,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Comfortaa</family>
+          <family>Arvo</family>
           <pointsize>12</pointsize>
           <bold>false</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
@@ -215,7 +221,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Courier Prime</family>
+          <family>Arvo</family>
           <pointsize>12</pointsize>
           <bold>true</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
@@ -261,7 +267,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Courier Prime</family>
+          <family>Arvo</family>
           <bold>true</bold>
           <hintingpreference>PreferNoHinting</hintingpreference>
          </font>
@@ -294,6 +300,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arvo</family>
+          <hintingpreference>PreferNoHinting</hintingpreference>
+         </font>
         </property>
         <property name="acceptDrops">
          <bool>false</bool>
@@ -330,6 +342,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Arvo</family>
+          <hintingpreference>PreferNoHinting</hintingpreference>
+         </font>
+        </property>
         <property name="toolTip">
          <string>View Checkpoints</string>
         </property>
@@ -365,6 +383,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Arvo</family>
+          <hintingpreference>PreferNoHinting</hintingpreference>
+         </font>
+        </property>
         <property name="toolTip">
          <string>View Logs</string>
         </property>
@@ -396,6 +420,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arvo</family>
+          <hintingpreference>PreferNoHinting</hintingpreference>
+         </font>
         </property>
         <property name="toolTip">
          <string>Exit Game</string>
@@ -537,11 +567,18 @@ QLabel#checkpointValue {
      <x>0</x>
      <y>0</y>
      <width>1010</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <family>Arvo</family>
+     <hintingpreference>PreferNoHinting</hintingpreference>
+    </font>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -551,7 +588,7 @@ QLabel#checkpointValue {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../assets/assets.qrc"/>
+  <include location="../../assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>

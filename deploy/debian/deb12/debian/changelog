@@ -1,0 +1,11 @@
+wikilynx (1.5.8-1~deb12) unstable; urgency=medium
+
+  * Performance Improvements
+  * Major Code Structure Revamp
+  * Level Selector is now maximized
+  * Fixed #63: Game Incorrectly shows as success when aborted
+  * Fixed #66: License button fix
+  * Fixed #62: Game counter starts only when page loads
+  * Embarassing fixes, necessary changes and improvements
+
+ -- Penguin <penguin@dawn.org.in>  Mon, 23 Sep 2025 21:04:00 +0530

@@ -1,0 +1,109 @@
+---
+name: Build Release
+"on":
+  push:
+    tags:
+      - "v*"
+    paths:
+      - "src/**"
+      - "CMakeLists.txt"
+      - "deploy/**"
+      - ".gitea/workflows/build-release.yaml"
+  workflow_dispatch: {}
+
+jobs:
+  build-debian:
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [11, 12]
+        target: [amd64, i386, arm64, armhf]
+        include:
+          - version: 11
+            packages: "qtwebengine5-dev qtmultimedia5-dev qtwayland5-private-dev qtwayland5-dev-tools"
+          - version: 12
+            packages: "qt6-webengine-dev qt6-multimedia-dev qt6-wayland-dev qt6-wayland-dev-tools"
+
+    name: Build for Debian ${{ matrix.version }} on ${{ matrix.target }}
+
+    container:
+      image: debian:${{ matrix.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          apt update && apt upgrade -y
+          apt install -y git devscripts cmake ${{ matrix.packages }}
+
+      - name: Qt5 Shenanigans Again
+        if: ${{ matrix.version == 11 }}
+        run: |
+          sed -i 's/::checkStateChanged/::stateChanged/g' src/ui/*.cpp
+
+      - name: Build
+        run: |
+          bash deploy/debian/deployDebian release
+          mv ../wikilynx_*.deb .
+
+      - name: Publish to Packages
+        run: |
+          for deb in ./wikilynx_*.deb; do
+            curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
+            --upload-file "$deb" \
+            https://code.dawn.org.in/api/packages/${{vars.maintainer}}/debian/pool/edge/main/upload
+          done
+
+  build-appimage:
+    runs-on: ubuntu-latest
+    container:
+      image: ""
+      volumes:
+        - "source:/source"
+        - "output:/output"
+    strategy:
+      fail-fast: true
+      matrix:
+        target: [amd64, i386, arm64, armhf]
+        include:
+          - target: amd64
+            alt_name: x86_64
+          - target: i386
+            alt_name: i686
+          - target: arm64
+            alt_name: aarch64
+          - target: armhf
+            alt_name: armhf
+
+    name: "Build AppImage on ${{matrix.target}}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: source
+
+      - name: Copy Source
+        run: |
+          cp -r source/* /source
+
+      - name: Build
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-${{matrix.target}} \
+          -f Containerfile --platform=linux/${{matrix.target}} .
+
+          docker run --rm -v "source:/source" -v "output:/output" \
+          --platform linux/${{matrix.target}} builder-${{matrix.target}}
+
+      - name: Publish to Packages
+        run: |
+          curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
+          --upload-file /output/wikiLYNX-${{matrix.alt_name}}.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-${{matrix.target}}.AppImage
+
+          curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
+          --upload-file /output/wikiLYNX-${{matrix.alt_name}}.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/${{github.ref_name}}/wikiLYNX-${{matrix.target}}.AppImage

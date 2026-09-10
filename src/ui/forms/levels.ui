@@ -18,7 +18,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Comfortaa</family>
+    <family>Arvo</family>
     <hintingpreference>PreferNoHinting</hintingpreference>
    </font>
   </property>
@@ -50,7 +50,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -97,7 +97,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -147,7 +147,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -197,7 +197,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -247,7 +247,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -297,7 +297,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -344,7 +344,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Courier Prime</family>
+         <family>Arvo</family>
          <hintingpreference>PreferNoHinting</hintingpreference>
         </font>
        </property>
@@ -396,6 +396,12 @@
          <height>40</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Arvo</family>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -421,6 +427,12 @@
          <height>40</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Arvo</family>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -445,6 +457,12 @@
          <width>40</width>
          <height>40</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arvo</family>
+         <hintingpreference>PreferNoHinting</hintingpreference>
+        </font>
        </property>
        <property name="text">
         <string/>

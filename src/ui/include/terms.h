@@ -1,8 +1,8 @@
-#ifndef TERMS_H
-#define TERMS_H
+#pragma once
 
 #include <QDialog>
-#include <QFile>
+
+#include "util.h"
 
 namespace Ui {
 class Terms;
@@ -20,5 +20,3 @@ private:
     void initialise();
     Ui::Terms *ui;
 };
-
-#endif // TERMS_H

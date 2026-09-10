@@ -1,0 +1,61 @@
+---
+name: Build Edge
+"on":
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "CMakeLists.txt"
+      - "deploy/**"
+      - ".gitea/workflows/build-edge.yaml"
+  workflow_dispatch: {}
+
+jobs:
+  build-appimage:
+    runs-on: ubuntu-latest
+    container:
+      image: ""
+      volumes:
+        - "source:/source"
+        - "output:/output"
+    strategy:
+      fail-fast: true
+      matrix:
+        target: [amd64, i386, arm64, armhf]
+        include:
+          - target: amd64
+            alt_name: x86_64
+          - target: i386
+            alt_name: i686
+          - target: arm64
+            alt_name: aarch64
+          - target: armhf
+            alt_name: armhf
+
+    name: "Build AppImage on ${{matrix.target}}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: source
+
+      - name: Copy Source
+        run: |
+          cp -r source/* /source
+
+      - name: Build
+        run: |
+          cd source/deploy/appimage
+
+          docker build --load -t builder-${{matrix.target}} \
+          -f Containerfile --platform=linux/${{matrix.target}} .
+
+          docker run --rm -v "source:/source" -v "output:/output" \
+          --platform linux/${{matrix.target}} builder-${{matrix.target}}
+
+      - name: Publish to Packages
+        run: |
+          curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
+          --upload-file /output/wikiLYNX-${{matrix.alt_name}}.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-${{matrix.target}}.AppImage

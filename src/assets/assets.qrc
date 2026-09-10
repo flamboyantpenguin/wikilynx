@@ -1,13 +1,14 @@
 <RCC>
     <qresource prefix="/base">
-        <file>fonts/CourierPrime_OFL.txt</file>
-        <file>fonts/CourierPrime-Bold.ttf</file>
-        <file>fonts/CourierPrime-BoldItalic.ttf</file>
-        <file>fonts/CourierPrime-Italic.ttf</file>
-        <file>fonts/CourierPrime-Regular.ttf</file>
-        <file>fonts/NotoSans_OFL.txt</file>
-        <file>fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf</file>
-        <file>fonts/NotoSans-VariableFont_wdth,wght.ttf</file>
+        <file>fonts/Arvo_OFL.txt</file>
+        <file>fonts/Arvo-Bold.ttf</file>
+        <file>fonts/Arvo-BoldItalic.ttf</file>
+        <file>fonts/Arvo-Italic.ttf</file>
+        <file>fonts/Arvo-Regular.ttf</file>
+        <file>fonts/Playwrite_DE_SAS_OFL.txt</file>
+        <file>fonts/PlaywriteDESAS-VariableFont_wght.ttf</file>
+        <file>fonts/Oldenburg_OFL.txt</file>
+        <file>fonts/Oldenburg-Regular.ttf</file>
         <file>info/LICENSE.txt</file>
         <file>info/COPYING.txt</file>
         <file>info/COPYING.QtWebEngine.txt</file>
@@ -20,8 +21,6 @@
         <file>audio/init.wav</file>
         <file>audio/yay.wav</file>
         <file>info/PRIVACY.txt</file>
-        <file>fonts/Comfortaa_OFL.txt</file>
-        <file>fonts/Comfortaa-VariableFont_wght.ttf</file>
         <file>images/wikiLYNX_logo.ico</file>
         <file>images/DAWN_Dark.svg</file>
         <file>images/DAWN_Light.svg</file>

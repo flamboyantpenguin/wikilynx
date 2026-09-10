@@ -14,7 +14,7 @@ public:
     explicit BaseBrowser(QWidget *parent = nullptr);
     ~BaseBrowser();
 
-    void initialise(QString, QString url  = "https://github.com/flamboyantpenguin/wikilynx/wiki/Gameplay");
+    void initialise(QString, QString url  = "https://github.com/flamboyantpenguin/wikilynx/wiki");
 
 
 private:
