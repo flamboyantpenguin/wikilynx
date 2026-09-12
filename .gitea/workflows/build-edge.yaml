@@ -11,14 +11,14 @@ name: Build Edge
       - ".gitea/workflows/build-edge.yaml"
   workflow_dispatch: {}
 
+concurrency:
+  group: shared-appimage-build-lane
+  cancel-in-progress: false
+
 jobs:
   build-appimage:
     runs-on: ubuntu-latest
-    container:
-      image: ""
-      volumes:
-        - "source:/source"
-        - "output:/output"
+
     strategy:
       fail-fast: true
       matrix:
@@ -33,29 +33,28 @@ jobs:
           - target: armhf
             alt_name: armhf
 
+    container:
+      image: code.dawn.org.in/flamboyantpenguin/appimager-wikilynx
+      options: --platform linux/${{ matrix.target }}
+
     name: "Build AppImage on ${{matrix.target}}"
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          path: source
-
-      - name: Copy Source
-        run: |
-          cp -r source/* /source
 
       - name: Build
         run: |
-          cd source/deploy/appimage
+          cp source/deploy/appimage/AppRun .
+          cp source/deploy/deploy ./deployAppImage
 
-          docker build --load -t builder-${{matrix.target}} \
-          -f Containerfile --platform=linux/${{matrix.target}} .
-
-          docker run --rm -v "source:/source" -v "output:/output" \
-          --platform linux/${{matrix.target}} builder-${{matrix.target}}
+          ./deployAppImage
 
       - name: Publish to Packages
         run: |
           curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
-          --upload-file /output/wikiLYNX-${{matrix.alt_name}}.AppImage \
-          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx_appimage/edge/wikiLYNX-${{matrix.target}}.AppImage
+          -X DELETE \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx/edge/wikiLYNX-${{matrix.target}}.AppImage
+
+          curl --user ${{vars.maintainer}}:${{secrets.TOKEN}} \
+          --upload-file ./output/wikiLYNX-${{matrix.alt_name}}.AppImage \
+          https://code.dawn.org.in/api/packages/flamboyantpenguin/generic/wikilynx/edge/wikiLYNX-${{matrix.target}}.AppImage

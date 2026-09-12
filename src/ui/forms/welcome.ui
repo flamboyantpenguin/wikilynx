@@ -227,7 +227,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Playwrite DE SAS</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -398,7 +398,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Playwrite DE SAS</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -567,6 +567,9 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QCheckBox" name="allowSitesToggle">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this allows you to access sites outside wikipedia.org in the game. By default, accessing sites outside wikipedia.org resets the browser URL to the current checkpoint. Turn this on if you're playing Non-Wikipedia levels &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>

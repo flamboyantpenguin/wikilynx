@@ -3,11 +3,19 @@
 ScoreSheet::ScoreSheet() {
     QDir().mkpath(dirName);
     loadData();
+    initID();
 }
 
 
 ScoreSheet::~ScoreSheet() {
     this->reset();
+}
+
+void ScoreSheet::initID() {
+    if (this->getSetting("gID").toString().isEmpty()) {
+        qInfo() << "No gID set, generating one...";
+        this->updateSettings("gID", QUuid::createUuid().toString(QUuid::WithoutBraces));
+    }
 }
 
 
@@ -230,7 +238,7 @@ void ScoreSheet::saveData(QString *fname, QJsonObject *cfg, QJsonObject *gameDat
 }
 
 
-// Safge way to get level data
+// Safe way to get level data
 QJsonObject ScoreSheet::getLevel(QString levelName) {
     if (this->iLevels.contains(levelName))
         return this->iLevels[levelName].toObject();
@@ -267,12 +275,59 @@ QString ScoreSheet::getLevelPresence(QString levelName) {
 
 // Write log to file
 void ScoreSheet::updateGameLog(QString instance, QJsonObject log) {
+    if (log["league"] != "") {
+        this->trySubmitScore(log);
+    }
     QJsonObject logs = readBinFile(gLogFile);
     logs.insert(instance, log);
     writeBinFile(gLogFile, logs);
 }
 
-\
+// Submit score online if league is selected
+void ScoreSheet::trySubmitScore(QJsonObject log) {
+
+    QUrl leagueUrl(getSetting("scorekeeper").toString());
+    leagueUrl.setPath(leagueUrl.path() + "/api/score");
+
+    QNetworkRequest request(leagueUrl);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject jsonPayload;
+    jsonPayload["level"] = log["level"];
+    jsonPayload["league"] = log["league"];
+    jsonPayload["username"] = log["playerName"];
+
+    jsonPayload["primary"] = log["chk"];
+    jsonPayload["secondary"] = log["timeTaken"];
+    jsonPayload["tertiary"] = log["clicks"];
+    jsonPayload["status"] = log["status"];
+
+
+    jsonPayload["userId"] = getSetting("gID");
+
+    QJsonDocument postDoc(jsonPayload);
+    QByteArray postData = postDoc.toJson();
+
+    QNetworkAccessManager manager;
+
+    qDebug().noquote() << postData;
+
+    QNetworkReply *reply = manager.post(request, postData);
+
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError) {
+        reply->deleteLater();
+        return;
+    }
+
+    reply->deleteLater();
+
+}
+
+
 // Read data from log based on instance name (datetime stamp)
 QJsonObject ScoreSheet::getGameLog(QString instance) {
     QJsonObject logs = readBinFile(gLogFile);
@@ -335,3 +390,4 @@ QString ScoreSheet::getPlayerStats(QString level, QString player) {
 QJsonObject ScoreSheet::getLeaderBoard(QString level) {
     return readBinFile(stat, true).value(level).toObject();
 }
+

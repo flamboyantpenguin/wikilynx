@@ -35,10 +35,12 @@ int main(int argc, char *argv[]) {
     WelcomeUI dialog;
     dialog.dontKillParse0 = &dontKill;
     dialog.initialise(&totem);
-    dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
+    //dialog.setWindowFlags(Qt::WindowStaysOnTopHint);
     dialog.show();
 
+    // Coming Soon...
     //ModernStarter dialog;
+    //dialog.initialise(&totem, &dontKill);
     //dialog.show();
 
     QObject::connect(&a, &QApplication::focusChanged, onFocusChanged);

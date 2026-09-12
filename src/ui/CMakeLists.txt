@@ -15,6 +15,7 @@ set(SOURCES
     terms.cpp include/terms.h forms/terms.ui
     welcome.cpp include/welcome.h forms/welcome.ui
     whatsnew.cpp include/whatsnew.h forms/whatsnew.ui
+    modernstarter.cpp include/modernstarter.h forms/modernstarter.ui
     include/util.h util.cpp
 )
 

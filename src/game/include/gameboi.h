@@ -21,21 +21,31 @@ public:
 
     QString getCurrentChk(); // Get Current Checkpoint URL
 
-    GameBoi(ScoreSheet* gameData, QString, QString);
+    GameBoi(ScoreSheet* gameData, QString, QString, QString);
 
 private:
     // Game Variables
-    int chk = 0; // Checkpoint status (Numeber of checkpoints cleared)
     QString gamer; // Player Name
-    int clicks = 0; // Click Counter
     QString instance; // Name of the game instance (Date+Time)
+
+    // Counters
+    int chk = 0; // Checkpoint status (Number of checkpoints cleared)
+    int clicks = 0; // Click Counter
     double countup = 0; // Countup (Basically countdown but upwards)
+
+    // Counter Checkpoints
+    int last_clicks = 0;
+    double last_countup = 0;
 
     QTimer *timer = new QTimer();
 
     // GameInfo
     QString levelName;
     QStringList levels;
+    QJsonObject levelInfo;
+
+    // League
+    QString league;
 
     // Subsystems
     ScoreSheet *gameData; // This one handles gameData
