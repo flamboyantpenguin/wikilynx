@@ -72,6 +72,14 @@ int WelcomeUI::initialise(int *totem) {
     return 0;
 }
 
+bool WelcomeUI::isDarkTheme() {
+    QColor backgroundColor = qApp->palette().color(QPalette::Window);
+    int luminance = (0.299 * backgroundColor.red() +
+                     0.587 * backgroundColor.green() +
+                     0.114 * backgroundColor.blue());
+    return luminance < 128;  // If luminance is low, it's likely a dark theme.
+}
+
 
 void WelcomeUI::checkStatus() {
     thread = new QThread();
@@ -90,16 +98,6 @@ void WelcomeUI::checkStatus() {
 
     thread->start();
 }
-
-
-bool WelcomeUI::isDarkTheme() {
-    QColor backgroundColor = qApp->palette().color(QPalette::Window);
-    int luminance = (0.299 * backgroundColor.red() +
-                     0.587 * backgroundColor.green() +
-                     0.114 * backgroundColor.blue());
-    return luminance < 128;  // If luminance is low, it's likely a dark theme.
-}
-
 
 void WelcomeUI::launchLevelSelector() {
 
@@ -138,7 +136,7 @@ int WelcomeUI::startGame() {
         return 1;
     }
 
-    GameBoi *gameSystem = new GameBoi(this->gameData, passcode, ui->playerName->text());
+    GameBoi *gameSystem = new GameBoi(this->gameData, passcode, ui->playerName->text(), "");
     game = new GameWindow(gameSystem, this->dontKillParse0, hex+"|"+bHex);
     connect(&(game->congratsView), &Congrats::closed, this, &WelcomeUI::reset);
     connect(game, &GameWindow::gameEnded, this, &WelcomeUI::updateLogs);

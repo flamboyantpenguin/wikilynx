@@ -2,13 +2,18 @@
 #define SCORESHEET_H
 
 #include <QDir>
+#include <QUuid>
 #include <QList>
 #include <QFile>
 #include <QString>
+#include <QEventLoop>
 #include <QJsonObject>
 #include <QDataStream>
+#include <QNetworkReply>
 #include <QJsonDocument>
 #include <QStandardPaths>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 class FileError : public std::runtime_error {
 public:
@@ -80,9 +85,11 @@ private:
     QJsonObject base;
 
     // Data Management
+    void initID();
     void reset();
     void loadData();
     void loadLevels(QJsonObject);
+    void trySubmitScore(QJsonObject);
     void loadSettings(QJsonObject, QJsonObject);
     void saveData(QString *fname = nullptr, QJsonObject *cfg = nullptr, QJsonObject *gameData = nullptr);
 
