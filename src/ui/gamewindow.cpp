@@ -24,7 +24,7 @@ GameWindow::GameWindow(GameBoi *gameSystem, int *dontKillMeParse, QString prgHex
     connect(gameSystem, SIGNAL(counter(QString)), this, SLOT(updateCountdown(QString)));
     connect(gameSystem, SIGNAL(sendMessage(QString)), this, SLOT(showMessage(QString)));
     connect(gameSystem, SIGNAL(end(QJsonObject,int)), this, SLOT(endGame(QJsonObject,int)));
-    connect(gameSystem, SIGNAL(clicked(QString, QString)), this, SLOT(updateClicks(QString,QString)));
+    connect(gameSystem, SIGNAL(clicked(QString,QString)), this, SLOT(updateClicks(QString,QString)));
 
 
     // Set Logo according to Theme
