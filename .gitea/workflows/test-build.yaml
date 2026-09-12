@@ -1,13 +1,11 @@
 ---
-
 name: Build Test
 "on":
   pull_request:
     paths:
       - "src/**"
       - "CMakeLists.txt"
-      - "deploy/**"
-      - ".gitea/workflows/build-test.yaml"
+      - ".gitea/workflows/test-build.yaml"
 
 jobs:
   build:
@@ -22,10 +20,6 @@ jobs:
             qt: 6
             platform: linux
             packages: "qt6-base-dev qt6-webengine-dev qt6-multimedia-dev"
-          - runner: ubuntu-latest
-            qt: 5
-            platform: linux
-            packages: "qtbase5-dev qtwebengine5-dev qtmultimedia5-dev"
 
     name: Build Test Qt${{ matrix.qt }}
     steps:
@@ -38,12 +32,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v6
-
-      - name: Qt5 Shenanigans
-        if: ${{ matrix.qt == 5 }}
-        run: |
-          sed 's/::checkStateChanged/::stateChanged/g' -i src/ui/*.cpp
-          sed '/hintingpreference/d' -i src/ui/forms/*.ui
 
       - name: Configure
         run: |

@@ -62,7 +62,7 @@ int WelcomeUI::initialise(int *totem) {
 
     theme = gameData->getSetting("iconTheme").toString() + theme;
     QIcon::setThemeName(theme);
-    qDebug() << "Current Icon Theme:" << QIcon::themeName();
+    qInfo() << "Current Icon Theme:" << QIcon::themeName();
     this->update();
 
     connect(ui->killToggle, &QCheckBox::checkStateChanged, this, &WelcomeUI::updateSettings);
