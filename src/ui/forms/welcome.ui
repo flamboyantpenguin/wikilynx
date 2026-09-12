@@ -227,7 +227,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Playwrite DE SAS</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
@@ -398,7 +398,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Playwrite DE SAS</family>
+               <family>Arvo</family>
                <stylestrategy>PreferDefault</stylestrategy>
                <hintingpreference>PreferNoHinting</hintingpreference>
               </font>
