@@ -28,8 +28,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
-        with:
-          endpoint: "/run/user/1000/podman/podman.sock"
 
       - name: Build and push
         uses: docker/build-push-action@v7
